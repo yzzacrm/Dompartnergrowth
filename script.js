@@ -46,7 +46,7 @@
 
     mount.innerHTML =
       '<div class="nav-capsule">' +
-        '<a href="index.html" class="brand"><img src="assets/logo-white.png" alt="Dom Partner Growth"></a>' +
+        '<a href="index.html" class="brand"><img src="logo-white.png" alt="Dom Partner Growth"></a>' +
         '<nav class="nav-links" id="nav-links">' +
           linksHtml +
           '<a href="'+CONTACT_LINK.href+'" class="nav-cta">'+CONTACT_LINK.label+'</a>' +
@@ -81,7 +81,7 @@
       '<div class="container">' +
         '<div class="footer-top">' +
           '<div class="footer-brand">' +
-            '<img src="assets/logo-white.png" alt="Dom Partner Growth">' +
+            '<img src="logo-white.png" alt="Dom Partner Growth">' +
             '<p>Parceria de crescimento: comercial, marketing, produtora e inteligência trabalhando pela mesma meta.</p>' +
           '</div>' +
           '<div class="footer-col">' +
@@ -372,7 +372,7 @@
   }
 
   /* ---------------- partículas formando o logo "DOM" no hero ---------------- */
-  // pontos pré-calculados a partir do logo real (assets/logo-white.png, 1000x397 px),
+  // pontos pré-calculados a partir do logo real (logo-white.png, 1000x397 px),
   // usados como molde das esferas — em vez de desenhar a imagem num canvas e ler os
   // pixels em tempo real (getImageData pode falhar/ficar bloqueado em alguns
   // ambientes sandboxed, e dependia da imagem carregar antes de formar o "DOM")
