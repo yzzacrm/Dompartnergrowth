@@ -23,7 +23,7 @@
 
   /* text */
   --cream:#EFE9DC;
-  --cream-dim:rgba(239,233,220,.62);
+  --cream-dim:rgba(239,233,220,.8);
   --cream-faint:rgba(239,233,220,.38);
 
   --font-head:'Cormorant Garamond', 'Times New Roman', serif;
@@ -707,6 +707,77 @@ h1,h2,h3,h4{
   max-width:420px;
   margin-bottom:48px;
 }
+.ecosystem--frentes{
+  max-width:660px;
+  margin-bottom:76px;
+}
+.ecosystem--frentes .eco-ring--outer{ width:400px; height:400px; }
+.ecosystem--frentes .eco-ring--inner{ width:320px; height:320px; }
+.ecosystem--frentes .eco-dot--r1{ --radius:98px; }
+.ecosystem--frentes .eco-dot--r2{ --radius:158px; }
+.ecosystem--frentes .eco-dot--r3{ --radius:228px; }
+.ecosystem--frentes .eco-spoke{ --radius:190px; }
+.ecosystem--frentes .eco-node--center{ width:118px; height:118px; font-size:24px; }
+.ecosystem--frentes .eco-node--sat{
+  --radius:190px;
+  width:156px;
+  height:auto;
+  white-space:normal;
+  flex-direction:column;
+  gap:4px;
+  padding:16px 14px;
+  border-radius:18px;
+  text-align:center;
+}
+.ecosystem--frentes .eco-node-title{
+  font-family:var(--font-title);
+  font-size:14.5px;
+  font-weight:700;
+  letter-spacing:.2px;
+  color:inherit;
+}
+.ecosystem--frentes .eco-node-desc{
+  font-family:var(--font-body);
+  font-size:10.5px;
+  font-weight:400;
+  line-height:1.35;
+  letter-spacing:.1px;
+  color:var(--cream-dim);
+  text-transform:none;
+}
+.ecosystem--frentes .eco-node--sat:hover .eco-node-desc,
+.ecosystem--frentes .eco-node--sat:focus-visible .eco-node-desc{
+  color:var(--bg-deep);
+}
+@media(max-width:760px){
+  .ecosystem--frentes{ max-width:480px; margin-bottom:60px; }
+  .ecosystem--frentes .eco-ring--outer{ width:300px; height:300px; }
+  .ecosystem--frentes .eco-ring--inner{ width:240px; height:240px; }
+  .ecosystem--frentes .eco-dot--r1{ --radius:74px; }
+  .ecosystem--frentes .eco-dot--r2{ --radius:118px; }
+  .ecosystem--frentes .eco-dot--r3{ --radius:170px; }
+  .ecosystem--frentes .eco-spoke{ --radius:140px; }
+  .ecosystem--frentes .eco-node--center{ width:100px; height:100px; font-size:21px; }
+  .ecosystem--frentes .eco-node--sat{
+    --radius:140px;
+    width:auto;
+    height:44px;
+    padding:0 18px;
+    border-radius:999px;
+    flex-direction:row;
+  }
+  .ecosystem--frentes .eco-node-desc{ display:none; }
+}
+@media(max-width:520px){
+  .ecosystem--frentes .eco-node--sat{ --radius:96px; font-size:11px; padding:0 12px; height:36px; }
+  .ecosystem--frentes .eco-ring--outer{ width:212px; height:212px; }
+  .ecosystem--frentes .eco-ring--inner{ width:152px; height:152px; }
+  .ecosystem--frentes .eco-dot--r1{ --radius:50px; }
+  .ecosystem--frentes .eco-dot--r2{ --radius:80px; }
+  .ecosystem--frentes .eco-dot--r3{ --radius:115px; }
+  .ecosystem--frentes .eco-spoke{ --radius:96px; }
+  .ecosystem--frentes .eco-node--center{ width:76px; height:76px; font-size:16px; }
+}
 @media(max-width:640px){
   #ecossistema .ecosystem--products{
     max-width:none;
@@ -1288,6 +1359,7 @@ h1,h2,h3,h4{
   gap:24px;
 }
 .shot-card{
+  display:block;
   border:1px solid var(--border);
   border-radius:var(--radius);
   background:var(--panel);
@@ -1404,6 +1476,7 @@ h1,h2,h3,h4{
   gap:28px;
 }
 .deck-card{
+  display:block;
   border:1px solid var(--border);
   border-radius:var(--radius);
   background:var(--panel);
@@ -1739,11 +1812,12 @@ body.modal-open{ overflow:hidden; }
   right:24px;
   bottom:24px;
   z-index:850;
-  width:62px;
-  height:62px;
+  width:68px;
+  height:68px;
+  padding:0;
   border-radius:50%;
-  background:radial-gradient(circle at 35% 30%, #16382a, var(--panel) 70%);
-  border:1px solid rgba(228,197,103,.45);
+  background:radial-gradient(circle at 35% 30%, #1c4634, var(--panel) 72%);
+  border:1.5px solid rgba(228,197,103,.65);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -1757,21 +1831,51 @@ body.modal-open{ overflow:hidden; }
   border-color:var(--gold);
 }
 .floating-cta img{
-  width:30px;
-  height:30px;
+  width:42px;
+  height:42px;
   display:block;
+  filter:drop-shadow(0 0 6px rgba(228,197,103,.55));
 }
 @keyframes floatingCtaPulse{
-  0%, 100%{ box-shadow:0 14px 34px rgba(0,0,0,.5), 0 0 0 0 rgba(228,197,103,.35); }
-  50%{ box-shadow:0 14px 34px rgba(0,0,0,.5), 0 0 0 10px rgba(228,197,103,0); }
+  0%, 100%{ box-shadow:0 14px 34px rgba(0,0,0,.5), 0 0 0 0 rgba(228,197,103,.4); }
+  50%{ box-shadow:0 14px 34px rgba(0,0,0,.5), 0 0 0 12px rgba(228,197,103,0); }
 }
 @media(max-width:640px){
-  .floating-cta{ right:16px; bottom:16px; width:54px; height:54px; }
-  .floating-cta img{ width:26px; height:26px; }
+  .floating-cta{ right:16px; bottom:16px; width:58px; height:58px; }
+  .floating-cta img{ width:36px; height:36px; }
 }
 @media(prefers-reduced-motion: reduce){
   .floating-cta{ animation:none; }
 }
+
+/* ---------- moldura decorativa (cantos dourados, estilo obra de arte) ---------- */
+.page-frame{
+  position:fixed;
+  inset:20px;
+  z-index:5;
+  pointer-events:none;
+}
+.page-frame .frame-corner{
+  position:absolute;
+  width:44px;
+  height:44px;
+}
+.page-frame .frame-corner::before,
+.page-frame .frame-corner::after{
+  content:'';
+  position:absolute;
+  background:linear-gradient(90deg, var(--gold-light), rgba(228,197,103,0));
+}
+.page-frame .frame-corner::before{ top:0; left:0; width:100%; height:1px; }
+.page-frame .frame-corner::after{ top:0; left:0; width:1px; height:100%; background:linear-gradient(180deg, var(--gold-light), rgba(228,197,103,0)); }
+.page-frame .frame-corner--tl{ top:0; left:0; opacity:.55; }
+.page-frame .frame-corner--tr{ top:0; right:0; opacity:.55; transform:scaleX(-1); }
+.page-frame .frame-corner--bl{ bottom:0; left:0; opacity:.55; transform:scaleY(-1); }
+@media(max-width:640px){
+  .page-frame{ inset:12px; }
+  .page-frame .frame-corner{ width:30px; height:30px; }
+}
+@media print{ .page-frame{ display:none; } }
 
 /* ---------- footer ---------- */
 .site-footer{

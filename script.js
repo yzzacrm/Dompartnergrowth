@@ -495,6 +495,21 @@
     // que abre o modal pra qualquer a.btn[href="contato.html"]
   }
 
+  /* ---------------- moldura decorativa dourada (cantos, estilo obra de arte) ---------------- */
+  function buildPageFrame(){
+    if(document.getElementById('page-frame')) return;
+    var frame = document.createElement('div');
+    frame.id = 'page-frame';
+    frame.className = 'page-frame';
+    frame.setAttribute('aria-hidden', 'true');
+    // canto inferior direito fica de fora: é onde mora o botão flutuante de contato
+    frame.innerHTML =
+      '<span class="frame-corner frame-corner--tl"></span>' +
+      '<span class="frame-corner frame-corner--tr"></span>' +
+      '<span class="frame-corner frame-corner--bl"></span>';
+    document.body.appendChild(frame);
+  }
+
   /* ---------------- partículas formando o logo "DOM" no hero ---------------- */
   // pontos pré-calculados a partir do logo real (logo-white.png, 1000x397 px),
   // usados como molde das esferas — em vez de desenhar a imagem num canvas e ler os
@@ -508,22 +523,47 @@
     if(!canvas) return;
     var ctx = canvas.getContext('2d');
     var particles = [];
+    var networkEdges = [];
     var mouse = { x:-9999, y:-9999 };
     var scattered = false;
+    var networkAlpha = 0; // 0 = "monte de dados" formando o logo, 1 = rede neural
+    var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    // sprite pré-renderizado da esfera — evita redesenhar (fill+stroke+fill)
-    // pra cada partícula em todo frame, que é o que deixava a animação pesada
+    // sprite pré-renderizado do ponto de dado — evita redesenhar (fill+stroke+fill)
+    // pra cada partícula em todo frame, que é o que deixava a animação pesada.
+    // núcleo claro esmaecendo em dourado: lê como "dado"/"nó" luminoso, não como
+    // uma esferazinha cinza opaca
     var sprite = (function(){
       var size = 28;
       var s = document.createElement('canvas');
       s.width = size; s.height = size;
       var sc = s.getContext('2d');
-      var cx = size/2, cy = size/2, r = size*0.42;
-      var grad = sc.createRadialGradient(cx-r*0.4, cy-r*0.4, r*0.05, cx, cy, r);
-      grad.addColorStop(0, 'rgba(238,236,228,1)');
-      grad.addColorStop(.4, 'rgba(122,120,110,1)');
-      grad.addColorStop(1, 'rgba(48,47,42,1)');
+      var cx = size/2, cy = size/2, r = size*0.46;
+      var grad = sc.createRadialGradient(cx, cy, 0, cx, cy, r);
+      grad.addColorStop(0, 'rgba(255,250,235,1)');
+      grad.addColorStop(.35, 'rgba(228,197,103,.95)');
+      grad.addColorStop(.72, 'rgba(180,140,60,.32)');
+      grad.addColorStop(1, 'rgba(180,140,60,0)');
+      sc.fillStyle = grad;
+      sc.beginPath();
+      sc.arc(cx, cy, r, 0, Math.PI*2);
+      sc.fill();
+      return s;
+    })();
+
+    // sprite maior/mais intenso, usado só nos "nós" que formam a rede neural
+    var nodeSprite = (function(){
+      var size = 40;
+      var s = document.createElement('canvas');
+      s.width = size; s.height = size;
+      var sc = s.getContext('2d');
+      var cx = size/2, cy = size/2, r = size*0.46;
+      var grad = sc.createRadialGradient(cx, cy, 0, cx, cy, r);
+      grad.addColorStop(0, 'rgba(255,252,240,1)');
+      grad.addColorStop(.3, 'rgba(238,213,140,1)');
+      grad.addColorStop(.62, 'rgba(201,162,39,.45)');
+      grad.addColorStop(1, 'rgba(201,162,39,0)');
       sc.fillStyle = grad;
       sc.beginPath();
       sc.arc(cx, cy, r, 0, Math.PI*2);
@@ -565,8 +605,50 @@
           x: Math.random()*w, y: Math.random()*h,
           sx: Math.random()*w, sy: Math.random()*h, // posição "espalhada"
           size: isBig ? (Math.random()*2.1+1.6) : (Math.random()*1.7+1.1),
-          alpha: Math.random()*.35+.55
+          alpha: Math.random()*.35+.55,
+          isNode: false
         });
+      }
+
+      buildNetwork(w, h);
+    }
+
+    // escolhe uma amostra das partículas pra virar "neurônios" quando a Dom
+    // se espalha pela rolagem, conectando cada uma às vizinhas mais próximas —
+    // calculado uma única vez por resize (não a cada frame: com milhares de
+    // partículas, comparar todas contra todas em todo frame pesaria demais)
+    function buildNetwork(w, h){
+      networkEdges = [];
+      var step = Math.max(1, Math.floor(particles.length / 220)); // ~220 nós
+      var nodes = [];
+      for(var i=0; i<particles.length; i+=step){
+        particles[i].isNode = true;
+        nodes.push(i);
+      }
+
+      var maxDist = Math.max(w, h) * 0.13;
+      var maxLinksPerNode = 3;
+      var seen = {};
+      for(var a=0; a<nodes.length; a++){
+        var pi = nodes[a];
+        var pa = particles[pi];
+        var dists = [];
+        for(var b=0; b<nodes.length; b++){
+          if(a === b) continue;
+          var pj = nodes[b];
+          var pb = particles[pj];
+          var dx = pa.sx - pb.sx, dy = pa.sy - pb.sy;
+          var d = Math.sqrt(dx*dx + dy*dy);
+          if(d < maxDist) dists.push({ j:pj, d:d });
+        }
+        dists.sort(function(m,n){ return m.d - n.d; });
+        for(var k=0; k<Math.min(maxLinksPerNode, dists.length); k++){
+          var pj2 = dists[k].j;
+          var key = pi < pj2 ? (pi+'_'+pj2) : (pj2+'_'+pi);
+          if(seen[key]) continue;
+          seen[key] = true;
+          networkEdges.push({ a:pi, b:pj2, baseAlpha: 1 - (dists[k].d / maxDist), phase: Math.random() });
+        }
       }
     }
 
@@ -574,6 +656,13 @@
       var w = canvas.width / dpr, h = canvas.height / dpr;
       ctx.clearRect(0,0,w,h);
       var target = scattered ? 'scattered' : 'formed';
+
+      // a Dom nasce como um monte de dados formando a palavra, e ao rolar a
+      // página esses dados vão se conectando: os nós crescem e as linhas
+      // entre eles aparecem, lendo como uma rede neural — networkAlpha faz
+      // essa transição suavemente em vez de ligar/desligar de uma vez
+      var targetNetworkAlpha = scattered ? 1 : 0;
+      networkAlpha += (targetNetworkAlpha - networkAlpha) * 0.04;
 
       for(var i=0;i<particles.length;i++){
         var p = particles[i];
@@ -591,12 +680,48 @@
 
         p.x += (goalX - p.x) * 0.06;
         p.y += (goalY - p.y) * 0.06;
+      }
 
-        // um único drawImage do sprite pré-renderizado por partícula
-        // (bem mais leve que os 2-3 fill/stroke por ponto de antes)
-        var d = p.size * 2.6;
-        ctx.globalAlpha = p.alpha;
-        ctx.drawImage(sprite, p.x - d/2, p.y - d/2, d, d);
+      // linhas da rede neural, desenhadas antes dos pontos pra ficarem por baixo
+      if(networkAlpha > 0.01 && networkEdges.length){
+        ctx.lineWidth = 1;
+        for(var e=0; e<networkEdges.length; e++){
+          var edge = networkEdges[e];
+          var pa = particles[edge.a], pb = particles[edge.b];
+          var lineAlpha = edge.baseAlpha * networkAlpha * 0.5;
+          if(lineAlpha > 0.01){
+            ctx.strokeStyle = 'rgba(228,197,103,' + lineAlpha.toFixed(3) + ')';
+            ctx.beginPath();
+            ctx.moveTo(pa.x, pa.y);
+            ctx.lineTo(pb.x, pb.y);
+            ctx.stroke();
+          }
+
+          // pulso viajando pela conexão — sensação de dado vivo circulando
+          if(!prefersReducedMotion){
+            edge.phase += 0.0035 + (e % 5) * 0.0007;
+            if(edge.phase > 1) edge.phase -= 1;
+          }
+          var pulseAlpha = edge.baseAlpha * networkAlpha;
+          if(pulseAlpha > 0.02){
+            var px = pa.x + (pb.x - pa.x) * edge.phase;
+            var py = pa.y + (pb.y - pa.y) * edge.phase;
+            ctx.globalAlpha = pulseAlpha;
+            ctx.drawImage(sprite, px-3, py-3, 6, 6);
+          }
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      // um único drawImage do sprite pré-renderizado por partícula
+      // (bem mais leve que os 2-3 fill/stroke por ponto de antes)
+      for(var j=0;j<particles.length;j++){
+        var pt = particles[j];
+        var d = pt.size * 2.6;
+        var useNodeSprite = pt.isNode && networkAlpha > 0.03;
+        if(useNodeSprite) d = d * (1 + networkAlpha * 0.95);
+        ctx.globalAlpha = pt.alpha;
+        ctx.drawImage(useNodeSprite ? nodeSprite : sprite, pt.x - d/2, pt.y - d/2, d, d);
       }
       ctx.globalAlpha = 1;
       requestAnimationFrame(animate);
@@ -635,6 +760,7 @@
     initContactForm();
     buildContactModal();
     buildFloatingCta();
+    buildPageFrame();
     initParticles();
   });
 
