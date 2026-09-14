@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dom Partner Growth: Parceria de Crescimento</title>
 <meta name="description" content="Dom Partner Growth: comercial, marketing, produtora e inteligência trabalhando pela mesma meta. Parceria de crescimento, não prestação de serviço.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dom Partner Growth: Parceria de Crescimento">
+<meta property="og:description" content="Dom Partner Growth: comercial, marketing, produtora e inteligência trabalhando pela mesma meta. Parceria de crescimento, não prestação de serviço.">
+<meta property="og:image" content="logo-color.png">
+<meta name="twitter:card" content="summary_large_image">
 <script>document.documentElement.classList.add("js");</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="style.css">
@@ -14,6 +19,7 @@
 <div class="progress-bar"></div>
 <svg class="grain" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
 <div class="bg-orbs" aria-hidden="true"><span class="orb orb--1"></span><span class="orb orb--2"></span><span class="orb orb--3"></span></div>
+<canvas id="hero-particles" class="hero-particles" aria-hidden="true"></canvas>
 
 <header id="site-header" class="site-header"></header>
 
@@ -21,7 +27,6 @@
 
   <!-- HERO -->
   <section class="hero">
-    <canvas id="hero-particles" class="hero-particles"></canvas>
     <div class="hero-content hero-content--clean">
       <h1 class="hero-headline"><span class="line-1">Marketing atrai.</span><span class="line-2">A nossa estratégia vende.</span></h1>
     </div>
@@ -36,11 +41,36 @@
     </div>
   </section>
 
+  <!-- IMPACTO / CONTADOR -->
+  <section class="section section--dense" id="impacto">
+    <div class="container">
+      <div class="counter-block reveal">
+        <span class="eyebrow-num" style="justify-content:center;"><span class="n">01</span><span class="t">Impacto</span></span>
+        <h2 class="counter-number" id="revenue-counter" data-base="21000000" data-anchor="1788836400000" data-per-second="1" data-spike-amount="50000" data-spike-days="2">R$21.000.000,00</h2>
+        <p class="counter-caption">Faturados para os nossos clientes somente este ano. E o número não para, e contando...</p>
+      </div>
+      <div class="numbers" style="max-width:880px; margin:56px auto 0; grid-template-columns:repeat(3,1fr);">
+        <div class="number-item">
+          <span class="num" data-count="3" data-prefix="+" data-suffix=" anos">0</span>
+          <span class="label">De estrada no mercado</span>
+        </div>
+        <div class="number-item">
+          <span class="num" data-count="20" data-suffix="+">0</span>
+          <span class="label">Empresas atendidas</span>
+        </div>
+        <div class="number-item">
+          <span class="num" data-count="4">0</span>
+          <span class="label">Frentes integradas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 4 FRENTES / A HOLDING -->
   <section class="section section--alt" id="frentes">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow-num"><span class="n">01</span><span class="t">A holding</span></span>
+        <span class="eyebrow-num"><span class="n">02</span><span class="t">A holding</span></span>
         <h2>Quatro frentes. Uma única operação.</h2>
         <p>Cada frente resolve uma parte do crescimento. Juntas, fecham o ciclo inteiro.</p>
       </div>
@@ -100,11 +130,88 @@
     </div>
   </section>
 
+  <!-- PROVA DE VALOR -->
+  <section class="section" id="prova-de-valor">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow-num"><span class="n">03</span><span class="t">Prova de valor</span></span>
+        <h2>Resultado real, não promessa de agência.</h2>
+        <p>Uma amostra do que cada frente já entregou. O case completo, com todos os números, está na página de cada produto.</p>
+      </div>
+      <div class="proof-grid">
+        <a class="proof-card proof-card--video reveal" href="produtora.html">
+          <div class="shot-media shot-media--landscape">
+            <video muted loop autoplay playsinline preload="metadata" poster="itaquera-poster.jpg">
+              <source src="itaquera.mp4" type="video/mp4">
+            </video>
+            <span class="shot-badge">+100 milhões de views geradas</span>
+          </div>
+          <div class="shot-body">
+            <span class="shot-tag">Produtora · Papin REC</span>
+            <h3 class="shot-title">Vídeo que constrói autoridade, não só preenche o feed</h3>
+            <p class="shot-desc">Produção institucional e de drone, do canteiro de obra ao empreendimento pronto.</p>
+            <span class="more">Ver a Produtora →</span>
+          </div>
+        </a>
+
+        <a class="proof-card reveal" href="gestao-anuncios.html">
+          <div class="shot-media shot-media--wide">
+            <img src="funil.jpg" alt="Funil de conversão de mídia paga" loading="lazy">
+            <span class="shot-badge">198,2x ROAS</span>
+          </div>
+          <div class="shot-body">
+            <span class="shot-tag">Gestão de Anúncios</span>
+            <h3 class="shot-title">R$19,43 milhões faturados em 8 meses</h3>
+            <p class="shot-desc">Incorporadora parceira, com mídia, branding e CRM integrados numa única operação.</p>
+            <span class="more">Ver Gestão de Anúncios →</span>
+          </div>
+        </a>
+
+        <a class="proof-card reveal" href="consultoria-comercial.html">
+          <div class="shot-media shot-media--portrait">
+            <img src="consultoria-daniel.jpg" alt="Sessão de consultoria comercial em campo" loading="lazy">
+            <span class="shot-badge">De R$3 mi a R$19 mi em 1 ano</span>
+          </div>
+          <div class="shot-body">
+            <span class="shot-tag">Consultoria Comercial</span>
+            <h3 class="shot-title">Construtora parceira, um ano de acompanhamento</h3>
+            <p class="shot-desc">Diagnóstico, script e treinamento lado a lado com o time até virar rotina de vendas.</p>
+            <span class="more">Ver Consultoria Comercial →</span>
+          </div>
+        </a>
+
+        <a class="proof-card reveal" href="branding.html">
+          <div class="shot-media shot-media--landscape">
+            <img src="evoluc-1.jpg" alt="Brand Book Evoluc Construtora" loading="lazy">
+          </div>
+          <div class="shot-body">
+            <span class="shot-tag">Branding</span>
+            <h3 class="shot-title">Posicionamento que muda como o mercado enxerga a marca</h3>
+            <p class="shot-desc">Da essência ao guia de conduta: brand books completos para marcas pessoais e corporativas.</p>
+            <span class="more">Ver Branding →</span>
+          </div>
+        </a>
+
+        <a class="proof-card reveal" href="loja-online.html">
+          <div class="shot-media shot-media--landscape">
+            <img src="joy-1.jpg" alt="Loja online Joy Variedades" loading="lazy">
+          </div>
+          <div class="shot-body">
+            <span class="shot-tag">Loja Online</span>
+            <h3 class="shot-title">Lojas estruturadas de ponta a ponta</h3>
+            <p class="shot-desc">Da Joy Variedades, do nosso próprio ecossistema, a marcas de suplementos e cuidados pessoais.</p>
+            <span class="more">Ver Loja Online →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- O ECOSSISTEMA -->
   <section class="section" id="ecossistema">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow-num"><span class="n">02</span><span class="t">O ecossistema</span></span>
+        <span class="eyebrow-num"><span class="n">04</span><span class="t">O ecossistema</span></span>
         <h2>A Dom é o centro de um ecossistema.</h2>
         <p>A Dom atua como holding: reúne empresas de propósitos diferentes, cada uma com seu próprio mercado, sob uma mesma gestão e visão de crescimento.</p>
       </div>
@@ -139,27 +246,6 @@
         </div>
       </div>
 
-      <div class="card-grid">
-        <a class="nx-card reveal" href="produtora.html">
-          <span class="tag">Produtora</span>
-          <h3>Papin REC</h3>
-          <p class="desc">Vídeo institucional e de redes para empresas que decidiram parar de parecer menores do que são.</p>
-          <span class="more">Ver mais →</span>
-        </a>
-        <a class="nx-card reveal" href="crm.html">
-          <span class="tag">CRM</span>
-          <h3>Yzza</h3>
-          <p class="desc">Plataforma própria de CRM, usada nas implantações comerciais da Dom pra nenhum lead se perder.</p>
-          <span class="more">Ver mais →</span>
-        </a>
-        <a class="nx-card reveal" href="loja-online.html">
-          <span class="tag">E-commerce</span>
-          <h3>Joy Variedades</h3>
-          <p class="desc">Loja online de brinquedos, dentro do nosso próprio ecossistema.</p>
-          <span class="more">Ver mais →</span>
-        </a>
-      </div>
-
       <div class="section-head reveal" style="margin-top:64px;">
         <span class="eyebrow">Nossos produtos</span>
         <h2>Serviços prontos pra cada etapa do negócio.</h2>
@@ -186,7 +272,7 @@
         <a class="nx-card reveal" href="branding.html">
           <span class="tag">Posicionamento</span>
           <h3>Branding</h3>
-          <p class="desc">A Bíblia da sua marca: o credo, os símbolos e o guia de conduta.</p>
+          <p class="desc">A Bíblia da sua marca: a essência, os símbolos e o guia de conduta.</p>
           <span class="more">Ver mais →</span>
         </a>
         <a class="nx-card reveal" href="automacao-ia.html">
@@ -216,7 +302,7 @@
     <div class="container">
       <div class="business-grid" style="grid-template-columns:1fr; max-width:720px; margin:0 auto; text-align:center;">
         <div class="business-copy reveal">
-          <span class="eyebrow-num" style="justify-content:center;"><span class="n">03</span><span class="t">O que fazemos</span></span>
+          <span class="eyebrow-num" style="justify-content:center;"><span class="n">05</span><span class="t">O que fazemos</span></span>
           <h2>Uma parceria de crescimento, não mais um fornecedor de marketing.</h2>
           <p style="margin-left:auto; margin-right:auto;">Marketing sozinho não aumenta suas vendas: ele só leva gente até a porta. Pra elas comprarem (e voltarem), o negócio precisa de produto bom, vendedor treinado, tecnologia que dá agilidade e um posicionamento que gera confiança. Só depois entra o marketing de aquisição. Por isso a Dom não vende tráfego ou conteúdo avulso: estruturamos o negócio inteiro, da estratégia à execução, pra cada real investido virar faturamento de verdade.</p>
           <div class="business-divider"></div>

@@ -101,16 +101,14 @@
           '</div>' +
           '<div class="footer-col">' +
             '<h4>Contato</h4>' +
-            '<a href="mailto:contato@dompartnergrowth.com.br">contato@dompartnergrowth.com.br</a>' +
+            '<a href="mailto:comercial@domgrowth.com">comercial@domgrowth.com</a>' +
             '<a href="contato.html">Fale no WhatsApp</a>' +
           '</div>' +
         '</div>' +
         '<div class="footer-bottom">' +
-          '<span>© '+ new Date().getFullYear() +' Dom Partner Growth. Todos os direitos reservados.</span>' +
+          '<span>© '+ new Date().getFullYear() +' Dom Partner Growth. Todos os direitos reservados. <a href="privacidade.html">Política de Privacidade</a></span>' +
           '<div class="socials">' +
-            '<a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>' +
-            '<a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="8" y1="10" x2="8" y2="17"/><circle cx="8" cy="6.5" r="1"/><path d="M12 17v-4.5c0-1.5 1-2.5 2.5-2.5S17 11 17 12.5V17"/></svg></a>' +
-            '<a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="12" rx="4"/><path d="M10.5 9.5l4.5 2.5-4.5 2.5z" fill="currentColor" stroke="none"/></svg></a>' +
+            '<a href="https://www.instagram.com/dompartnergrowth/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -352,10 +350,9 @@
   }
 
   /* ---------------- formulário de contato -> WhatsApp ---------------- */
-  function initContactForm(){
-    var form = document.getElementById('contact-form');
+  function wireContactForm(form){
     if(!form) return;
-    var WHATSAPP_NUMBER = '5511999999999'; // TODO: substituir pelo número real (formato DDI+DDD+numero)
+    var WHATSAPP_NUMBER = '5511949901200';
     form.addEventListener('submit', function(e){
       e.preventDefault();
       var nome = form.nome.value.trim();
@@ -368,6 +365,75 @@
                  (whats ? ' Meu WhatsApp: ' + whats : '');
       var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text);
       window.open(url, '_blank');
+    });
+  }
+  function initContactForm(){
+    wireContactForm(document.getElementById('contact-form'));
+  }
+
+  /* ---------------- modal de contato: CTAs abrem o formulário na mesma tela ----------------
+     contato.html continua existindo normal pra quem navega direto (menu/rodapé).
+     Só os botões de CTA (classe "btn" com href="contato.html") abrem o modal em vez de navegar. */
+  function buildContactModal(){
+    if(document.getElementById('contact-modal-overlay')) return;
+    var wrap = document.createElement('div');
+    wrap.id = 'contact-modal-overlay';
+    wrap.className = 'contact-modal-overlay';
+    wrap.setAttribute('aria-hidden', 'true');
+    wrap.innerHTML =
+      '<div class="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">' +
+        '<button type="button" class="contact-modal-close" aria-label="Fechar">&times;</button>' +
+        '<h3 id="contact-modal-title">Vamos conversar sobre o crescimento do seu negócio.</h3>' +
+        '<p class="contact-modal-sub">Preencha e a gente já abre a conversa direto no seu WhatsApp.</p>' +
+        '<form id="modal-contact-form">' +
+          '<div class="form-grid">' +
+            '<div class="field">' +
+              '<label for="modal-nome">Nome</label>' +
+              '<input type="text" id="modal-nome" name="nome" required>' +
+            '</div>' +
+            '<div class="field">' +
+              '<label for="modal-empresa">Empresa</label>' +
+              '<input type="text" id="modal-empresa" name="empresa">' +
+            '</div>' +
+            '<div class="field full">' +
+              '<label for="modal-whatsapp">WhatsApp</label>' +
+              '<input type="tel" id="modal-whatsapp" name="whatsapp" placeholder="(11) 90000-0000" required>' +
+            '</div>' +
+            '<div class="field full">' +
+              '<label for="modal-mensagem">Mensagem</label>' +
+              '<textarea id="modal-mensagem" name="mensagem" placeholder="Conta rapidamente onde seu negócio está hoje e o que você quer resolver."></textarea>' +
+            '</div>' +
+          '</div>' +
+          '<button type="submit" class="btn btn-primary" style="margin-top:26px; width:100%;">Enviar pelo WhatsApp</button>' +
+          '<p class="form-note">Ao enviar, abrimos uma conversa direta no WhatsApp com a sua mensagem já preenchida.</p>' +
+        '</form>' +
+      '</div>';
+    document.body.appendChild(wrap);
+    wireContactForm(document.getElementById('modal-contact-form'));
+
+    function openModal(){
+      wrap.classList.add('is-open');
+      wrap.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+    }
+    function closeModal(){
+      wrap.classList.remove('is-open');
+      wrap.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+    }
+    wrap.querySelector('.contact-modal-close').addEventListener('click', closeModal);
+    wrap.addEventListener('click', function(e){
+      if(e.target === wrap) closeModal();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && wrap.classList.contains('is-open')) closeModal();
+    });
+
+    document.addEventListener('click', function(e){
+      var link = e.target.closest ? e.target.closest('a.btn[href="contato.html"]') : null;
+      if(!link) return;
+      e.preventDefault();
+      openModal();
     });
   }
 
@@ -408,13 +474,15 @@
     })();
 
     function resize(){
-      var rect = canvas.parentElement.getBoundingClientRect();
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      canvas.style.width = rect.width + 'px';
-      canvas.style.height = rect.height + 'px';
+      // canvas fixo cobrindo a janela inteira (não mais só a caixa da hero),
+      // pra esfera de partículas acompanhar a rolagem pelo site inteiro
+      var w = window.innerWidth, h = window.innerHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
       ctx.setTransform(dpr,0,0,dpr,0,0);
-      buildParticles(rect.width, rect.height);
+      buildParticles(w, h);
     }
 
     function buildParticles(w, h){
@@ -480,12 +548,13 @@
     window.addEventListener('scroll', function(){
       scattered = window.scrollY > (window.innerHeight * 0.16);
     }, { passive:true });
-    canvas.parentElement.addEventListener('mousemove', function(e){
-      var rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
+    // canvas agora é fixo (cobre a janela inteira, não só a hero), então o
+    // mouse é ouvido na window pra repulsão continuar funcionando rolando a página
+    window.addEventListener('mousemove', function(e){
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
     });
-    canvas.parentElement.addEventListener('mouseleave', function(){
+    document.addEventListener('mouseleave', function(){
       mouse.x = -9999; mouse.y = -9999;
     });
 
@@ -506,6 +575,7 @@
     initEcosystem();
     initFaq();
     initContactForm();
+    buildContactModal();
     initParticles();
   });
 

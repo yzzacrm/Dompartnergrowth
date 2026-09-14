@@ -288,11 +288,12 @@ h1,h2,h3,h4{
   }
 }
 .hero-particles{
-  position:absolute;
+  position:fixed;
   inset:0;
   width:100%;
   height:100%;
-  z-index:1;
+  z-index:0;
+  pointer-events:none;
 }
 .hero-content{
   position:relative;
@@ -1337,6 +1338,41 @@ h1,h2,h3,h4{
   line-height:1.5;
 }
 
+/* ---------- prova de valor (home) ---------- */
+.proof-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px;
+}
+.proof-card{
+  display:block;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:var(--panel);
+  overflow:hidden;
+  transition:border-color .35s, transform .35s;
+}
+.proof-card:hover, .proof-card:focus-within{
+  border-color:var(--gold);
+  transform:translateY(-4px);
+}
+.proof-card .more{
+  margin-top:14px;
+  font-size:12.5px;
+  color:var(--gold-light);
+  font-weight:600;
+  letter-spacing:.5px;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+.proof-card--video .shot-media video{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
 /* ---------- decks de branding (3 slides + descrição) ---------- */
 .deck-grid{
   display:grid;
@@ -1567,6 +1603,112 @@ h1,h2,h3,h4{
   margin-top:16px;
 }
 
+/* ---------- modal de contato (CTAs abrem o formulário na mesma tela) ---------- */
+.contact-modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(4,9,7,.78);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  z-index:999;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .3s var(--ease), visibility .3s;
+}
+.contact-modal-overlay.is-open{
+  opacity:1;
+  visibility:visible;
+}
+.contact-modal{
+  position:relative;
+  width:100%;
+  max-width:560px;
+  max-height:88vh;
+  overflow-y:auto;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:40px 36px;
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+  transform:translateY(16px) scale(.98);
+  transition:transform .35s var(--ease);
+}
+.contact-modal-overlay.is-open .contact-modal{
+  transform:translateY(0) scale(1);
+}
+.contact-modal-close{
+  position:absolute;
+  top:18px; right:18px;
+  width:36px; height:36px;
+  border-radius:50%;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--cream);
+  font-size:20px;
+  line-height:1;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:border-color .25s, color .25s;
+}
+.contact-modal-close:hover{
+  border-color:var(--gold);
+  color:var(--gold-light);
+}
+.contact-modal h3{
+  font-size:24px;
+  color:var(--cream);
+  font-family:var(--font-title);
+  font-weight:700;
+  margin-bottom:8px;
+  padding-right:30px;
+}
+.contact-modal .contact-modal-sub{
+  color:var(--cream-dim);
+  font-size:14px;
+  line-height:1.5;
+  margin-bottom:24px;
+}
+body.modal-open{ overflow:hidden; }
+@media(max-width:640px){
+  .contact-modal{ padding:32px 22px; }
+}
+
+/* ---------- páginas de texto corrido (ex.: política de privacidade) ---------- */
+.legal-content{
+  max-width:760px;
+  margin:0 auto;
+}
+.legal-content h2{
+  font-size:26px;
+  margin-bottom:14px;
+}
+.legal-content h3{
+  font-size:20px;
+  margin:36px 0 12px;
+}
+.legal-content p{
+  color:var(--cream-dim);
+  line-height:1.7;
+  font-size:15.5px;
+}
+.legal-content a{
+  color:var(--gold-light);
+  text-decoration:underline;
+}
+.legal-updated{
+  margin-top:36px;
+  padding-top:20px;
+  border-top:1px solid var(--border);
+  font-size:13px;
+  color:var(--cream-faint);
+}
+
 /* ---------- footer ---------- */
 .site-footer{
   border-top:1px solid var(--border);
@@ -1615,6 +1757,11 @@ h1,h2,h3,h4{
   font-size:12.5px;
   color:var(--cream-faint);
 }
+.footer-bottom a{
+  text-decoration:underline;
+  transition:color .25s;
+}
+.footer-bottom a:hover{ color:var(--gold-light); }
 .socials{ display:flex; gap:14px; }
 .socials a{
   width:34px; height:34px;
