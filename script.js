@@ -177,30 +177,60 @@
   function initCounters(){
     var counters = document.querySelectorAll('[data-count]');
     if(!counters.length) return;
+
+    function runCounter(el){
+      if(el.dataset.counterDone) return;
+      el.dataset.counterDone = '1';
+      var target = parseFloat(el.getAttribute('data-count'));
+      var suffix = el.getAttribute('data-suffix') || '';
+      var prefix = el.getAttribute('data-prefix') || '';
+      var startFrac = target >= 10 ? 0.7 : 0; // números pequenos (ex: "4") contam do zero normalmente
+      var duration = 1100;
+      var start = null;
+      function step(ts){
+        if(start === null) start = ts;
+        var progress = Math.min((ts - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        var value = Math.round(target * (startFrac + (1 - startFrac) * eased));
+        el.textContent = prefix + value.toLocaleString('pt-BR') + suffix;
+        if(progress < 1) requestAnimationFrame(step);
+        else el.textContent = prefix + target.toLocaleString('pt-BR') + suffix;
+      }
+      requestAnimationFrame(step);
+    }
+
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(!entry.isIntersecting) return;
-        var el = entry.target;
-        io.unobserve(el);
-        var target = parseFloat(el.getAttribute('data-count'));
-        var suffix = el.getAttribute('data-suffix') || '';
-        var prefix = el.getAttribute('data-prefix') || '';
-        var startFrac = target >= 10 ? 0.7 : 0; // números pequenos (ex: "4") contam do zero normalmente
-        var duration = 1100;
-        var start = null;
-        function step(ts){
-          if(start === null) start = ts;
-          var progress = Math.min((ts - start) / duration, 1);
-          var eased = 1 - Math.pow(1 - progress, 3);
-          var value = Math.round(target * (startFrac + (1 - startFrac) * eased));
-          el.textContent = prefix + value.toLocaleString('pt-BR') + suffix;
-          if(progress < 1) requestAnimationFrame(step);
-          else el.textContent = prefix + target.toLocaleString('pt-BR') + suffix;
-        }
-        requestAnimationFrame(step);
+        io.unobserve(entry.target);
+        runCounter(entry.target);
       });
-    }, { threshold:.4 });
+    }, { threshold:.15, rootMargin:'0px 0px -60px 0px' });
     counters.forEach(function(el){ io.observe(el); });
+
+    // rede de segurança: se por qualquer motivo (scroll muito rápido, momentum
+    // de trackpad pulando frames) o IntersectionObserver nunca disparar pra um
+    // contador que já passou pela tela, isso garante que ele não fique travado em "0"
+    var fallbackTicking = false;
+    function fallbackCheck(){
+      fallbackTicking = false;
+      counters.forEach(function(el){
+        if(el.dataset.counterDone) return;
+        var rect = el.getBoundingClientRect();
+        if(rect.top < window.innerHeight && rect.bottom > 0){
+          io.unobserve(el);
+          runCounter(el);
+        }
+      });
+    }
+    function onScrollOrResize(){
+      if(fallbackTicking) return;
+      fallbackTicking = true;
+      requestAnimationFrame(fallbackCheck);
+    }
+    window.addEventListener('scroll', onScrollOrResize, { passive:true });
+    window.addEventListener('resize', onScrollOrResize);
+    fallbackCheck(); // cobre o caso de já carregar com o contador visível
   }
 
   /* ---------------- contador de faturamento (baseado em tempo real, segue subindo sozinho) ---------------- */
@@ -291,8 +321,22 @@
       entries.forEach(function(entry){
         if(entry.isIntersecting){ countUp(); io.unobserve(entry.target); }
       });
-    }, { threshold:.4 });
+    }, { threshold:.15, rootMargin:'0px 0px -60px 0px' });
     io.observe(el);
+    // mesma rede de segurança dos contadores: garante que anima mesmo se o
+    // scroll pular o frame exato da interseção
+    function fallbackCheck(){
+      if(started) return;
+      var rect = el.getBoundingClientRect();
+      if(rect.top < window.innerHeight && rect.bottom > 0){ countUp(); io.unobserve(el); }
+    }
+    var ticking = false;
+    window.addEventListener('scroll', function(){
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(function(){ ticking = false; fallbackCheck(); });
+    }, { passive:true });
+    fallbackCheck();
   }
 
   /* ---------------- timeline: bolinha acende ao entrar na tela ---------------- */
@@ -437,6 +481,20 @@
     });
   }
 
+  /* ---------------- botão flutuante de contato ---------------- */
+  function buildFloatingCta(){
+    if(document.getElementById('floating-cta')) return;
+    var btn = document.createElement('a');
+    btn.id = 'floating-cta';
+    btn.className = 'btn floating-cta';
+    btn.href = 'contato.html';
+    btn.setAttribute('aria-label', 'Falar com a Dom');
+    btn.innerHTML = '<img src="logo-mark-gold.png" alt="">';
+    document.body.appendChild(btn);
+    // o clique é interceptado pelo mesmo listener de buildContactModal(),
+    // que abre o modal pra qualquer a.btn[href="contato.html"]
+  }
+
   /* ---------------- partículas formando o logo "DOM" no hero ---------------- */
   // pontos pré-calculados a partir do logo real (logo-white.png, 1000x397 px),
   // usados como molde das esferas — em vez de desenhar a imagem num canvas e ler os
@@ -576,6 +634,7 @@
     initFaq();
     initContactForm();
     buildContactModal();
+    buildFloatingCta();
     initParticles();
   });
 
