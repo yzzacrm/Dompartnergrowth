@@ -525,7 +525,11 @@
     var particles = [];
     var networkEdges = [];
     var mouse = { x:-9999, y:-9999 };
-    var scattered = false;
+    // em vez de um interruptor liga/desliga num ponto fixo da rolagem, o quanto
+    // os dados estão "espalhados" acompanha continuamente o quanto já se rolou
+    // a página inteira (0 no topo, 1 no fim) — assim o movimento é sempre lento
+    // e contínuo, nunca um salto que pareça reiniciar/embaralhar os pontos
+    var scrollProgress = 0;
     var networkAlpha = 0; // 0 = "monte de dados" formando o logo, 1 = rede neural
     var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -619,15 +623,15 @@
     // partículas, comparar todas contra todas em todo frame pesaria demais)
     function buildNetwork(w, h){
       networkEdges = [];
-      var step = Math.max(1, Math.floor(particles.length / 220)); // ~220 nós
+      var step = Math.max(1, Math.floor(particles.length / 150)); // ~150 nós
       var nodes = [];
       for(var i=0; i<particles.length; i+=step){
         particles[i].isNode = true;
         nodes.push(i);
       }
 
-      var maxDist = Math.max(w, h) * 0.13;
-      var maxLinksPerNode = 3;
+      var maxDist = Math.max(w, h) * 0.11;
+      var maxLinksPerNode = 2;
       var seen = {};
       for(var a=0; a<nodes.length; a++){
         var pi = nodes[a];
@@ -655,19 +659,19 @@
     function animate(){
       var w = canvas.width / dpr, h = canvas.height / dpr;
       ctx.clearRect(0,0,w,h);
-      var target = scattered ? 'scattered' : 'formed';
 
       // a Dom nasce como um monte de dados formando a palavra, e ao rolar a
-      // página esses dados vão se conectando: os nós crescem e as linhas
-      // entre eles aparecem, lendo como uma rede neural — networkAlpha faz
-      // essa transição suavemente em vez de ligar/desligar de uma vez
-      var targetNetworkAlpha = scattered ? 1 : 0;
-      networkAlpha += (targetNetworkAlpha - networkAlpha) * 0.04;
+      // página inteira (não só os primeiros pixels) esses dados vão se afastando
+      // aos poucos e se conectando — os nós crescem e as linhas entre eles
+      // aparecem, lendo como uma rede neural. networkAlpha persegue o progresso
+      // real da rolagem com uma suavização leve, então o movimento é sempre
+      // lento e contínuo, nunca um salto de estado
+      networkAlpha += (scrollProgress - networkAlpha) * 0.035;
 
       for(var i=0;i<particles.length;i++){
         var p = particles[i];
-        var goalX = target === 'formed' ? p.tx : p.sx;
-        var goalY = target === 'formed' ? p.ty : p.sy;
+        var goalX = p.tx + (p.sx - p.tx) * scrollProgress;
+        var goalY = p.ty + (p.sy - p.ty) * scrollProgress;
 
         // repulsão do mouse
         var dx = p.x - mouse.x, dy = p.y - mouse.y;
@@ -678,8 +682,8 @@
           goalY += (dy/(dist||1)) * force * 40;
         }
 
-        p.x += (goalX - p.x) * 0.06;
-        p.y += (goalY - p.y) * 0.06;
+        p.x += (goalX - p.x) * 0.04;
+        p.y += (goalY - p.y) * 0.04;
       }
 
       // linhas da rede neural, desenhadas antes dos pontos pra ficarem por baixo
@@ -688,7 +692,11 @@
         for(var e=0; e<networkEdges.length; e++){
           var edge = networkEdges[e];
           var pa = particles[edge.a], pb = particles[edge.b];
-          var lineAlpha = edge.baseAlpha * networkAlpha * 0.5;
+          // curva de força bem acentuada: só as conexões mais próximas
+          // (baseAlpha perto de 1) ficam visíveis, quase todas as outras
+          // somem — em vez de a tela inteira brilhar por igual
+          var strength = Math.pow(edge.baseAlpha, 2.6);
+          var lineAlpha = strength * networkAlpha * 0.4;
           if(lineAlpha > 0.01){
             ctx.strokeStyle = 'rgba(228,197,103,' + lineAlpha.toFixed(3) + ')';
             ctx.beginPath();
@@ -697,12 +705,13 @@
             ctx.stroke();
           }
 
-          // pulso viajando pela conexão — sensação de dado vivo circulando
+          // pulso viajando pela conexão — sensação de dado vivo circulando,
+          // bem mais transparente que a linha em si
           if(!prefersReducedMotion){
             edge.phase += 0.0035 + (e % 5) * 0.0007;
             if(edge.phase > 1) edge.phase -= 1;
           }
-          var pulseAlpha = edge.baseAlpha * networkAlpha;
+          var pulseAlpha = strength * networkAlpha * 0.3;
           if(pulseAlpha > 0.02){
             var px = pa.x + (pb.x - pa.x) * edge.phase;
             var py = pa.y + (pb.y - pa.y) * edge.phase;
@@ -715,22 +724,29 @@
 
       // um único drawImage do sprite pré-renderizado por partícula
       // (bem mais leve que os 2-3 fill/stroke por ponto de antes)
+      // conforme os dados vão se espalhando pela página, ficam um pouco mais
+      // discretos — pra não parecer um céu inteiro de estrelas brilhando forte
+      // atrás do conteúdo das seções mais abaixo
+      var scatterDim = 1 - scrollProgress * 0.5;
       for(var j=0;j<particles.length;j++){
         var pt = particles[j];
         var d = pt.size * 2.6;
         var useNodeSprite = pt.isNode && networkAlpha > 0.03;
-        if(useNodeSprite) d = d * (1 + networkAlpha * 0.95);
-        ctx.globalAlpha = pt.alpha;
+        if(useNodeSprite) d = d * (1 + networkAlpha * 0.45);
+        ctx.globalAlpha = pt.alpha * scatterDim;
         ctx.drawImage(useNodeSprite ? nodeSprite : sprite, pt.x - d/2, pt.y - d/2, d, d);
       }
       ctx.globalAlpha = 1;
       requestAnimationFrame(animate);
     }
 
-    window.addEventListener('resize', resize);
-    window.addEventListener('scroll', function(){
-      scattered = window.scrollY > (window.innerHeight * 0.16);
-    }, { passive:true });
+    function updateScrollProgress(){
+      var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgress = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
+    }
+    window.addEventListener('resize', function(){ resize(); updateScrollProgress(); });
+    window.addEventListener('scroll', updateScrollProgress, { passive:true });
+    updateScrollProgress();
     // canvas agora é fixo (cobre a janela inteira, não só a hero), então o
     // mouse é ouvido na window pra repulsão continuar funcionando rolando a página
     window.addEventListener('mousemove', function(e){
