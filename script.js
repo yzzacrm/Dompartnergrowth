@@ -530,6 +530,7 @@
     // a página inteira (0 no topo, 1 no fim) — assim o movimento é sempre lento
     // e contínuo, nunca um salto que pareça reiniciar/embaralhar os pontos
     var scrollProgress = 0;
+    var canvasFade = 1; // apaga o efeito inteiro depois que ele já convergiu e a rolagem continua
     var networkAlpha = 0; // 0 = "monte de dados" formando o logo, 1 = rede neural
     var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -599,6 +600,20 @@
       var dw = LOGO_W * scale, dh = LOGO_H * scale;
       var dx = (w - dw) / 2, dy = (h - dh) / 2;
 
+      // os dados não se espalham pela tela inteira (isso lia como uma explosão/
+      // confete bagunçado) — eles convergem pra um aglomerado mais compacto,
+      // perto do centro, como se os pontos da logo virassem "elétrons" que se
+      // aproximam uns dos outros formando a rede
+      var clusterW = Math.min(w * 0.62, dw * 1.5);
+      // o aglomerado descia só até a metade da tela, deixando o quarto de
+      // baixo vazio — agora ele se estende bem mais pra baixo, quase até o
+      // rodapé da tela, sem deixar de ser compacto na largura
+      var clusterTop = Math.min(dy, h * 0.28);
+      var clusterBottom = h * 0.94;
+      var clusterH = Math.max(h * 0.5, clusterBottom - clusterTop);
+      var clusterX = w/2 - clusterW/2;
+      var clusterY = clusterTop;
+
       particles = [];
       for(var i=0; i<LOGO_POINTS.length; i+=2){
         var tx = dx + LOGO_POINTS[i] * dw;
@@ -607,21 +622,22 @@
         particles.push({
           tx:tx, ty:ty,
           x: Math.random()*w, y: Math.random()*h,
-          sx: Math.random()*w, sy: Math.random()*h, // posição "espalhada"
+          sx: clusterX + Math.random()*clusterW,
+          sy: clusterY + Math.random()*clusterH, // posição "aglomerada" (elétrons próximos)
           size: isBig ? (Math.random()*2.1+1.6) : (Math.random()*1.7+1.1),
           alpha: Math.random()*.35+.55,
           isNode: false
         });
       }
 
-      buildNetwork(w, h);
+      buildNetwork(clusterW, clusterH);
     }
 
     // escolhe uma amostra das partículas pra virar "neurônios" quando a Dom
     // se espalha pela rolagem, conectando cada uma às vizinhas mais próximas —
     // calculado uma única vez por resize (não a cada frame: com milhares de
     // partículas, comparar todas contra todas em todo frame pesaria demais)
-    function buildNetwork(w, h){
+    function buildNetwork(clusterW, clusterH){
       networkEdges = [];
       var step = Math.max(1, Math.floor(particles.length / 150)); // ~150 nós
       var nodes = [];
@@ -630,7 +646,9 @@
         nodes.push(i);
       }
 
-      var maxDist = Math.max(w, h) * 0.11;
+      // maxDist relativo ao tamanho do aglomerado (não da janela inteira),
+      // já que os "elétrons" agora convergem pra uma área bem mais compacta
+      var maxDist = Math.max(clusterW, clusterH) * 0.16;
       var maxLinksPerNode = 2;
       var seen = {};
       for(var a=0; a<nodes.length; a++){
@@ -660,12 +678,12 @@
       var w = canvas.width / dpr, h = canvas.height / dpr;
       ctx.clearRect(0,0,w,h);
 
-      // a Dom nasce como um monte de dados formando a palavra, e ao rolar a
-      // página inteira (não só os primeiros pixels) esses dados vão se afastando
-      // aos poucos e se conectando — os nós crescem e as linhas entre eles
-      // aparecem, lendo como uma rede neural. networkAlpha persegue o progresso
-      // real da rolagem com uma suavização leve, então o movimento é sempre
-      // lento e contínuo, nunca um salto de estado
+      // a Dom nasce como um monte de dados formando a palavra, e ao rolar os
+      // dados convergem pra um aglomerado compacto — os nós crescem, ficam
+      // mais próximos uns dos outros e as linhas entre eles aparecem, lendo
+      // como uma rede neural. networkAlpha persegue o progresso real da
+      // rolagem com uma suavização leve, então o movimento é sempre lento e
+      // contínuo, nunca um salto de estado
       networkAlpha += (scrollProgress - networkAlpha) * 0.035;
 
       for(var i=0;i<particles.length;i++){
@@ -696,7 +714,7 @@
           // (baseAlpha perto de 1) ficam visíveis, quase todas as outras
           // somem — em vez de a tela inteira brilhar por igual
           var strength = Math.pow(edge.baseAlpha, 2.6);
-          var lineAlpha = strength * networkAlpha * 0.4;
+          var lineAlpha = strength * networkAlpha * 0.4 * canvasFade;
           if(lineAlpha > 0.01){
             ctx.strokeStyle = 'rgba(228,197,103,' + lineAlpha.toFixed(3) + ')';
             ctx.beginPath();
@@ -711,7 +729,7 @@
             edge.phase += 0.0035 + (e % 5) * 0.0007;
             if(edge.phase > 1) edge.phase -= 1;
           }
-          var pulseAlpha = strength * networkAlpha * 0.3;
+          var pulseAlpha = strength * networkAlpha * 0.3 * canvasFade;
           if(pulseAlpha > 0.02){
             var px = pa.x + (pb.x - pa.x) * edge.phase;
             var py = pa.y + (pb.y - pa.y) * edge.phase;
@@ -724,15 +742,15 @@
 
       // um único drawImage do sprite pré-renderizado por partícula
       // (bem mais leve que os 2-3 fill/stroke por ponto de antes)
-      // conforme os dados vão se espalhando pela página, ficam um pouco mais
-      // discretos — pra não parecer um céu inteiro de estrelas brilhando forte
-      // atrás do conteúdo das seções mais abaixo
-      var scatterDim = 1 - scrollProgress * 0.5;
+      // conforme os dados convergem, ficam um pouco mais discretos, e todo o
+      // efeito se apaga (canvasFade) assim que a rolagem passa da hero — pra
+      // não parecer um céu de estrelas fixo atrás do conteúdo mais abaixo
+      var scatterDim = (1 - scrollProgress * 0.5) * canvasFade;
       for(var j=0;j<particles.length;j++){
         var pt = particles[j];
         var d = pt.size * 2.6;
         var useNodeSprite = pt.isNode && networkAlpha > 0.03;
-        if(useNodeSprite) d = d * (1 + networkAlpha * 0.45);
+        if(useNodeSprite) d = d * (1 + networkAlpha * 0.85);
         ctx.globalAlpha = pt.alpha * scatterDim;
         ctx.drawImage(useNodeSprite ? nodeSprite : sprite, pt.x - d/2, pt.y - d/2, d, d);
       }
@@ -740,9 +758,20 @@
       requestAnimationFrame(animate);
     }
 
+    // a transição (logo virando elétrons que se aproximam) completa logo no
+    // início da rolagem, não ao longo da página inteira. Depois disso, o
+    // efeito inteiro se apaga suavemente conforme a rolagem continua, pra não
+    // ficar "grudado" por cima do conteúdo das seções mais abaixo — é um
+    // flash elegante no início, não um fundo fixo o site inteiro. Continua
+    // sendo progresso contínuo (nunca um interruptor num ponto fixo), então
+    // rolar pra cima e pra baixo continua suave, sem reiniciar/embaralhar
     function updateScrollProgress(){
-      var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      scrollProgress = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
+      var y = window.scrollY;
+      var convergeDist = window.innerHeight * 0.8;
+      var fadeDist = window.innerHeight * 1.8;
+      scrollProgress = convergeDist > 0 ? Math.min(1, Math.max(0, y / convergeDist)) : 0;
+      var fadeAmount = fadeDist > 0 ? Math.min(1, Math.max(0, (y - convergeDist) / fadeDist)) : 0;
+      canvasFade = 1 - fadeAmount;
     }
     window.addEventListener('resize', function(){ resize(); updateScrollProgress(); });
     window.addEventListener('scroll', updateScrollProgress, { passive:true });

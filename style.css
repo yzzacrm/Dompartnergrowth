@@ -1287,6 +1287,23 @@ h1,h2,h3,h4{
   font-size:13px;
   color:var(--cream-dim);
 }
+.mentor-card--photo{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.mentor-photo{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  object-fit:cover;
+  border:1px solid var(--gold);
+  flex-shrink:0;
+}
+.mentor-card--photo .name,
+.mentor-card--photo .role{
+  margin-top:0;
+}
 
 /* ---------- galeria do fundador (bastidores) ---------- */
 .founder-gallery{
