@@ -768,7 +768,14 @@
     function updateScrollProgress(){
       var y = window.scrollY;
       var convergeDist = window.innerHeight * 0.8;
-      var fadeDist = window.innerHeight * 1.8;
+      // o fade era um múltiplo fixo da altura da tela (2.6x). Isso funcionava
+      // numa página comprida, mas em páginas mais curtas esse ponto fixo cai
+      // bem antes do fim da rolagem — os elétrons sumiam no meio do conteúdo.
+      // Agora o fade se estende com base na altura real de cada página, pra
+      // eles continuarem visíveis (se apagando bem devagar) até perto do
+      // rodapé, não importa o tamanho da página.
+      var maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      var fadeDist = Math.max(window.innerHeight * 1.8, maxScroll - convergeDist);
       scrollProgress = convergeDist > 0 ? Math.min(1, Math.max(0, y / convergeDist)) : 0;
       var fadeAmount = fadeDist > 0 ? Math.min(1, Math.max(0, (y - convergeDist) / fadeDist)) : 0;
       canvasFade = 1 - fadeAmount;
