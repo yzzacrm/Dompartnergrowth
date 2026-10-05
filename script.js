@@ -530,8 +530,15 @@
     // a página inteira (0 no topo, 1 no fim) — assim o movimento é sempre lento
     // e contínuo, nunca um salto que pareça reiniciar/embaralhar os pontos
     var scrollProgress = 0;
-    var canvasFade = 1; // apaga o efeito inteiro depois que ele já convergiu e a rolagem continua
     var networkAlpha = 0; // 0 = "monte de dados" formando o logo, 1 = rede neural
+    // depois de ajustar a transparência algumas vezes (pra menos, pra mais um
+    // pouco), o cliente pediu pra tirar o fade de vez: o efeito não precisa
+    // ir ficando transparente conforme rola, quer ele visível o tempo todo,
+    // só sem atrapalhar a leitura do texto. VISIBLE_OPACITY agora é uma
+    // opacidade constante (não muda com scrollProgress nem com a distância
+    // rolada) — moderada o bastante pra não competir com o conteúdo, já que
+    // o texto sempre desenha por cima do canvas (z-index), nunca por baixo.
+    var VISIBLE_OPACITY = 0.7;
     var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
 
@@ -576,6 +583,7 @@
       return s;
     })();
 
+    var lastParticlesW = 0, lastParticlesH = 0;
     function resize(){
       // canvas fixo cobrindo a janela inteira (não mais só a caixa da hero),
       // pra esfera de partículas acompanhar a rolagem pelo site inteiro
@@ -585,7 +593,21 @@
       canvas.style.width = w + 'px';
       canvas.style.height = h + 'px';
       ctx.setTransform(dpr,0,0,dpr,0,0);
-      buildParticles(w, h);
+      // no mobile (e no painel da prévia), a barra de endereço/UI do navegador
+      // aparece e some ao rolar, o que dispara 'resize' com innerHeight
+      // mudando bastante mas innerWidth igual. buildParticles() sorteia
+      // posições e alvos novos do zero — reconstruir isso a cada rolagem
+      // fazia as partículas parecerem "chover"/descer feito esferas e sumir
+      // repetidamente. Só reconstrói de verdade quando a largura muda (giro
+      // de tela ou redimensionamento real) ou a altura muda bem mais do que
+      // uma barra de endereço costuma variar; senão só atualiza o canvas.
+      var widthChanged = w !== lastParticlesW;
+      var heightChanged = Math.abs(h - lastParticlesH) > 150;
+      if(widthChanged || heightChanged){
+        buildParticles(w, h);
+        lastParticlesW = w;
+        lastParticlesH = h;
+      }
     }
 
     function buildParticles(w, h){
@@ -603,8 +625,13 @@
       // os dados não se espalham pela tela inteira (isso lia como uma explosão/
       // confete bagunçado) — eles convergem pra um aglomerado mais compacto,
       // perto do centro, como se os pontos da logo virassem "elétrons" que se
-      // aproximam uns dos outros formando a rede
-      var clusterW = Math.min(w * 0.62, dw * 1.5);
+      // aproximam uns dos outros formando a rede. Isso limitava a largura do
+      // aglomerado a 62% da tela — com a malha bem mais densa (rodada
+      // seguinte), essa faixa central virou um "quadrado" visível, com bordas
+      // nítidas e vazio dos dois lados. Agora o aglomerado ocupa quase a
+      // largura inteira da viewport, então a malha cobre o site de ponta a
+      // ponta em vez de ficar num bloco central destacado
+      var clusterW = w * (isMobile ? 0.96 : 0.94);
       // o aglomerado descia só até a metade da tela, deixando o quarto de
       // baixo vazio — agora ele se estende bem mais pra baixo, quase até o
       // rodapé da tela, sem deixar de ser compacto na largura
@@ -639,7 +666,12 @@
     // partículas, comparar todas contra todas em todo frame pesaria demais)
     function buildNetwork(clusterW, clusterH){
       networkEdges = [];
-      var step = Math.max(1, Math.floor(particles.length / 150)); // ~150 nós
+      // rede bem mais densa: o cliente pediu de volta o visual "constelação"
+      // da primeira versão (tela cheia de pontos conectados por muitas
+      // linhas finas), não um punhado de nós isolados. Mais nós + mais
+      // ligações por nó = malha triangulada cobrindo a maior parte do
+      // aglomerado, igual ao print de referência
+      var step = Math.max(1, Math.floor(particles.length / 380)); // ~380 nós
       var nodes = [];
       for(var i=0; i<particles.length; i+=step){
         particles[i].isNode = true;
@@ -648,8 +680,8 @@
 
       // maxDist relativo ao tamanho do aglomerado (não da janela inteira),
       // já que os "elétrons" agora convergem pra uma área bem mais compacta
-      var maxDist = Math.max(clusterW, clusterH) * 0.16;
-      var maxLinksPerNode = 2;
+      var maxDist = Math.max(clusterW, clusterH) * 0.22;
+      var maxLinksPerNode = 4;
       var seen = {};
       for(var a=0; a<nodes.length; a++){
         var pi = nodes[a];
@@ -710,11 +742,12 @@
         for(var e=0; e<networkEdges.length; e++){
           var edge = networkEdges[e];
           var pa = particles[edge.a], pb = particles[edge.b];
-          // curva de força bem acentuada: só as conexões mais próximas
-          // (baseAlpha perto de 1) ficam visíveis, quase todas as outras
-          // somem — em vez de a tela inteira brilhar por igual
-          var strength = Math.pow(edge.baseAlpha, 2.6);
-          var lineAlpha = strength * networkAlpha * 0.4 * canvasFade;
+          // curva mais suave: antes só as conexões mais próximas apareciam
+          // e o resto da malha sumia, deixando só pontos soltos sem parecer
+          // rede nenhuma. Agora a maioria das conexões fica visível (só as
+          // bem mais longas somem), formando a malha densa tipo constelação
+          var strength = Math.pow(edge.baseAlpha, 1.1);
+          var lineAlpha = strength * networkAlpha * 0.95 * VISIBLE_OPACITY;
           if(lineAlpha > 0.01){
             ctx.strokeStyle = 'rgba(228,197,103,' + lineAlpha.toFixed(3) + ')';
             ctx.beginPath();
@@ -729,7 +762,7 @@
             edge.phase += 0.0035 + (e % 5) * 0.0007;
             if(edge.phase > 1) edge.phase -= 1;
           }
-          var pulseAlpha = strength * networkAlpha * 0.3 * canvasFade;
+          var pulseAlpha = strength * networkAlpha * 0.5 * VISIBLE_OPACITY;
           if(pulseAlpha > 0.02){
             var px = pa.x + (pb.x - pa.x) * edge.phase;
             var py = pa.y + (pb.y - pa.y) * edge.phase;
@@ -741,11 +774,13 @@
       }
 
       // um único drawImage do sprite pré-renderizado por partícula
-      // (bem mais leve que os 2-3 fill/stroke por ponto de antes)
-      // conforme os dados convergem, ficam um pouco mais discretos, e todo o
-      // efeito se apaga (canvasFade) assim que a rolagem passa da hero — pra
-      // não parecer um céu de estrelas fixo atrás do conteúdo mais abaixo
-      var scatterDim = (1 - scrollProgress * 0.5) * canvasFade;
+      // (bem mais leve que os 2-3 fill/stroke por ponto de antes). Depois de
+      // ir e voltar em quanto o efeito deveria se apagar ao rolar, o cliente
+      // pediu pra tirar o fade de vez: fica visível o tempo todo, com
+      // opacidade constante (VISIBLE_OPACITY) — não depende mais de
+      // scrollProgress nem de canvasFade. Como o conteúdo (texto, cards)
+      // sempre desenha por cima do canvas, isso não atrapalha a leitura.
+      var scatterDim = VISIBLE_OPACITY;
       for(var j=0;j<particles.length;j++){
         var pt = particles[j];
         var d = pt.size * 2.6;
@@ -759,26 +794,16 @@
     }
 
     // a transição (logo virando elétrons que se aproximam) completa logo no
-    // início da rolagem, não ao longo da página inteira. Depois disso, o
-    // efeito inteiro se apaga suavemente conforme a rolagem continua, pra não
-    // ficar "grudado" por cima do conteúdo das seções mais abaixo — é um
-    // flash elegante no início, não um fundo fixo o site inteiro. Continua
-    // sendo progresso contínuo (nunca um interruptor num ponto fixo), então
-    // rolar pra cima e pra baixo continua suave, sem reiniciar/embaralhar
+    // início da rolagem, não ao longo da página inteira — depois disso os
+    // dados ficam parados nesse aglomerado (não se espalham de novo) e não
+    // se apagam mais: o efeito fica visível o tempo todo, em vez de sumir
+    // conforme a rolagem continua. Continua sendo progresso contínuo (nunca
+    // um interruptor num ponto fixo), então rolar pra cima e pra baixo
+    // continua suave, sem reiniciar/embaralhar
     function updateScrollProgress(){
       var y = window.scrollY;
       var convergeDist = window.innerHeight * 0.8;
-      // o fade era um múltiplo fixo da altura da tela (2.6x). Isso funcionava
-      // numa página comprida, mas em páginas mais curtas esse ponto fixo cai
-      // bem antes do fim da rolagem — os elétrons sumiam no meio do conteúdo.
-      // Agora o fade se estende com base na altura real de cada página, pra
-      // eles continuarem visíveis (se apagando bem devagar) até perto do
-      // rodapé, não importa o tamanho da página.
-      var maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-      var fadeDist = Math.max(window.innerHeight * 1.8, maxScroll - convergeDist);
       scrollProgress = convergeDist > 0 ? Math.min(1, Math.max(0, y / convergeDist)) : 0;
-      var fadeAmount = fadeDist > 0 ? Math.min(1, Math.max(0, (y - convergeDist) / fadeDist)) : 0;
-      canvasFade = 1 - fadeAmount;
     }
     window.addEventListener('resize', function(){ resize(); updateScrollProgress(); });
     window.addEventListener('scroll', updateScrollProgress, { passive:true });
