@@ -24,7 +24,13 @@
   /* text */
   --cream:#EFE9DC;
   --cream-dim:rgba(239,233,220,.92);
-  --cream-faint:rgba(239,233,220,.38);
+  /* era .38 — ficava com contraste ~3:1 contra os fundos escuros do site,
+     abaixo do mínimo de 4.5:1 (WCAG AA) pra texto normal, e as letras
+     "sumiam" no fundo em vários lugares (preço dos planos, nota de taxa,
+     legenda dos cases). Subido pra .60 (~5.4–6.2:1 nos fundos do site),
+     continua lendo como texto secundário/mais discreto que --cream-dim,
+     mas agora realmente legível */
+  --cream-faint:rgba(239,233,220,.60);
 
   --font-head:'Cormorant Garamond', 'Times New Roman', serif;
   --font-body:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -292,7 +298,14 @@ h1,h2,h3,h4{
   }
 }
 .hero-particles{
-  position:fixed;
+  /* confinado só à área da hero (que é position:relative + overflow:hidden
+     acima): antes era "fixed" cobrindo a janela inteira, então, depois que a
+     convergência terminava (só os primeiros ~80% da altura da hero rolados),
+     o aglomerado ficava parado, congelado por cima do resto do site inteiro
+     durante toda a rolagem — lia como um "quadrado travado". Agora o efeito
+     rola junto com a hero e some de vista assim que ela sai da tela, como
+     uma abertura única, em vez de uma textura permanente */
+  position:absolute;
   inset:0;
   width:100%;
   height:100%;
@@ -1620,6 +1633,96 @@ h1,h2,h3,h4{
   font-size:14.5px;
 }
 
+/* ---------- planos (consultoria Daniel Gualberto) ---------- */
+.plan-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  align-items:stretch;
+}
+.plan-card{
+  position:relative;
+  border-radius:var(--radius);
+  border:1px solid var(--border);
+  background:linear-gradient(165deg,var(--panel),var(--bg-deep) 78%);
+  padding:36px 30px 30px;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 14px 34px rgba(0,0,0,.22);
+  transition:transform .45s var(--ease), border-color .45s, box-shadow .45s;
+}
+.plan-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(228,197,103,.4);
+  box-shadow:0 26px 52px rgba(0,0,0,.4);
+}
+.plan-card--featured{
+  border-color:var(--gold);
+  background:linear-gradient(165deg,rgba(201,162,39,.1),var(--panel) 60%,var(--bg-deep) 100%);
+}
+.plan-badge{
+  position:absolute;
+  top:-13px;
+  left:30px;
+  background:var(--gold);
+  color:var(--bg-deep);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  padding:5px 14px;
+  border-radius:100px;
+}
+.plan-card .tag{
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--gold-light);
+  margin-bottom:14px;
+}
+.plan-card h3{
+  font-size:23px;
+  color:var(--cream);
+  font-family:var(--font-title);
+  font-weight:700;
+}
+.plan-price{
+  display:flex;
+  align-items:baseline;
+  gap:6px;
+  margin-top:14px;
+}
+.plan-price .value{
+  font-family:var(--font-head);
+  font-size:38px;
+  color:var(--gold-light);
+}
+.plan-price .period{
+  font-size:13.5px;
+  color:var(--cream-faint);
+}
+.plan-note{
+  font-size:12px;
+  color:var(--cream-faint);
+  margin-top:6px;
+}
+.plan-card .desc{
+  font-size:14.5px;
+  line-height:1.62;
+  color:var(--cream-dim);
+  margin-top:18px;
+  flex-grow:1;
+}
+.plan-card .btn{
+  margin-top:26px;
+  width:100%;
+  text-align:center;
+  justify-content:center;
+}
+@media(max-width:860px){
+  .plan-grid{ grid-template-columns:1fr; }
+}
+
 /* ---------- CTA banner ---------- */
 .cta-banner{
   border-radius:24px;
@@ -1967,17 +2070,29 @@ body.modal-open{ overflow:hidden; }
 }
 
 /* ---------- reveal on scroll ---------- */
-/* só esconde antes do scroll se JS estiver ativo (evita conteúdo sumido sem JS) */
+/* só esconde antes do scroll se JS estiver ativo (evita conteúdo sumido sem JS).
+   Distância e duração aumentadas (24px/.8s → 40px/.9s) pra ficar mais
+   perceptível — o cliente pediu um site "mais animado ao rolar, com os
+   textos surgindo" — sem nunca mexer em line-height/letter-spacing, só em
+   opacidade e posição, então o texto não fica "espaçado" durante a entrada */
 .reveal{
-  transition:opacity .8s var(--ease), transform .8s var(--ease);
+  transition:opacity .9s var(--ease), transform .9s var(--ease);
 }
 .js .reveal{
   opacity:0;
-  transform:translateY(28px);
+  transform:translateY(40px);
 }
 .reveal.is-visible{
   opacity:1;
   transform:translateY(0);
+  /* script.js já marca cada .reveal com --i (posição dele entre os 8
+     últimos elementos revelados na página, calculado em initReveal()) —
+     antes isso só era usado por .reveal-stagger (que não é usado em
+     lugar nenhum do HTML). Reaproveitado aqui pra dar um atraso curto e
+     crescente a cada elemento: cards do mesmo grid (que entram juntos no
+     observer) passam a "surgir" em cascata um atrás do outro, em vez de
+     pipocarem todos ao mesmo tempo */
+  transition-delay:calc(var(--i,0) * 70ms);
 }
 .reveal-stagger.is-visible > *{ transition-delay:calc(var(--i,0) * 90ms); }
 

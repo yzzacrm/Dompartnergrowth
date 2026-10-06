@@ -9,7 +9,7 @@
   var NAV_LINKS = [
     { href:'index.html',        label:'Início' },
     { href:'sobre.html',        label:'Quem Somos' },
-    { href:'fundador.html',     label:'O Fundador' },
+    { href:'advisor.html',      label:'Daniel Gualberto' },
     { href:'comercial.html',    label:'Comercial' },
     { href:'marketing.html',    label:'Marketing' },
     { href:'produtora.html',    label:'Produtora' },
@@ -88,7 +88,7 @@
             '<h4>Institucional</h4>' +
             '<a href="index.html">Início</a>' +
             '<a href="sobre.html">Quem Somos</a>' +
-            '<a href="fundador.html">O Fundador</a>' +
+            '<a href="advisor.html">Daniel Gualberto</a>' +
             '<a href="contato.html">Contato</a>' +
           '</div>' +
           '<div class="footer-col">' +
@@ -584,10 +584,13 @@
     })();
 
     var lastParticlesW = 0, lastParticlesH = 0;
+    // o canvas agora vive dentro da própria .hero (não mais fixo cobrindo a
+    // janela inteira) — o efeito acontece só ali e rola embora junto com o
+    // resto da hero, em vez de ficar uma textura fixa grudada na tela por
+    // cima do site inteiro depois que a convergência termina
+    var heroEl = canvas.parentElement;
     function resize(){
-      // canvas fixo cobrindo a janela inteira (não mais só a caixa da hero),
-      // pra esfera de partículas acompanhar a rolagem pelo site inteiro
-      var w = window.innerWidth, h = window.innerHeight;
+      var w = heroEl.clientWidth, h = heroEl.clientHeight;
       canvas.width = w * dpr;
       canvas.height = h * dpr;
       canvas.style.width = w + 'px';
@@ -794,25 +797,32 @@
     }
 
     // a transição (logo virando elétrons que se aproximam) completa logo no
-    // início da rolagem, não ao longo da página inteira — depois disso os
-    // dados ficam parados nesse aglomerado (não se espalham de novo) e não
-    // se apagam mais: o efeito fica visível o tempo todo, em vez de sumir
-    // conforme a rolagem continua. Continua sendo progresso contínuo (nunca
-    // um interruptor num ponto fixo), então rolar pra cima e pra baixo
-    // continua suave, sem reiniciar/embaralhar
+    // início da rolagem pela hero, não ao longo da página inteira — depois
+    // disso os dados ficam parados nesse aglomerado (não se espalham de
+    // novo) pelo resto da hero. Como o canvas agora é só do tamanho da hero
+    // (não mais fixo cobrindo a janela toda), assim que a hero sai da tela
+    // rolando o efeito inteiro some junto com ela — não fica mais uma
+    // textura congelada por cima do resto do site. Continua sendo progresso
+    // contínuo (nunca um interruptor num ponto fixo), então rolar pra cima e
+    // pra baixo dentro da hero continua suave, sem reiniciar/embaralhar
     function updateScrollProgress(){
       var y = window.scrollY;
-      var convergeDist = window.innerHeight * 0.8;
+      var convergeDist = heroEl.clientHeight * 0.8;
       scrollProgress = convergeDist > 0 ? Math.min(1, Math.max(0, y / convergeDist)) : 0;
     }
     window.addEventListener('resize', function(){ resize(); updateScrollProgress(); });
     window.addEventListener('scroll', updateScrollProgress, { passive:true });
     updateScrollProgress();
-    // canvas agora é fixo (cobre a janela inteira, não só a hero), então o
-    // mouse é ouvido na window pra repulsão continuar funcionando rolando a página
+    // o mouse continua ouvido na window (não só no canvas) pra repulsão
+    // funcionar em qualquer ponto da hero, não só exatamente sobre o canvas.
+    // Como as partículas usam coordenadas locais da hero (0,0 no canto
+    // superior esquerdo dela, não da janela), convertemos a posição do
+    // mouse (que vem em coordenadas da janela) subtraindo a posição atual
+    // da hero na tela — necessário desde que o canvas deixou de ser "fixed"
     window.addEventListener('mousemove', function(e){
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
+      var r = heroEl.getBoundingClientRect();
+      mouse.x = e.clientX - r.left;
+      mouse.y = e.clientY - r.top;
     });
     document.addEventListener('mouseleave', function(){
       mouse.x = -9999; mouse.y = -9999;
