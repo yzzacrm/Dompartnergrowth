@@ -5,18 +5,26 @@
 
 (function(){
 
-  /* ---------------- dados de navegação (fonte única) ---------------- */
-  var NAV_LINKS = [
-    { href:'index.html',        label:'Início' },
-    { href:'sobre.html',        label:'Quem Somos' },
-    { href:'advisor.html',      label:'Daniel Gualberto' },
+  /* ---------------- dados de navegação (fonte única) ----------------
+     Bloco 5 do pente fino: capsula de nav mais enxuta. As 4 frentes
+     (antes 4 itens soltos no menu) agora moram dentro de um submenu
+     "Serviços" — o conteúdo/links de cada frente continuam existindo
+     normalmente, só a entrada no menu principal que fica agrupada. */
+  var NAV_HOME = { href:'index.html', label:'Início' };
+  var NAV_ABOUT = { href:'sobre.html', label:'Quem Somos' };
+  var SERVICE_LINKS = [
     { href:'comercial.html',    label:'Comercial' },
     { href:'marketing.html',    label:'Marketing' },
     { href:'produtora.html',    label:'Produtora' },
     { href:'inteligencia.html', label:'Inteligência' }
   ];
-
+  var NAV_CASES = { href:'cases.html', label:'Cases' };
+  var NAV_ADVISOR = { href:'advisor.html', label:'Daniel Gualberto' };
   var CONTACT_LINK = { href:'contato.html', label:'Contato' };
+  var NAV_CTA = { href:'advisor.html#diagnostico', label:'Agendar Diagnóstico' };
+
+  // mantido por compatibilidade: lista plana usada pelo rodapé (coluna "Frentes")
+  var NAV_LINKS = [NAV_HOME, NAV_ABOUT, NAV_ADVISOR].concat(SERVICE_LINKS);
 
   var PRODUCT_LINKS = [
     { href:'loja-online.html',        label:'Loja Online' },
@@ -39,28 +47,56 @@
     if(!mount) return;
     var here = currentFile();
 
-    var linksHtml = NAV_LINKS.map(function(l){
+    function linkHtml(l){
       var active = (l.href === here) ? ' is-active' : '';
       return '<a href="'+l.href+'" class="'+active.trim()+'">'+l.label+'</a>';
-    }).join('');
+    }
+
+    var isServicePage = SERVICE_LINKS.some(function(l){ return l.href === here; });
+    var subLinksHtml = SERVICE_LINKS.map(linkHtml).join('');
 
     mount.innerHTML =
       '<div class="nav-capsule">' +
         '<a href="index.html" class="brand"><img src="logo-white.png" alt="Dom Partner Growth"></a>' +
         '<nav class="nav-links" id="nav-links">' +
-          linksHtml +
-          '<a href="'+CONTACT_LINK.href+'" class="nav-cta">'+CONTACT_LINK.label+'</a>' +
+          linkHtml(NAV_HOME) +
+          linkHtml(NAV_ABOUT) +
+          '<div class="nav-item" id="nav-services-item">' +
+            '<button type="button" class="nav-sub-toggle'+(isServicePage ? ' is-active' : '')+'" id="nav-services-toggle" aria-expanded="false">Serviços<span class="nav-sub-caret"></span></button>' +
+            '<div class="nav-submenu">' + subLinksHtml + '</div>' +
+          '</div>' +
+          linkHtml(NAV_CASES) +
+          linkHtml(NAV_ADVISOR) +
+          '<a href="'+NAV_CTA.href+'" class="nav-cta">'+NAV_CTA.label+'</a>' +
         '</nav>' +
         '<button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu"><span></span></button>' +
       '</div>';
 
     var toggle = document.getElementById('nav-toggle');
     var links = document.getElementById('nav-links');
+    var servicesItem = document.getElementById('nav-services-item');
+    var servicesToggle = document.getElementById('nav-services-toggle');
+
     toggle.addEventListener('click', function(){
       links.classList.toggle('is-open');
     });
+    servicesToggle.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = servicesItem.classList.toggle('is-open');
+      servicesToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    document.addEventListener('click', function(e){
+      if(!servicesItem.contains(e.target)){
+        servicesItem.classList.remove('is-open');
+        servicesToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
     links.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){ links.classList.remove('is-open'); });
+      a.addEventListener('click', function(){
+        links.classList.remove('is-open');
+        servicesItem.classList.remove('is-open');
+        servicesToggle.setAttribute('aria-expanded', 'false');
+      });
     });
   }
 
@@ -69,7 +105,7 @@
     var mount = document.getElementById('site-footer');
     if(!mount) return;
 
-    var colFrentes = NAV_LINKS.slice(3).map(function(l){
+    var colFrentes = SERVICE_LINKS.map(function(l){
       return '<a href="'+l.href+'">'+l.label+'</a>';
     }).join('');
 
@@ -88,6 +124,7 @@
             '<h4>Institucional</h4>' +
             '<a href="index.html">Início</a>' +
             '<a href="sobre.html">Quem Somos</a>' +
+            '<a href="cases.html">Cases</a>' +
             '<a href="advisor.html">Daniel Gualberto</a>' +
             '<a href="contato.html">Contato</a>' +
           '</div>' +
@@ -101,7 +138,7 @@
           '</div>' +
           '<div class="footer-col">' +
             '<h4>Contato</h4>' +
-            '<a href="mailto:comercial@domgrowth.com">comercial@domgrowth.com</a>' +
+            '<a href="mailto:comercial@dompartnergrowth.com.br">comercial@dompartnergrowth.com.br</a>' +
             '<a href="contato.html">Fale no WhatsApp</a>' +
           '</div>' +
         '</div>' +
@@ -114,7 +151,12 @@
       '</div>';
   }
 
-  /* ---------------- barra de progresso ---------------- */
+  /* ---------------- barra de progresso ----------------
+     Removida no Bloco 2 do pente fino ("O que sai": barra de progresso).
+     Função mantida (não chamada mais no init, abaixo) só porque o
+     <div class="progress-bar"> ainda existe fisicamente no HTML de cada
+     página — chamá-la de novo não faria nada visível de qualquer forma,
+     já que a classe não tem mais CSS. */
   function initProgressBar(){
     var bar = document.querySelector('.progress-bar');
     if(!bar) return;
@@ -393,23 +435,46 @@
     });
   }
 
-  /* ---------------- formulário de contato -> WhatsApp ---------------- */
+  /* ---------------- formulário de contato -> WhatsApp ou e-mail ---------------- */
+  var CONTACT_EMAIL = 'comercial@dompartnergrowth.com.br';
   function wireContactForm(form){
     if(!form) return;
     var WHATSAPP_NUMBER = '5511949901200';
+
+    function fieldValue(name){
+      return (form[name] && form[name].value) ? form[name].value.trim() : '';
+    }
+    function buildMessage(){
+      var nome = fieldValue('nome');
+      var empresa = fieldValue('empresa');
+      var whats = fieldValue('whatsapp');
+      var faturamento = fieldValue('faturamento');
+      var msg = fieldValue('mensagem');
+      return 'Olá, Dom Partner Growth! Meu nome é ' + nome +
+             (empresa ? ' (' + empresa + ')' : '') +
+             '. ' + (msg ? msg : 'Quero conversar sobre uma parceria de crescimento.') +
+             (whats ? ' Meu WhatsApp: ' + whats : '') +
+             (faturamento ? ' Faturamento mensal aproximado: ' + faturamento : '');
+    }
+
     form.addEventListener('submit', function(e){
       e.preventDefault();
-      var nome = form.nome.value.trim();
-      var empresa = form.empresa.value.trim();
-      var whats = form.whatsapp.value.trim();
-      var msg = form.mensagem.value.trim();
-      var text = 'Olá, Dom Partner Growth! Meu nome é ' + nome +
-                 (empresa ? ' (' + empresa + ')' : '') +
-                 '. ' + (msg ? msg : 'Quero conversar sobre uma parceria de crescimento.') +
-                 (whats ? ' Meu WhatsApp: ' + whats : '');
-      var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text);
+      var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(buildMessage());
       window.open(url, '_blank');
     });
+
+    // alternativa pra quem prefere mandar por e-mail em vez de WhatsApp
+    var emailLink = form.querySelector('.form-email-alt');
+    if(emailLink){
+      emailLink.addEventListener('click', function(e){
+        e.preventDefault();
+        var subject = 'Contato pelo site — ' + (fieldValue('nome') || 'Dom Partner Growth');
+        var mailto = 'mailto:' + CONTACT_EMAIL +
+                     '?subject=' + encodeURIComponent(subject) +
+                     '&body=' + encodeURIComponent(buildMessage());
+        window.location.href = mailto;
+      });
+    }
   }
   function initContactForm(){
     wireContactForm(document.getElementById('contact-form'));
@@ -481,7 +546,9 @@
     });
   }
 
-  /* ---------------- botão flutuante de contato ---------------- */
+  /* ---------------- botão flutuante de contato ----------------
+     Removido no Bloco 2 do pente fino ("O que sai": botão flutuante).
+     Função mantida sem uso (não chamada mais no init, abaixo). */
   function buildFloatingCta(){
     if(document.getElementById('floating-cta')) return;
     var btn = document.createElement('a');
@@ -836,7 +903,6 @@
   document.addEventListener('DOMContentLoaded', function(){
     buildHeader();
     buildFooter();
-    initProgressBar();
     initHeaderAutoHide();
     initReveal();
     initCounters();
@@ -846,7 +912,6 @@
     initFaq();
     initContactForm();
     buildContactModal();
-    buildFloatingCta();
     buildPageFrame();
     initParticles();
   });

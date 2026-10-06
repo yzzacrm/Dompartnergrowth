@@ -69,12 +69,16 @@ ul{ list-style:none; margin:0; padding:0; }
   padding:0 28px;
 }
 
+/* Bloco 2 do pente fino: títulos em Cormorant Garamond, peso médio, sem
+   caixa alta — troca de maior impacto visual por menor custo. --font-title
+   continua sendo usado por rótulos/UI (nav, números, eco-node-title etc.),
+   só os headings reais (h1-h4) migram pra --font-head. */
 h1,h2,h3,h4{
-  font-family:var(--font-title);
-  font-weight:700;
-  line-height:1.12;
+  font-family:var(--font-head);
+  font-weight:500;
+  line-height:1.15;
   margin:0;
-  letter-spacing:.3px;
+  letter-spacing:.2px;
 }
 
 .eyebrow{
@@ -124,26 +128,12 @@ h1,h2,h3,h4{
   font-size:16px;
 }
 
-/* ---------- grain overlay ---------- */
-.grain{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:2;
-  opacity:.05;
-  mix-blend-mode:overlay;
-}
-
-/* ---------- progress bar ---------- */
-.progress-bar{
-  position:fixed;
-  top:0; left:0;
-  height:3px;
-  width:0%;
-  background:linear-gradient(90deg,var(--gold-dark),var(--gold-light));
-  z-index:1000;
-  transition:width .08s linear;
-}
+/* ---------- grain overlay e barra de progresso ----------
+   Removidos no Bloco 2 do pente fino ("O que sai"): grão por cima do
+   conteúdo e barra de progresso no topo. As classes .grain/.progress-bar
+   ainda existem no HTML de cada página (não removidas pra evitar reabrir
+   todo arquivo); como não há mais CSS pra elas, ficam sem efeito visual —
+   dois <div>/<svg> vazios no DOM, invisíveis. */
 
 /* ---------- capsule nav ---------- */
 .site-header{
@@ -211,6 +201,81 @@ h1,h2,h3,h4{
   color:var(--bg-deep) !important;
   font-weight:600 !important;
 }
+
+/* ---------- submenu "Serviços" (Bloco 5: agrupa as 4 frentes num só item) ---------- */
+.nav-item{ position:relative; }
+.nav-sub-toggle{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  font-family:inherit;
+  font-size:12.5px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+  padding:9px 14px;
+  border-radius:999px;
+  color:var(--cream-dim);
+  background:none;
+  border:none;
+  transition:color .25s, background .25s;
+  white-space:nowrap;
+}
+.nav-sub-toggle:hover,
+.nav-item.is-open .nav-sub-toggle{
+  color:var(--cream);
+  background:rgba(255,255,255,.05);
+}
+.nav-sub-toggle.is-active{
+  color:var(--bg-deep);
+  background:var(--gold-light);
+}
+.nav-sub-caret{
+  width:6px; height:6px;
+  border-right:1.5px solid currentColor;
+  border-bottom:1.5px solid currentColor;
+  transform:rotate(45deg);
+  margin-top:-3px;
+  transition:transform .25s;
+}
+.nav-item.is-open .nav-sub-caret{ transform:rotate(225deg); margin-top:1px; }
+.nav-submenu{
+  position:absolute;
+  top:calc(100% + 10px);
+  left:50%;
+  min-width:180px;
+  background:rgba(6,20,14,.97);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:8px;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  box-shadow:0 20px 40px rgba(0,0,0,.5);
+  opacity:0;
+  pointer-events:none;
+  transform:translate(-50%,-6px);
+  transition:opacity .2s, transform .2s;
+  z-index:20;
+}
+.nav-item.is-open .nav-submenu{
+  opacity:1;
+  pointer-events:auto;
+  transform:translate(-50%,0);
+}
+.nav-submenu a{
+  font-size:12.5px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  padding:9px 14px;
+  border-radius:12px;
+  color:var(--cream-dim);
+  white-space:nowrap;
+  transition:color .2s, background .2s;
+}
+.nav-submenu a:hover{ color:var(--cream); background:rgba(255,255,255,.06); }
+.nav-submenu a.is-active{ color:var(--bg-deep); background:var(--gold-light); }
 .nav-toggle{
   display:none;
   background:none;
@@ -248,6 +313,22 @@ h1,h2,h3,h4{
   .nav-links.is-open{ display:flex; }
   .nav-links a{ padding:13px 16px; text-align:center; }
   .nav-toggle{ display:block; }
+
+  .nav-item{ position:static; }
+  .nav-sub-toggle{ width:100%; justify-content:center; padding:13px 16px; }
+  .nav-submenu{
+    position:static;
+    transform:none;
+    opacity:1;
+    pointer-events:auto;
+    box-shadow:none;
+    border:none;
+    background:rgba(255,255,255,.03);
+    margin:2px 0 4px;
+    display:none;
+  }
+  .nav-item.is-open .nav-submenu{ display:flex; }
+  .nav-submenu a{ text-align:center; }
 }
 
 /* ---------- buttons ---------- */
@@ -348,12 +429,12 @@ h1,h2,h3,h4{
 .hero-headline .line-1,
 .hero-headline .line-2{
   display:block;
-  font-family:'Inter', sans-serif;
+  font-family:var(--font-head);
   font-style:normal;
-  text-transform:uppercase;
-  font-size:clamp(28px,5.2vw,60px);
-  font-weight:800;
-  letter-spacing:-.5px;
+  text-transform:none;
+  font-size:clamp(32px,6vw,68px);
+  font-weight:500;
+  letter-spacing:.2px;
   color:var(--cream);
   text-shadow:0 3px 22px rgba(4,13,9,.95), 0 1px 3px rgba(4,13,9,.9);
 }
@@ -582,6 +663,36 @@ h1,h2,h3,h4{
   margin:18px auto 0;
   max-width:48ch;
 }
+/* Bloco 3 do pente fino: substitui o contador de R$21 milhões (número
+   simulado, só subindo com o tempo) por resultados fixos e reais, cada
+   um com contexto (o que foi feito, cliente/segmento, período) */
+.impact-results{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:34px;
+  margin-top:8px;
+}
+.impact-result{
+  flex:1 1 190px;
+  max-width:230px;
+}
+.impact-number{
+  display:block;
+  font-family:var(--font-title);
+  font-weight:800;
+  font-size:clamp(24px,3.6vw,36px);
+  line-height:1.1;
+  color:var(--gold-light);
+  text-shadow:0 0 30px rgba(228,197,103,.3);
+}
+.impact-context{
+  display:block;
+  margin-top:8px;
+  font-size:12.5px;
+  line-height:1.45;
+  color:var(--cream-dim);
+}
 @media(max-width:640px){
   .counter-block{ padding:40px 22px; }
 }
@@ -741,6 +852,12 @@ h1,h2,h3,h4{
   padding:16px 14px;
   border-radius:18px;
   text-align:center;
+  /* Bloco 2 do pente fino: "4 frentes" deixa de girar sem parar e vira um
+     diagrama estático — o detalhe de cada frente já aparece ao passar o
+     mouse (ver .eco-node-desc / :hover abaixo), não precisa mais da rotação
+     pra "revelar" nada */
+  animation:none;
+  transform:translate(-50%,-50%) rotate(var(--start,0deg)) translateX(var(--radius,190px)) rotate(calc(-1 * var(--start,0deg)));
 }
 .ecosystem--frentes .eco-node-title{
   font-family:var(--font-title);
@@ -986,6 +1103,27 @@ h1,h2,h3,h4{
   .ecosystem .eco-node--center{
     animation-play-state:paused !important;
   }
+}
+
+/* "4 frentes": anéis, partículas e raios ficam parados (diagrama estático,
+   sem animação orbital contínua) e bem mais discretos — quase invisíveis,
+   só uma textura sutil atrás das esferas com o nome de cada frente */
+.ecosystem--frentes .eco-ring{
+  animation:none;
+  opacity:.3;
+}
+.ecosystem--frentes .eco-dot{
+  animation:none;
+  opacity:.3;
+  transform:translate(-50%,-50%) rotate(var(--start,0deg)) translateX(var(--radius,100px));
+}
+.ecosystem--frentes .eco-spoke{
+  animation:none;
+  opacity:.45;
+  transform:rotate(var(--start,0deg));
+}
+.ecosystem--frentes .eco-node--center{
+  animation:none;
 }
 
 /* ---------- nossa essência (sobre) ---------- */
@@ -1766,7 +1904,7 @@ h1,h2,h3,h4{
   color:var(--cream-dim);
   margin-bottom:8px;
 }
-.field input, .field textarea{
+.field input, .field textarea, .field select{
   width:100%;
   background:var(--panel);
   border:1px solid var(--border);
@@ -1777,11 +1915,23 @@ h1,h2,h3,h4{
   font-size:15px;
   transition:border-color .3s;
 }
-.field input:focus, .field textarea:focus{
+.field input:focus, .field textarea:focus, .field select:focus{
   outline:none;
   border-color:var(--gold);
 }
 .field textarea{ resize:vertical; min-height:120px; }
+.field select{ appearance:none; cursor:pointer; }
+
+/* ---------- alternativa de envio por e-mail no formulário de contato ---------- */
+.form-email-alt{
+  display:inline-block;
+  margin:14px 0 0 18px;
+  font-size:13px;
+  color:var(--cream-dim);
+  text-decoration:underline;
+  text-decoration-color:var(--border);
+}
+.form-email-alt:hover{ color:var(--gold-light); text-decoration-color:var(--gold-light); }
 @media(max-width:640px){
   .form-grid{ grid-template-columns:1fr; }
 }
@@ -2127,69 +2277,12 @@ body.modal-open{ overflow:hidden; }
    PREMIUM LAYER — esferas de fundo, glass badges, cases "pro", eyebrow numerada
    =================================================================== */
 
-/* ---------- esferas rolando a página inteira ---------- */
-.bg-orbs{
-  position:fixed;
-  inset:0;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  z-index:0;
-  pointer-events:none;
-}
-.bg-orbs .orb{
-  position:absolute;
-  border-radius:50%;
-  filter:blur(60px);
-  opacity:.5;
-  mix-blend-mode:screen;
-  will-change:transform;
-}
-.bg-orbs .orb--1{
-  width:46vw; height:46vw; max-width:640px; max-height:640px;
-  left:-12%; top:4%;
-  background:radial-gradient(circle, var(--green-glow) 0%, transparent 70%);
-  animation:orb-drift-1 38s ease-in-out infinite;
-}
-.bg-orbs .orb--2{
-  width:36vw; height:36vw; max-width:520px; max-height:520px;
-  right:-10%; top:38%;
-  background:radial-gradient(circle, var(--gold) 0%, transparent 72%);
-  opacity:.4;
-  animation:orb-drift-2 44s ease-in-out infinite;
-}
-.bg-orbs .orb--3{
-  width:40vw; height:40vw; max-width:560px; max-height:560px;
-  left:8%; bottom:-14%;
-  background:radial-gradient(circle, var(--green-glow) 0%, transparent 70%);
-  opacity:.44;
-  animation:orb-drift-3 50s ease-in-out infinite;
-}
-/* percursos bem mais amplos: cada esfera atravessa boa parte da tela
-   inteira ao longo do ciclo, não só um leve balanço perto do canto */
-@keyframes orb-drift-1{
-  0%,100%{ transform:translate(0,0) scale(1); }
-  20%{ transform:translate(38vw,22vh) scale(1.15); }
-  45%{ transform:translate(58vw,58vh) scale(.9); }
-  70%{ transform:translate(20vw,74vh) scale(1.08); }
-  88%{ transform:translate(-6vw,30vh) scale(.96); }
-}
-@keyframes orb-drift-2{
-  0%,100%{ transform:translate(0,0) scale(1); }
-  25%{ transform:translate(-48vw,28vh) scale(1.1); }
-  50%{ transform:translate(-62vw,-30vh) scale(.92); }
-  75%{ transform:translate(-18vw,-52vh) scale(1.12); }
-}
-@keyframes orb-drift-3{
-  0%,100%{ transform:translate(0,0) scale(1); }
-  22%{ transform:translate(34vw,-38vh) scale(1.12); }
-  48%{ transform:translate(60vw,-8vh) scale(.94); }
-  74%{ transform:translate(24vw,32vh) scale(1.06); }
-  90%{ transform:translate(-10vw,-14vh) scale(.98); }
-}
-@media(prefers-reduced-motion:reduce){
-  .bg-orbs .orb{ animation:none; }
-}
+/* ---------- esferas de fundo (bg-orbs) ----------
+   Removidas no Bloco 2 do pente fino ("O que sai": orbes de fundo) — e
+   também o pedido do cliente de deixar as "esferas do fundo" quase
+   invisíveis. O <div class="bg-orbs">...</div> já foi removido de todas
+   as páginas; sem ele no HTML, essas classes não têm mais nada pra
+   estilizar. */
 main, header, footer{ position:relative; z-index:1; }
 
 /* ---------- eyebrow numerada (referência editorial) ---------- */
