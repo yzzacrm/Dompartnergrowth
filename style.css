@@ -1718,6 +1718,45 @@ h1,h2,h3,h4{
   .deck-slides{ grid-template-columns:repeat(3,1fr); }
 }
 
+/* ---------- cases: subgrupos e links de material real em "em detalhe" ---------- */
+.case-group{ margin-top:50px; }
+.case-group:first-child{ margin-top:0; }
+.case-group-label{
+  font-family:var(--font-body);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--cream-faint);
+  margin-bottom:20px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--border);
+}
+.deck-slides-link{ display:block; }
+.deck-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px 20px;
+  margin-top:16px;
+}
+.deck-action{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:12.5px;
+  font-weight:600;
+  color:var(--gold-light);
+  text-decoration:none;
+  border-bottom:1px solid rgba(228,197,103,.4);
+  padding-bottom:1px;
+  transition:border-color .3s, color .3s;
+}
+.deck-action:hover{ border-color:var(--gold-light); }
+.deck-action--muted{
+  color:var(--cream-faint);
+  border-bottom-color:var(--border);
+}
+
 /* ---------- FAQ ---------- */
 .faq-list{
   border-top:1px solid var(--border);
