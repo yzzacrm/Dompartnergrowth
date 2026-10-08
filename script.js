@@ -468,7 +468,7 @@
     if(emailLink){
       emailLink.addEventListener('click', function(e){
         e.preventDefault();
-        var subject = 'Contato pelo site — ' + (fieldValue('nome') || 'Dom Partner Growth');
+        var subject = 'Contato pelo site: ' + (fieldValue('nome') || 'Dom Partner Growth');
         var mailto = 'mailto:' + CONTACT_EMAIL +
                      '?subject=' + encodeURIComponent(subject) +
                      '&body=' + encodeURIComponent(buildMessage());
@@ -590,21 +590,14 @@
     if(!canvas) return;
     var ctx = canvas.getContext('2d');
     var particles = [];
-    var networkEdges = [];
     var mouse = { x:-9999, y:-9999 };
     // em vez de um interruptor liga/desliga num ponto fixo da rolagem, o quanto
-    // os dados estão "espalhados" acompanha continuamente o quanto já se rolou
-    // a página inteira (0 no topo, 1 no fim) — assim o movimento é sempre lento
-    // e contínuo, nunca um salto que pareça reiniciar/embaralhar os pontos
+    // já se desfez acompanha continuamente o quanto já se rolou a hero (0 no
+    // topo, 1 ao sair dela) — assim o movimento é sempre lento e contínuo,
+    // nunca um salto que pareça reiniciar/embaralhar os pontos
     var scrollProgress = 0;
-    var networkAlpha = 0; // 0 = "monte de dados" formando o logo, 1 = rede neural
-    // depois de ajustar a transparência algumas vezes (pra menos, pra mais um
-    // pouco), o cliente pediu pra tirar o fade de vez: o efeito não precisa
-    // ir ficando transparente conforme rola, quer ele visível o tempo todo,
-    // só sem atrapalhar a leitura do texto. VISIBLE_OPACITY agora é uma
-    // opacidade constante (não muda com scrollProgress nem com a distância
-    // rolada) — moderada o bastante pra não competir com o conteúdo, já que
-    // o texto sempre desenha por cima do canvas (z-index), nunca por baixo.
+    // opacidade de base no topo da hero (antes de começar a rolar e os
+    // pontos começarem a subir e se apagar)
     var VISIBLE_OPACITY = 0.7;
     var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -624,25 +617,6 @@
       grad.addColorStop(.35, 'rgba(228,197,103,.95)');
       grad.addColorStop(.72, 'rgba(180,140,60,.32)');
       grad.addColorStop(1, 'rgba(180,140,60,0)');
-      sc.fillStyle = grad;
-      sc.beginPath();
-      sc.arc(cx, cy, r, 0, Math.PI*2);
-      sc.fill();
-      return s;
-    })();
-
-    // sprite maior/mais intenso, usado só nos "nós" que formam a rede neural
-    var nodeSprite = (function(){
-      var size = 40;
-      var s = document.createElement('canvas');
-      s.width = size; s.height = size;
-      var sc = s.getContext('2d');
-      var cx = size/2, cy = size/2, r = size*0.46;
-      var grad = sc.createRadialGradient(cx, cy, 0, cx, cy, r);
-      grad.addColorStop(0, 'rgba(255,252,240,1)');
-      grad.addColorStop(.3, 'rgba(238,213,140,1)');
-      grad.addColorStop(.62, 'rgba(201,162,39,.45)');
-      grad.addColorStop(1, 'rgba(201,162,39,0)');
       sc.fillStyle = grad;
       sc.beginPath();
       sc.arc(cx, cy, r, 0, Math.PI*2);
@@ -692,87 +666,27 @@
       var dw = LOGO_W * scale, dh = LOGO_H * scale;
       var dx = (w - dw) / 2, dy = (h - dh) / 2;
 
-      // os dados não se espalham pela tela inteira (isso lia como uma explosão/
-      // confete bagunçado) — eles convergem pra um aglomerado mais compacto,
-      // perto do centro, como se os pontos da logo virassem "elétrons" que se
-      // aproximam uns dos outros formando a rede. Isso limitava a largura do
-      // aglomerado a 62% da tela — com a malha bem mais densa (rodada
-      // seguinte), essa faixa central virou um "quadrado" visível, com bordas
-      // nítidas e vazio dos dois lados. Agora o aglomerado ocupa quase a
-      // largura inteira da viewport, então a malha cobre o site de ponta a
-      // ponta em vez de ficar num bloco central destacado
+      // largura de referência pro quanto cada ponto pode se afastar de lado
+      // ao subir (driftX, logo abaixo) — proporcional ao tamanho da hero
       var clusterW = w * (isMobile ? 0.96 : 0.94);
-      // o aglomerado descia só até a metade da tela, deixando o quarto de
-      // baixo vazio — agora ele se estende bem mais pra baixo, quase até o
-      // rodapé da tela, sem deixar de ser compacto na largura
-      var clusterTop = Math.min(dy, h * 0.28);
-      var clusterBottom = h * 0.94;
-      var clusterH = Math.max(h * 0.5, clusterBottom - clusterTop);
-      var clusterX = w/2 - clusterW/2;
-      var clusterY = clusterTop;
 
       particles = [];
       for(var i=0; i<LOGO_POINTS.length; i+=2){
         var tx = dx + LOGO_POINTS[i] * dw;
         var ty = dy + LOGO_POINTS[i+1] * dh;
         var isBig = Math.random() < 0.35;
+        // cada ponto sobe e se espalha um pouco de lado ao rolar, como brasa/
+        // luz se apagando — não "neurônios" se conectando. driftX/driftRise
+        // são só a direção e a distância desse movimento, sorteadas uma vez
+        // por ponto pra ficar orgânico (não todo mundo subindo igual)
         particles.push({
           tx:tx, ty:ty,
           x: Math.random()*w, y: Math.random()*h,
-          sx: clusterX + Math.random()*clusterW,
-          sy: clusterY + Math.random()*clusterH, // posição "aglomerada" (elétrons próximos)
+          driftX: (Math.random()-0.5) * clusterW * 0.12,
+          driftRise: h * (0.32 + Math.random()*0.28),
           size: isBig ? (Math.random()*2.1+1.6) : (Math.random()*1.7+1.1),
-          alpha: Math.random()*.35+.55,
-          isNode: false
+          alpha: Math.random()*.35+.55
         });
-      }
-
-      buildNetwork(clusterW, clusterH);
-    }
-
-    // escolhe uma amostra das partículas pra virar "neurônios" quando a Dom
-    // se espalha pela rolagem, conectando cada uma às vizinhas mais próximas —
-    // calculado uma única vez por resize (não a cada frame: com milhares de
-    // partículas, comparar todas contra todas em todo frame pesaria demais)
-    function buildNetwork(clusterW, clusterH){
-      networkEdges = [];
-      // rede bem mais densa: o cliente pediu de volta o visual "constelação"
-      // da primeira versão (tela cheia de pontos conectados por muitas
-      // linhas finas), não um punhado de nós isolados. Mais nós + mais
-      // ligações por nó = malha triangulada cobrindo a maior parte do
-      // aglomerado, igual ao print de referência
-      var step = Math.max(1, Math.floor(particles.length / 380)); // ~380 nós
-      var nodes = [];
-      for(var i=0; i<particles.length; i+=step){
-        particles[i].isNode = true;
-        nodes.push(i);
-      }
-
-      // maxDist relativo ao tamanho do aglomerado (não da janela inteira),
-      // já que os "elétrons" agora convergem pra uma área bem mais compacta
-      var maxDist = Math.max(clusterW, clusterH) * 0.22;
-      var maxLinksPerNode = 4;
-      var seen = {};
-      for(var a=0; a<nodes.length; a++){
-        var pi = nodes[a];
-        var pa = particles[pi];
-        var dists = [];
-        for(var b=0; b<nodes.length; b++){
-          if(a === b) continue;
-          var pj = nodes[b];
-          var pb = particles[pj];
-          var dx = pa.sx - pb.sx, dy = pa.sy - pb.sy;
-          var d = Math.sqrt(dx*dx + dy*dy);
-          if(d < maxDist) dists.push({ j:pj, d:d });
-        }
-        dists.sort(function(m,n){ return m.d - n.d; });
-        for(var k=0; k<Math.min(maxLinksPerNode, dists.length); k++){
-          var pj2 = dists[k].j;
-          var key = pi < pj2 ? (pi+'_'+pj2) : (pj2+'_'+pi);
-          if(seen[key]) continue;
-          seen[key] = true;
-          networkEdges.push({ a:pi, b:pj2, baseAlpha: 1 - (dists[k].d / maxDist), phase: Math.random() });
-        }
       }
     }
 
@@ -781,17 +695,17 @@
       ctx.clearRect(0,0,w,h);
 
       // a Dom nasce como um monte de dados formando a palavra, e ao rolar os
-      // dados convergem pra um aglomerado compacto — os nós crescem, ficam
-      // mais próximos uns dos outros e as linhas entre eles aparecem, lendo
-      // como uma rede neural. networkAlpha persegue o progresso real da
-      // rolagem com uma suavização leve, então o movimento é sempre lento e
-      // contínuo, nunca um salto de estado
-      networkAlpha += (scrollProgress - networkAlpha) * 0.035;
-
+      // dados sobem e se apagam aos poucos, como brasa ou luz se dissipando
       for(var i=0;i<particles.length;i++){
         var p = particles[i];
-        var goalX = p.tx + (p.sx - p.tx) * scrollProgress;
-        var goalY = p.ty + (p.sy - p.ty) * scrollProgress;
+        // ao rolar, cada ponto sobe e se afasta um pouco de lado (driftX/
+        // driftRise, sorteados por ponto), feito brasa ou luz se apagando —
+        // sem linhas conectando pontos, sem formar "rede". Eased (progresso
+        // ao quadrado) pra começar devagar e acelerar, mais orgânico que
+        // movimento linear
+        var eased = scrollProgress * scrollProgress;
+        var goalX = p.tx + p.driftX * eased;
+        var goalY = p.ty - p.driftRise * eased;
 
         // repulsão do mouse
         var dx = p.x - mouse.x, dy = p.y - mouse.y;
@@ -806,58 +720,14 @@
         p.y += (goalY - p.y) * 0.04;
       }
 
-      // linhas da rede neural, desenhadas antes dos pontos pra ficarem por baixo
-      if(networkAlpha > 0.01 && networkEdges.length){
-        ctx.lineWidth = 1;
-        for(var e=0; e<networkEdges.length; e++){
-          var edge = networkEdges[e];
-          var pa = particles[edge.a], pb = particles[edge.b];
-          // curva mais suave: antes só as conexões mais próximas apareciam
-          // e o resto da malha sumia, deixando só pontos soltos sem parecer
-          // rede nenhuma. Agora a maioria das conexões fica visível (só as
-          // bem mais longas somem), formando a malha densa tipo constelação
-          var strength = Math.pow(edge.baseAlpha, 1.1);
-          var lineAlpha = strength * networkAlpha * 0.95 * VISIBLE_OPACITY;
-          if(lineAlpha > 0.01){
-            ctx.strokeStyle = 'rgba(228,197,103,' + lineAlpha.toFixed(3) + ')';
-            ctx.beginPath();
-            ctx.moveTo(pa.x, pa.y);
-            ctx.lineTo(pb.x, pb.y);
-            ctx.stroke();
-          }
-
-          // pulso viajando pela conexão — sensação de dado vivo circulando,
-          // bem mais transparente que a linha em si
-          if(!prefersReducedMotion){
-            edge.phase += 0.0035 + (e % 5) * 0.0007;
-            if(edge.phase > 1) edge.phase -= 1;
-          }
-          var pulseAlpha = strength * networkAlpha * 0.5 * VISIBLE_OPACITY;
-          if(pulseAlpha > 0.02){
-            var px = pa.x + (pb.x - pa.x) * edge.phase;
-            var py = pa.y + (pb.y - pa.y) * edge.phase;
-            ctx.globalAlpha = pulseAlpha;
-            ctx.drawImage(sprite, px-3, py-3, 6, 6);
-          }
-        }
-        ctx.globalAlpha = 1;
-      }
-
-      // um único drawImage do sprite pré-renderizado por partícula
-      // (bem mais leve que os 2-3 fill/stroke por ponto de antes). Depois de
-      // ir e voltar em quanto o efeito deveria se apagar ao rolar, o cliente
-      // pediu pra tirar o fade de vez: fica visível o tempo todo, com
-      // opacidade constante (VISIBLE_OPACITY) — não depende mais de
-      // scrollProgress nem de canvasFade. Como o conteúdo (texto, cards)
-      // sempre desenha por cima do canvas, isso não atrapalha a leitura.
-      var scatterDim = VISIBLE_OPACITY;
+      // os pontos se apagam conforme sobem (fundem com o fundo antes de sair
+      // da hero), em vez de ficarem visíveis o tempo todo numa rede
+      var scatterDim = VISIBLE_OPACITY * (1 - scrollProgress * 0.92);
       for(var j=0;j<particles.length;j++){
         var pt = particles[j];
         var d = pt.size * 2.6;
-        var useNodeSprite = pt.isNode && networkAlpha > 0.03;
-        if(useNodeSprite) d = d * (1 + networkAlpha * 0.85);
         ctx.globalAlpha = pt.alpha * scatterDim;
-        ctx.drawImage(useNodeSprite ? nodeSprite : sprite, pt.x - d/2, pt.y - d/2, d, d);
+        ctx.drawImage(sprite, pt.x - d/2, pt.y - d/2, d, d);
       }
       ctx.globalAlpha = 1;
       requestAnimationFrame(animate);

@@ -35,9 +35,9 @@ Ao atualizar um case, editar nos dois lugares (o card completo na página de pro
 
 ## Fontes de dado por trás dos números (pra não perder o rastro depois)
 
-- **Evoluc Construtora** (headline R$19,43M / ROI 204,9x e o card de redes sociais +956% de alcance): vêm do relatório interno `Evoluc Construtora · Relatório Consolidado` (jan–ago/2026) que o Daniel mandou. Esse relatório tem dado sensível (ranking nominal de corretores, investimento por campanha) — **não foi publicado no site**, só os números agregados que aparecem nos cards. O arquivo bruto não está no repositório do site.
-- O "Construtora parceira" que aparecia anônimo nos cards de `index.html`/`sobre.html`/`cases.html` **é a Evoluc** — isso estava como pendência em aberto numa versão antiga deste documento ("são o mesmo cliente?") e foi confirmado nesta sessão pelo relatório consolidado. Os cards agora citam "Evoluc Construtora" pelo nome, já que ela também é citada publicamente no case de branding.
-- O número antigo de "+548% no VGV do ano / metade da equipe de corretores" não tinha fonte localizável nesta sessão e foi substituído pelos números do relatório consolidado (mais recente e melhor documentado).
+- **Evoluc Construtora** (headline R$19,43M / retorno ~204,9x/198,2x e o card de redes sociais +956% de alcance): vêm do relatório interno `Evoluc Construtora · Relatório Consolidado` (jan–ago/2026) que o Daniel mandou. Esse relatório tem dado sensível (ranking nominal de corretores, investimento por campanha) — **não foi publicado no site**, só os números agregados que aparecem nos cards. O arquivo bruto não está no repositório do site.
+- O "Construtora parceira" / "Incorporadora parceira" que aparece anônimo nos cards de `index.html`/`sobre.html`/`cases.html`/`comercial.html`/`crm.html`/`consultoria-comercial.html`/`marketing.html`/`gestao-anuncios.html` **é a Evoluc** — confirmado nesta sessão pelo relatório consolidado. Ver regra de nomenclatura abaixo (nov/2026): o nome "Evoluc" só pode aparecer perto do case de branding/alcance, nunca perto de número de faturamento.
+- O número antigo de "+548% no VGV do ano / metade da equipe de corretores" não tinha fonte localizável e foi substituído pelos números do relatório consolidado (mais recente e melhor documentado).
 
 ## Documentos originais publicados como prova de case
 
@@ -65,6 +65,33 @@ Todas as imagens e PDFs ficam soltos na raiz do repositório (estrutura flat, ve
 - `wguimaraes-1/2/3.jpg`, `consigliere-1/2/3.jpg`, `lablaser-1/2/3.jpg` — preview dos cases de posicionamento de marca
 - `abihto-1/2/3.jpg`, `ameridan-1/2/3.jpg`, `joy-1/2/3.jpg` — preview dos cases de loja online
 - `evoluc-relatorio-anual.jpg` — renderizado mas não usado em nenhuma página ainda (sobra disponível caso sirva pra outro case/seção)
+
+## Revisão de estilo "menos cara de IA" (out/2026)
+
+Pedido do Daniel: revisar ortografia, tirar travessões e deixar o site mais elegante/minimalista, com base também numa análise escrita pelo conselheiro dele.
+
+- **Ortografia:** "Anatai" corrigido para "Anota.ai" (`cases.html`, `sobre.html`).
+- **Travessões (—):** removidos de 100% do repositório — não só do texto visível, mas também de comentários de código HTML (`<!-- DOBRA ... -->` em `marketing.html`, `comercial.html`, `inteligencia.html`, `produtora.html`) e de uma string JS que vira assunto de e-mail (`script.js`, `CONTACT_EMAIL`/`mailto`). Comentários explicativos em `style.css`/`script.js` (não geram nenhum texto visível ou enviado) foram deixados como estavam.
+- **Hero (`index.html`):** a animação de scroll foi trocada. Antes, ao rolar a página as partículas formavam uma "rede neural" de linhas douradas conectadas — removido por pedir muito "AI template". Agora as partículas sobem devagar e vão sumindo (efeito de brasa/luz se apagando), sem linhas de conexão. A formação em repouso do logo "DOM" / "PARTNER GROWTH" (`LOGO_POINTS` em `script.js`) **não mudou** — o Daniel gosta dela e pediu pra manter.
+- **Testado e rejeitado — não refazer sem perguntar de novo:** um protótipo com faixas claras (fundo creme/branco) alternando com o verde escuro nas seções "Prova de valor" (home) e "Em detalhe" (cases), inspirado em tittanium.inc (referência de harmonização de cores que o Daniel mandou). Ele viu o protótipo e preferiu manter o verde da Dom em todas as seções — a classe `.section--light` existe no CSS (pré-existente, não foi removida) mas não está aplicada em nenhuma página.
+- **Mantendo a paleta verde/dourada**, itens aplicados pra reduzir o "ar de template de IA":
+  - `.eyebrow-num` (o número de cada seção, ex. "03 Prova de valor"): número diminuído pro mesmo tamanho do rótulo e cor mais discreta (`--gold-dark` em vez de `--gold`), menos destaque de "selo".
+  - `.counter-block` / `.impact-number` (bloco de "Impacto" com os números grandes): removido o gradiente radial de fundo e o glow (`text-shadow`) ao redor dos números — agora painel sólido (`--panel`) com borda fina, mais limpo.
+  - `.cta-banner`: removido o blob de gradiente radial decorativo no canto.
+  - Botões (`.btn`, `.btn-primary`, `.nav-cta`): deixaram de ser pílula com gradiente — agora cantos quase quadrados (usam `var(--radius)`, o mesmo raio dos cards) e cor sólida dourada, sem gradiente.
+  - `strong{}` ganhou estilo global (peso 700, cor creme cheia em vez de creme apagado) pra permitir negrito pontual em frases-chave dentro de parágrafos — já aplicado em uma frase de `index.html`, duas de `sobre.html` e uma de `cases.html`. É pra uso pontual (uma frase por parágrafo, no máximo), não um negrito geral no texto.
+- **Diagrama em órbita (`.ecosystem`) e os 7 cases de `cases.html`: intencionalmente não tocados** — pedido explícito do Daniel pra manter como estão, inclusive a animação giratória do diagrama.
+
+## Regras de copy e nomenclatura (nov/2026)
+
+Pedido do Daniel: revisar o site inteiro em busca de frases confusas ("sujeito trocado" no meio da frase) e jargão de marketing/vendas sem explicação, e aplicar duas regras de negócio que valem pro site inteiro, pra sempre.
+
+- **Nunca citar "Evoluc" perto de número de faturamento.** O nome "Evoluc"/"Evoluc Construtora" só pode aparecer em contexto de alcance/redes sociais/branding (ex.: o card do Brand Book em `branding.html`/`cases.html`, a métrica de alcance no Instagram). Em qualquer lugar que fale de faturamento, vendas ou retorno sobre mídia (R$19,43M, retorno de ~204,9x/198,2x, as 60 vendas), o cliente é anonimizado como **"Construtora parceira"** (termo já usado antes, mantido por consistência) ou **"Incorporadora parceira"** (usado nos cards de `marketing.html`/`gestao-anuncios.html`, também antigo e mantido). O card do Brand Book em `branding.html`/`cases.html` teve o número de faturamento removido da descrição por esse motivo, mas manteve o nome Evoluc porque ali o assunto é o brand book, não faturamento.
+- **Nunca admitir rastreamento parcial de faturamento.** Frases como "rastreamento confirmado em quase metade do volume" ou "44,4% do faturamento" foram removidas de todo o site (apareciam em `sobre.html`, `comercial.html`, `crm.html`, `consultoria-comercial.html`, todas com a mesma estatística "Ticket médio de R$ 323 mil, rastreamento confirmado em ~50%"). A frase agora afirma o resultado com confiança, sem citar percentual de rastreio.
+- **Jargão simplificado site-wide** (mantendo os termos de marca do Daniel intocados — ver abaixo): lead → contato; funil → processo de vendas (exceto `funil.jpg` como nome de arquivo/alt text de imagem, não alterado); ticket médio → valor médio (por venda); ROI/ROAS → retorno (sobre a mídia investida); feeling → achismo (o site já usava "achismo" em outros lugares, mantida a consistência); script → roteiro; dashboard → painel; performance → resultado (exceto quando "Performance" é nome próprio do plano de marketing, em `marketing.html`); follow-up → retomada de contato; taxa de setup → taxa de entrada (em `advisor.html`); brand book/Brandbook → manual de marca; views → visualizações; B2G → "setor público" (paráfrase, em `branding.html`); dissonância → descompasso.
+- **Termos mantidos de propósito** (vocabulário de marca do Daniel, não é jargão a simplificar): CRM e ERP como nome literal dos produtos/páginas; frentes, ecossistema, holding, Diagnóstico, É·Faz·Fala; "Growth" no nome "Dom Partner Growth" (mas o card "Planejamento de Growth" em `inteligencia.html` foi simplificado pra "Planejamento de Crescimento", por não ser nome próprio).
+- **Correções de gramática "sujeito trocado"** (frase começa falando de uma coisa e termina falando de outra, no estilo do exemplo que o Daniel apontou em "Resultado real, auditável: não é um número que só sobe.") foram corrigidas pontualmente em várias páginas conforme encontradas — ver histórico de commits pra detalhe por arquivo.
+- `loja-online.html` e `erp.html` foram revisados e não precisaram de nenhuma alteração.
 
 ## Pendências / pontos em aberto
 
