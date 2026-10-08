@@ -201,11 +201,19 @@
   function initReveal(){
     var items = document.querySelectorAll('.reveal');
     if(!items.length) return;
+    /* Bloco 3 do pente fino: o cliente pediu que o efeito funcione nos dois
+       sentidos, não só na entrada. Antes, cada elemento era revelado uma
+       única vez (io.unobserve logo depois de ganhar .is-visible) e ficava
+       visível pra sempre, mesmo rolando de volta pra cima. Agora continuamos
+       observando e tiramos a classe quando o elemento sai da tela, então ele
+       desce e some com a mesma transição (definida em .reveal/.js .reveal no
+       CSS) ao rolar pra cima, e sobe e aparece de novo ao rolar pra baixo */
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(entry.isIntersecting){
           entry.target.classList.add('is-visible');
-          io.unobserve(entry.target);
+        } else {
+          entry.target.classList.remove('is-visible');
         }
       });
     }, { threshold:.15, rootMargin:'0px 0px -60px 0px' });
@@ -667,7 +675,7 @@
       var dx = (w - dw) / 2, dy = (h - dh) / 2;
 
       // largura de referência pro quanto cada ponto pode se afastar de lado
-      // ao subir (driftX, logo abaixo) — proporcional ao tamanho da hero
+      // ao descer (driftX, logo abaixo) — proporcional ao tamanho da hero
       var clusterW = w * (isMobile ? 0.96 : 0.94);
 
       particles = [];
@@ -675,10 +683,11 @@
         var tx = dx + LOGO_POINTS[i] * dw;
         var ty = dy + LOGO_POINTS[i+1] * dh;
         var isBig = Math.random() < 0.35;
-        // cada ponto sobe e se espalha um pouco de lado ao rolar, como brasa/
-        // luz se apagando — não "neurônios" se conectando. driftX/driftRise
-        // são só a direção e a distância desse movimento, sorteadas uma vez
-        // por ponto pra ficar orgânico (não todo mundo subindo igual)
+        // cada ponto desce e se espalha um pouco de lado ao rolar, preenchendo
+        // o espaço vazio abaixo do logo, como brasa/luz se apagando — não
+        // "neurônios" se conectando. driftX/driftRise são só a direção e a
+        // distância desse movimento, sorteadas uma vez por ponto pra ficar
+        // orgânico (não todo mundo descendo igual)
         particles.push({
           tx:tx, ty:ty,
           x: Math.random()*w, y: Math.random()*h,
@@ -695,17 +704,18 @@
       ctx.clearRect(0,0,w,h);
 
       // a Dom nasce como um monte de dados formando a palavra, e ao rolar os
-      // dados sobem e se apagam aos poucos, como brasa ou luz se dissipando
+      // dados descem e se apagam aos poucos, preenchendo o espaço vazio
+      // abaixo do logo, como brasa ou luz se dissipando
       for(var i=0;i<particles.length;i++){
         var p = particles[i];
-        // ao rolar, cada ponto sobe e se afasta um pouco de lado (driftX/
+        // ao rolar, cada ponto desce e se afasta um pouco de lado (driftX/
         // driftRise, sorteados por ponto), feito brasa ou luz se apagando —
         // sem linhas conectando pontos, sem formar "rede". Eased (progresso
         // ao quadrado) pra começar devagar e acelerar, mais orgânico que
         // movimento linear
         var eased = scrollProgress * scrollProgress;
         var goalX = p.tx + p.driftX * eased;
-        var goalY = p.ty - p.driftRise * eased;
+        var goalY = p.ty + p.driftRise * eased;
 
         // repulsão do mouse
         var dx = p.x - mouse.x, dy = p.y - mouse.y;
@@ -720,7 +730,7 @@
         p.y += (goalY - p.y) * 0.04;
       }
 
-      // os pontos se apagam conforme sobem (fundem com o fundo antes de sair
+      // os pontos se apagam conforme descem (fundem com o fundo antes de sair
       // da hero), em vez de ficarem visíveis o tempo todo numa rede
       var scatterDim = VISIBLE_OPACITY * (1 - scrollProgress * 0.92);
       for(var j=0;j<particles.length;j++){
