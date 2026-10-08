@@ -851,12 +851,6 @@ h1,h2,h3,h4{
   padding:16px 14px;
   border-radius:18px;
   text-align:center;
-  /* Bloco 2 do pente fino: "4 frentes" deixa de girar sem parar e vira um
-     diagrama estático — o detalhe de cada frente já aparece ao passar o
-     mouse (ver .eco-node-desc / :hover abaixo), não precisa mais da rotação
-     pra "revelar" nada */
-  animation:none;
-  transform:translate(-50%,-50%) rotate(var(--start,0deg)) translateX(var(--radius,190px)) rotate(calc(-1 * var(--start,0deg)));
 }
 .ecosystem--frentes .eco-node-title{
   font-family:var(--font-title);

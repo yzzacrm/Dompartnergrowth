@@ -80,7 +80,7 @@ Pedido do Daniel: revisar ortografia, tirar travessões e deixar o site mais ele
   - `.cta-banner`: removido o blob de gradiente radial decorativo no canto.
   - Botões (`.btn`, `.btn-primary`, `.nav-cta`): deixaram de ser pílula com gradiente — agora cantos quase quadrados (usam `var(--radius)`, o mesmo raio dos cards) e cor sólida dourada, sem gradiente.
   - `strong{}` ganhou estilo global (peso 700, cor creme cheia em vez de creme apagado) pra permitir negrito pontual em frases-chave dentro de parágrafos — já aplicado em uma frase de `index.html`, duas de `sobre.html` e uma de `cases.html`. É pra uso pontual (uma frase por parágrafo, no máximo), não um negrito geral no texto.
-- **Diagrama em órbita (`.ecosystem`) e os 7 cases de `cases.html`: intencionalmente não tocados** — pedido explícito do Daniel pra manter como estão, inclusive a animação giratória do diagrama.
+- **Diagrama em órbita (`.ecosystem`) e os 7 cases de `cases.html`: intencionalmente não tocados** — pedido explícito do Daniel pra manter como estão, inclusive a animação giratória do diagrama. (Correção, 08/out: o diagrama "4 frentes" de `index.html`/`#frentes` tinha tido a rotação travada numa sessão anterior a essa nota — `.ecosystem--frentes .eco-node--sat{ animation:none; }` — pra não atrapalhar a leitura da descrição ao passar o mouse. O Daniel pediu de volta a rotação via comentário na prévia, e a trava foi removida: o diagrama volta a usar a mesma animação `eco-orbit` do diagrama de produtos, que já pausa sozinha com `:hover`/`:focus-visible`, então a leitura continua funcionando.)
 
 ## Regras de copy e nomenclatura (nov/2026)
 
