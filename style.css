@@ -3901,3 +3901,255 @@ main, header, footer{ position:relative; z-index:1; }
 @media(max-width:860px){
   .nx-card:first-child, .case-card--pro:first-child, .plan-card:first-child, .method-card:first-child{ border-left:none !important; }
 }
+
+/* ===================================================================
+   PÁGINA DANIEL GUALBERTO: biografia (out/2026)
+   Capítulos da trajetória em linhas numeradas, mesmo idioma visual do
+   índice de cases da home: número vazado, texto, e foto em P&B que
+   ganha cor quando o capítulo passa pelo meio da tela.
+   =================================================================== */
+.shot-media--square{ aspect-ratio:1/1; }
+.bio-chapters{
+  list-style:none;
+  margin:0;
+  padding:0;
+  border-bottom:1px solid var(--border);
+}
+.bio-chapter{
+  display:grid;
+  grid-template-columns:96px minmax(0,1fr);
+  gap:36px;
+  padding:44px 0;
+  border-top:1px solid var(--border);
+}
+.bio-chapter--media{ grid-template-columns:96px minmax(0,1fr) minmax(240px,34%); align-items:center; }
+.bio-num{
+  font-family:var(--font-impact);
+  font-size:clamp(48px,5.4vw,76px);
+  line-height:.85;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(228,197,103,.5);
+  transition:color .3s ease, -webkit-text-stroke-color .3s ease;
+}
+.bio-chapter.is-lit .bio-num{ color:var(--gold-light); -webkit-text-stroke-color:var(--gold-light); }
+.bio-tag{
+  display:block;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:2.2px;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+.bio-title{
+  margin-top:12px;
+  font-family:var(--font-head);
+  font-weight:500;
+  font-size:clamp(26px,2.8vw,38px);
+  line-height:1.12;
+  color:var(--cream);
+}
+.bio-text p{
+  margin-top:14px;
+  max-width:60ch;
+  font-size:15.5px;
+  line-height:1.7;
+  color:var(--cream-dim);
+}
+.bio-text .bio-lesson{
+  margin-top:18px;
+  padding-left:16px;
+  border-left:1px solid var(--gold);
+  font-family:var(--font-head);
+  font-style:italic;
+  font-size:clamp(18px,1.7vw,21px);
+  line-height:1.45;
+  color:var(--cream);
+}
+.bio-media{ overflow:hidden; }
+.bio-media img{
+  display:block;
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  object-position:50% 30%;
+  filter:grayscale(1) brightness(.85) contrast(1.06);
+  transition:filter .6s cubic-bezier(.23,1,.32,1);
+}
+.bio-chapter.is-lit .bio-media img{ filter:none; }
+@media (hover:hover) and (pointer:fine){
+  .bio-chapter:hover .bio-media img{ filter:none; }
+  .bio-chapter:hover .bio-num{ color:var(--gold-light); -webkit-text-stroke-color:var(--gold-light); }
+}
+@media(max-width:860px){
+  .bio-chapter, .bio-chapter--media{
+    grid-template-columns:52px minmax(0,1fr);
+    gap:18px 20px;
+    padding:32px 0;
+  }
+  .bio-media{ grid-column:1 / -1; }
+  .bio-media img{ aspect-ratio:4/3; }
+}
+@media (prefers-reduced-motion:reduce){
+  .bio-media img, .bio-num{ transition:none; }
+}
+@media(max-width:860px){ .bio-chapter, .bio-chapter--media{ align-items:start; } }
+
+/* ---------- hero em pôster (página Daniel Gualberto), seguindo as
+   referências de campanha que o Daniel mandou: retrato grande, título
+   em três pesos (serifado, condensado gigante e um trecho em tarja
+   dourada) passando por cima da foto */
+.phero--poster .phero-media{
+  width:68%;
+  -webkit-mask-image:linear-gradient(to right, transparent 0%, #000 24%);
+          mask-image:linear-gradient(to right, transparent 0%, #000 24%);
+}
+.phero--poster::after{
+  background:
+    linear-gradient(to top, rgba(5,15,10,.96) 0%, rgba(5,15,10,.55) 30%, rgba(5,15,10,0) 58%),
+    linear-gradient(to right, rgba(5,15,10,.7) 0%, rgba(5,15,10,0) 42%);
+}
+.phero-title--poster{ max-width:none; }
+.phero-title--poster .pl1{
+  display:block;
+  font-family:var(--font-head);
+  font-weight:500;
+  font-size:clamp(30px,3.6vw,52px);
+  line-height:1.05;
+  color:var(--cream);
+}
+.phero-title--poster .pl2{
+  display:block;
+  margin-top:8px;
+  font-family:var(--font-impact);
+  font-weight:400;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  font-size:clamp(64px,min(11.5vw,19vh),176px);
+  line-height:.86;
+  color:var(--gold-light);
+}
+.phero-title--poster .pl3{
+  display:block;
+  margin-top:16px;
+  font-family:var(--font-head);
+  font-weight:500;
+  font-size:clamp(26px,3vw,44px);
+  line-height:1.1;
+  color:var(--cream);
+}
+.phero-title--poster mark{
+  display:inline-block;
+  margin-right:.22em;
+  padding:.14em .42em .16em;
+  background:var(--gold);
+  color:var(--bg-deep);
+  font-family:var(--font-body);
+  font-weight:700;
+  font-size:.6em;
+  letter-spacing:.2px;
+  vertical-align:.18em;
+}
+@media(max-width:640px){
+  .phero--poster .phero-media{ width:100%; }
+  .phero-title--poster .pl1{ font-size:clamp(26px,7.4vw,32px); }
+  .phero-title--poster .pl2{ font-size:clamp(56px,17vw,80px); }
+  .phero-title--poster .pl3{ font-size:clamp(22px,6.4vw,28px); }
+}
+.phero--poster .phero-media img{ filter:grayscale(1) contrast(1.18) brightness(.95); }
+@media(max-width:640px){
+  .phero--poster .phero-media{
+    -webkit-mask-image:linear-gradient(to bottom, #000 45%, transparent 100%);
+            mask-image:linear-gradient(to bottom, #000 45%, transparent 100%);
+  }
+}
+/* pedido do Daniel: nesta foto, a cor natural (azul do deserto, brasa
+   laranja) fica sem o P&B e sem a película verde das outras heros */
+.phero--poster .phero-media img{ filter:none; }
+.phero--poster .phero-media::after{ display:none; }
+/* foto natural também esmaece na base, sem a linha dura no fim da hero */
+@media(min-width:641px){
+  .phero--poster .phero-media{
+    -webkit-mask-image:linear-gradient(to right, transparent 0%, #000 24%), linear-gradient(to bottom, #000 72%, transparent 100%);
+    -webkit-mask-composite:source-in;
+            mask-image:linear-gradient(to right, transparent 0%, #000 24%), linear-gradient(to bottom, #000 72%, transparent 100%);
+            mask-composite:intersect;
+  }
+}
+/* kicker com nome e cargo: no celular, quebra logo depois do nome */
+.phero-kicker--split{ flex-wrap:wrap; column-gap:14px; row-gap:6px; }
+.phero-kicker--split .k-sep{ color:var(--gold); }
+@media(max-width:640px){
+  .phero-kicker--split .k-sep{ display:none; }
+  .phero-kicker--split .k-role{ flex-basis:100%; padding-left:54px; }
+}
+/* desktop: a foto do deserto é vertical. Numa caixa larga (68%) ela era
+   ampliada até a cabeça ficar embaixo do título. Caixa mais estreita, na
+   proporção da foto, deixa o Daniel inteiro à direita, olhando pro texto */
+@media(min-width:641px){
+  .phero--poster .phero-media{ width:min(48%, 820px); right:0; }
+  .phero--poster .phero-media img{ object-position:50% 22%; }
+}
+
+/* ---------- planos de Marketing com escopo (Tração, Performance, Domínio) */
+.plan-card--scope .desc{ flex-grow:0; }
+.plan-list{
+  list-style:none; margin:24px 0 28px; padding:22px 0 0;
+  border-top:1px solid var(--border);
+  display:grid; gap:12px;
+}
+.plan-list li{
+  position:relative; padding-left:20px;
+  font-size:14px; line-height:1.5; color:var(--cream);
+}
+.plan-list li::before{
+  content:""; position:absolute; left:0; top:.7em;
+  width:8px; height:1px; background:var(--gold);
+}
+.plan-list li.is-lead{ color:var(--gold-light); }
+.plan-card--scope .btn{ margin-top:auto; }
+.plan-footnote{
+  margin:28px 0 0; font-size:13.5px; color:var(--cream-dim); letter-spacing:.2px;
+}
+
+/* ---------- esteira de marcas (logos dos clientes, em movimento) ---------- */
+.logo-belt{
+  padding:clamp(44px,6vw,76px) 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  overflow:hidden;
+}
+.logo-belt-label{ display:block; margin-bottom:clamp(28px,4vw,44px); }
+.logo-belt-mask{
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%);
+}
+.logo-belt-track{
+  display:flex; width:max-content;
+  animation:logo-belt 80s linear infinite;
+  will-change:transform;
+}
+.logo-belt-row{
+  display:flex; align-items:center; flex-shrink:0;
+  gap:clamp(48px,6vw,92px);
+  padding:0 clamp(48px,6vw,92px) 0 0; margin:0; list-style:none;
+}
+.logo-belt-row li{ display:flex; align-items:center; }
+.logo-belt-row img{
+  display:block; width:auto;
+  height:calc(var(--h) * 1px);
+  opacity:.6;
+  transition:opacity .3s var(--ease);
+}
+.logo-belt-row img:hover{ opacity:1; }
+.logo-belt-track:hover{ animation-play-state:paused; }
+@keyframes logo-belt{ to{ transform:translateX(-50%); } }
+@media(max-width:640px){
+  .logo-belt-row img{ height:calc(var(--h) * .72px); }
+  .logo-belt-track{ animation-duration:60s; }
+}
+@media(prefers-reduced-motion:reduce){
+  .logo-belt-track{ animation:none; width:auto; flex-wrap:wrap; justify-content:center; padding:0 var(--gutter,24px); }
+  .logo-belt-row{ flex-wrap:wrap; justify-content:center; padding:0; gap:32px 48px; }
+  .logo-belt-row[aria-hidden="true"]{ display:none; }
+  .logo-belt-mask{ -webkit-mask-image:none; mask-image:none; }
+}
