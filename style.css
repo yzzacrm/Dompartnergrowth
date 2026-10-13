@@ -1269,7 +1269,8 @@ h1,h2,h3,h4{
     position:relative;
     display:flex;
     overflow-x:auto;
-    touch-action:pan-x;
+    overflow-y:hidden;
+    touch-action:pan-x pan-y;
     scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
@@ -1380,7 +1381,8 @@ h1,h2,h3,h4{
     position:relative;
     display:flex;
     overflow-x:auto;
-    touch-action:pan-x;
+    overflow-y:hidden;
+    touch-action:pan-x pan-y;
     scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
@@ -1613,7 +1615,8 @@ h1,h2,h3,h4{
     position:relative;
     display:flex;
     overflow-x:auto;
-    touch-action:pan-x;
+    overflow-y:hidden;
+    touch-action:pan-x pan-y;
     scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
@@ -1661,7 +1664,8 @@ h1,h2,h3,h4{
     position:relative;
     display:flex;
     overflow-x:auto;
-    touch-action:pan-x;
+    overflow-y:hidden;
+    touch-action:pan-x pan-y;
     scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
@@ -1819,7 +1823,8 @@ h1,h2,h3,h4{
     position:relative;
     display:flex;
     overflow-x:auto;
-    touch-action:pan-x;
+    overflow-y:hidden;
+    touch-action:pan-x pan-y;
     scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
@@ -2113,7 +2118,8 @@ h1,h2,h3,h4{
     position:relative;
     display:flex;
     overflow-x:auto;
-    touch-action:pan-x;
+    overflow-y:hidden;
+    touch-action:pan-x pan-y;
     scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
@@ -2693,7 +2699,8 @@ main, header, footer{ position:relative; z-index:1; }
     position:relative;
     display:flex;
     overflow-x:auto;
-    touch-action:pan-x;
+    overflow-y:hidden;
+    touch-action:pan-x pan-y;
     scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
@@ -4152,4 +4159,12 @@ main, header, footer{ position:relative; z-index:1; }
   .logo-belt-row{ flex-wrap:wrap; justify-content:center; padding:0; gap:32px 48px; }
   .logo-belt-row[aria-hidden="true"]{ display:none; }
   .logo-belt-mask{ -webkit-mask-image:none; mask-image:none; }
+}
+
+/* pedido do Daniel (celular): texto da hero do Daniel mais embaixo, pra foto
+   aparecer inteira acima do título em vez de ficar escondida atrás dele */
+@media(max-width:640px){
+  .phero--poster{ min-height:calc(100svh + 190px); }
+  .phero--poster .phero-media{ height:calc(100svh - 120px); }
+  .phero--poster .phero-media img{ object-position:var(--pos-m, 50% 14%); }
 }

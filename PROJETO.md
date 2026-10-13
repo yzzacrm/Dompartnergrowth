@@ -163,6 +163,39 @@ Home aprovada (hero com o vídeo da sessão de assessoria, `hero-assessoria.mp4`
 - Quem Somos: o bloco de Impacto em caixa foi trocado pelo mesmo bloco sem caixa da home.
 - `initGhostNumerals()` em `script.js`: põe o numeral gigante vazado atrás de todo título de seção numerado, lendo o número do próprio eyebrow.
 
+## Página "Daniel Gualberto" vira biografia (out/2026)
+
+Pedido do Daniel: `advisor.html` mais de biografia, mantendo o CTA de Reunião de Diagnóstico. Fontes: o doc "A Verdadeira História de Daniel Gualberto" e a apresentação comercial do Grupo Ev (fotos da época de corretor). Regra seguida: "usar só o necessário", e nada de faturamento pessoal, salário, família ou nome de ex-sócio (preferência antiga dele).
+
+- **Hero em pôster (`.phero--poster`):** "Eu errei com o / MEU DINHEIRO / [pra você não errar] com o seu.", em três pesos (serifado, Bebas gigante e trecho em tarja dourada), seguindo as referências de post de campanha que o Daniel mandou. Foto: a capa do e-book "Bem-vindo ao deserto" (foto real do Daniel, enviada por ele), com o título e a assinatura removidos aqui mesmo (céu reconstruído por ajuste de gradiente + inpainting, sem IA generativa) → `hero-daniel-deserto.jpg`. Botão continua sendo a Reunião de Diagnóstico.
+- A foto do deserto fica com a **cor natural** (sem o P&B e sem a película verde das outras heros), pedido do Daniel. No desktop ela esmaece na base pra não terminar em linha dura. No celular, o kicker quebra a linha logo depois do nome ("Daniel Gualberto" / "Fundador da Dom").
+- Rodrigo Vincenzi confirmado pelo Daniel como mentor (legenda "Mentoria de marca pessoal"). Os demais pontos da bio (14 imóveis em equipe de três, barraca e estande) confirmados por ele.
+- **01 A história:** começo aos 18 anos (camisetas na faculdade de Engenharia Mecânica) e 5 capítulos em linhas numeradas (`.bio-chapter`): tabacaria, cozinha/hamburgueria, sociedades (restaurante e casa de salgados), corretor de imóveis (14 imóveis em um ano, em equipe de três; foto da prospecção na rua `bio-rua.jpg`, tirada da apresentação do Grupo Ev) e a Dom. Cada capítulo fecha com "O que ficou".
+- **02 O método:** as cicatrizes viram as 4 perguntas da Reunião de Diagnóstico (sócios e papéis, caixa, processo de venda, disciplina).
+- **03 Referências:** fotos já existentes com Thiago Reis, Rafa Brito e Rodrigo Vincenzi.
+- Depois seguem Diagnóstico (04), Consultoria contínua (05), Como funciona, FAQ e fechamento, como antes. O bloco "Quem conduz" (foto redonda + mini bio) saiu, porque a página inteira agora é a bio.
+- **Não usado de propósito:** a foto do Daniel no palco com "PAPIN GROWTH" no telão (última página da apresentação) tem a marca d'água do Gemini, ou seja, é imagem gerada/editada por IA. Numa página de biografia ela apresentaria como real um evento que talvez não tenha acontecido daquele jeito, então ficou de fora. Os nomes "Popping World" e os valores mensais da agência que aparecem no doc também não entraram.
+
 ## Entrega
 
 O site é entregue como .zip com todas as páginas, `style.css`, `script.js` e os assets, em formato flat (pronto pra upload direto no GitHub Pages). Uma prévia navegável (`preview-artifact.html`, versão single-file com imagens embutidas) também fica publicada como link — não faz parte do zip de entrega.
+
+## Revisão de copy (todas as páginas)
+- Revisão com as sete varreduras (clareza, voz, e daí, prova, especificidade, emoção, risco zero) em 16 páginas. Relatório de antes e depois em `revisao-de-copy-antes-e-depois.md` (entregue fora do repositório).
+- **Comercial:** saiu o card de seguidores (750→2.248), que é resultado de marketing. Entraram R$3mi→R$19mi (construtora, 1 ano) e o atendimento 24/7 da pizzaria pela Yzza, ao lado das 60 vendas.
+- **Evoluc longe de faturamento:** tirado o nome "Evoluc" do bloco de impacto (Home e Quem somos) e movido o card de alcance da Evoluc para o fim da grade em Cases e Quem somos.
+- Títulos de prova diferentes em cada página (antes eram o mesmo em 6). Fórmula "X, não Y" reduzida. Textos duplicados na mesma página removidos (Consultoria Comercial, Automação de IA, Produtora, ERP).
+- **Em aberto com o Daniel:** 204,9x vs 198,2x; contadores da Produtora (+3000 / +10 milhões / +250 cidades) contra +10 mil / +100 milhões; frase "maior parte das vendas segue o modelo de indicação"; nome "Terras Raras Vila Carrão"; estatística de 68% sem fonte; escopo dos planos Tração/Performance/Domínio.
+
+## Ajustes pós-revisão de copy (respostas do Daniel)
+- Retorno oficial: **198,2x** (Home, Quem somos, Cases). Produtora: **+3 mil vídeos** e **+15 milhões de visualizações** em todo o site.
+- Case da construtora (60 vendas, R$19,43M): sem nome de empreendimento, sem Evoluc, sem a frase da indicação. Texto: "Resultado de anúncios e branding trabalhando juntos, com 94% dos contatos que viraram cliente vindos do Facebook."
+- Indicadores "0 contato perdido" viraram "Meta: contato perdido no caminho" (Comercial e CRM).
+- Estatística de 68% (reputação da incorporadora) retirada: só achada em fonte secundária (Portas citando Abrainc/Brain 2024).
+- Página Marketing: planos Tração, Performance e Domínio com escopo real (`.plan-card--scope`, `.plan-list`), sem valores.
+- **Esteira de marcas** (`.logo-belt`): 14 logos soltas na raiz como `logo-cliente-*.png` (sem pasta, porque o upload de pasta no GitHub falhava), tratados em creme único, 2x, tamanhos equilibrados por área. Está na Home (depois do ecossistema) e no Contato (antes do FAQ), longe dos blocos de faturamento. Animação CSS linear de 80s, pausa no hover, vira grade parada com prefers-reduced-motion. Para trocar ou incluir logo: gerar o PNG em creme (#ECE5D0) com fundo transparente e repetir o `<li>` nas duas listas (a segunda é a cópia com `aria-hidden`).
+- Produtora: bloco "+250 cidades documentadas" removido (a grade de números tem 2 itens). O logo do símbolo é a Autoescola Virtual (`logo-cliente-autoescola-virtual.png`). "Papin Growth" é o antigo nome da Dom (aparece só nos PDFs de proposta dos planos).
+
+## Ajustes de celular (outubro/2026)
+- Cards que rolam para o lado: `touch-action` passou de `pan-x` para `pan-x pan-y` e `overflow-y:hidden`, para a página continuar rolando para baixo quando o dedo está em cima de um card (deslize lateral e snap mantidos).
+- Hero da página Daniel Gualberto (advisor.html) no celular: hero mais alta e texto mais embaixo, foto aparece inteira acima do título.
