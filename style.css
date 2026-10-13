@@ -2,7 +2,7 @@
    DOM PARTNER GROWTH — Design System
    =================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root{
   /* backgrounds */
@@ -35,6 +35,9 @@
   --font-head:'Cormorant Garamond', 'Times New Roman', serif;
   --font-body:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-title:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* condensada e cheia, estilo pôster esportivo (Nike/Oakley) — só pra
+     números e palavras de impacto, nunca pra texto corrido */
+  --font-impact:'Bebas Neue', var(--font-head);
 
   --container:1180px;
   --radius:14px;
@@ -633,6 +636,7 @@ h1,h2,h3,h4{
 
 /* ---------- contador de faturamento ---------- */
 .counter-block{
+  position:relative;
   text-align:center;
   max-width:820px;
   margin:0 auto;
@@ -641,7 +645,23 @@ h1,h2,h3,h4{
   background:var(--panel);
   border:1px solid var(--border);
   box-shadow:0 20px 50px rgba(0,0,0,.25);
+  overflow:hidden;
 }
+.counter-block .numeral-ghost{
+  position:absolute;
+  top:-18px;
+  left:50%;
+  transform:translateX(-50%);
+  font-family:var(--font-impact);
+  font-size:clamp(90px,14vw,160px);
+  line-height:1;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(228,197,103,.16);
+  z-index:0;
+  pointer-events:none;
+  user-select:none;
+}
+.counter-block > *{ position:relative; z-index:1; }
 .counter-number{
   font-family:var(--font-title);
   font-weight:800;
@@ -2730,3 +2750,1154 @@ main, header, footer{ position:relative; z-index:1; }
   line-height:1.6;
 }
 .section--dense .section-head h2{ font-size:clamp(28px,3.6vw,42px); }
+
+/* ===================================================================
+   REDESIGN EDITORIAL — protótipo da home (out/2026)
+   Tipografia mais ousada, numerais gigantes como camada gráfica e
+   fotos em duotone, inspirado nas referências Nike/Oakley que o Daniel
+   mandou, mas sem trocar a paleta verde-escuro + dourado da Dom (opção
+   escolhida por ele). Tudo aqui é opt-in via classe modificadora nova
+   (--editorial / --punch), não altera o comportamento das outras
+   páginas que ainda usam .section-head, .eyebrow-num, .deck-grid etc.
+   normalmente. Sem grão/textura: já foi removido de propósito antes
+   (ver nota "Bloco 2 do pente fino" acima) — não reintroduzido aqui.
+   =================================================================== */
+
+/* numeral gigante como camada gráfica atrás do título da seção,
+   só contorno (sem preenchimento), bem discreto — efeito pôster
+   editorial em vez de decoração aleatória */
+.section-head--editorial{
+  position:relative;
+}
+.section-head--editorial .numeral-ghost{
+  position:absolute;
+  top:-.5em;
+  left:-.06em;
+  font-family:var(--font-impact);
+  font-size:clamp(100px,15vw,200px);
+  line-height:1;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(228,197,103,.2);
+  letter-spacing:0;
+  z-index:0;
+  pointer-events:none;
+  user-select:none;
+}
+.section-head--editorial > *{
+  position:relative;
+  z-index:1;
+}
+@media(max-width:760px){
+  .section-head--editorial .numeral-ghost{ font-size:clamp(76px,22vw,120px); top:-.42em; }
+}
+
+/* cantos de enquadramento (referência Oakley "VISION.") — moldura sutil
+   em volta de um bloco, como um visor/crosshair de câmera */
+.frame-marks{
+  position:absolute;
+  inset:10px;
+  pointer-events:none;
+  z-index:2;
+}
+.frame-marks span{
+  position:absolute;
+  width:20px;
+  height:20px;
+  border:1px solid var(--gold-light);
+  opacity:.45;
+}
+.frame-marks span:nth-child(1){ top:0; left:0; border-right:none; border-bottom:none; }
+.frame-marks span:nth-child(2){ top:0; right:0; border-left:none; border-bottom:none; }
+.frame-marks span:nth-child(3){ bottom:0; left:0; border-right:none; border-top:none; }
+.frame-marks span:nth-child(4){ bottom:0; right:0; border-left:none; border-top:none; }
+@media(max-width:640px){
+  .frame-marks{ display:none; }
+}
+
+/* hero: segunda linha como "soco" tipográfico — condensada, maiúscula,
+   mais confiante, igual as peças esportivas que o Daniel mandou de
+   referência, mantendo a primeira linha no serifado elegante de sempre */
+.hero-headline .line-2--punch{
+  font-family:var(--font-impact);
+  font-weight:400;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  font-size:clamp(40px,7.4vw,108px);
+  line-height:1;
+  white-space:normal;
+  color:var(--gold-light);
+  text-shadow:0 3px 26px rgba(4,13,9,.95), 0 1px 3px rgba(4,13,9,.9);
+}
+@media(max-width:640px){
+  .hero-headline .line-2--punch{ font-size:clamp(34px,11vw,54px); letter-spacing:.2px; }
+}
+.hero-headline .line-2--punch .accent{
+  color:var(--cream);
+}
+
+/* números de impacto e contador: tratamento condensado/pôster, com
+   régua fina embaixo marcando cada estatística, tipo placar esportivo */
+.impact-number--editorial{
+  font-family:var(--font-impact);
+  font-weight:400;
+  letter-spacing:.5px;
+  font-size:clamp(30px,4.6vw,46px);
+  padding-bottom:10px;
+  border-bottom:1px solid rgba(228,197,103,.3);
+  margin-bottom:2px;
+}
+.counter-number--editorial{
+  font-family:var(--font-impact);
+  font-weight:400;
+  letter-spacing:1px;
+}
+.number-item .num--editorial{
+  font-family:var(--font-impact);
+  font-weight:400;
+  letter-spacing:.5px;
+}
+
+/* cases (grade de cards): fotos em preto e branco, cor ao passar o mouse.
+   (Na rodada 1 era um duotone verde/dourado; o Daniel achou as fotos
+   "verdes" e escolheu preto e branco, ver PROJETO.md) */
+.deck-grid--editorial .deck-slides img{
+  filter:grayscale(1) brightness(.85) contrast(1.06);
+  transition:filter .5s var(--ease);
+}
+.deck-grid--editorial .deck-card:hover .deck-slides img,
+.deck-grid--editorial .deck-card:focus-visible .deck-slides img{
+  filter:none;
+}
+.deck-grid--editorial .deck-slides{
+  position:relative;
+}
+.deck-grid--editorial .deck-slides::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(5,15,10,0) 40%, rgba(5,15,10,.82) 100%);
+  pointer-events:none;
+}
+@media (prefers-reduced-motion:reduce){
+  .deck-grid--editorial .deck-slides img{ transition:none; }
+}
+
+/* "o que fazemos": leitura editorial, assimétrica, com numeral
+   fantasma atrás e a primeira frase em destaque tipo manchete */
+.business-copy--editorial{
+  text-align:left;
+  max-width:640px;
+}
+.business-copy--editorial .lede{
+  font-family:var(--font-head);
+  font-size:clamp(20px,2.6vw,26px);
+  font-style:italic;
+  color:var(--cream);
+  display:block;
+  margin-bottom:14px;
+}
+
+/* ===================================================================
+   REDESIGN EDITORIAL, rodada 2 (out/2026): estrutura, não só tipografia
+   Feedback do Daniel na rodada 1: "sistema em card, dentro de uma
+   caixa, deixa com muita cara de IA". Aqui a home perde as caixas
+   (painel com borda + fundo + sombra) e passa a usar escala, linhas
+   finas e espaço vazio pra separar as coisas, como um pôster/revista.
+   Tudo com classes novas, só usadas em index.html por enquanto.
+   =================================================================== */
+
+/* ---------- faixa corrida com as 4 frentes (estilo campanha esportiva) */
+.ticker{
+  position:relative;
+  overflow:hidden;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:18px 0;
+}
+.ticker-track{
+  display:flex;
+  width:max-content;
+  animation:ticker 38s linear infinite;
+}
+.ticker-track span{
+  display:inline-flex;
+  align-items:center;
+  font-family:var(--font-impact);
+  font-size:clamp(30px,4.4vw,58px);
+  line-height:1;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(228,197,103,.55);
+  white-space:nowrap;
+}
+.ticker-track span::after{
+  content:'';
+  width:9px;
+  height:9px;
+  margin:0 34px;
+  border-radius:50%;
+  background:var(--gold);
+}
+.ticker-track span:nth-child(4n+2){
+  color:var(--gold-light);
+  -webkit-text-stroke:0;
+}
+@keyframes ticker{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
+}
+@media (prefers-reduced-motion:reduce){
+  .ticker-track{ animation:none; }
+}
+
+/* ---------- Impacto: sem caixa, um número dominante em escala de pôster */
+.impact-editorial{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  column-gap:72px;
+  row-gap:44px;
+  align-items:start;
+}
+.impact-lead{
+  grid-column:1 / -1;
+  max-width:640px;
+}
+.impact-lead h2{
+  margin-top:14px;
+  font-size:clamp(28px,3.6vw,44px);
+  line-height:1.12;
+}
+.impact-hero-number{
+  display:block;
+  font-family:var(--font-impact);
+  font-weight:400;
+  line-height:.8;
+  font-size:clamp(76px,15vw,220px);
+  letter-spacing:0;
+  color:var(--gold-light);
+}
+.impact-hero-context{
+  display:block;
+  margin-top:18px;
+  max-width:32ch;
+  font-size:15px;
+  line-height:1.5;
+  color:var(--cream-dim);
+}
+.impact-secondary{
+  display:flex;
+  flex-direction:column;
+  gap:38px;
+  padding:8px 0 0 44px;
+  border-left:1px solid var(--border);
+}
+.impact-stat-number{
+  display:block;
+  font-family:var(--font-impact);
+  font-weight:400;
+  font-size:clamp(34px,4vw,54px);
+  line-height:1;
+  color:var(--cream);
+}
+.impact-stat-context{
+  display:block;
+  margin-top:8px;
+  max-width:30ch;
+  font-size:13px;
+  line-height:1.5;
+  color:var(--cream-dim);
+}
+.impact-caption{
+  grid-column:1 / -1;
+  font-size:14px;
+  color:var(--cream-faint);
+  max-width:56ch;
+  margin:0;
+}
+@media(max-width:860px){
+  .impact-editorial{ grid-template-columns:1fr; row-gap:32px; }
+  .impact-secondary{
+    flex-direction:row;
+    flex-wrap:wrap;
+    gap:28px 32px;
+    border-left:none;
+    border-top:1px solid var(--border);
+    padding:26px 0 0;
+  }
+  .impact-stat{ flex:1 1 140px; }
+}
+
+/* fileira "anos / empresas / frentes" como placar: sem caixas, só
+   linhas finas verticais separando cada número */
+.numbers-editorial{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  margin-top:76px;
+  border-top:1px solid var(--border);
+}
+.number-item-editorial{
+  padding:30px 28px 0;
+  border-left:1px solid var(--border);
+}
+.number-item-editorial:first-child{ border-left:none; padding-left:0; }
+.number-item-editorial .num{
+  display:block;
+  font-family:var(--font-impact);
+  font-weight:400;
+  font-size:clamp(34px,5vw,64px);
+  line-height:1;
+  color:var(--gold-light);
+  white-space:nowrap;
+}
+.number-item-editorial .label{
+  display:block;
+  margin-top:10px;
+  font-size:13px;
+  color:var(--cream-dim);
+}
+@media(max-width:480px){
+  .numbers-editorial{ margin-top:52px; }
+  .number-item-editorial{ padding:22px 10px 0; }
+  .number-item-editorial .num{ font-size:clamp(24px,8.4vw,34px); }
+  .number-item-editorial .label{ font-size:11px; line-height:1.35; }
+}
+
+/* ---------- Prova de valor: índice editorial em linhas, no lugar da
+   grade de cards com borda. Cada case é uma linha numerada, separada
+   só por um fio, com a tira de fotos em preto e branco do lado, que
+   ganha cor quando a linha está no meio da tela ou com o mouse em cima */
+.case-index{
+  border-bottom:1px solid var(--border);
+}
+.case-row{
+  display:grid;
+  grid-template-columns:96px 1fr minmax(240px,36%) 44px;
+  gap:36px;
+  align-items:center;
+  padding:40px 0;
+  border-top:1px solid var(--border);
+  color:inherit;
+  text-decoration:none;
+}
+.case-row-num{
+  font-family:var(--font-impact);
+  font-size:clamp(48px,5.4vw,76px);
+  line-height:.85;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(228,197,103,.5);
+  transition:color .3s ease, -webkit-text-stroke-color .3s ease;
+}
+.case-row-tag{
+  display:block;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:2.2px;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+.case-row-title{
+  margin-top:12px;
+  font-family:var(--font-head);
+  font-weight:500;
+  font-size:clamp(24px,2.6vw,34px);
+  line-height:1.15;
+  color:var(--cream);
+  transition:color .3s ease;
+}
+.case-row-desc{
+  margin-top:12px;
+  max-width:46ch;
+  font-size:14px;
+  line-height:1.6;
+  color:var(--cream-dim);
+}
+.case-row-media{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:4px;
+  overflow:hidden;
+}
+.case-row-media img{
+  display:block;
+  width:100%;
+  aspect-ratio:3/4;
+  object-fit:cover;
+  filter:grayscale(1) brightness(.85) contrast(1.06);
+  transition:filter .6s cubic-bezier(.23,1,.32,1);
+}
+/* aceso: linha no meio da tela (rolagem, vale pro celular) ou mouse em cima */
+.case-row.is-lit .case-row-media img{ filter:none; }
+.case-row.is-lit .case-row-num{ color:var(--gold-light); -webkit-text-stroke-color:var(--gold-light); }
+.case-row-arrow{
+  justify-self:end;
+  font-size:22px;
+  color:var(--gold-light);
+  transition:transform .3s cubic-bezier(.23,1,.32,1);
+}
+@media (hover:hover) and (pointer:fine){
+  .case-row:hover .case-row-num{ color:var(--gold-light); -webkit-text-stroke-color:var(--gold-light); }
+  .case-row:hover .case-row-title{ color:var(--gold-light); }
+  .case-row:hover .case-row-media img{ filter:none; }
+  .case-row:hover .case-row-arrow{ transform:translateX(6px); }
+}
+.case-row:focus-visible{ outline:1px solid var(--gold-light); outline-offset:6px; }
+@media(max-width:860px){
+  .case-row{
+    grid-template-columns:56px 1fr;
+    gap:18px 20px;
+    padding:30px 0;
+    align-items:start;
+  }
+  .case-row-media{ grid-column:1 / -1; }
+  .case-row-arrow{ display:none; }
+}
+@media (prefers-reduced-motion:reduce){
+  .case-row-media img, .case-row-arrow, .case-row-title, .case-row-num{ transition:none; }
+}
+
+/* ---------- CTA final como pôster: sem caixa, frase grande alinhada à
+   esquerda, "DOM" gigante vazado sangrando na direita */
+.cta-poster{
+  position:relative;
+  overflow:hidden;
+  border-top:1px solid var(--border);
+}
+.cta-poster-inner{
+  position:relative;
+  padding:40px 0 20px;
+}
+.cta-poster-ghost{
+  position:absolute;
+  right:-.06em;
+  top:50%;
+  transform:translateY(-50%);
+  font-family:var(--font-impact);
+  font-size:clamp(160px,30vw,420px);
+  line-height:.8;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(228,197,103,.24);
+  pointer-events:none;
+  user-select:none;
+  z-index:0;
+}
+.cta-poster-inner > *:not(.cta-poster-ghost){ position:relative; z-index:1; }
+.cta-poster h2{
+  max-width:15ch;
+  font-size:clamp(38px,6.2vw,84px);
+  line-height:1.02;
+  color:var(--cream);
+}
+.cta-poster p{
+  margin-top:22px;
+  max-width:44ch;
+  font-size:16px;
+  color:var(--cream-dim);
+}
+.cta-poster .btn{ margin-top:34px; }
+@media(max-width:640px){
+  .cta-poster-ghost{ font-size:clamp(130px,44vw,200px); top:auto; bottom:-10px; transform:none; }
+}
+
+/* ===================================================================
+   HERO DA HOME: ASSESSORIA DE CRESCIMENTO (out/2026, rodada 3)
+   Pedido do Daniel: hero com ênfase na assessoria (os vídeos ficam pra
+   hero da página da produtora). Antes: tudo centralizado, headline em
+   cima das letras "DOM", terço de baixo vazio e CTA só em texto.
+   Agora: texto embaixo à esquerda em escala de pôster, "DOM" em
+   partículas no alto à direita sem sobrepor o texto (posição em
+   buildParticles(), data-layout="side"), botão de verdade e o método
+   da assessoria (as 4 etapas que já estão em sobre.html) fechando a
+   primeira tela como um placar.
+   =================================================================== */
+.hero--assessoria{
+  min-height:100vh;
+  min-height:100svh;
+  align-items:stretch;
+  justify-content:flex-end;
+  text-align:left;
+  padding:130px 0 0;
+}
+/* chão escuro: as partículas que descem ao rolar se apagam nele, e o
+   texto nunca disputa contraste com o brilho do logo */
+.hero--assessoria::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to top, rgba(5,15,10,.96) 0%, rgba(5,15,10,.72) 30%, rgba(5,15,10,0) 62%),
+    linear-gradient(to right, rgba(5,15,10,.7) 0%, rgba(5,15,10,0) 55%);
+  z-index:1;
+  pointer-events:none;
+}
+@media(min-width:641px){
+  /* no desktop, apaga as partículas na faixa onde fica o texto (esquerda
+     e embaixo), pra o "DOM" nunca disputar leitura com o headline */
+  .hero--assessoria .hero-particles{
+    -webkit-mask-image:linear-gradient(to right, transparent 28%, #000 52%);
+            mask-image:linear-gradient(to right, transparent 28%, #000 52%);
+  }
+}
+.hero-a{
+  position:relative;
+  z-index:2;
+  width:100%;
+  max-width:var(--container);
+  margin:0 auto;
+  padding:0 28px;
+}
+.hero-a-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:14px;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--gold-light);
+}
+.hero-a-kicker::before{
+  content:'';
+  width:40px;
+  height:1px;
+  background:var(--gold);
+}
+.hero-a-title{ margin:0; }
+.hero-a-title .l1{
+  display:block;
+  margin-top:24px;
+  font-family:var(--font-head);
+  font-weight:500;
+  font-size:clamp(30px,3.6vw,52px);
+  line-height:1.05;
+  color:var(--cream);
+}
+.hero-a-title .l2{
+  display:block;
+  margin-top:10px;
+  font-family:var(--font-impact);
+  font-weight:400;
+  text-transform:uppercase;
+  font-size:clamp(56px,min(9vw,15.5vh),146px);
+  line-height:.86;
+  letter-spacing:.5px;
+  color:var(--gold-light);
+}
+.hero-a-sub{
+  margin:26px 0 0;
+  max-width:40ch;
+  font-size:17px;
+  color:var(--cream-dim);
+}
+.hero-a-actions{
+  margin-top:32px;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:18px 30px;
+}
+.hero-a-link{
+  font-size:15px;
+  font-weight:600;
+  color:var(--cream);
+  letter-spacing:.2px;
+}
+.hero-a-link .arrow{
+  display:inline-block;
+  margin-left:6px;
+  color:var(--gold-light);
+  transition:transform .25s cubic-bezier(.23,1,.32,1);
+}
+@media (hover:hover) and (pointer:fine){
+  .hero-a-link:hover .arrow{ transform:translateX(4px); }
+}
+/* o método como placar no pé da hero: fios finos, sem caixas */
+.hero-a-method{
+  list-style:none;
+  margin:60px 0 0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--border);
+}
+.hero-a-method li{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+  padding:24px 24px 30px;
+  border-left:1px solid var(--border);
+}
+.hero-a-method li:first-child{ border-left:none; padding-left:0; }
+.hero-a-method .n{
+  font-family:var(--font-impact);
+  font-size:16px;
+  letter-spacing:1px;
+  color:var(--gold);
+}
+.hero-a-method .t{
+  font-family:var(--font-head);
+  font-size:clamp(19px,1.8vw,26px);
+  line-height:1.1;
+  color:var(--cream);
+}
+/* entrada: cada peça sobe um pouco e aparece, em sequência curta */
+@keyframes heroIn{
+  from{ opacity:0; transform:translateY(14px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+.hero-a-copy > *, .hero-a-method li{
+  animation:heroIn .8s cubic-bezier(.23,1,.32,1) both;
+}
+.hero-a-copy > *:nth-child(1){ animation-delay:.10s; }
+.hero-a-copy > *:nth-child(2){ animation-delay:.18s; }
+.hero-a-copy > *:nth-child(3){ animation-delay:.26s; }
+.hero-a-copy > *:nth-child(4){ animation-delay:.32s; }
+.hero-a-method li:nth-child(1){ animation-delay:.40s; }
+.hero-a-method li:nth-child(2){ animation-delay:.46s; }
+.hero-a-method li:nth-child(3){ animation-delay:.52s; }
+.hero-a-method li:nth-child(4){ animation-delay:.58s; }
+@media (prefers-reduced-motion:reduce){
+  .hero-a-copy > *, .hero-a-method li{ animation:none; }
+}
+@media(max-width:640px){
+  .hero--assessoria{ padding:0; min-height:100svh; }
+  .hero-a{ padding:0 22px; }
+  .br-desk{ display:none; }
+  .hero-a-title .l1{ margin-top:18px; font-size:clamp(26px,7.4vw,32px); }
+  .hero-a-title .l2{ font-size:clamp(46px,14.6vw,66px); line-height:.9; }
+  .hero-a-sub{ margin-top:18px; font-size:15px; }
+  .hero-a-actions{ margin-top:24px; }
+  .hero-a-method{ margin-top:36px; grid-template-columns:repeat(2,1fr); }
+  .hero-a-method li{ padding:16px 14px 18px; }
+  .hero-a-method li:nth-child(odd){ border-left:none; padding-left:0; }
+  .hero-a-method li:nth-child(n+3){ border-top:1px solid var(--border); }
+  .hero-a-method .t{ font-size:19px; }
+}
+
+/* ---------- hero da home com vídeo (rodada 4, protótipo na branch
+   hero-video): sessão real de assessoria do Daniel no lugar das
+   partículas. Vídeo em P&B escurecido, só na metade direita no desktop,
+   dissolvendo pro fundo escuro na borda esquerda; no mobile ocupa o topo
+   e dissolve pra baixo, onde fica o texto */
+.hero-media{
+  position:absolute;
+  top:0; right:0; bottom:0;
+  width:64%;
+  z-index:0;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(to right, transparent 0%, #000 38%);
+          mask-image:linear-gradient(to right, transparent 0%, #000 38%);
+}
+.hero-media::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:rgba(8,26,18,.3);
+}
+.hero-video{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:30% 30%;
+  filter:grayscale(1) contrast(1.1) brightness(.8);
+}
+@media(max-width:640px){
+  .hero-media{
+    left:0; width:100%;
+    bottom:auto; height:64%;
+    -webkit-mask-image:linear-gradient(to bottom, #000 50%, transparent 100%);
+            mask-image:linear-gradient(to bottom, #000 50%, transparent 100%);
+  }
+  .hero-video{ object-position:73% 30%; }
+}
+
+/* ===================================================================
+   HERO DAS PÁGINAS INTERNAS (.phero), mesmo modelo da home
+   Antes: foto de fundo em tela cheia escurecida, tudo centralizado e
+   "glass-badges" (caixinhas flutuantes com número). Agora: foto em P&B
+   na metade direita dissolvendo pro fundo escuro, texto embaixo à
+   esquerda, botão sólido e os números das antigas caixinhas viram um
+   placar de fios finos no pé da hero (sem caixas).
+   =================================================================== */
+.phero{
+  position:relative;
+  min-height:88vh;
+  min-height:88svh;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:150px 0 0;
+  overflow:hidden;
+}
+.phero--short{ min-height:64vh; min-height:64svh; }
+.phero-media{
+  position:absolute;
+  top:0; right:0; bottom:0;
+  width:62%;
+  z-index:0;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(to right, transparent 0%, #000 40%);
+          mask-image:linear-gradient(to right, transparent 0%, #000 40%);
+}
+.phero-media img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:var(--pos, 50% 35%);
+  filter:grayscale(1) contrast(1.1) brightness(.78);
+}
+.phero-media::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:rgba(8,26,18,.3);
+}
+.phero::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to top, rgba(5,15,10,.96) 0%, rgba(5,15,10,.6) 32%, rgba(5,15,10,0) 62%),
+    linear-gradient(to right, rgba(5,15,10,.75) 0%, rgba(5,15,10,0) 55%);
+  z-index:1;
+  pointer-events:none;
+}
+.phero-in{
+  position:relative;
+  z-index:2;
+  width:100%;
+  max-width:var(--container);
+  margin:0 auto;
+  padding:0 28px 64px;
+}
+.phero--stats .phero-in{ padding-bottom:0; }
+.phero-copy{ max-width:760px; }
+.phero-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:14px;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--gold-light);
+}
+.phero-kicker::before{
+  content:'';
+  width:40px;
+  height:1px;
+  background:var(--gold);
+}
+.phero-title{
+  margin:22px 0 0;
+  max-width:17ch;
+  font-family:var(--font-head);
+  font-weight:500;
+  font-size:clamp(38px,5.2vw,74px);
+  line-height:1.04;
+  color:var(--cream);
+}
+/* título de uma palavra só ("Comercial", "CRM"): vira pôster */
+.phero-title--word{
+  max-width:none;
+  font-family:var(--font-impact);
+  font-weight:400;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  font-size:clamp(64px,min(12vw,20vh),190px);
+  line-height:.84;
+  color:var(--gold-light);
+}
+.phero-sub{
+  margin:24px 0 0;
+  max-width:52ch;
+  font-size:17px;
+  line-height:1.6;
+  color:var(--cream-dim);
+}
+.phero-actions{
+  margin-top:30px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px 28px;
+  align-items:center;
+}
+.phero-stats{
+  list-style:none;
+  margin:56px 0 0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  border-top:1px solid var(--border);
+}
+.phero-stats li{
+  padding:24px 28px 30px;
+  border-left:1px solid var(--border);
+}
+.phero-stats li:first-child{ border-left:none; padding-left:0; }
+.phero-stats .n{
+  display:block;
+  font-family:var(--font-impact);
+  font-size:clamp(30px,3.2vw,44px);
+  line-height:1;
+  color:var(--gold-light);
+}
+.phero-stats .t{
+  display:block;
+  margin-top:8px;
+  max-width:30ch;
+  font-size:13px;
+  line-height:1.45;
+  color:var(--cream-dim);
+}
+.phero-copy > *, .phero-stats li{
+  animation:heroIn .8s cubic-bezier(.23,1,.32,1) both;
+}
+.phero-copy > *:nth-child(1){ animation-delay:.08s; }
+.phero-copy > *:nth-child(2){ animation-delay:.16s; }
+.phero-copy > *:nth-child(3){ animation-delay:.24s; }
+.phero-copy > *:nth-child(4){ animation-delay:.30s; }
+.phero-stats li:nth-child(1){ animation-delay:.38s; }
+.phero-stats li:nth-child(2){ animation-delay:.44s; }
+.phero-stats li:nth-child(3){ animation-delay:.50s; }
+@media (prefers-reduced-motion:reduce){
+  .phero-copy > *, .phero-stats li{ animation:none; }
+}
+@media(max-width:640px){
+  .phero{ min-height:92svh; padding-top:0; }
+  .phero--short{ min-height:70svh; }
+  .phero-media{
+    left:0; width:100%;
+    bottom:auto; height:60%;
+    -webkit-mask-image:linear-gradient(to bottom, #000 45%, transparent 100%);
+            mask-image:linear-gradient(to bottom, #000 45%, transparent 100%);
+  }
+  .phero-media img{ object-position:var(--pos-m, var(--pos, 50% 35%)); }
+  .phero-in{ padding:0 22px 48px; }
+  .phero-title{ font-size:clamp(32px,9vw,42px); }
+  .phero-title--word{ font-size:clamp(58px,19vw,88px); }
+  .phero-sub{ font-size:15px; margin-top:18px; }
+  .phero-stats{ margin-top:36px; grid-template-columns:1fr 1fr; }
+  .phero-stats li{ padding:18px 14px 22px; }
+  .phero-stats li:nth-child(odd){ border-left:none; padding-left:0; }
+  .phero-stats li:nth-child(n+3){ border-top:1px solid var(--border); }
+}
+
+/* ===================================================================
+   SISTEMA SEM CAIXAS NAS PÁGINAS INTERNAS (out/2026)
+   Mesma regra da home: nada de painel com borda + fundo + sombra.
+   Os componentes compartilhados (.nx-card, .case-card--pro,
+   .shot-card, .deck-card, .plan-card, .method-card, .cta-banner,
+   .video-card) perdem a "caixa" e passam a se separar por fio fino,
+   escala e espaço. A rolagem lateral no mobile (pedido antigo do
+   Daniel) continua igual: só a aparência dos itens mudou.
+   Truque das colunas: cada item tem fio à esquerda e margin-left:-1px,
+   e o grid corta o que sobra (overflow:hidden), então a primeira
+   coluna de cada linha nunca mostra fio, em qualquer quebra.
+   =================================================================== */
+
+/* ---------- cards de dor/solução (.nx-card): numerados, sem caixa */
+.card-grid{
+  gap:0;
+  border-top:1px solid var(--border);
+  counter-reset:nx;
+}
+@media(min-width:761px){ .card-grid{ overflow:hidden; } }
+.nx-card{
+  background:none !important;
+  border:none !important;
+  border-left:1px solid var(--border) !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  margin-left:-1px;
+  padding:30px 30px 36px !important;
+  transform:none !important;
+}
+.nx-card::after{ display:none !important; }
+.nx-card::before{
+  counter-increment:nx;
+  content:counter(nx, decimal-leading-zero);
+  position:static !important;
+  inset:auto !important;
+  display:block;
+  background:none !important;
+  margin-bottom:22px;
+  font-family:var(--font-impact);
+  font-size:46px;
+  line-height:.85;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(228,197,103,.5);
+  opacity:1;
+  transition:color .3s ease, -webkit-text-stroke-color .3s ease;
+}
+.nx-card h3{
+  font-family:var(--font-head) !important;
+  font-weight:500 !important;
+  font-size:clamp(23px,2.2vw,28px) !important;
+  line-height:1.15;
+}
+@media (hover:hover) and (pointer:fine){
+  .nx-card:hover::before{ color:var(--gold-light); -webkit-text-stroke-color:var(--gold-light); }
+}
+
+/* ---------- resultados de clientes (.case-card--pro): número em pôster */
+.case-grid--pro{
+  gap:0;
+  border-top:1px solid var(--border);
+}
+@media(min-width:761px){ .case-grid--pro{ overflow:hidden; } }
+.case-card--pro{
+  background:none !important;
+  padding:0 !important;
+  border-radius:0 !important;
+  border-left:1px solid var(--border);
+  margin-left:-1px;
+  transform:none !important;
+}
+.case-card--pro .ccp-inner{
+  background:none !important;
+  border-radius:0 !important;
+  padding:32px 34px 38px !important;
+}
+.case-card--pro .ccp-avatar{ display:none !important; }
+.case-card--pro .ccp-top{ justify-content:flex-start !important; }
+.case-card--pro .ccp-segment{ text-align:left !important; color:var(--gold-light) !important; }
+.case-card--pro .ccp-number{
+  font-family:var(--font-impact) !important;
+  font-weight:400 !important;
+  font-size:clamp(52px,6vw,86px) !important;
+  line-height:.86 !important;
+  letter-spacing:.5px;
+}
+.case-card--pro .ccp-metric{ font-size:13.5px !important; max-width:34ch; }
+
+/* ---------- prints e fotos com legenda (.shot-card / .video-card) */
+.shot-card, .video-card{
+  border:none !important;
+  border-radius:0 !important;
+  background:none !important;
+  overflow:visible !important;
+  transform:none !important;
+}
+.shot-media, .video-card video{ border-radius:0 !important; }
+.shot-media img{
+  filter:grayscale(1) brightness(.88) contrast(1.06);
+  transition:filter .6s cubic-bezier(.23,1,.32,1);
+}
+.shot-card.is-lit .shot-media img{ filter:none; }
+@media (hover:hover) and (pointer:fine){
+  .shot-card:hover .shot-media img{ filter:none; }
+}
+.shot-body, .video-card .shot-body{ padding:22px 0 0 !important; }
+.shot-title{
+  font-family:var(--font-head) !important;
+  font-weight:500 !important;
+  font-size:clamp(22px,2vw,26px) !important;
+  line-height:1.18;
+}
+
+/* ---------- cases com tira de slides (.deck-card): no desktop vira o
+   mesmo índice em linhas da home; no mobile segue a rolagem lateral */
+.deck-card{
+  border:none !important;
+  border-radius:0 !important;
+  background:none !important;
+  overflow:visible !important;
+  transform:none !important;
+}
+.deck-slides img{
+  filter:grayscale(1) brightness(.85) contrast(1.06);
+  transition:filter .6s cubic-bezier(.23,1,.32,1);
+}
+.deck-card.is-lit .deck-slides img{ filter:none; }
+@media (hover:hover) and (pointer:fine){
+  .deck-card:hover .deck-slides img{ filter:none; }
+}
+.deck-title{
+  font-family:var(--font-head) !important;
+  font-weight:500 !important;
+  font-size:clamp(23px,2.4vw,32px) !important;
+  line-height:1.15;
+}
+.deck-body{ padding:22px 0 0 !important; }
+@media(min-width:761px){
+  .deck-grid{
+    display:block;
+    border-bottom:1px solid var(--border);
+    counter-reset:deck;
+  }
+  .deck-card{
+    display:grid !important;
+    grid-template-columns:72px 1fr minmax(260px,38%);
+    gap:36px;
+    align-items:center;
+    padding:40px 0;
+    border-top:1px solid var(--border) !important;
+  }
+  .deck-card::before{
+    counter-increment:deck;
+    content:counter(deck, decimal-leading-zero);
+    grid-column:1;
+    grid-row:1;
+    font-family:var(--font-impact);
+    font-size:clamp(46px,5vw,70px);
+    line-height:.85;
+    color:transparent;
+    -webkit-text-stroke:1px rgba(228,197,103,.5);
+    transition:color .3s ease, -webkit-text-stroke-color .3s ease;
+  }
+  .deck-card.is-lit::before{ color:var(--gold-light); -webkit-text-stroke-color:var(--gold-light); }
+  .deck-card > .deck-slides, .deck-card > .deck-slides-link{ grid-column:3; grid-row:1; }
+  .deck-card > .deck-body{ grid-column:2; grid-row:1; padding:0 !important; }
+  .deck-card .deck-slides{ gap:4px; background:none; }
+}
+
+/* ---------- planos (.plan-card): colunas separadas por fio; o plano em
+   destaque ganha só um fio dourado no topo, sem caixa */
+.plan-grid{ gap:0; border-top:1px solid var(--border); }
+@media(min-width:861px){ .plan-grid{ overflow:hidden; } }
+.plan-card{
+  background:none !important;
+  border:none !important;
+  border-left:1px solid var(--border) !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  margin-left:-1px;
+  padding:40px 34px 10px !important;
+  transform:none !important;
+}
+.plan-card--featured{ box-shadow:inset 0 2px 0 var(--gold) !important; }
+.plan-badge{
+  position:static !important;
+  align-self:flex-start;
+  margin-bottom:14px;
+  padding:0 0 4px !important;
+  border-radius:0 !important;
+  background:none !important;
+  color:var(--gold-light) !important;
+  border-bottom:1px solid var(--gold);
+}
+.plan-card h3{
+  font-family:var(--font-head) !important;
+  font-weight:500 !important;
+  font-size:30px !important;
+}
+.plan-price .value{
+  font-family:var(--font-impact) !important;
+  font-weight:400 !important;
+  font-size:clamp(48px,5vw,64px) !important;
+  line-height:.9;
+  letter-spacing:.5px;
+}
+
+/* ---------- método É · Faz · Fala (.method-card) */
+.method-grid{ gap:0; border-top:1px solid var(--border); }
+@media(min-width:761px){ .method-grid{ overflow:hidden; } }
+.method-card{
+  background:none !important;
+  border:none !important;
+  border-left:1px solid var(--border) !important;
+  border-radius:0 !important;
+  margin-left:-1px;
+  padding:32px 30px 12px !important;
+}
+.method-card .letter{
+  font-family:var(--font-impact) !important;
+  text-transform:uppercase;
+  font-size:clamp(56px,6vw,84px) !important;
+  line-height:.85;
+}
+
+/* ---------- números soltos (.number-item) no mesmo placar da home */
+.number-item .num{
+  font-family:var(--font-impact) !important;
+  font-weight:400 !important;
+  letter-spacing:.5px;
+}
+
+/* ---------- fechamento (.cta-banner) como pôster, igual à home */
+.cta-banner{
+  background:none !important;
+  border:none !important;
+  border-top:1px solid var(--border) !important;
+  border-radius:0 !important;
+  padding:72px 0 24px !important;
+  text-align:left !important;
+  overflow:hidden;
+}
+.cta-banner::before{
+  content:'DOM';
+  position:absolute;
+  right:-.06em;
+  top:50%;
+  transform:translateY(-50%);
+  font-family:var(--font-impact);
+  font-size:clamp(160px,28vw,380px);
+  line-height:.8;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(228,197,103,.2);
+  pointer-events:none;
+  z-index:0;
+}
+.cta-banner::after{ display:none !important; }
+.cta-banner > *{ position:relative; z-index:1; }
+.cta-banner h2{
+  margin:0 !important;
+  max-width:16ch !important;
+  font-size:clamp(36px,5.4vw,72px) !important;
+  line-height:1.04;
+}
+.cta-banner p{ max-width:46ch; font-size:16px; margin-top:20px !important; }
+.cta-banner .hero-actions{ justify-content:flex-start !important; }
+@media(max-width:640px){
+  .cta-banner::before{ font-size:clamp(130px,44vw,200px); top:auto; bottom:-10px; transform:none; }
+}
+
+/* alinhamento: o texto da primeira coluna encosta na mesma margem dos
+   títulos de seção (sem o recuo do padding), e cada item leva o próprio
+   fio no topo, então grids que quebram em 2 linhas ficam com as linhas
+   certas sem caixa nenhuma */
+.card-grid, .case-grid--pro, .plan-grid, .method-grid{ border-top:none !important; }
+.nx-card, .case-card--pro, .plan-card, .method-card{ border-top:1px solid var(--border) !important; }
+.nx-card:first-child, .plan-card:first-child, .method-card:first-child{ padding-left:0 !important; }
+.case-card--pro:first-child .ccp-inner{ padding-left:0 !important; }
+@media(min-width:1100px){
+  .case-grid--pro{ grid-template-columns:repeat(3,1fr) !important; }
+  .case-grid--pro:has(> .case-card--pro:nth-child(2):last-child){ grid-template-columns:repeat(2,1fr) !important; }
+  .case-grid--pro > .case-card--pro:nth-child(3n+1) .ccp-inner{ padding-left:0 !important; }
+}
+@media(min-width:761px) and (max-width:1099px){
+  .case-grid--pro{ grid-template-columns:repeat(2,1fr) !important; }
+  .case-grid--pro > .case-card--pro:nth-child(2n+1) .ccp-inner{ padding-left:0 !important; }
+}
+
+/* print/foto única numa seção (ex.: Reunião de Diagnóstico, painel do
+   CRM): em vez de uma imagem enorme na largura toda com o texto embaixo,
+   vira um par imagem + texto lado a lado, como página de revista */
+@media(min-width:861px){
+  .shot-grid:has(> .shot-card:only-child){ display:block; }
+  .shot-card:only-child{
+    display:grid !important;
+    grid-template-columns:minmax(320px,44%) 1fr;
+    gap:56px;
+    align-items:center;
+  }
+  .shot-card:only-child .shot-body{ padding:0 !important; }
+  .shot-card:only-child .shot-media--portrait{ aspect-ratio:4/5; }
+  .shot-card:only-child .shot-media--portrait img{ object-position:50% 20%; }
+}
+
+/* mobile: as fileiras com rolagem lateral encaixam cada item na borda
+   do "scrollport", não na margem interna. Sem caixa em volta, o texto
+   do primeiro item ficava colado na borda da tela; o scroll-padding faz
+   o encaixe respeitar a mesma margem de 28px do resto da página */
+@media(max-width:860px){
+  .card-grid, .case-grid--pro, .shot-grid, .deck-grid, .method-grid, .plan-grid{
+    scroll-padding-inline:28px;
+  }
+}
+@media(max-width:860px){
+  .nx-card:first-child, .case-card--pro:first-child, .plan-card:first-child, .method-card:first-child{ border-left:none !important; }
+}

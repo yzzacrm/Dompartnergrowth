@@ -21,13 +21,14 @@
 
 <main>
 
-  <section class="page-hero page-hero--media">
-    <img class="page-hero-bg" src="daniel-perfil.jpg" alt="" loading="eager">
-    <div class="page-hero-overlay"></div>
-    <div class="container">
-      <span class="eyebrow" style="justify-content:center;">Quem somos</span>
-      <h1>Parceria de crescimento é o que fazemos, não apenas o que vendemos.</h1>
-      <p>Há mais de 3 anos no mercado, trabalhamos o posicionamento e o crescimento de empresas parceiras, da estratégia à execução. Marketing é aquisição de clientes, só isso. Por trás da Dom, está a convicção de que <strong>vender mais começa antes disso</strong>: produto bom, vendedor treinado, tecnologia e um posicionamento que gera confiança.</p>
+  <section class="phero">
+    <div class="phero-media" aria-hidden="true"><img src="hero-sobre.jpg" alt="" loading="eager" fetchpriority="high" style="--pos:60% 30%;"></div>
+    <div class="phero-in">
+      <div class="phero-copy">
+        <span class="phero-kicker">Quem somos</span>
+        <h1 class="phero-title">Parceria de crescimento é o que fazemos, não apenas o que vendemos.</h1>
+        <p class="phero-sub">Há mais de 3 anos no mercado, trabalhamos o posicionamento e o crescimento de empresas parceiras, da estratégia à execução. Marketing é aquisição de clientes, só isso. Por trás da Dom, está a convicção de que <strong>vender mais começa antes disso</strong>: produto bom, vendedor treinado, tecnologia e um posicionamento que gera confiança.</p>
+      </div>
     </div>
   </section>
 
@@ -46,37 +47,39 @@
   </section>
 
   <!-- IMPACTO / CONTADOR -->
-  <section class="section section--dense" id="impacto">
+  <section class="section" id="impacto">
     <div class="container">
-      <div class="counter-block reveal">
-        <span class="eyebrow-num" style="justify-content:center;"><span class="n">01</span><span class="t">Impacto</span></span>
-        <h2>Resultado real e auditável, não um número que só sobe.</h2>
-        <div class="impact-results">
-          <div class="impact-result">
-            <span class="impact-number">R$19,43M</span>
-            <span class="impact-context">Faturados em 60 vendas, retorno de 204,9 vezes sobre a mídia investida</span>
+      <div class="impact-editorial">
+        <div class="impact-lead reveal">
+          <span class="eyebrow-num"><span class="n">01</span><span class="t">Impacto</span></span>
+          <h2>Resultado real e auditável, não um número que só sobe.</h2>
+        </div>
+        <div class="impact-hero reveal">
+          <span class="impact-hero-number">R$19,43M</span>
+          <span class="impact-hero-context">Faturados em 60 vendas, retorno de 204,9 vezes sobre a mídia investida</span>
+        </div>
+        <div class="impact-secondary">
+          <div class="impact-stat reveal">
+            <span class="impact-stat-number">+956%</span>
+            <span class="impact-stat-context">De alcance mensal da Evoluc no Instagram · 33,3 mil → 352 mil pessoas em 13 meses</span>
           </div>
-          <div class="impact-result">
-            <span class="impact-number">+956%</span>
-            <span class="impact-context">De alcance mensal da Evoluc no Instagram · 33,3 mil → 352 mil pessoas em 13 meses</span>
-          </div>
-          <div class="impact-result">
-            <span class="impact-number">+100M</span>
-            <span class="impact-context">Visualizações geradas · Papin REC, nossa produtora, em +10 mil vídeos entregues</span>
+          <div class="impact-stat reveal">
+            <span class="impact-stat-number">+100M</span>
+            <span class="impact-stat-context">Visualizações geradas · Papin REC, nossa produtora, em +10 mil vídeos entregues</span>
           </div>
         </div>
-        <p class="counter-caption">Cases completos, com todos os números, estão na seção de resultados abaixo.</p>
+        <p class="impact-caption reveal">Cases completos, com todos os números, estão na seção de resultados abaixo.</p>
       </div>
-      <div class="numbers" style="max-width:880px; margin:56px auto 0; grid-template-columns:repeat(3,1fr);">
-        <div class="number-item">
+      <div class="numbers-editorial reveal">
+        <div class="number-item-editorial">
           <span class="num" data-count="3" data-prefix="+" data-suffix=" anos">0</span>
           <span class="label">De estrada no mercado</span>
         </div>
-        <div class="number-item">
+        <div class="number-item-editorial">
           <span class="num" data-count="20" data-suffix="+">0</span>
           <span class="label">Empresas atendidas</span>
         </div>
-        <div class="number-item">
+        <div class="number-item-editorial">
           <span class="num" data-count="4">0</span>
           <span class="label">Frentes integradas</span>
         </div>
@@ -85,7 +88,7 @@
   </section>
 
   <!-- COMO TRABALHAMOS -->
-  <section class="section section--alt">
+  <section class="section section--alt" id="como-trabalhamos">
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Como trabalhamos</span>

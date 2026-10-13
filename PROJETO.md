@@ -111,6 +111,58 @@ Pedido do Daniel: revisar o site inteiro em busca de frases confusas ("sujeito t
 
 A foto de IA (`daniel-perfil.jpg`) usada no card "Reunião de Diagnóstico" de `advisor.html` foi trocada por uma foto real do Daniel conduzindo uma reunião com um grupo (`daniel-diagnostico.jpg`, novo arquivo). `daniel-perfil.jpg` **continua em uso** em outros 3 lugares (fundo do hero de `advisor.html` e de `sobre.html`, e os respectivos `og:image`) — não foram trocados porque o Daniel só pediu a do card de Diagnóstico; ele sabe que esses outros ainda usam a foto de IA, caso queira trocar depois.
 
+## Redesign editorial "Nike/Oakley" — rascunho da home (out/2026)
+
+Daniel mandou um vídeo de referência (site tutorial do @ambrosiomkt) e 4 imagens de referência (3 campanhas estilo Nike/Oakley em alto contraste, 1 landing page da Patrícia Medronha em tom escuro+dourado) e pediu pra refazer o design de todas as 18 páginas, sem mudar nenhum conteúdo. Antes de mexer, perguntei duas coisas e ele escolheu as opções recomendadas:
+
+1. **Paleta:** manter o verde-escuro + dourado da Dom (não trocar pra preto/branco de alto contraste) — aplicar a energia das referências esportivas na tipografia, nas fotos e na composição, não na cor.
+2. **Escopo:** redesenhar a home primeiro como protótipo, aprovar a direção, só depois aplicar nas outras 17 páginas.
+
+O que mudou na home (`index.html`), tudo via classes modificadoras novas (`--editorial`, `--punch`) que não afetam as outras páginas ainda:
+
+- **Fonte nova `--font-impact` (Bebas Neue, condensada/pôster)**, usada só em números e palavras de impacto (nunca em texto corrido): segunda linha do headline da hero ("A NOSSA ESTRATÉGIA VENDE."), os 3 números grandes do bloco de Impacto, os 3 números da fileira "anos/empresas/frentes". A primeira linha da hero e os títulos de seção continuam no serifado Cormorant Garamond de sempre.
+- **Numeral fantasma**: cada eyebrow de seção (01, 02, 03, 04, 05) ganhou o mesmo número gigante, só contorno, bem discreto, atrás do título — efeito pôster editorial. Escondido/reduzido no mobile pra não poluir.
+- **Molduras de canto (`.frame-marks`)**: cantinhos finos dourados em L, tipo visor de câmera (referência direta da imagem "VISION." da Oakley que o Daniel mandou), usados só na hero pra não virar repetição.
+- **Fotos dos cases em duotone** (seção "Prova de valor"): os thumbnails dos 4 cards passam por um filtro CSS que desatura e tinge na paleta verde/dourada da marca, com saturação total na cor única no hover — fica coeso como campanha, em vez de prints soltos de cada cor.
+- **Seção "O que fazemos" ficou assimétrica**: texto alinhado à esquerda (era centralizado), primeira frase isolada como "manchete" em itálico serifado, numeral fantasma "05" atrás.
+- Diagrama em órbita (`.ecosystem`) e os cards dos 4 produtos/frentes **não foram tocados** — mesma regra de sempre, só ganharam o cabeçalho de seção novo ao redor.
+- Sem grão/textura de fundo — já tinha sido removido de propósito antes (ver nota "Bloco 2 do pente fino"), não reintroduzido.
+
+Testado em desktop (1440px) e mobile (390px) via Playwright antes de mostrar pro Daniel. **Status: aguardando aprovação dele pra aplicar o mesmo sistema nas outras 17 páginas.**
+
+**Rodada 2 (estrutura).** Feedback do Daniel na rodada 1: o bloco de Impacto "em card, dentro de uma caixa" ainda tinha cara de IA, e só a tipografia tinha mudado, não a estrutura. Regra que fica pro resto do redesign: **nada de painel com borda + fundo + sombra pra destacar conteúdo**; separar com escala, fio fino e espaço vazio. Mudanças na home:
+
+- **Faixa corrida** logo abaixo da hero com os nomes das 4 frentes em letra condensada (uma cheia, as outras vazadas), estilo campanha esportiva. Para com `prefers-reduced-motion`.
+- **Impacto sem caixa:** R$19,43M virou o número dominante em escala de pôster (até ~220px), com os outros dois resultados numa coluna menor separada por um fio vertical; a fileira anos/empresas/frentes virou um "placar" com fios verticais, sem caixas.
+- **Prova de valor:** a grade de 4 cards com borda virou um **índice editorial em linhas** (`.case-index` / `.case-row`): número grande vazado, tag, título serifado, descrição e a tira de 3 fotos em duotone dourado, cada linha separada só por um fio. No hover o número enche de dourado, as fotos ganham cor e a seta anda.
+- **CTA final sem caixa:** frase grande alinhada à esquerda e "DOM" gigante vazado sangrando na direita.
+- ~~Duotone dourado/oliva nas fotos~~ **trocado por preto e branco** a pedido do Daniel (ele estranhou as fotos "verdes", e nos prints com fundo branco o filtro deixava o branco bege-esverdeado). Agora as fotos dos cases ficam em P&B e ganham a cor original quando a linha passa pelo meio da tela (`initCaseSpotlight()` em `script.js`, IntersectionObserver com uma faixa estreita no centro da viewport, classe `.is-lit`, vale nos dois sentidos). É o que resolve o celular, que não tem hover; no computador o hover também acende. O número da linha acesa fica dourado cheio.
+- Linha 2 da hero maior (Bebas condensada aguenta).
+
+Obs. de teste: o sandbox não alcança o Google Fonts, então os testes usam as mesmas fontes servidas localmente via npm (`@fontsource`) interceptando a requisição no Playwright. O site em si continua carregando do Google Fonts normalmente.
+
+## Hero da home: assessoria de crescimento (out/2026, rodada 3)
+
+Daniel achou a hero "simples e sem graça" e pediu ênfase na **assessoria** (os vídeos da Papin REC ficam pra hero da página da produtora, quando ela for redesenhada). Diagnóstico da versão antiga: tudo centralizado, headline em cima das letras "DOM" (os dois brigando), terço de baixo vazio só com "ROLE", CTA só como link de texto.
+
+- **Layout:** texto embaixo à esquerda; "Marketing atrai." no serifado e "A NOSSA ESTRATÉGIA VENDE." em Bebas gigante (limitado também pela altura da tela, `min(9vw,15.5vh)`, pra caber em notebook 1280x720).
+- **Partículas "DOM":** continuam (mesma animação, mesma dissolução descendo ao rolar), mas agora ficam no alto à direita, maiores e sangrando pra fora da tela no desktop, e no topo, acima do texto, no mobile. Controlado por `data-layout="side"` no canvas, tratado em `buildParticles()`. No desktop, um `mask-image` apaga as partículas na faixa do texto.
+- **Textos novos/reaproveitados:** kicker **"Assessoria de crescimento"** (novo, pedido do Daniel); subtítulo "Parceria de crescimento, não prestação de serviço." (já era a meta description/rodapé); botão sólido "Personalize seu plano" (mesmo texto do link antigo) + link "Como trabalhamos →" que leva pra `sobre.html#como-trabalhamos` (id novo adicionado nessa seção de sobre.html).
+- **Método da assessoria no pé da hero:** 01 Diagnóstico · 02 Estratégia · 03 Execução · 04 Escala (as mesmas 4 etapas de "Como trabalhamos" em sobre.html), em placar de fios finos; no mobile vira 2x2. A faixa corrida das frentes vem logo abaixo.
+- Entrada em sequência curta (sobe 14px e aparece, ~60ms entre peças), desligada com `prefers-reduced-motion`.
+- Removidos da hero: indicador "ROLE" e molduras de canto (`.frame-marks` continua no CSS, sem uso na home).
+
+## Páginas internas no mesmo modelo da home (out/2026, rodada 5)
+
+Home aprovada (hero com o vídeo da sessão de assessoria, `hero-assessoria.mp4`). Daniel pediu as outras páginas no mesmo modelo, com foto na hero, e liberou gerar imagens novas.
+
+- **Hero de todas as páginas internas (`.phero`):** foto em P&B na metade direita dissolvendo pro fundo, texto embaixo à esquerda, botão sólido. Título de uma palavra ("Comercial", "CRM"...) vira pôster em Bebas; título-frase fica no serifado. As antigas "glass-badges" (caixinhas flutuantes com número) viraram um placar de fios finos no pé da hero (`.phero-stats`). Convertido por script a partir do HTML antigo, sem mudar texto nenhum (único ajuste: "Automação de&nbsp;IA" pra não quebrar "IA" sozinho).
+- **Fotos das heros:** reais onde existe foto boa: Quem Somos = quadro do vídeo da sessão (`hero-sobre.jpg`), Daniel Gualberto = `daniel-diagnostico.jpg`, Consultoria Comercial = `consultoria-daniel.jpg`, Cases = `itaquera-poster.jpg` (drone da Papin), Contato = `daniel-laptop-restaurante.jpg`, Produtora = claquete (vídeos entram depois), Branding = `evoluc-1.jpg`, Loja Online = `joy-2.jpg`. Privacidade fica sem foto (hero curta).
+- **Imagens geradas (pendente):** Comercial, Marketing, Gestão de Anúncios, CRM, ERP, Inteligência e Automação de IA ainda usam as fotos antigas (banco de imagem, baixa resolução, e as três últimas repetiam a mesma). Foram geradas 7 imagens no Figma (P&B editorial, sem rosto e sem texto legível: aperto de mão, celular, notebook com gráfico, quadro de etapas, galpão, xadrez, celular com conversa), mas este ambiente não consegue baixar arquivos do Figma/Canva (bloqueio de rede); dependem do Daniel mandar os arquivos.
+- **Sistema sem caixas nos componentes compartilhados:** `.nx-card` (numerados 01, 02... em contorno), `.case-card--pro` (número em pôster, sem o avatar de letra), `.shot-card`/`.video-card` (foto em P&B que ganha cor no centro da tela, igual aos cases da home), `.deck-card` (no desktop vira o mesmo índice em linhas da home), `.plan-card` (plano em destaque marcado só por fio dourado no topo), `.method-card`, `.cta-banner` (pôster com "DOM" vazado). Tudo via CSS no fim do `style.css`; a rolagem lateral no mobile continua igual.
+- Quem Somos: o bloco de Impacto em caixa foi trocado pelo mesmo bloco sem caixa da home.
+- `initGhostNumerals()` em `script.js`: põe o numeral gigante vazado atrás de todo título de seção numerado, lendo o número do próprio eyebrow.
+
 ## Entrega
 
 O site é entregue como .zip com todas as páginas, `style.css`, `script.js` e os assets, em formato flat (pronto pra upload direto no GitHub Pages). Uma prévia navegável (`preview-artifact.html`, versão single-file com imagens embutidas) também fica publicada como link — não faz parte do zip de entrega.

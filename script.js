@@ -198,6 +198,57 @@
   }
 
   /* ---------------- reveal on scroll ---------------- */
+  /* Prova de valor (home): as fotos de cada case ficam em preto e branco
+     e ganham cor quando a linha passa pelo meio da tela. No celular, que não
+     tem mouse, é a rolagem que "acende" um case de cada vez; no computador
+     o hover também acende (via CSS). Vale nos dois sentidos, igual ao
+     .reveal: saiu da faixa do meio, volta pro preto e branco */
+  /* vídeo de fundo da hero: quem pediu menos movimento no sistema, ou está
+     com economia de dados ligada, fica só com a imagem parada (poster) */
+  /* numeral gigante vazado atrás do título de cada seção numerada, em
+     todas as páginas (na home ele já vem no HTML). Lê o número que já
+     está no eyebrow ("02 A holding") em vez de duplicar no HTML */
+  function initGhostNumerals(){
+    var heads = document.querySelectorAll('.section-head');
+    heads.forEach(function(head){
+      if(head.querySelector('.numeral-ghost')) return;
+      var n = head.querySelector('.eyebrow-num .n');
+      if(!n) return;
+      var ghost = document.createElement('span');
+      ghost.className = 'numeral-ghost';
+      ghost.setAttribute('aria-hidden','true');
+      ghost.textContent = n.textContent.trim();
+      head.classList.add('section-head--editorial');
+      head.insertBefore(ghost, head.firstChild);
+    });
+  }
+
+  function initHeroVideo(){
+    var v = document.querySelector('.hero-video');
+    if(!v) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var saveData = navigator.connection && navigator.connection.saveData;
+    if(reduce || saveData){
+      v.removeAttribute('autoplay');
+      v.pause();
+      v.preload = 'none';
+      return;
+    }
+    var p = v.play();
+    if(p && p.catch) p.catch(function(){});
+  }
+
+  function initCaseSpotlight(){
+    var rows = document.querySelectorAll('.case-row, .shot-card, .deck-card');
+    if(!rows.length || !('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        entry.target.classList.toggle('is-lit', entry.isIntersecting);
+      });
+    }, { rootMargin:'-49% 0px -49% 0px', threshold:0 });
+    rows.forEach(function(row){ io.observe(row); });
+  }
+
   function initReveal(){
     var items = document.querySelectorAll('.reveal');
     if(!items.length) return;
@@ -673,6 +724,23 @@
       var scale = Math.min(maxW / LOGO_W, maxH / LOGO_H);
       var dw = LOGO_W * scale, dh = LOGO_H * scale;
       var dx = (w - dw) / 2, dy = (h - dh) / 2;
+      // hero da assessoria (data-layout="side"): o "DOM" sai de trás do
+      // texto. No desktop fica grande no alto à direita, sangrando pra fora
+      // da tela; no mobile fica no topo, acima do texto. Assim texto e logo
+      // param de brigar pelo mesmo espaço
+      if(canvas.getAttribute('data-layout') === 'side'){
+        if(isMobile){
+          scale = (w * 1.04) / LOGO_W;
+          dw = LOGO_W * scale; dh = LOGO_H * scale;
+          dx = (w - dw) / 2;
+          dy = h * 0.13;
+        } else {
+          scale = Math.min((w * 0.6) / LOGO_W, (h * 0.42) / LOGO_H);
+          dw = LOGO_W * scale; dh = LOGO_H * scale;
+          dx = w - dw * 0.84;
+          dy = h * 0.11;
+        }
+      }
 
       // largura de referência pro quanto cada ponto pode se afastar de lado
       // ao descer (driftX, logo abaixo) — proporcional ao tamanho da hero
@@ -785,6 +853,9 @@
     buildFooter();
     initHeaderAutoHide();
     initReveal();
+    initCaseSpotlight();
+    initHeroVideo();
+    initGhostNumerals();
     initCounters();
     initRevenueCounter();
     initTimeline();

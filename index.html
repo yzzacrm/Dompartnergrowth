@@ -20,50 +20,78 @@
 
 <main>
 
-  <!-- HERO -->
-  <section class="hero">
-    <canvas id="hero-particles" class="hero-particles" aria-hidden="true"></canvas>
-    <div class="hero-content hero-content--clean">
-      <h1 class="hero-headline"><span class="line-1">Marketing atrai.</span><span class="line-2">A nossa estratégia vende.</span></h1>
-      <div class="hero-actions hero-actions--inline">
-        <a href="contato.html" class="btn hero-inline-cta">Personalize seu plano <span class="arrow">→</span></a>
-      </div>
+  <!-- HERO: assessoria de crescimento. Texto embaixo à esquerda, vídeo
+       real de uma sessão de assessoria do Daniel à direita (em P&B, escurecido)
+       e o método da assessoria fechando a primeira tela -->
+  <section class="hero hero--assessoria">
+    <div class="hero-media" aria-hidden="true">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="hero-assessoria.jpg">
+        <source src="hero-assessoria.mp4" type="video/mp4">
+      </video>
     </div>
-    <div class="hero-scroll"><span>ROLE</span><span class="line"></span></div>
+    <div class="hero-a">
+      <div class="hero-a-copy">
+        <span class="hero-a-kicker">Assessoria de crescimento</span>
+        <h1 class="hero-a-title"><span class="l1">Marketing atrai.</span><span class="l2">A nossa estratégia <br class="br-desk">vende.</span></h1>
+        <p class="hero-a-sub">Parceria de crescimento, não prestação de serviço.</p>
+        <div class="hero-a-actions">
+          <a href="contato.html" class="btn btn-primary">Personalize seu plano</a>
+          <a href="sobre.html#como-trabalhamos" class="hero-a-link">Como trabalhamos <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <ol class="hero-a-method" aria-label="Como a assessoria funciona">
+        <li><span class="n">01</span><span class="t">Diagnóstico</span></li>
+        <li><span class="n">02</span><span class="t">Estratégia</span></li>
+        <li><span class="n">03</span><span class="t">Execução</span></li>
+        <li><span class="n">04</span><span class="t">Escala</span></li>
+      </ol>
+    </div>
   </section>
 
-  <!-- IMPACTO / CONTADOR -->
-  <section class="section section--dense" id="impacto">
+  <!-- FAIXA CORRIDA: AS 4 FRENTES -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Comercial</span><span>Marketing</span><span>Produtora</span><span>Inteligência</span>
+      <span>Comercial</span><span>Marketing</span><span>Produtora</span><span>Inteligência</span>
+      <span>Comercial</span><span>Marketing</span><span>Produtora</span><span>Inteligência</span>
+      <span>Comercial</span><span>Marketing</span><span>Produtora</span><span>Inteligência</span>
+    </div>
+  </div>
+
+  <!-- IMPACTO -->
+  <section class="section" id="impacto">
     <div class="container">
-      <div class="counter-block reveal">
-        <span class="eyebrow-num" style="justify-content:center;"><span class="n">01</span><span class="t">Impacto</span></span>
-        <h2>Resultado real e auditável, não um número que só sobe.</h2>
-        <div class="impact-results">
-          <div class="impact-result">
-            <span class="impact-number">R$19,43M</span>
-            <span class="impact-context">Faturados em 60 vendas, retorno de 204,9 vezes sobre a mídia investida</span>
+      <div class="impact-editorial">
+        <div class="impact-lead reveal">
+          <span class="eyebrow-num"><span class="n">01</span><span class="t">Impacto</span></span>
+          <h2>Resultado real e auditável, não um número que só sobe.</h2>
+        </div>
+        <div class="impact-hero reveal">
+          <span class="impact-hero-number">R$19,43M</span>
+          <span class="impact-hero-context">Faturados em 60 vendas, retorno de 204,9 vezes sobre a mídia investida</span>
+        </div>
+        <div class="impact-secondary">
+          <div class="impact-stat reveal">
+            <span class="impact-stat-number">+956%</span>
+            <span class="impact-stat-context">De alcance mensal da Evoluc no Instagram · 33,3 mil → 352 mil pessoas em 13 meses</span>
           </div>
-          <div class="impact-result">
-            <span class="impact-number">+956%</span>
-            <span class="impact-context">De alcance mensal da Evoluc no Instagram · 33,3 mil → 352 mil pessoas em 13 meses</span>
-          </div>
-          <div class="impact-result">
-            <span class="impact-number">+100M</span>
-            <span class="impact-context">Visualizações geradas · Papin REC, nossa produtora, em +10 mil vídeos entregues</span>
+          <div class="impact-stat reveal">
+            <span class="impact-stat-number">+100M</span>
+            <span class="impact-stat-context">Visualizações geradas · Papin REC, nossa produtora, em +10 mil vídeos entregues</span>
           </div>
         </div>
-        <p class="counter-caption">Cases completos, com todos os números, estão na prova de valor abaixo e na página de cada frente.</p>
+        <p class="impact-caption reveal">Cases completos, com todos os números, estão na prova de valor abaixo e na página de cada frente.</p>
       </div>
-      <div class="numbers" style="max-width:880px; margin:56px auto 0; grid-template-columns:repeat(3,1fr);">
-        <div class="number-item">
+      <div class="numbers-editorial reveal">
+        <div class="number-item-editorial">
           <span class="num" data-count="3" data-prefix="+" data-suffix=" anos">0</span>
           <span class="label">De estrada no mercado</span>
         </div>
-        <div class="number-item">
+        <div class="number-item-editorial">
           <span class="num" data-count="20" data-suffix="+">0</span>
           <span class="label">Empresas atendidas</span>
         </div>
-        <div class="number-item">
+        <div class="number-item-editorial">
           <span class="num" data-count="4">0</span>
           <span class="label">Frentes integradas</span>
         </div>
@@ -74,7 +102,8 @@
   <!-- 4 FRENTES / A HOLDING -->
   <section class="section section--alt" id="frentes">
     <div class="container">
-      <div class="section-head reveal">
+      <div class="section-head section-head--editorial reveal">
+        <span class="numeral-ghost" aria-hidden="true">02</span>
         <span class="eyebrow-num"><span class="n">02</span><span class="t">A holding</span></span>
         <h2>Quatro frentes. Uma única operação.</h2>
         <p>Cada frente resolve uma parte do crescimento. Juntas, fecham o ciclo inteiro.</p>
@@ -123,62 +152,68 @@
   <!-- PROVA DE VALOR -->
   <section class="section" id="prova-de-valor">
     <div class="container">
-      <div class="section-head reveal">
+      <div class="section-head section-head--editorial reveal">
+        <span class="numeral-ghost" aria-hidden="true">03</span>
         <span class="eyebrow-num"><span class="n">03</span><span class="t">Prova de valor</span></span>
         <h2>Resultado real, não promessa de agência.</h2>
         <p>Uma amostra do que cada frente já entregou. O case completo, com todos os números, está na página de cada produto.</p>
       </div>
-      <div class="deck-grid">
-        <a class="deck-card reveal" href="produtora.html">
-          <div class="deck-slides">
-            <img src="case-construtoras.jpg" alt="Case de vídeo para o nicho de construtoras" loading="lazy">
-            <img src="case-academia.jpg" alt="Case de vídeo para academia Cross Over" loading="lazy">
-            <img src="case-variedades.jpg" alt="Case de vídeo de variedades, loja de conveniência" loading="lazy">
+      <div class="case-index">
+        <a class="case-row reveal" href="produtora.html">
+          <span class="case-row-num" aria-hidden="true">01</span>
+          <div class="case-row-text">
+            <span class="case-row-tag">Produtora · Papin REC</span>
+            <h3 class="case-row-title">Vídeo que constrói autoridade, não só preenche o feed</h3>
+            <p class="case-row-desc">Produção institucional e de drone, do canteiro de obra ao empreendimento pronto.</p>
           </div>
-          <div class="deck-body">
-            <span class="deck-tag">Produtora · Papin REC</span>
-            <h3 class="deck-title">Vídeo que constrói autoridade, não só preenche o feed</h3>
-            <p class="deck-desc">Produção institucional e de drone, do canteiro de obra ao empreendimento pronto.</p>
+          <div class="case-row-media">
+          <img src="case-construtoras.jpg" alt="Case de vídeo para o nicho de construtoras" loading="lazy">
+          <img src="case-academia.jpg" alt="Case de vídeo para academia Cross Over" loading="lazy">
+          <img src="case-variedades.jpg" alt="Case de vídeo de variedades, loja de conveniência" loading="lazy">
           </div>
+          <span class="case-row-arrow" aria-hidden="true">→</span>
         </a>
-
-        <a class="deck-card reveal" href="gestao-anuncios.html">
-          <div class="deck-slides">
-            <img src="ga4.jpg" alt="Dashboard Google Analytics 4" loading="lazy">
-            <img src="funil.jpg" alt="Funil de conversão de mídia paga" loading="lazy">
-            <img src="alcance.jpg" alt="Alcance e impressões no Facebook e Instagram" loading="lazy">
+        <a class="case-row reveal" href="gestao-anuncios.html">
+          <span class="case-row-num" aria-hidden="true">02</span>
+          <div class="case-row-text">
+            <span class="case-row-tag">Gestão de Anúncios</span>
+            <h3 class="case-row-title">R$19,43 milhões faturados em 8 meses</h3>
+            <p class="case-row-desc">Incorporadora parceira, com mídia, branding e CRM integrados numa única operação.</p>
           </div>
-          <div class="deck-body">
-            <span class="deck-tag">Gestão de Anúncios</span>
-            <h3 class="deck-title">R$19,43 milhões faturados em 8 meses</h3>
-            <p class="deck-desc">Incorporadora parceira, com mídia, branding e CRM integrados numa única operação.</p>
+          <div class="case-row-media">
+          <img src="ga4.jpg" alt="Dashboard Google Analytics 4" loading="lazy">
+          <img src="funil.jpg" alt="Funil de conversão de mídia paga" loading="lazy">
+          <img src="alcance.jpg" alt="Alcance e impressões no Facebook e Instagram" loading="lazy">
           </div>
+          <span class="case-row-arrow" aria-hidden="true">→</span>
         </a>
-
-        <a class="deck-card reveal" href="loja-online.html">
-          <div class="deck-slides">
-            <img src="joy-1.jpg" alt="Loja online Joy Variedades, brinquedos" loading="lazy">
-            <img src="joy-2.jpg" alt="Categoria de brinquedos Joy Variedades" loading="lazy">
-            <img src="joy-3.jpg" alt="Vitrine de brinquedos Joy Variedades" loading="lazy">
+        <a class="case-row reveal" href="loja-online.html">
+          <span class="case-row-num" aria-hidden="true">03</span>
+          <div class="case-row-text">
+            <span class="case-row-tag">Brinquedos · Ecossistema Dom</span>
+            <h3 class="case-row-title">Monte a sua loja online</h3>
+            <p class="case-row-desc">Loja online estruturada de ponta a ponta, própria do nosso ecossistema, pronta pra converter visita em venda.</p>
           </div>
-          <div class="deck-body">
-            <span class="deck-tag">Brinquedos · Ecossistema Dom</span>
-            <h3 class="deck-title">Monte a sua loja online</h3>
-            <p class="deck-desc">Loja online estruturada de ponta a ponta, própria do nosso ecossistema, pronta pra converter visita em venda.</p>
+          <div class="case-row-media">
+          <img src="joy-1.jpg" alt="Loja online Joy Variedades, brinquedos" loading="lazy">
+          <img src="joy-2.jpg" alt="Categoria de brinquedos Joy Variedades" loading="lazy">
+          <img src="joy-3.jpg" alt="Vitrine de brinquedos Joy Variedades" loading="lazy">
           </div>
+          <span class="case-row-arrow" aria-hidden="true">→</span>
         </a>
-
-        <a class="deck-card reveal" href="branding.html">
-          <div class="deck-slides">
-            <img src="evoluc-1.jpg" alt="Capa do Brand Book Evoluc Construtora 2025" loading="lazy">
-            <img src="evoluc-2.jpg" alt="EPI e uniformes da marca Evoluc" loading="lazy">
-            <img src="evoluc-3.jpg" alt="Propósito, missão e visão da Evoluc" loading="lazy">
+        <a class="case-row reveal" href="branding.html">
+          <span class="case-row-num" aria-hidden="true">04</span>
+          <div class="case-row-text">
+            <span class="case-row-tag">Branding</span>
+            <h3 class="case-row-title">Branding: a Bíblia da sua marca</h3>
+            <p class="case-row-desc">O branding é o que faz a sua marca ser lembrada. Aplicamos a técnica É · Faz · Fala, do posicionamento ao guia de conduta, em marcas pessoais e corporativas.</p>
           </div>
-          <div class="deck-body">
-            <span class="deck-tag">Branding</span>
-            <h3 class="deck-title">Branding: a Bíblia da sua marca</h3>
-            <p class="deck-desc">O branding é o que faz a sua marca ser lembrada. Aplicamos a técnica É · Faz · Fala, do posicionamento ao guia de conduta, em marcas pessoais e corporativas.</p>
+          <div class="case-row-media">
+          <img src="evoluc-1.jpg" alt="Capa do Brand Book Evoluc Construtora 2025" loading="lazy">
+          <img src="evoluc-2.jpg" alt="EPI e uniformes da marca Evoluc" loading="lazy">
+          <img src="evoluc-3.jpg" alt="Propósito, missão e visão da Evoluc" loading="lazy">
           </div>
+          <span class="case-row-arrow" aria-hidden="true">→</span>
         </a>
       </div>
     </div>
@@ -187,7 +222,8 @@
   <!-- O ECOSSISTEMA -->
   <section class="section" id="ecossistema">
     <div class="container">
-      <div class="section-head reveal">
+      <div class="section-head section-head--editorial reveal">
+        <span class="numeral-ghost" aria-hidden="true">04</span>
         <span class="eyebrow-num"><span class="n">04</span><span class="t">O ecossistema</span></span>
         <h2>A Dom é o centro de um ecossistema.</h2>
         <p>A Dom atua como holding: reúne empresas de propósitos diferentes, cada uma com seu próprio mercado, sob uma mesma gestão e visão de crescimento.</p>
@@ -229,11 +265,12 @@
   <!-- NOSSO NEGÓCIO / QUEM SOMOS -->
   <section class="section">
     <div class="container">
-      <div class="business-grid" style="grid-template-columns:1fr; max-width:720px; margin:0 auto; text-align:center;">
-        <div class="business-copy reveal">
-          <span class="eyebrow-num" style="justify-content:center;"><span class="n">05</span><span class="t">O que fazemos</span></span>
+      <div class="business-grid" style="grid-template-columns:1fr; max-width:720px; margin:0 auto;">
+        <div class="business-copy business-copy--editorial section-head--editorial reveal">
+          <span class="numeral-ghost" aria-hidden="true">05</span>
+          <span class="eyebrow-num"><span class="n">05</span><span class="t">O que fazemos</span></span>
           <h2>Uma parceria de crescimento, não mais um fornecedor de marketing.</h2>
-          <p style="margin-left:auto; margin-right:auto;">Marketing sozinho não aumenta suas vendas: ele só leva gente até a porta. Pra elas comprarem (e voltarem), o negócio precisa de produto bom, vendedor treinado, tecnologia que dá agilidade e um posicionamento que gera confiança. Só depois entra o marketing pra atrair cliente novo. Por isso não vendemos tráfego ou conteúdo avulso. <strong>Estruturamos o negócio inteiro, da estratégia à execução</strong>, pra cada real investido virar faturamento de verdade.</p>
+          <p><span class="lede">Marketing sozinho não aumenta suas vendas: ele só leva gente até a porta.</span> Pra elas comprarem (e voltarem), o negócio precisa de produto bom, vendedor treinado, tecnologia que dá agilidade e um posicionamento que gera confiança. Só depois entra o marketing pra atrair cliente novo. Por isso não vendemos tráfego ou conteúdo avulso. <strong>Estruturamos o negócio inteiro, da estratégia à execução</strong>, pra cada real investido virar faturamento de verdade.</p>
           <div class="business-divider"></div>
           <a href="sobre.html" class="btn btn-ghost" style="margin-top:30px;">Conhecer a história</a>
         </div>
@@ -242,14 +279,13 @@
   </section>
 
   <!-- CTA FINAL -->
-  <section class="section section--tight">
+  <section class="section cta-poster">
     <div class="container">
-      <div class="cta-banner reveal">
+      <div class="cta-poster-inner reveal">
+        <span class="cta-poster-ghost" aria-hidden="true">DOM</span>
         <h2>Vamos conversar sobre o crescimento do seu negócio.</h2>
         <p>Sem enrolação: conta pra gente onde está e onde quer chegar.</p>
-        <div class="hero-actions">
-          <a href="contato.html" class="btn btn-primary">Falar com a Dom</a>
-        </div>
+        <a href="contato.html" class="btn btn-primary">Falar com a Dom</a>
       </div>
     </div>
   </section>
