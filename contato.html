@@ -3,189 +3,400 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contato: Dom Partner Growth</title>
-<meta name="description" content="Fale com a Dom Partner Growth sobre a parceria de crescimento do seu negócio.">
+<title>Contato | Dom Partner Growth</title>
+<meta name="description" content="Fale com a Dom Partner Growth pelo formulário ou direto no WhatsApp.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Contato: Dom Partner Growth">
-<meta property="og:description" content="Fale com a Dom Partner Growth sobre a parceria de crescimento do seu negócio.">
-<meta property="og:image" content="daniel-evento-1.jpg">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Contato | Dom Partner Growth">
+<meta property="og:description" content="Fale com a Dom Partner Growth pelo formulário ou direto no WhatsApp.">
+<meta property="og:image" content="logo-color.png">
 <script>document.documentElement.classList.add("js");</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="style.css">
+<style>
+@font-face{font-family:"Manrope";font-weight:400;font-display:swap;src:url(manrope-400.woff2) format("woff2")}
+@font-face{font-family:"Manrope";font-weight:500;font-display:swap;src:url(manrope-500.woff2) format("woff2")}
+@font-face{font-family:"Manrope";font-weight:600;font-display:swap;src:url(manrope-600.woff2) format("woff2")}
+@font-face{font-family:"Geist Mono";font-weight:500;font-display:swap;src:url(geist-mono-500.woff2) format("woff2")}
+
+:root{
+  --ink:#050F0A;
+  --ink-2:#0B1912;
+  --paper:#F1ECDF;
+  --cream:#EFE9DC;
+  --gold:#C9A227;
+  --gold-soft:#E4C567;
+  --bronze:#8C5A17;
+  --line-d:rgba(239,233,220,.14);
+  --line-l:rgba(5,15,10,.16);
+  --pad:clamp(24px,5.6vw,80px);
+  --max:1280px;
+  --sans:"Manrope",system-ui,sans-serif;
+  --mono:"Geist Mono",ui-monospace,monospace;
+  --out:cubic-bezier(.23,1,.32,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--ink);overflow-x:clip;scroll-behavior:smooth}
+body{background:var(--ink);color:var(--cream);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;min-width:320px;overflow-x:clip}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+
+.t-label{display:flex;align-items:center;gap:14px;font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gold-soft)}
+.t-label::before{content:"";width:28px;height:1px;background:currentColor}
+.t-title{font-family:var(--sans);font-weight:600;text-transform:uppercase;letter-spacing:-.055em;line-height:.95;font-size:clamp(38px,5.4vw,78px)}
+.t-lead{font-size:clamp(17px,1.4vw,20px);max-width:44ch;opacity:.78}
+
+.btn{display:inline-flex;align-items:center;gap:28px;padding:15px 18px;border-radius:4px;font:500 11.5px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid transparent;transition:background-color .2s ease,transform .2s var(--out),color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+.btn .ar{font-size:15px;letter-spacing:0}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:var(--gold-soft)}
+.btn-dark{background:var(--ink);color:var(--cream)}
+.btn-line-d{border-color:rgba(239,233,220,.45);color:var(--cream)}
+.btn-line-d:hover{background:var(--cream);color:var(--ink)}
+
+/* MENU */
+.nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;width:min(1180px,calc(100% - 32px));
+  display:flex;align-items:center;gap:8px;padding:9px 10px 9px 24px;border-radius:999px;
+  background:rgba(6,16,11,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line-d)}
+.nav .brand img{height:28px;width:auto}
+.nav ul{list-style:none;display:flex;gap:4px;margin:0 auto}
+.nav li a{display:block;padding:12px 15px;font:500 13.5px/1 var(--sans);color:rgba(239,233,220,.72);transition:color .15s}
+.nav li a:hover{color:var(--cream)}
+.nav .cta{white-space:nowrap;padding:14px 20px;border-radius:999px;background:var(--gold);color:var(--ink);font:500 11.5px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase}
+
+/* ============ SEÇÕES ============ */
+.content-flow{position:relative;z-index:5;background:var(--ink)}
+.sec{padding:clamp(80px,9vw,130px) 0;position:relative}
+.sec.light{background:var(--paper);color:var(--ink)}
+.sec.light .t-label{color:var(--bronze)}
+.sec.light .t-lead{opacity:.8}
+.sec .t-title{margin:22px 0 22px}
+
+.about{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,7vw,110px);align-items:center}
+.about .t-lead{margin-bottom:34px}
+.mini{display:flex;margin-top:54px;border-top:1px solid var(--line-l)}
+.mini div{padding:22px 34px 0 0}
+.mini div + div{padding-left:34px;border-left:1px solid var(--line-l)}
+.mini b{display:block;white-space:nowrap;font:500 34px/1 var(--sans);letter-spacing:-.05em}
+.mini span{display:block;font:500 11.5px/1.3 var(--mono);text-transform:uppercase;margin-top:10px;opacity:.65}
+.photo{position:relative;padding:0 0 28px 28px}
+.photo::before{content:"";position:absolute;left:0;bottom:0;right:28px;top:28px;border:1px solid var(--line-l)}
+.photo img{position:relative;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;filter:grayscale(.2)}
+
+.method-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
+.method-head .t-lead{margin:0}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);margin-top:64px;border-top:1px solid var(--line-d)}
+.trio article{padding:34px 36px 6px 0}
+.trio article + article{padding-left:36px;border-left:1px solid var(--line-d)}
+.trio .n,.front .n,.res .n{font:500 11.5px/1 var(--mono);letter-spacing:.08em;color:var(--gold-soft)}
+.trio h3{font:600 clamp(28px,3vw,42px)/1 var(--sans);text-transform:uppercase;letter-spacing:-.055em;margin:18px 0 14px}
+.trio p{opacity:.72;max-width:26ch}
+.method-foot{margin-top:56px;display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.method-foot p{font:500 12px/1.4 var(--mono);letter-spacing:.03em;text-transform:uppercase;opacity:.8}
+
+.fronts{margin-top:56px;border-top:1px solid var(--line-l)}
+.front{display:grid;grid-template-columns:70px 1.1fr 1fr 190px;gap:24px;align-items:center;padding:30px 0;border-bottom:1px solid var(--line-l);transition:padding .25s var(--out)}
+.front:hover{padding-left:14px}
+.front .n{color:var(--bronze)}
+.front h3{font:600 clamp(32px,4.2vw,60px)/.95 var(--sans);text-transform:uppercase;letter-spacing:-.06em}
+.front p{max-width:34ch;opacity:.78}
+.front .th{height:112px;overflow:hidden;border-radius:56px}
+.front .th img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);transition:filter .3s,transform .4s var(--out)}
+.front:hover .th img{filter:none;transform:scale(1.06)}
+
+.res{display:grid;grid-template-columns:repeat(3,1fr);margin-top:64px;border-top:1px solid var(--line-d)}
+.res article{padding:38px 36px 0 0}
+.res article + article{padding-left:36px;border-left:1px solid var(--line-d)}
+.res b{display:block;font:500 clamp(52px,6.2vw,92px)/.95 var(--sans);letter-spacing:-.065em;color:var(--gold-soft)}
+.res p{margin-top:20px;max-width:28ch;opacity:.78}
+.res-foot{margin-top:60px}
+.logos{margin-top:84px;padding-top:34px;border-top:1px solid var(--line-d)}
+.logos small{display:block;font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.55;margin-bottom:26px}
+.logos ul{list-style:none;display:grid;grid-template-columns:repeat(6,1fr);gap:26px 34px;align-items:center}
+.logos img{height:34px;width:auto;max-width:100%;object-fit:contain;filter:brightness(0) invert(.92);opacity:.6}
+
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);margin-top:58px;border-top:1px solid var(--line-l);counter-reset:s}
+.steps li{padding:30px 28px 8px 0;counter-increment:s}
+.steps li + li{padding-left:28px;border-left:1px solid var(--line-l)}
+.steps li::before{content:counter(s);display:block;font:500 clamp(64px,7vw,104px)/.9 var(--sans);letter-spacing:-.07em;color:var(--bronze);margin-bottom:22px}
+.steps h3{font:600 22px/1.05 var(--sans);text-transform:uppercase;letter-spacing:-.04em;margin-bottom:10px}
+.steps p{opacity:.78;max-width:20ch}
+.map-foot{margin-top:56px}
+
+.close{text-align:center;padding:clamp(100px,12vw,170px) 0;background:var(--ink)}
+.close .t-title{font-size:clamp(36px,5.4vw,80px);max-width:13em;margin:0 auto 40px}
+.close .alt{margin-top:26px;font-size:14px;opacity:.66}
+.close .alt a{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--gold)}
+
+footer{background:var(--ink);border-top:1px solid var(--line-d);padding:64px 0 34px;position:relative;z-index:5}
+.foot{display:grid;grid-template-columns:1.4fr .7fr .7fr .8fr;gap:40px}
+.foot img{height:34px;margin-bottom:20px}
+.foot p{font-size:14.5px;opacity:.66;max-width:34ch}
+.foot h4{font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px;color:var(--gold-soft)}
+.foot a{display:block;font-size:14.5px;opacity:.7;margin-bottom:11px}
+.foot a:hover{opacity:1;color:var(--gold-soft)}
+.copy{margin-top:54px;padding-top:24px;border-top:1px solid var(--line-d);font-size:13px;opacity:.5}
+
+@media(max-width:900px){
+  .nav ul{display:none}.nav{padding:7px 7px 7px 18px;justify-content:space-between}
+  .nav .brand img{height:22px}.nav .cta{padding:12px 14px;font-size:10px}
+  .about{grid-template-columns:1fr}
+  .trio,.res,.steps{grid-template-columns:1fr}
+  .trio article,.trio article + article,.res article,.res article + article,.steps li,.steps li + li{padding:28px 0 30px;border-left:none;border-bottom:1px solid var(--line-d)}
+  .steps li,.steps li + li{border-bottom-color:var(--line-l)}
+  .front{grid-template-columns:44px 1fr;gap:10px 16px}
+  .front p,.front .th{grid-column:2}
+  .front .th{height:130px}
+  .logos ul{grid-template-columns:repeat(3,1fr)}
+  .foot{grid-template-columns:1fr 1fr}.foot > div:first-child{grid-column:1 / -1}
+  .mini div{padding-right:18px}.mini div + div{padding-left:18px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+
+/* ---------- menu: submenu de serviços e menu de celular ---------- */
+.nav .brand{flex:none}
+.nav li.has-sub{position:relative}
+.nav .chev{font-size:9px;margin-left:5px;opacity:.7}
+.nav .sub{position:absolute;top:calc(100% + 16px);left:-140px;display:grid;grid-template-columns:1fr 1fr;gap:12px 40px;padding:26px 32px 28px;min-width:560px;background:rgba(7,18,13,.98);border:1px solid var(--line-d);border-radius:22px;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .18s var(--out),transform .18s var(--out),visibility .18s}
+.nav .sub::before{content:"";position:absolute;left:0;right:0;top:-18px;height:18px}
+.nav .sub h5{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:12px}
+.nav .sub a{padding:8px 0;font:500 15px/1.2 var(--sans);color:rgba(239,233,220,.8)}
+.nav .sub a:hover{color:var(--gold-soft)}
+.nav li.has-sub:hover .sub,.nav li.has-sub:focus-within .sub{opacity:1;visibility:visible;transform:none}
+.nav li a.on{color:var(--cream)}
+.menu-btn{display:none;border:1px solid rgba(239,233,220,.3);background:none;color:var(--cream);font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:13px 16px;border-radius:999px;cursor:pointer}
+.drawer{position:fixed;inset:0;z-index:49;background:var(--ink);padding:104px var(--pad) 40px;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .2s var(--out),visibility .2s}
+.drawer.show{opacity:1;visibility:visible}
+.drawer h5{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gold-soft);margin:26px 0 8px}
+.drawer a{display:block;font:600 clamp(26px,8vw,38px)/1.1 var(--sans);letter-spacing:-.05em;text-transform:uppercase;padding:9px 0}
+.drawer a.sm{font-size:19px;letter-spacing:-.03em;padding:6px 0;opacity:.8}
+.drawer .btn{display:inline-flex;font:500 12px/1 var(--mono);letter-spacing:.04em;margin-top:30px;padding:16px 18px}
+@media(max-width:900px){.menu-btn{display:block}.nav .cta{display:none}.nav{padding:7px 7px 7px 18px;justify-content:space-between}}
+
+/* ---------- revelar ao rolar ---------- */
+html.js .rv{opacity:0;transform:translateY(14px);transition:opacity .55s var(--out),transform .55s var(--out);transition-delay:var(--d,0ms)}
+html.js .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html.js .rv{transform:none;transition:opacity .2s}}
+
+/* ---------- componentes das páginas ---------- */
+.sec{--ln:var(--line-d);--acc:var(--gold-soft)}
+.sec.light{--ln:var(--line-l);--acc:var(--bronze)}
+.phero{--ln:var(--line-d);--acc:var(--gold-soft)}
+.phero{padding:clamp(132px,15vw,180px) 0 0;background:var(--ink)}
+.phero .g{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(32px,5vw,80px);align-items:end}
+.phero .g.top{align-items:start}
+.phero h1{font:600 clamp(56px,9.2vw,148px)/.84 var(--sans);letter-spacing:-.075em;text-transform:uppercase;margin:26px 0 28px}
+.phero h1.long{font-size:clamp(46px,6.6vw,104px)}
+.phero h1.quote{font-size:clamp(40px,5.6vw,92px);line-height:.92}
+.phero .t-lead{margin-bottom:34px}
+.phero .cap{aspect-ratio:1.45;border-radius:999px;overflow:hidden;position:relative;margin-bottom:6px}
+.phero .cap img{width:100%;height:100%;object-fit:cover;object-position:50% 35%;filter:grayscale(.6) contrast(1.05)}
+.phero .cap::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,15,10,.05),rgba(5,15,10,.5))}
+.phero .cap.tall{aspect-ratio:.82;border-radius:999px 999px 28px 28px}
+.pstrip{margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--line-d)}
+.pstrip .wrap{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr))}
+.pstrip .wrap>div{padding:30px 24px 34px 0}
+.pstrip .wrap>div + div{padding-left:34px;border-left:1px solid var(--line-d)}
+.pstrip b{display:block;font:500 clamp(36px,4.6vw,68px)/.95 var(--sans);letter-spacing:-.06em;color:var(--gold-soft);white-space:nowrap}
+.pstrip span{display:block;margin-top:12px;font:500 11.5px/1.35 var(--mono);letter-spacing:.04em;text-transform:uppercase;opacity:.65;max-width:30ch}
+.phero .gap{height:clamp(56px,7vw,96px)}
+
+.rows,.list{margin-top:52px;border-top:1px solid var(--ln)}
+.row{display:grid;grid-template-columns:70px 1fr 1fr;gap:24px;align-items:baseline;padding:30px 0;border-bottom:1px solid var(--ln)}
+.row .n{font:500 11.5px/1 var(--mono);letter-spacing:.08em;color:var(--acc)}
+.row h3{font:600 clamp(26px,3.2vw,46px)/1 var(--sans);letter-spacing:-.055em;text-transform:uppercase}
+.row p{max-width:34ch;opacity:.78}
+.item{display:grid;grid-template-columns:1fr 1.2fr 40px;gap:24px;align-items:center;padding:26px 0;border-bottom:1px solid var(--ln);transition:padding .25s var(--out)}
+.item:hover{padding-left:12px}
+.item h3{font:600 clamp(24px,2.8vw,40px)/1 var(--sans);letter-spacing:-.055em;text-transform:uppercase}
+.item p{opacity:.78;max-width:38ch}
+.item .ar{font-size:22px;text-align:right}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:60px;border-top:1px solid var(--ln)}
+.plans article{padding:34px 36px 8px 0}
+.plans article + article{padding-left:36px;border-left:1px solid var(--ln)}
+.plans .n{font:500 11.5px/1 var(--mono);letter-spacing:.08em;color:var(--acc)}
+.plans h3{font:600 clamp(26px,3.1vw,46px)/1 var(--sans);text-transform:uppercase;letter-spacing:-.06em;margin:18px 0 14px}
+.plans p{opacity:.74;max-width:24ch}
+.plans.n4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.plans.n4 article{padding-right:24px}.plans.n4 article + article{padding-left:24px}
+.plans.n4 h3{font-size:clamp(22px,2.3vw,34px)}
+.plans-foot{margin-top:52px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.plans-foot small{font:500 11.5px/1.4 var(--mono);letter-spacing:.04em;text-transform:uppercase;opacity:.6}
+.proof{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr));margin-top:56px;border-top:1px solid var(--ln)}
+.proof article{padding:38px 36px 0 0}
+.proof article + article{padding-left:36px;border-left:1px solid var(--ln)}
+.proof b{display:block;font:500 clamp(48px,6.4vw,108px)/.9 var(--sans);letter-spacing:-.07em;color:var(--acc);white-space:nowrap}
+.proof small{display:block;margin-top:18px;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--acc);opacity:.85}
+.proof p{margin-top:10px;max-width:32ch;opacity:.8}
+.big{margin-top:56px;border-top:1px solid var(--ln)}
+.big article{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,80px);align-items:center;padding:42px 0;border-bottom:1px solid var(--ln)}
+.big b{font:500 clamp(44px,9vw,140px)/.9 var(--sans);letter-spacing:-.07em;color:var(--acc);white-space:nowrap}
+.big small{display:block;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--acc);opacity:.9;margin-bottom:12px}
+.big p{max-width:36ch;font-size:clamp(17px,1.5vw,21px);opacity:.85}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(var(--n,4),minmax(0,1fr));margin-top:58px;border-top:1px solid var(--ln);counter-reset:s}
+.steps li{padding:30px 28px 8px 0;counter-increment:s}
+.steps li + li{padding-left:28px;border-left:1px solid var(--ln)}
+.steps li::before{content:counter(s);display:block;font:500 clamp(56px,6vw,96px)/.9 var(--sans);letter-spacing:-.07em;color:var(--acc);margin-bottom:22px}
+.steps h3{font:600 clamp(19px,1.7vw,24px)/1.05 var(--sans);text-transform:uppercase;letter-spacing:-.04em;margin-bottom:10px}
+.steps p{opacity:.78;max-width:24ch}
+.trio3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:56px;border-top:1px solid var(--ln)}
+.trio3 article{padding:34px 36px 6px 0}
+.trio3 article + article{padding-left:36px;border-left:1px solid var(--ln)}
+.trio3 .n{font:500 11.5px/1 var(--mono);letter-spacing:.08em;color:var(--acc)}
+.trio3 h3{font:600 clamp(44px,5.2vw,80px)/.9 var(--sans);text-transform:uppercase;letter-spacing:-.07em;margin:18px 0 12px}
+.trio3 h4{font:500 11.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--acc);margin-bottom:12px}
+.trio3 p{opacity:.78;max-width:28ch}
+.gal{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:clamp(16px,2.4vw,36px);margin-top:52px}
+.gal figure img,.gal figure video{width:100%;aspect-ratio:var(--ar,9/16);object-fit:cover;object-position:50% 20%;border-radius:20px;background:#0a1a12}
+.gal figcaption{margin-top:16px}
+.gal b{display:block;font:600 clamp(20px,2vw,28px)/1.05 var(--sans);letter-spacing:-.045em;text-transform:uppercase}
+.gal span{display:block;margin-top:6px;opacity:.72;font-size:15px;max-width:30ch}
+.gal a.lk{display:inline-block;margin-top:10px;font:500 11.5px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--acc);border-bottom:1px solid currentColor;padding-bottom:3px}
+.gal.wide figure img,.gal.wide figure video{aspect-ratio:16/9;border-radius:20px}
+.figure{margin-top:52px}
+.figure img{width:100%;border-radius:18px;border:1px solid var(--ln)}
+.figure figcaption{margin-top:14px;font:500 11.5px/1.4 var(--mono);letter-spacing:.04em;text-transform:uppercase;opacity:.65}
+.txt{margin-top:40px;max-width:60ch;font-size:clamp(18px,1.6vw,22px);opacity:.85}
+.quote{margin-top:56px;max-width:20ch;font:600 clamp(34px,4.6vw,68px)/.95 var(--sans);letter-spacing:-.06em;text-transform:uppercase}
+.quote small{display:block;margin-top:22px;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;color:var(--acc)}
+.founder{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,6vw,96px);align-items:center;margin-top:12px}
+.founder img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;border-radius:999px 999px 24px 24px;filter:grayscale(.25)}
+.founder h3{font:600 clamp(34px,4vw,58px)/.95 var(--sans);letter-spacing:-.06em;text-transform:uppercase;margin:16px 0 8px}
+.founder p{max-width:44ch;opacity:.82;margin:14px 0 26px}
+.logos2{margin-top:70px;padding-top:34px;border-top:1px solid var(--ln)}
+.logos2 small{display:block;font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.55;margin-bottom:26px}
+.logos2 ul{list-style:none;display:grid;grid-template-columns:repeat(6,1fr);gap:26px 34px;align-items:center}
+.logos2 img{height:34px;width:auto;max-width:100%;object-fit:contain;filter:brightness(0) invert(.92);opacity:.6}
+.sec.light .logos2 img{filter:brightness(0);opacity:.55}
+/* contato */
+.form{display:grid;gap:26px}
+.form label{display:block;font:500 11.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--gold-soft)}
+.form input,.form textarea{display:block;width:100%;margin-top:10px;padding:10px 0 14px;background:none;border:0;border-bottom:1px solid rgba(239,233,220,.3);color:var(--cream);font:400 19px/1.3 var(--sans);border-radius:0;outline:none;resize:vertical;transition:border-color .2s}
+.form input:focus,.form textarea:focus{border-bottom-color:var(--gold)}
+.form .btn{justify-self:start;cursor:pointer;margin-top:6px}
+.form .note{font-size:13.5px;opacity:.6;max-width:40ch}
+.faq{margin-top:48px;border-top:1px solid var(--ln)}
+.faq details{border-bottom:1px solid var(--ln)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:24px;align-items:center;padding:26px 0;font:600 clamp(20px,2.2vw,30px)/1.1 var(--sans);letter-spacing:-.04em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:400 28px/1 var(--sans);transition:transform .25s var(--out);flex:none}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{padding:0 0 28px;max-width:62ch;opacity:.8}
+/* texto legal */
+.legal{max-width:760px}
+.legal h2{font:600 clamp(22px,2.2vw,30px)/1.1 var(--sans);letter-spacing:-.04em;margin:44px 0 12px}
+.legal p{opacity:.82;margin-bottom:10px}
+.legal a{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--bronze)}
+/* reels da produtora */
+.capsule.reel img{filter:grayscale(.2) contrast(1.04) brightness(.92)}
+.capsule.reel .tag{display:inline-flex;align-items:center;gap:7px}
+.gal .pw{position:relative}
+.gal .vw{position:absolute;left:14px;bottom:14px;margin:0;opacity:1;max-width:none;z-index:3;display:inline-flex;align-items:center;gap:7px;font:500 12px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--cream);padding:8px 11px;border-radius:99px;background:rgba(5,15,10,.6);backdrop-filter:blur(8px)}
+.gal .vw svg{width:15px;height:15px;flex:none}
+.capsule.reel .tag svg{width:1.25em;height:1.25em;flex:none}
+.close{border-top:1px solid var(--line-d)}
+@media(max-width:900px){
+  .phero .g{grid-template-columns:1fr}
+  .phero .cap{aspect-ratio:1.6}
+  .phero .cap.tall{aspect-ratio:1.2;border-radius:999px}
+  .row{grid-template-columns:44px 1fr;gap:8px 16px}.row p{grid-column:2}
+  .plans,.plans.n4,.proof,.trio3{grid-template-columns:1fr}
+  .plans article,.plans article + article,.proof article,.proof article + article,.trio3 article,.trio3 article + article{padding:28px 0 30px;border-left:none;border-bottom:1px solid var(--ln)}
+  .steps{grid-template-columns:1fr 1fr}
+  .steps li,.steps li + li{padding:26px 14px 8px 0;border-left:none;border-bottom:1px solid var(--ln)}
+  .steps li:nth-child(even){padding-left:16px;border-left:1px solid var(--ln)}
+  .item{grid-template-columns:1fr 30px;gap:8px 16px}.item p{grid-column:1}.item .ar{grid-row:1;grid-column:2}
+  .big article{grid-template-columns:1fr;gap:12px}
+  .gal{grid-template-columns:1fr 1fr}
+  .gal.one{grid-template-columns:1fr}
+  .pstrip .wrap>div + div{padding-left:16px}
+  .pstrip .wrap>div{padding-right:10px}
+  .pstrip span{font-size:10px}
+  .founder{grid-template-columns:1fr}
+  .logos2 ul{grid-template-columns:repeat(3,1fr)}
+}
+
+.foot{grid-template-columns:1.3fr .6fr .6fr .9fr .8fr!important}@media(max-width:900px){.foot{grid-template-columns:1fr 1fr!important}.foot>div:first-child{grid-column:1/-1}}
+</style>
 </head>
 <body>
-
-
-<header id="site-header" class="site-header"></header>
-
+<nav class="nav" aria-label="Principal">
+  <a class="brand" href="index.html"><img src="logo-white.png" alt="Dom Partner Growth"></a>
+  <ul>
+    <li><a href="index.html#metodo">Método</a></li>
+    <li><a href="sobre.html">Quem somos</a></li>
+    <li class="has-sub"><a href="index.html#frentes" aria-haspopup="true">Serviços <span class="chev">&#9662;</span></a><div class="sub"><div><h5>Frentes</h5><a href="comercial.html">Comercial</a><a href="marketing.html">Marketing</a><a href="produtora.html">Produtora</a><a href="inteligencia.html">Inteligência</a></div><div><h5>Produtos</h5><a href="crm.html">CRM</a><a href="consultoria-comercial.html">Consultoria comercial</a><a href="gestao-anuncios.html">Gestão de anúncios</a><a href="loja-online.html">Loja online</a><a href="automacao-ia.html">Automação de IA</a><a href="erp.html">ERP</a><a href="branding.html">Branding</a></div></div></li>
+    <li><a href="cases.html">Cases</a></li>
+    <li><a href="advisor.html">Daniel Gualberto</a></li>
+  </ul>
+  <a class="cta" href="contato.html">Agende um diagnóstico</a>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="drawer">Menu</button>
+</nav>
+<div class="drawer" id="drawer" aria-hidden="true">
+  <a href="index.html">Início</a><a href="sobre.html">Quem somos</a><a href="cases.html">Cases</a><a href="advisor.html">Daniel Gualberto</a>
+  <h5>Frentes</h5><a href="comercial.html">Comercial</a><a href="marketing.html">Marketing</a><a href="produtora.html">Produtora</a><a href="inteligencia.html">Inteligência</a><h5>Produtos</h5><a class="sm" href="crm.html">CRM</a><a class="sm" href="consultoria-comercial.html">Consultoria comercial</a><a class="sm" href="gestao-anuncios.html">Gestão de anúncios</a><a class="sm" href="loja-online.html">Loja online</a><a class="sm" href="automacao-ia.html">Automação de IA</a><a class="sm" href="erp.html">ERP</a><a class="sm" href="branding.html">Branding</a>
+  <a class="btn btn-gold" href="contato.html">Agende um diagnóstico <span class="ar">&#8599;</span></a>
+</div>
 <main>
-
-  <section class="phero">
-    <div class="phero-media" aria-hidden="true"><img src="daniel-laptop-restaurante.jpg" alt="" loading="eager" fetchpriority="high" style="--pos:50% 30%;"></div>
-    <div class="phero-in">
-      <div class="phero-copy">
-        <span class="phero-kicker">Contato</span>
-        <h1 class="phero-title">Vamos conversar sobre o crescimento do seu negócio.</h1>
-        <p class="phero-sub">Preencha o formulário ou chame direto no WhatsApp, o que for mais rápido pra você.</p>
-      </div>
+<header class="phero">
+  <div class="wrap g top">
+    <div>
+      <span class="t-label">Contato</span>
+      <h1 class="long">Vamos<br>conversar</h1>
+      <p class="t-lead">Preencha ao lado ou chame direto no WhatsApp.</p>
+      <a class="btn btn-line-d" href="https://wa.me/5511949901200">Chamar no WhatsApp <span class="ar">&#8599;</span></a>
     </div>
-  </section>
-
-  <section class="section section--alt">
-    <div class="container">
-      <div class="contact-grid">
-
-        <form id="contact-form" class="reveal">
-          <div class="form-grid">
-            <div class="field">
-              <label for="nome">Nome</label>
-              <input type="text" id="nome" name="nome" required>
-            </div>
-            <div class="field">
-              <label for="empresa">Empresa</label>
-              <input type="text" id="empresa" name="empresa">
-            </div>
-            <div class="field full">
-              <label for="whatsapp">WhatsApp</label>
-              <input type="tel" id="whatsapp" name="whatsapp" placeholder="(11) 90000-0000" required>
-            </div>
-            <div class="field full">
-              <label for="faturamento">Faturamento mensal aproximado</label>
-              <select id="faturamento" name="faturamento">
-                <option value="">Prefiro não informar</option>
-                <option value="Até R$10 mil/mês">Até R$10 mil/mês</option>
-                <option value="De R$10 mil a R$50 mil/mês">De R$10 mil a R$50 mil/mês</option>
-                <option value="De R$50 mil a R$200 mil/mês">De R$50 mil a R$200 mil/mês</option>
-                <option value="Acima de R$200 mil/mês">Acima de R$200 mil/mês</option>
-              </select>
-            </div>
-            <div class="field full">
-              <label for="mensagem">Mensagem</label>
-              <textarea id="mensagem" name="mensagem" placeholder="Conta rapidamente onde seu negócio está hoje e o que você quer resolver."></textarea>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary" style="margin-top:26px;">Enviar pelo WhatsApp</button>
-          <a href="#" id="contact-form-email" class="form-email-alt">ou enviar por e-mail</a>
-          <p class="form-note">Ao enviar pelo WhatsApp, abrimos uma conversa direta com a sua mensagem já preenchida.</p>
-        </form>
-
-        <div class="contact-side reveal">
-          <span class="contact-line">
-            <span class="k">E-mail</span>
-            <span class="v"><a href="mailto:comercial@dompartnergrowth.com.br">comercial@dompartnergrowth.com.br</a></span>
-          </span>
-          <span class="contact-line">
-            <span class="k">WhatsApp</span>
-            <span class="v"><a href="https://wa.me/5511949901200" target="_blank" rel="noopener">Chamar agora</a></span>
-          </span>
-          <span class="contact-line">
-            <span class="k">Frentes</span>
-            <span class="v">Comercial · Marketing · Produtora · Inteligência</span>
-          </span>
-          <div class="tag-row">
-            <span class="tag-pill">Construção Civil</span>
-            <span class="tag-pill">Mercado Imobiliário</span>
-            <span class="tag-pill">Gastronomia</span>
-            <span class="tag-pill">Academias</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <!-- ESTEIRA DE MARCAS -->
-  <section class="logo-belt" aria-label="Marcas com quem já trabalhamos">
-    <div class="container">
-      <span class="eyebrow logo-belt-label">Marcas com quem já trabalhamos</span>
-    </div>
-    <div class="logo-belt-mask">
-      <div class="logo-belt-track">
-        <ul class="logo-belt-row">
-            <li><img src="logo-cliente-tn4.png" alt="TN4" width="100" height="52" style="--h:52" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-evoluc-construtora.png" alt="Evoluc Construtora" width="132" height="40" style="--h:40" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-enrico.png" alt="Enrico Pizzas e Esfihas" width="85" height="61" style="--h:61" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-cury.png" alt="Cury" width="128" height="41" style="--h:41" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-napoles.png" alt="Nápoles" width="101" height="51" style="--h:51" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-abihto.png" alt="Abihto" width="163" height="32" style="--h:32" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-colegio-cavlac.png" alt="Colégio Cavlac" width="119" height="44" style="--h:44" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-jangada-fight.png" alt="Centro de Treinamento Jangada Fight" width="64" height="64" style="--h:64" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-w-guimaraes-banking.png" alt="W Guimarães Banking" width="134" height="39" style="--h:39" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-telma-multimarcas.png" alt="Telma Multimarcas" width="104" height="49" style="--h:49" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-plano-e-plano.png" alt="Plano&Plano" width="151" height="34" style="--h:34" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-autoescola-virtual.png" alt="Autoescola Virtual" width="78" height="64" style="--h:64" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-academia-imperio.png" alt="Academia Império" width="121" height="43" style="--h:43" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-evoluc-vendas.png" alt="Evoluc Vendas" width="134" height="39" style="--h:39" loading="lazy" decoding="async"></li>
-        </ul>
-        <ul class="logo-belt-row" aria-hidden="true">
-            <li><img src="logo-cliente-tn4.png" alt="" width="100" height="52" style="--h:52" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-evoluc-construtora.png" alt="" width="132" height="40" style="--h:40" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-enrico.png" alt="" width="85" height="61" style="--h:61" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-cury.png" alt="" width="128" height="41" style="--h:41" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-napoles.png" alt="" width="101" height="51" style="--h:51" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-abihto.png" alt="" width="163" height="32" style="--h:32" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-colegio-cavlac.png" alt="" width="119" height="44" style="--h:44" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-jangada-fight.png" alt="" width="64" height="64" style="--h:64" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-w-guimaraes-banking.png" alt="" width="134" height="39" style="--h:39" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-telma-multimarcas.png" alt="" width="104" height="49" style="--h:49" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-plano-e-plano.png" alt="" width="151" height="34" style="--h:34" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-autoescola-virtual.png" alt="" width="78" height="64" style="--h:64" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-academia-imperio.png" alt="" width="121" height="43" style="--h:43" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-evoluc-vendas.png" alt="" width="134" height="39" style="--h:39" loading="lazy" decoding="async"></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--dense">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Perguntas frequentes</span>
-        <h2>Antes de perguntar, já respondemos.</h2>
-      </div>
-      <div class="faq-list reveal">
-        <div class="faq-item">
-          <button class="faq-q"><span>Vocês atendem qualquer segmento?</span><span class="plus"></span></button>
-          <div class="faq-a"><p>Já atendemos construção civil, mercado imobiliário, gastronomia e confeitaria, academias, entre outros. Não travamos a marca a um segmento só: cada campanha fala a língua do público certo.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q"><span>Preciso contratar as quatro frentes?</span><span class="plus"></span></button>
-          <div class="faq-a"><p>Não. Cada frente funciona sozinha. A força aparece quando elas trabalham junto, mas o ponto de partida é sempre o diagnóstico do seu negócio.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q"><span>Como funciona a cobrança?</span><span class="plus"></span></button>
-          <div class="faq-a"><p>Mensalidade fixa somada a uma parte do resultado que geramos pra você. Crescemos juntos.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q"><span>Em quanto tempo vejo resultado?</span><span class="plus"></span></button>
-          <div class="faq-a"><p>Depende da frente e do ponto de partida. No diagnóstico já alinhamos prazos realistas, sem promessa vazia de "resultado em 7 dias".</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q"><span>Já tive experiência ruim com agência antes. Por que com vocês seria diferente?</span><span class="plus"></span></button>
-          <div class="faq-a"><p>Porque uma parte da nossa remuneração depende do resultado: quando você não cresce, a gente também sente. Não entregamos só tarefa, somos parte do crescimento do seu negócio.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q"><span>Tem fidelidade? Se eu não gostar, consigo sair?</span><span class="plus"></span></button>
-          <div class="faq-a"><p>Não trabalhamos com contrato de fidelidade longa. Acreditamos que quem entrega resultado não precisa prender o cliente por contrato, e sim pelo trabalho.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q"><span>Como eu acompanho o que está sendo feito?</span><span class="plus"></span></button>
-          <div class="faq-a"><p>Você tem relatórios periódicos e um canal direto com o time responsável pela sua conta. Nada de "caixa preta": você sabe exatamente o que está sendo feito e por quê.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q"><span>Minha empresa é pequena ou está começando. Faz sentido pra mim?</span><span class="plus"></span></button>
-          <div class="faq-a"><p>Faz, desde que exista operação rodando: já vendendo algo ou já com estrutura mínima. O diagnóstico serve justamente pra dizer com sinceridade se é o momento certo ou o que precisa ajustar antes.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <div><form class="form" id="contact-form">
+  <label>Nome<input name="nome" required autocomplete="name"></label>
+  <label>Empresa<input name="empresa" autocomplete="organization"></label>
+  <label>WhatsApp<input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel"></label>
+  <label>Mensagem<textarea name="mensagem" rows="3"></textarea></label>
+  <button class="btn btn-gold" type="submit">Enviar pelo WhatsApp <span class="ar">&#8599;</span></button>
+  <p class="note">Ao enviar, abrimos uma conversa no WhatsApp com a sua mensagem já preenchida.</p>
+</form></div>
+  </div>
+  <div class="gap" style="height:clamp(72px,8vw,120px)"></div>
+</header><section class="sec light" id="faq">
+  <div class="wrap">
+    <span class="t-label">Perguntas frequentes</span>
+    <h2 class="t-title">Antes de perguntar,<br>já respondemos.</h2>
+    <div class="faq"><details><summary>Vocês atendem qualquer segmento?</summary><p>Já atendemos construção civil, mercado imobiliário, gastronomia, academias, entre outros. Cada campanha fala a língua do público certo.</p></details><details><summary>Preciso contratar as quatro frentes?</summary><p>Não. Cada frente funciona sozinha. O ponto de partida é sempre o diagnóstico do seu negócio.</p></details><details><summary>Como funciona a cobrança?</summary><p>Mensalidade fixa somada a uma parte do resultado que geramos para você. Crescemos juntos.</p></details><details><summary>Em quanto tempo vejo resultado?</summary><p>Depende da frente e do ponto de partida. No diagnóstico alinhamos prazos realistas, sem promessa vazia.</p></details><details><summary>Já tive experiência ruim com agência. Por que seria diferente?</summary><p>Porque uma parte da nossa remuneração depende do resultado. Quando você não cresce, a gente também sente.</p></details><details><summary>Tem fidelidade? Se eu não gostar, consigo sair?</summary><p>Não trabalhamos com contrato de fidelidade longa. Quem entrega resultado não precisa prender o cliente.</p></details><details><summary>Como acompanho o que está sendo feito?</summary><p>Relatórios periódicos e um canal direto com o time da sua conta. Sem caixa preta.</p></details><details><summary>Minha empresa é pequena. Faz sentido?</summary><p>Faz, desde que exista operação rodando. O diagnóstico diz com sinceridade se é o momento certo.</p></details></div><div class="logos2"><small>Empresas que já trabalharam com a gente</small><ul><li><img src="logo-cliente-abihto.png" alt="Abihto"></li><li><img src="logo-cliente-academia-imperio.png" alt="Academia Império"></li><li><img src="logo-cliente-autoescola-virtual.png" alt="Autoescola Virtual"></li><li><img src="logo-cliente-colegio-cavlac.png" alt="Colégio Cavlac"></li><li><img src="logo-cliente-enrico.png" alt="Enrico"></li><li><img src="logo-cliente-jangada-fight.png" alt="Jangada Fight"></li><li><img src="logo-cliente-napoles.png" alt="Nápoles"></li><li><img src="logo-cliente-plano-e-plano.png" alt="Plano&Plano"></li><li><img src="logo-cliente-telma-multimarcas.png" alt="Telma Multimarcas"></li><li><img src="logo-cliente-tn4.png" alt="TN4"></li><li><img src="logo-cliente-w-guimaraes-banking.png" alt="W. Guimarães Banking"></li></ul></div>
+  </div>
+</section>
 
 </main>
-
-<footer id="site-footer" class="site-footer"></footer>
-
-<script src="script.js"></script>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><img src="logo-white.png" alt="Dom Partner Growth"><p>Marketing atrai. A nossa visão vende.</p></div>
+      <div><h4>Dom</h4><a href="index.html#metodo">Método</a><a href="sobre.html">Quem somos</a><a href="cases.html">Cases</a><a href="advisor.html">Daniel Gualberto</a><a href="privacidade.html">Privacidade</a></div><div><h4>Frentes</h4><a href="comercial.html">Comercial</a><a href="marketing.html">Marketing</a><a href="produtora.html">Produtora</a><a href="inteligencia.html">Inteligência</a></div><div><h4>Produtos</h4><a href="crm.html">CRM</a><a href="consultoria-comercial.html">Consultoria comercial</a><a href="gestao-anuncios.html">Gestão de anúncios</a><a href="loja-online.html">Loja online</a><a href="automacao-ia.html">Automação de IA</a><a href="erp.html">ERP</a><a href="branding.html">Branding</a></div><div><h4>Contato</h4><a href="https://wa.me/5511949901200">WhatsApp</a><a href="contato.html">Agende um diagnóstico</a></div>
+    </div>
+    <p class="copy">&copy; 2026 Dom Partner Growth. Todos os direitos reservados.</p>
+  </div>
+</footer>
+<script>
+(function(){
+  var btn=document.querySelector('.menu-btn'),dr=document.getElementById('drawer');
+  function set(o){dr.classList.toggle('show',o);btn.setAttribute('aria-expanded',o);btn.textContent=o?'Fechar':'Menu';dr.setAttribute('aria-hidden',!o);document.body.style.overflow=o?'hidden':''}
+  if(btn&&dr){btn.addEventListener('click',function(){set(!dr.classList.contains('show'))});
+    dr.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});
+    addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});}
+  var sel='.t-label,.t-title,.t-lead,.row,.item,.big article,.plans article,.proof article,.trio3 article,.steps li,.gal figure,.figure,.faq details,.founder,.txt,.quote,.mini,.photo,.res article,.trio article,.front,.legal h2,.logos2,.method-foot,.res-foot,.map-foot';
+  var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.hero-sticky')});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{rootMargin:'0px 0px -6% 0px',threshold:.05});
+    els.forEach(function(e,i){e.classList.add('rv');var sib=e.parentElement?[].indexOf.call(e.parentElement.children,e):0;e.style.setProperty('--d',Math.min(sib,5)*60+'ms');io.observe(e)});
+    var vio=new IntersectionObserver(function(es){es.forEach(function(x){var v=x.target;if(x.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()})},{threshold:.25});
+    document.querySelectorAll('video.lz').forEach(function(v){vio.observe(v)});
+  }
+})();
+</script><script>
+(function(){var f=document.getElementById('contact-form');if(!f)return;
+f.addEventListener('submit',function(e){e.preventDefault();
+function v(n){return f[n]&&f[n].value?f[n].value.trim():''}
+var m='Olá, Dom Partner Growth! Meu nome é '+v('nome')+(v('empresa')?' ('+v('empresa')+')':'')+'. '+(v('mensagem')||'Quero conversar sobre uma parceria de crescimento.')+(v('whatsapp')?' Meu WhatsApp: '+v('whatsapp'):'');
+window.open('https://wa.me/5511949901200?text='+encodeURIComponent(m),'_blank');});})();
+</script>
 </body>
 </html>

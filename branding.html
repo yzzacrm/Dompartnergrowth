@@ -3,156 +3,399 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Branding: Dom Partner Growth</title>
-<meta name="description" content="A Bíblia da sua marca: método É · Faz · Fala aplicado a marcas pessoais e corporativas, do posicionamento ao guia de conduta.">
+<title>Branding | Dom Partner Growth</title>
+<meta name="description" content="Branding: a essência do negócio traduzida em marca, com cases de posicionamento.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Branding: Dom Partner Growth">
-<meta property="og:description" content="A Bíblia da sua marca: método É · Faz · Fala aplicado a marcas pessoais e corporativas, do posicionamento ao guia de conduta.">
-<meta property="og:image" content="evoluc-1.jpg">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Branding | Dom Partner Growth">
+<meta property="og:description" content="Branding: a essência do negócio traduzida em marca, com cases de posicionamento.">
+<meta property="og:image" content="logo-color.png">
 <script>document.documentElement.classList.add("js");</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="style.css">
+<style>
+@font-face{font-family:"Manrope";font-weight:400;font-display:swap;src:url(manrope-400.woff2) format("woff2")}
+@font-face{font-family:"Manrope";font-weight:500;font-display:swap;src:url(manrope-500.woff2) format("woff2")}
+@font-face{font-family:"Manrope";font-weight:600;font-display:swap;src:url(manrope-600.woff2) format("woff2")}
+@font-face{font-family:"Geist Mono";font-weight:500;font-display:swap;src:url(geist-mono-500.woff2) format("woff2")}
+
+:root{
+  --ink:#050F0A;
+  --ink-2:#0B1912;
+  --paper:#F1ECDF;
+  --cream:#EFE9DC;
+  --gold:#C9A227;
+  --gold-soft:#E4C567;
+  --bronze:#8C5A17;
+  --line-d:rgba(239,233,220,.14);
+  --line-l:rgba(5,15,10,.16);
+  --pad:clamp(24px,5.6vw,80px);
+  --max:1280px;
+  --sans:"Manrope",system-ui,sans-serif;
+  --mono:"Geist Mono",ui-monospace,monospace;
+  --out:cubic-bezier(.23,1,.32,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--ink);overflow-x:clip;scroll-behavior:smooth}
+body{background:var(--ink);color:var(--cream);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;min-width:320px;overflow-x:clip}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+
+.t-label{display:flex;align-items:center;gap:14px;font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gold-soft)}
+.t-label::before{content:"";width:28px;height:1px;background:currentColor}
+.t-title{font-family:var(--sans);font-weight:600;text-transform:uppercase;letter-spacing:-.055em;line-height:.95;font-size:clamp(38px,5.4vw,78px)}
+.t-lead{font-size:clamp(17px,1.4vw,20px);max-width:44ch;opacity:.78}
+
+.btn{display:inline-flex;align-items:center;gap:28px;padding:15px 18px;border-radius:4px;font:500 11.5px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid transparent;transition:background-color .2s ease,transform .2s var(--out),color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+.btn .ar{font-size:15px;letter-spacing:0}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:var(--gold-soft)}
+.btn-dark{background:var(--ink);color:var(--cream)}
+.btn-line-d{border-color:rgba(239,233,220,.45);color:var(--cream)}
+.btn-line-d:hover{background:var(--cream);color:var(--ink)}
+
+/* MENU */
+.nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;width:min(1180px,calc(100% - 32px));
+  display:flex;align-items:center;gap:8px;padding:9px 10px 9px 24px;border-radius:999px;
+  background:rgba(6,16,11,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line-d)}
+.nav .brand img{height:28px;width:auto}
+.nav ul{list-style:none;display:flex;gap:4px;margin:0 auto}
+.nav li a{display:block;padding:12px 15px;font:500 13.5px/1 var(--sans);color:rgba(239,233,220,.72);transition:color .15s}
+.nav li a:hover{color:var(--cream)}
+.nav .cta{white-space:nowrap;padding:14px 20px;border-radius:999px;background:var(--gold);color:var(--ink);font:500 11.5px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase}
+
+/* ============ SEÇÕES ============ */
+.content-flow{position:relative;z-index:5;background:var(--ink)}
+.sec{padding:clamp(80px,9vw,130px) 0;position:relative}
+.sec.light{background:var(--paper);color:var(--ink)}
+.sec.light .t-label{color:var(--bronze)}
+.sec.light .t-lead{opacity:.8}
+.sec .t-title{margin:22px 0 22px}
+
+.about{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,7vw,110px);align-items:center}
+.about .t-lead{margin-bottom:34px}
+.mini{display:flex;margin-top:54px;border-top:1px solid var(--line-l)}
+.mini div{padding:22px 34px 0 0}
+.mini div + div{padding-left:34px;border-left:1px solid var(--line-l)}
+.mini b{display:block;white-space:nowrap;font:500 34px/1 var(--sans);letter-spacing:-.05em}
+.mini span{display:block;font:500 11.5px/1.3 var(--mono);text-transform:uppercase;margin-top:10px;opacity:.65}
+.photo{position:relative;padding:0 0 28px 28px}
+.photo::before{content:"";position:absolute;left:0;bottom:0;right:28px;top:28px;border:1px solid var(--line-l)}
+.photo img{position:relative;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;filter:grayscale(.2)}
+
+.method-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
+.method-head .t-lead{margin:0}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);margin-top:64px;border-top:1px solid var(--line-d)}
+.trio article{padding:34px 36px 6px 0}
+.trio article + article{padding-left:36px;border-left:1px solid var(--line-d)}
+.trio .n,.front .n,.res .n{font:500 11.5px/1 var(--mono);letter-spacing:.08em;color:var(--gold-soft)}
+.trio h3{font:600 clamp(28px,3vw,42px)/1 var(--sans);text-transform:uppercase;letter-spacing:-.055em;margin:18px 0 14px}
+.trio p{opacity:.72;max-width:26ch}
+.method-foot{margin-top:56px;display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.method-foot p{font:500 12px/1.4 var(--mono);letter-spacing:.03em;text-transform:uppercase;opacity:.8}
+
+.fronts{margin-top:56px;border-top:1px solid var(--line-l)}
+.front{display:grid;grid-template-columns:70px 1.1fr 1fr 190px;gap:24px;align-items:center;padding:30px 0;border-bottom:1px solid var(--line-l);transition:padding .25s var(--out)}
+.front:hover{padding-left:14px}
+.front .n{color:var(--bronze)}
+.front h3{font:600 clamp(32px,4.2vw,60px)/.95 var(--sans);text-transform:uppercase;letter-spacing:-.06em}
+.front p{max-width:34ch;opacity:.78}
+.front .th{height:112px;overflow:hidden;border-radius:56px}
+.front .th img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);transition:filter .3s,transform .4s var(--out)}
+.front:hover .th img{filter:none;transform:scale(1.06)}
+
+.res{display:grid;grid-template-columns:repeat(3,1fr);margin-top:64px;border-top:1px solid var(--line-d)}
+.res article{padding:38px 36px 0 0}
+.res article + article{padding-left:36px;border-left:1px solid var(--line-d)}
+.res b{display:block;font:500 clamp(52px,6.2vw,92px)/.95 var(--sans);letter-spacing:-.065em;color:var(--gold-soft)}
+.res p{margin-top:20px;max-width:28ch;opacity:.78}
+.res-foot{margin-top:60px}
+.logos{margin-top:84px;padding-top:34px;border-top:1px solid var(--line-d)}
+.logos small{display:block;font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.55;margin-bottom:26px}
+.logos ul{list-style:none;display:grid;grid-template-columns:repeat(6,1fr);gap:26px 34px;align-items:center}
+.logos img{height:34px;width:auto;max-width:100%;object-fit:contain;filter:brightness(0) invert(.92);opacity:.6}
+
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);margin-top:58px;border-top:1px solid var(--line-l);counter-reset:s}
+.steps li{padding:30px 28px 8px 0;counter-increment:s}
+.steps li + li{padding-left:28px;border-left:1px solid var(--line-l)}
+.steps li::before{content:counter(s);display:block;font:500 clamp(64px,7vw,104px)/.9 var(--sans);letter-spacing:-.07em;color:var(--bronze);margin-bottom:22px}
+.steps h3{font:600 22px/1.05 var(--sans);text-transform:uppercase;letter-spacing:-.04em;margin-bottom:10px}
+.steps p{opacity:.78;max-width:20ch}
+.map-foot{margin-top:56px}
+
+.close{text-align:center;padding:clamp(100px,12vw,170px) 0;background:var(--ink)}
+.close .t-title{font-size:clamp(36px,5.4vw,80px);max-width:13em;margin:0 auto 40px}
+.close .alt{margin-top:26px;font-size:14px;opacity:.66}
+.close .alt a{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--gold)}
+
+footer{background:var(--ink);border-top:1px solid var(--line-d);padding:64px 0 34px;position:relative;z-index:5}
+.foot{display:grid;grid-template-columns:1.4fr .7fr .7fr .8fr;gap:40px}
+.foot img{height:34px;margin-bottom:20px}
+.foot p{font-size:14.5px;opacity:.66;max-width:34ch}
+.foot h4{font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px;color:var(--gold-soft)}
+.foot a{display:block;font-size:14.5px;opacity:.7;margin-bottom:11px}
+.foot a:hover{opacity:1;color:var(--gold-soft)}
+.copy{margin-top:54px;padding-top:24px;border-top:1px solid var(--line-d);font-size:13px;opacity:.5}
+
+@media(max-width:900px){
+  .nav ul{display:none}.nav{padding:7px 7px 7px 18px;justify-content:space-between}
+  .nav .brand img{height:22px}.nav .cta{padding:12px 14px;font-size:10px}
+  .about{grid-template-columns:1fr}
+  .trio,.res,.steps{grid-template-columns:1fr}
+  .trio article,.trio article + article,.res article,.res article + article,.steps li,.steps li + li{padding:28px 0 30px;border-left:none;border-bottom:1px solid var(--line-d)}
+  .steps li,.steps li + li{border-bottom-color:var(--line-l)}
+  .front{grid-template-columns:44px 1fr;gap:10px 16px}
+  .front p,.front .th{grid-column:2}
+  .front .th{height:130px}
+  .logos ul{grid-template-columns:repeat(3,1fr)}
+  .foot{grid-template-columns:1fr 1fr}.foot > div:first-child{grid-column:1 / -1}
+  .mini div{padding-right:18px}.mini div + div{padding-left:18px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+
+/* ---------- menu: submenu de serviços e menu de celular ---------- */
+.nav .brand{flex:none}
+.nav li.has-sub{position:relative}
+.nav .chev{font-size:9px;margin-left:5px;opacity:.7}
+.nav .sub{position:absolute;top:calc(100% + 16px);left:-140px;display:grid;grid-template-columns:1fr 1fr;gap:12px 40px;padding:26px 32px 28px;min-width:560px;background:rgba(7,18,13,.98);border:1px solid var(--line-d);border-radius:22px;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .18s var(--out),transform .18s var(--out),visibility .18s}
+.nav .sub::before{content:"";position:absolute;left:0;right:0;top:-18px;height:18px}
+.nav .sub h5{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:12px}
+.nav .sub a{padding:8px 0;font:500 15px/1.2 var(--sans);color:rgba(239,233,220,.8)}
+.nav .sub a:hover{color:var(--gold-soft)}
+.nav li.has-sub:hover .sub,.nav li.has-sub:focus-within .sub{opacity:1;visibility:visible;transform:none}
+.nav li a.on{color:var(--cream)}
+.menu-btn{display:none;border:1px solid rgba(239,233,220,.3);background:none;color:var(--cream);font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:13px 16px;border-radius:999px;cursor:pointer}
+.drawer{position:fixed;inset:0;z-index:49;background:var(--ink);padding:104px var(--pad) 40px;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .2s var(--out),visibility .2s}
+.drawer.show{opacity:1;visibility:visible}
+.drawer h5{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gold-soft);margin:26px 0 8px}
+.drawer a{display:block;font:600 clamp(26px,8vw,38px)/1.1 var(--sans);letter-spacing:-.05em;text-transform:uppercase;padding:9px 0}
+.drawer a.sm{font-size:19px;letter-spacing:-.03em;padding:6px 0;opacity:.8}
+.drawer .btn{display:inline-flex;font:500 12px/1 var(--mono);letter-spacing:.04em;margin-top:30px;padding:16px 18px}
+@media(max-width:900px){.menu-btn{display:block}.nav .cta{display:none}.nav{padding:7px 7px 7px 18px;justify-content:space-between}}
+
+/* ---------- revelar ao rolar ---------- */
+html.js .rv{opacity:0;transform:translateY(14px);transition:opacity .55s var(--out),transform .55s var(--out);transition-delay:var(--d,0ms)}
+html.js .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html.js .rv{transform:none;transition:opacity .2s}}
+
+/* ---------- componentes das páginas ---------- */
+.sec{--ln:var(--line-d);--acc:var(--gold-soft)}
+.sec.light{--ln:var(--line-l);--acc:var(--bronze)}
+.phero{--ln:var(--line-d);--acc:var(--gold-soft)}
+.phero{padding:clamp(132px,15vw,180px) 0 0;background:var(--ink)}
+.phero .g{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(32px,5vw,80px);align-items:end}
+.phero .g.top{align-items:start}
+.phero h1{font:600 clamp(56px,9.2vw,148px)/.84 var(--sans);letter-spacing:-.075em;text-transform:uppercase;margin:26px 0 28px}
+.phero h1.long{font-size:clamp(46px,6.6vw,104px)}
+.phero h1.quote{font-size:clamp(40px,5.6vw,92px);line-height:.92}
+.phero .t-lead{margin-bottom:34px}
+.phero .cap{aspect-ratio:1.45;border-radius:999px;overflow:hidden;position:relative;margin-bottom:6px}
+.phero .cap img{width:100%;height:100%;object-fit:cover;object-position:50% 35%;filter:grayscale(.6) contrast(1.05)}
+.phero .cap::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,15,10,.05),rgba(5,15,10,.5))}
+.phero .cap.tall{aspect-ratio:.82;border-radius:999px 999px 28px 28px}
+.pstrip{margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--line-d)}
+.pstrip .wrap{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr))}
+.pstrip .wrap>div{padding:30px 24px 34px 0}
+.pstrip .wrap>div + div{padding-left:34px;border-left:1px solid var(--line-d)}
+.pstrip b{display:block;font:500 clamp(36px,4.6vw,68px)/.95 var(--sans);letter-spacing:-.06em;color:var(--gold-soft);white-space:nowrap}
+.pstrip span{display:block;margin-top:12px;font:500 11.5px/1.35 var(--mono);letter-spacing:.04em;text-transform:uppercase;opacity:.65;max-width:30ch}
+.phero .gap{height:clamp(56px,7vw,96px)}
+
+.rows,.list{margin-top:52px;border-top:1px solid var(--ln)}
+.row{display:grid;grid-template-columns:70px 1fr 1fr;gap:24px;align-items:baseline;padding:30px 0;border-bottom:1px solid var(--ln)}
+.row .n{font:500 11.5px/1 var(--mono);letter-spacing:.08em;color:var(--acc)}
+.row h3{font:600 clamp(26px,3.2vw,46px)/1 var(--sans);letter-spacing:-.055em;text-transform:uppercase}
+.row p{max-width:34ch;opacity:.78}
+.item{display:grid;grid-template-columns:1fr 1.2fr 40px;gap:24px;align-items:center;padding:26px 0;border-bottom:1px solid var(--ln);transition:padding .25s var(--out)}
+.item:hover{padding-left:12px}
+.item h3{font:600 clamp(24px,2.8vw,40px)/1 var(--sans);letter-spacing:-.055em;text-transform:uppercase}
+.item p{opacity:.78;max-width:38ch}
+.item .ar{font-size:22px;text-align:right}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:60px;border-top:1px solid var(--ln)}
+.plans article{padding:34px 36px 8px 0}
+.plans article + article{padding-left:36px;border-left:1px solid var(--ln)}
+.plans .n{font:500 11.5px/1 var(--mono);letter-spacing:.08em;color:var(--acc)}
+.plans h3{font:600 clamp(26px,3.1vw,46px)/1 var(--sans);text-transform:uppercase;letter-spacing:-.06em;margin:18px 0 14px}
+.plans p{opacity:.74;max-width:24ch}
+.plans.n4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.plans.n4 article{padding-right:24px}.plans.n4 article + article{padding-left:24px}
+.plans.n4 h3{font-size:clamp(22px,2.3vw,34px)}
+.plans-foot{margin-top:52px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.plans-foot small{font:500 11.5px/1.4 var(--mono);letter-spacing:.04em;text-transform:uppercase;opacity:.6}
+.proof{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr));margin-top:56px;border-top:1px solid var(--ln)}
+.proof article{padding:38px 36px 0 0}
+.proof article + article{padding-left:36px;border-left:1px solid var(--ln)}
+.proof b{display:block;font:500 clamp(48px,6.4vw,108px)/.9 var(--sans);letter-spacing:-.07em;color:var(--acc);white-space:nowrap}
+.proof small{display:block;margin-top:18px;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--acc);opacity:.85}
+.proof p{margin-top:10px;max-width:32ch;opacity:.8}
+.big{margin-top:56px;border-top:1px solid var(--ln)}
+.big article{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,80px);align-items:center;padding:42px 0;border-bottom:1px solid var(--ln)}
+.big b{font:500 clamp(44px,9vw,140px)/.9 var(--sans);letter-spacing:-.07em;color:var(--acc);white-space:nowrap}
+.big small{display:block;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--acc);opacity:.9;margin-bottom:12px}
+.big p{max-width:36ch;font-size:clamp(17px,1.5vw,21px);opacity:.85}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(var(--n,4),minmax(0,1fr));margin-top:58px;border-top:1px solid var(--ln);counter-reset:s}
+.steps li{padding:30px 28px 8px 0;counter-increment:s}
+.steps li + li{padding-left:28px;border-left:1px solid var(--ln)}
+.steps li::before{content:counter(s);display:block;font:500 clamp(56px,6vw,96px)/.9 var(--sans);letter-spacing:-.07em;color:var(--acc);margin-bottom:22px}
+.steps h3{font:600 clamp(19px,1.7vw,24px)/1.05 var(--sans);text-transform:uppercase;letter-spacing:-.04em;margin-bottom:10px}
+.steps p{opacity:.78;max-width:24ch}
+.trio3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:56px;border-top:1px solid var(--ln)}
+.trio3 article{padding:34px 36px 6px 0}
+.trio3 article + article{padding-left:36px;border-left:1px solid var(--ln)}
+.trio3 .n{font:500 11.5px/1 var(--mono);letter-spacing:.08em;color:var(--acc)}
+.trio3 h3{font:600 clamp(44px,5.2vw,80px)/.9 var(--sans);text-transform:uppercase;letter-spacing:-.07em;margin:18px 0 12px}
+.trio3 h4{font:500 11.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--acc);margin-bottom:12px}
+.trio3 p{opacity:.78;max-width:28ch}
+.gal{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:clamp(16px,2.4vw,36px);margin-top:52px}
+.gal figure img,.gal figure video{width:100%;aspect-ratio:var(--ar,9/16);object-fit:cover;object-position:50% 20%;border-radius:20px;background:#0a1a12}
+.gal figcaption{margin-top:16px}
+.gal b{display:block;font:600 clamp(20px,2vw,28px)/1.05 var(--sans);letter-spacing:-.045em;text-transform:uppercase}
+.gal span{display:block;margin-top:6px;opacity:.72;font-size:15px;max-width:30ch}
+.gal a.lk{display:inline-block;margin-top:10px;font:500 11.5px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--acc);border-bottom:1px solid currentColor;padding-bottom:3px}
+.gal.wide figure img,.gal.wide figure video{aspect-ratio:16/9;border-radius:20px}
+.figure{margin-top:52px}
+.figure img{width:100%;border-radius:18px;border:1px solid var(--ln)}
+.figure figcaption{margin-top:14px;font:500 11.5px/1.4 var(--mono);letter-spacing:.04em;text-transform:uppercase;opacity:.65}
+.txt{margin-top:40px;max-width:60ch;font-size:clamp(18px,1.6vw,22px);opacity:.85}
+.quote{margin-top:56px;max-width:20ch;font:600 clamp(34px,4.6vw,68px)/.95 var(--sans);letter-spacing:-.06em;text-transform:uppercase}
+.quote small{display:block;margin-top:22px;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;color:var(--acc)}
+.founder{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,6vw,96px);align-items:center;margin-top:12px}
+.founder img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;border-radius:999px 999px 24px 24px;filter:grayscale(.25)}
+.founder h3{font:600 clamp(34px,4vw,58px)/.95 var(--sans);letter-spacing:-.06em;text-transform:uppercase;margin:16px 0 8px}
+.founder p{max-width:44ch;opacity:.82;margin:14px 0 26px}
+.logos2{margin-top:70px;padding-top:34px;border-top:1px solid var(--ln)}
+.logos2 small{display:block;font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.55;margin-bottom:26px}
+.logos2 ul{list-style:none;display:grid;grid-template-columns:repeat(6,1fr);gap:26px 34px;align-items:center}
+.logos2 img{height:34px;width:auto;max-width:100%;object-fit:contain;filter:brightness(0) invert(.92);opacity:.6}
+.sec.light .logos2 img{filter:brightness(0);opacity:.55}
+/* contato */
+.form{display:grid;gap:26px}
+.form label{display:block;font:500 11.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--gold-soft)}
+.form input,.form textarea{display:block;width:100%;margin-top:10px;padding:10px 0 14px;background:none;border:0;border-bottom:1px solid rgba(239,233,220,.3);color:var(--cream);font:400 19px/1.3 var(--sans);border-radius:0;outline:none;resize:vertical;transition:border-color .2s}
+.form input:focus,.form textarea:focus{border-bottom-color:var(--gold)}
+.form .btn{justify-self:start;cursor:pointer;margin-top:6px}
+.form .note{font-size:13.5px;opacity:.6;max-width:40ch}
+.faq{margin-top:48px;border-top:1px solid var(--ln)}
+.faq details{border-bottom:1px solid var(--ln)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:24px;align-items:center;padding:26px 0;font:600 clamp(20px,2.2vw,30px)/1.1 var(--sans);letter-spacing:-.04em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:400 28px/1 var(--sans);transition:transform .25s var(--out);flex:none}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{padding:0 0 28px;max-width:62ch;opacity:.8}
+/* texto legal */
+.legal{max-width:760px}
+.legal h2{font:600 clamp(22px,2.2vw,30px)/1.1 var(--sans);letter-spacing:-.04em;margin:44px 0 12px}
+.legal p{opacity:.82;margin-bottom:10px}
+.legal a{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--bronze)}
+/* reels da produtora */
+.capsule.reel img{filter:grayscale(.2) contrast(1.04) brightness(.92)}
+.capsule.reel .tag{display:inline-flex;align-items:center;gap:7px}
+.gal .pw{position:relative}
+.gal .vw{position:absolute;left:14px;bottom:14px;margin:0;opacity:1;max-width:none;z-index:3;display:inline-flex;align-items:center;gap:7px;font:500 12px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--cream);padding:8px 11px;border-radius:99px;background:rgba(5,15,10,.6);backdrop-filter:blur(8px)}
+.gal .vw svg{width:15px;height:15px;flex:none}
+.capsule.reel .tag svg{width:1.25em;height:1.25em;flex:none}
+.close{border-top:1px solid var(--line-d)}
+@media(max-width:900px){
+  .phero .g{grid-template-columns:1fr}
+  .phero .cap{aspect-ratio:1.6}
+  .phero .cap.tall{aspect-ratio:1.2;border-radius:999px}
+  .row{grid-template-columns:44px 1fr;gap:8px 16px}.row p{grid-column:2}
+  .plans,.plans.n4,.proof,.trio3{grid-template-columns:1fr}
+  .plans article,.plans article + article,.proof article,.proof article + article,.trio3 article,.trio3 article + article{padding:28px 0 30px;border-left:none;border-bottom:1px solid var(--ln)}
+  .steps{grid-template-columns:1fr 1fr}
+  .steps li,.steps li + li{padding:26px 14px 8px 0;border-left:none;border-bottom:1px solid var(--ln)}
+  .steps li:nth-child(even){padding-left:16px;border-left:1px solid var(--ln)}
+  .item{grid-template-columns:1fr 30px;gap:8px 16px}.item p{grid-column:1}.item .ar{grid-row:1;grid-column:2}
+  .big article{grid-template-columns:1fr;gap:12px}
+  .gal{grid-template-columns:1fr 1fr}
+  .gal.one{grid-template-columns:1fr}
+  .pstrip .wrap>div + div{padding-left:16px}
+  .pstrip .wrap>div{padding-right:10px}
+  .pstrip span{font-size:10px}
+  .founder{grid-template-columns:1fr}
+  .logos2 ul{grid-template-columns:repeat(3,1fr)}
+}
+
+.foot{grid-template-columns:1.3fr .6fr .6fr .9fr .8fr!important}@media(max-width:900px){.foot{grid-template-columns:1fr 1fr!important}.foot>div:first-child{grid-column:1/-1}}
+</style>
 </head>
 <body>
-
-
-<header id="site-header" class="site-header"></header>
-
+<nav class="nav" aria-label="Principal">
+  <a class="brand" href="index.html"><img src="logo-white.png" alt="Dom Partner Growth"></a>
+  <ul>
+    <li><a href="index.html#metodo">Método</a></li>
+    <li><a href="sobre.html">Quem somos</a></li>
+    <li class="has-sub"><a href="index.html#frentes" class="on" aria-haspopup="true">Serviços <span class="chev">&#9662;</span></a><div class="sub"><div><h5>Frentes</h5><a href="comercial.html">Comercial</a><a href="marketing.html">Marketing</a><a href="produtora.html">Produtora</a><a href="inteligencia.html">Inteligência</a></div><div><h5>Produtos</h5><a href="crm.html">CRM</a><a href="consultoria-comercial.html">Consultoria comercial</a><a href="gestao-anuncios.html">Gestão de anúncios</a><a href="loja-online.html">Loja online</a><a href="automacao-ia.html">Automação de IA</a><a href="erp.html">ERP</a><a href="branding.html">Branding</a></div></div></li>
+    <li><a href="cases.html">Cases</a></li>
+    <li><a href="advisor.html">Daniel Gualberto</a></li>
+  </ul>
+  <a class="cta" href="contato.html">Agende um diagnóstico</a>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="drawer">Menu</button>
+</nav>
+<div class="drawer" id="drawer" aria-hidden="true">
+  <a href="index.html">Início</a><a href="sobre.html">Quem somos</a><a href="cases.html">Cases</a><a href="advisor.html">Daniel Gualberto</a>
+  <h5>Frentes</h5><a href="comercial.html">Comercial</a><a href="marketing.html">Marketing</a><a href="produtora.html">Produtora</a><a href="inteligencia.html">Inteligência</a><h5>Produtos</h5><a class="sm" href="crm.html">CRM</a><a class="sm" href="consultoria-comercial.html">Consultoria comercial</a><a class="sm" href="gestao-anuncios.html">Gestão de anúncios</a><a class="sm" href="loja-online.html">Loja online</a><a class="sm" href="automacao-ia.html">Automação de IA</a><a class="sm" href="erp.html">ERP</a><a class="sm" href="branding.html">Branding</a>
+  <a class="btn btn-gold" href="contato.html">Agende um diagnóstico <span class="ar">&#8599;</span></a>
+</div>
 <main>
-
-  <section class="phero">
-    <div class="phero-media" aria-hidden="true"><img src="evoluc-1.jpg" alt="" loading="eager" fetchpriority="high" style="--pos:50% 50%;"></div>
-    <div class="phero-in">
-      <div class="phero-copy">
-        <span class="phero-kicker">Produto</span>
-        <h1 class="phero-title phero-title--word">Branding</h1>
-        <p class="phero-sub">Branding não é só um conjunto de regras visuais. É a essência do negócio traduzida em marca: a verdade imutável, a promessa ao mercado e o motivo de ele existir.</p>
-        <div class="phero-actions">
-          <a href="contato.html" class="btn btn-primary">Quero a essência da minha marca definida</a>
-        </div>
-      </div>
+<header class="phero">
+  <div class="wrap g">
+    <div>
+      <span class="t-label">Produto</span>
+      <h1 class="">Branding</h1>
+      <p class="t-lead">A essência do negócio traduzida em marca.</p>
+      <a class="btn btn-gold" href="contato.html">Agende um diagnóstico <span class="ar">&#8599;</span></a>
     </div>
-  </section>
-
-  <!-- A BÍBLIA DA MARCA -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow-num"><span class="n">01</span><span class="t">O método</span></span>
-        <h2>A Bíblia da sua marca.</h2>
-      </div>
-      <div class="card-grid">
-        <div class="nx-card reveal">
-          <span class="tag">01</span>
-          <h3>A Descoberta da Verdade</h3>
-          <p class="desc">Imersão profunda pra encontrar o diferencial único, a causa e a voz de autoridade que só o seu negócio pode ter.</p>
-        </div>
-        <div class="nx-card reveal">
-          <span class="tag">02</span>
-          <h3>A Definição da Essência</h3>
-          <p class="desc">Os pilares inegociáveis da marca: quem ela é, pra quem fala, o que combate e por que é a única escolha lógica.</p>
-        </div>
-        <div class="nx-card reveal">
-          <span class="tag">03</span>
-          <h3>A Criação dos Símbolos</h3>
-          <p class="desc">Identidade visual que traduz essa essência pro mundo: logo, cores e formas.</p>
-        </div>
-        <div class="nx-card reveal">
-          <span class="tag">04</span>
-          <h3>O Guia de Conduta</h3>
-          <p class="desc">Manual de marca completo, pra que cada post, cada anúncio e cada atendimento siga a essência da marca.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CASES DE BRANDING -->
-  <section class="section section--alt">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow-num"><span class="n">02</span><span class="t">Cases</span></span>
-        <h2>Posicionamento que muda como o mercado enxerga a marca.</h2>
-        <p>Propostas e projetos de branding assinados pela Dom para marcas pessoais e corporativas.</p>
-      </div>
-      <div class="deck-grid">
-        <div class="deck-card reveal">
-          <div class="deck-slides">
-            <img src="wguimaraes-1.jpg" alt="Capa da proposta W Guimarães Banking" loading="lazy">
-            <img src="wguimaraes-2.jpg" alt="Slide de estratégia W Guimarães Banking" loading="lazy">
-            <img src="wguimaraes-3.jpg" alt="Slide de execução W Guimarães Banking" loading="lazy">
-          </div>
-          <div class="deck-body">
-            <span class="deck-tag">Marca pessoal · Wellington Guimarães</span>
-            <h3 class="deck-title">O Ativo Mais Forte do Seu Império</h3>
-            <p class="deck-desc">Proposta estratégica de posicionamento de marca pessoal, ligando a trajetória de superação de Wellington ao banco que leva seu nome. A meta é medida em indicações de clientes e contatos reais gerados.</p>
-            <div class="deck-actions">
-              <a class="deck-action" href="wguimaraes-proposta.pdf" target="_blank" rel="noopener">Ver a proposta completa (PDF) ↗</a>
-            </div>
-          </div>
-        </div>
-        <div class="deck-card reveal">
-          <div class="deck-slides">
-            <img src="consigliere-1.jpg" alt="Capa do Projeto Consigliere" loading="lazy">
-            <img src="consigliere-2.jpg" alt="Slide do arquétipo Consigliere" loading="lazy">
-            <img src="consigliere-3.jpg" alt="Slide de execução do Projeto Consigliere" loading="lazy">
-          </div>
-          <div class="deck-body">
-            <span class="deck-tag">Marca pessoal · Julio Machado, Confiatta</span>
-            <h3 class="deck-title">Projeto Consigliere</h3>
-            <p class="deck-desc">Posicionamento de autoridade para consultoria que atende o setor público, no papel do conselheiro que sustenta o poder por trás da decisão.</p>
-            <div class="deck-actions">
-              <a class="deck-action" href="consigliere-proposta-resumo.jpg" target="_blank" rel="noopener">Ver o resumo da estratégia ↗</a>
-            </div>
-          </div>
-        </div>
-        <div class="deck-card reveal">
-          <div class="deck-slides">
-            <img src="lablaser-1.jpg" alt="Capa A Era da Precisão LabLaser" loading="lazy">
-            <img src="lablaser-2.jpg" alt="Slide de diagnóstico LabLaser" loading="lazy">
-            <img src="lablaser-3.jpg" alt="Slide 01 Academia Tech and Mastery LabLaser" loading="lazy">
-          </div>
-          <div class="deck-body">
-            <span class="deck-tag">Clínica de laser · LabLaser</span>
-            <h3 class="deck-title">A Era da Precisão</h3>
-            <p class="deck-desc">Reposicionamento digital para dominar o mercado de lasercirurgia, corrigindo o descompasso entre a autoridade técnica da clínica e sua comunicação.</p>
-          </div>
-        </div>
-        <div class="deck-card reveal">
-          <div class="deck-slides">
-            <img src="evoluc-1.jpg" alt="Capa do Brand Book Evoluc Construtora 2025" loading="lazy">
-            <img src="evoluc-roi.jpg" alt="Relatório de equity de marca da Evoluc: alcance, engajamento e seguidores" loading="lazy">
-            <img src="evoluc-3.jpg" alt="Propósito, missão e visão da Evoluc" loading="lazy">
-          </div>
-          <div class="deck-body">
-            <span class="deck-tag">Construtora · Evoluc</span>
-            <h3 class="deck-title">Brand Book Evoluc Construtora 2025</h3>
-            <p class="deck-desc">Manual de marca completo, do uniforme de obra ao propósito institucional. +956% de alcance e +166% de seguidores no Instagram em 13 meses: a marca também virou número.</p>
-            <div class="deck-actions">
-              <a class="deck-action" href="evoluc-brandbook-2025.pdf" target="_blank" rel="noopener">Baixar o Brand Book completo (PDF) ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--tight">
-    <div class="container">
-      <div class="cta-banner reveal">
-        <h2>Sua marca tem uma essência definida ou só um logo?</h2>
-        <p>Vamos conversar sobre o posicionamento que a sua marca precisa pra parar de mudar de discurso a cada campanha.</p>
-        <div class="hero-actions">
-          <a href="contato.html" class="btn btn-primary">Falar com a Dom</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
+    <div class="cap tall"><img src="wguimaraes-1.jpg" alt="" style="object-position:50% 20%"></div>
+  </div>
+  
+</header><section class="sec light" id="metodo">
+  <div class="wrap">
+    <span class="t-label">O método</span>
+    <h2 class="t-title">A Bíblia da sua marca.</h2>
+    <ol class="steps" style="--n:4"><li><h3>A descoberta da verdade</h3><p>Imersão para achar o diferencial, a causa e a voz da marca.</p></li><li><h3>A definição da essência</h3><p>Quem ela é, para quem fala e o que combate.</p></li><li><h3>A criação dos símbolos</h3><p>Logo, cores e formas que traduzem a essência.</p></li><li><h3>O guia de conduta</h3><p>Manual de marca para cada post, anúncio e atendimento.</p></li></ol>
+  </div>
+</section><section class="sec" id="cases">
+  <div class="wrap">
+    <span class="t-label">Cases</span>
+    <h2 class="t-title">Posicionamento que muda<br>como o mercado vê a marca.</h2>
+    <div class="gal " style="--n:4;--ar:3/4"><figure><img src="wguimaraes-1.jpg" alt="" loading="lazy"><figcaption><b>O Ativo Mais Forte do Seu Império</b><span>Marca pessoal, Wellington Guimarães.</span><a class="lk" href="wguimaraes-proposta.pdf" target="_blank" rel="noopener">Ver a proposta (PDF)</a></figcaption></figure><figure><img src="consigliere-1.jpg" alt="" loading="lazy"><figcaption><b>Projeto Consigliere</b><span>Marca pessoal, Julio Machado, Confiatta.</span><a class="lk" href="consigliere-proposta-resumo.jpg">Ver o resumo</a></figcaption></figure><figure><img src="lablaser-1.jpg" alt="" loading="lazy"><figcaption><b>A Era da Precisão</b><span>LabLaser, clínica de laser.</span></figcaption></figure><figure><img src="evoluc-relatorio-capa.jpg" alt="" loading="lazy"><figcaption><b>Manual de marca Evoluc 2025</b><span>Construtora. Do uniforme de obra ao propósito.</span><a class="lk" href="evoluc-brandbook-2025.pdf" target="_blank" rel="noopener">Baixar o manual (PDF)</a></figcaption></figure></div>
+  </div>
+</section>
+<section class="close" id="fim">
+  <div class="wrap">
+    <h2 class="t-title">Vamos descobrir o próximo passo da sua empresa.</h2>
+    <a class="btn btn-gold" href="contato.html">Agende um diagnóstico <span class="ar">&#8599;</span></a>
+    <p class="alt">Ou chame no <a href="https://wa.me/5511949901200">WhatsApp</a>.</p>
+  </div>
+</section>
 </main>
-
-<footer id="site-footer" class="site-footer"></footer>
-
-<script src="script.js"></script>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><img src="logo-white.png" alt="Dom Partner Growth"><p>Marketing atrai. A nossa visão vende.</p></div>
+      <div><h4>Dom</h4><a href="index.html#metodo">Método</a><a href="sobre.html">Quem somos</a><a href="cases.html">Cases</a><a href="advisor.html">Daniel Gualberto</a><a href="privacidade.html">Privacidade</a></div><div><h4>Frentes</h4><a href="comercial.html">Comercial</a><a href="marketing.html">Marketing</a><a href="produtora.html">Produtora</a><a href="inteligencia.html">Inteligência</a></div><div><h4>Produtos</h4><a href="crm.html">CRM</a><a href="consultoria-comercial.html">Consultoria comercial</a><a href="gestao-anuncios.html">Gestão de anúncios</a><a href="loja-online.html">Loja online</a><a href="automacao-ia.html">Automação de IA</a><a href="erp.html">ERP</a><a href="branding.html">Branding</a></div><div><h4>Contato</h4><a href="https://wa.me/5511949901200">WhatsApp</a><a href="contato.html">Agende um diagnóstico</a></div>
+    </div>
+    <p class="copy">&copy; 2026 Dom Partner Growth. Todos os direitos reservados.</p>
+  </div>
+</footer>
+<script>
+(function(){
+  var btn=document.querySelector('.menu-btn'),dr=document.getElementById('drawer');
+  function set(o){dr.classList.toggle('show',o);btn.setAttribute('aria-expanded',o);btn.textContent=o?'Fechar':'Menu';dr.setAttribute('aria-hidden',!o);document.body.style.overflow=o?'hidden':''}
+  if(btn&&dr){btn.addEventListener('click',function(){set(!dr.classList.contains('show'))});
+    dr.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});
+    addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});}
+  var sel='.t-label,.t-title,.t-lead,.row,.item,.big article,.plans article,.proof article,.trio3 article,.steps li,.gal figure,.figure,.faq details,.founder,.txt,.quote,.mini,.photo,.res article,.trio article,.front,.legal h2,.logos2,.method-foot,.res-foot,.map-foot';
+  var els=[].slice.call(document.querySelectorAll(sel)).filter(function(e){return !e.closest('.hero-sticky')});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{rootMargin:'0px 0px -6% 0px',threshold:.05});
+    els.forEach(function(e,i){e.classList.add('rv');var sib=e.parentElement?[].indexOf.call(e.parentElement.children,e):0;e.style.setProperty('--d',Math.min(sib,5)*60+'ms');io.observe(e)});
+    var vio=new IntersectionObserver(function(es){es.forEach(function(x){var v=x.target;if(x.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()})},{threshold:.25});
+    document.querySelectorAll('video.lz').forEach(function(v){vio.observe(v)});
+  }
+})();
+</script>
 </body>
 </html>
