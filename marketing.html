@@ -3,234 +3,306 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marketing: Dom Partner Growth</title>
-<meta name="description" content="Tráfego, conteúdo e branding puxando na mesma direção. Planos Tração, Performance e Domínio, além de projetos pontuais.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Marketing: Dom Partner Growth">
-<meta property="og:description" content="Tráfego, conteúdo e branding puxando na mesma direção. Planos Tração, Performance e Domínio, além de projetos pontuais.">
-<meta property="og:image" content="hero-time-marketing.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<script>document.documentElement.classList.add("js");</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="style.css">
+<title>Dom Partner Growth: Marketing (prévia)</title>
+<style>
+@font-face{font-family:"Manrope";font-weight:400;font-display:swap;src:url(fonts/manrope-400.woff2) format("woff2")}
+@font-face{font-family:"Manrope";font-weight:500;font-display:swap;src:url(fonts/manrope-500.woff2) format("woff2")}
+@font-face{font-family:"Manrope";font-weight:600;font-display:swap;src:url(fonts/manrope-600.woff2) format("woff2")}
+@font-face{font-family:"Geist Mono";font-weight:500;font-display:swap;src:url(fonts/geist-mono-500.woff2) format("woff2")}
+
+:root{
+  --ink:#050F0A;
+  --ink-2:#0B1912;
+  --paper:#F1ECDF;
+  --cream:#EFE9DC;
+  --gold:#C9A227;
+  --gold-soft:#E4C567;
+  --bronze:#8C5A17;
+  --line-d:rgba(239,233,220,.14);
+  --line-l:rgba(5,15,10,.16);
+  --pad:clamp(24px,5.6vw,80px);
+  --max:1280px;
+  --sans:"Manrope",system-ui,sans-serif;
+  --mono:"Geist Mono",ui-monospace,monospace;
+  --out:cubic-bezier(.23,1,.32,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--ink);overflow-x:clip;scroll-behavior:smooth}
+body{background:var(--ink);color:var(--cream);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;min-width:320px;overflow-x:clip}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+
+.t-label{display:flex;align-items:center;gap:14px;font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gold-soft)}
+.t-label::before{content:"";width:28px;height:1px;background:currentColor}
+.t-title{font-family:var(--sans);font-weight:600;text-transform:uppercase;letter-spacing:-.055em;line-height:.95;font-size:clamp(38px,5.4vw,78px)}
+.t-lead{font-size:clamp(17px,1.4vw,20px);max-width:44ch;opacity:.78}
+
+.btn{display:inline-flex;align-items:center;gap:28px;padding:15px 18px;border-radius:4px;font:500 11.5px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid transparent;transition:background-color .2s ease,transform .2s var(--out),color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+.btn .ar{font-size:15px;letter-spacing:0}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:var(--gold-soft)}
+.btn-dark{background:var(--ink);color:var(--cream)}
+.btn-line-d{border-color:rgba(239,233,220,.45);color:var(--cream)}
+.btn-line-d:hover{background:var(--cream);color:var(--ink)}
+
+/* MENU */
+.nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;width:min(1180px,calc(100% - 32px));
+  display:flex;align-items:center;gap:8px;padding:9px 10px 9px 24px;border-radius:999px;
+  background:rgba(6,16,11,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line-d)}
+.nav .brand img{height:28px;width:auto}
+.nav ul{list-style:none;display:flex;gap:4px;margin:0 auto}
+.nav li a{display:block;padding:12px 15px;font:500 13.5px/1 var(--sans);color:rgba(239,233,220,.72);transition:color .15s}
+.nav li a:hover{color:var(--cream)}
+.nav .cta{white-space:nowrap;padding:14px 20px;border-radius:999px;background:var(--gold);color:var(--ink);font:500 11.5px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase}
+
+/* ============ SEÇÕES ============ */
+.content-flow{position:relative;z-index:5;background:var(--ink)}
+.sec{padding:clamp(80px,9vw,130px) 0;position:relative}
+.sec.light{background:var(--paper);color:var(--ink)}
+.sec.light .t-label{color:var(--bronze)}
+.sec.light .t-lead{opacity:.8}
+.sec .t-title{margin:22px 0 22px}
+
+.about{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,7vw,110px);align-items:center}
+.about .t-lead{margin-bottom:34px}
+.mini{display:flex;margin-top:54px;border-top:1px solid var(--line-l)}
+.mini div{padding:22px 34px 0 0}
+.mini div + div{padding-left:34px;border-left:1px solid var(--line-l)}
+.mini b{display:block;white-space:nowrap;font:500 34px/1 var(--sans);letter-spacing:-.05em}
+.mini span{display:block;font:500 11.5px/1.3 var(--mono);text-transform:uppercase;margin-top:10px;opacity:.65}
+.photo{position:relative;padding:0 0 28px 28px}
+.photo::before{content:"";position:absolute;left:0;bottom:0;right:28px;top:28px;border:1px solid var(--line-l)}
+.photo img{position:relative;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;filter:grayscale(.2)}
+
+.method-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
+.method-head .t-lead{margin:0}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);margin-top:64px;border-top:1px solid var(--line-d)}
+.trio article{padding:34px 36px 6px 0}
+.trio article + article{padding-left:36px;border-left:1px solid var(--line-d)}
+.trio .n,.front .n,.res .n{font:500 11.5px/1 var(--mono);letter-spacing:.08em;color:var(--gold-soft)}
+.trio h3{font:600 clamp(28px,3vw,42px)/1 var(--sans);text-transform:uppercase;letter-spacing:-.055em;margin:18px 0 14px}
+.trio p{opacity:.72;max-width:26ch}
+.method-foot{margin-top:56px;display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.method-foot p{font:500 12px/1.4 var(--mono);letter-spacing:.03em;text-transform:uppercase;opacity:.8}
+
+.fronts{margin-top:56px;border-top:1px solid var(--line-l)}
+.front{display:grid;grid-template-columns:70px 1.1fr 1fr 190px;gap:24px;align-items:center;padding:30px 0;border-bottom:1px solid var(--line-l);transition:padding .25s var(--out)}
+.front:hover{padding-left:14px}
+.front .n{color:var(--bronze)}
+.front h3{font:600 clamp(32px,4.2vw,60px)/.95 var(--sans);text-transform:uppercase;letter-spacing:-.06em}
+.front p{max-width:34ch;opacity:.78}
+.front .th{height:112px;overflow:hidden;border-radius:56px}
+.front .th img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);transition:filter .3s,transform .4s var(--out)}
+.front:hover .th img{filter:none;transform:scale(1.06)}
+
+.res{display:grid;grid-template-columns:repeat(3,1fr);margin-top:64px;border-top:1px solid var(--line-d)}
+.res article{padding:38px 36px 0 0}
+.res article + article{padding-left:36px;border-left:1px solid var(--line-d)}
+.res b{display:block;font:500 clamp(52px,6.2vw,92px)/.95 var(--sans);letter-spacing:-.065em;color:var(--gold-soft)}
+.res p{margin-top:20px;max-width:28ch;opacity:.78}
+.res-foot{margin-top:60px}
+.logos{margin-top:84px;padding-top:34px;border-top:1px solid var(--line-d)}
+.logos small{display:block;font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.55;margin-bottom:26px}
+.logos ul{list-style:none;display:grid;grid-template-columns:repeat(6,1fr);gap:26px 34px;align-items:center}
+.logos img{height:34px;width:auto;max-width:100%;object-fit:contain;filter:brightness(0) invert(.92);opacity:.6}
+
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);margin-top:58px;border-top:1px solid var(--line-l);counter-reset:s}
+.steps li{padding:30px 28px 8px 0;counter-increment:s}
+.steps li + li{padding-left:28px;border-left:1px solid var(--line-l)}
+.steps li::before{content:counter(s);display:block;font:500 clamp(64px,7vw,104px)/.9 var(--sans);letter-spacing:-.07em;color:var(--bronze);margin-bottom:22px}
+.steps h3{font:600 22px/1.05 var(--sans);text-transform:uppercase;letter-spacing:-.04em;margin-bottom:10px}
+.steps p{opacity:.78;max-width:20ch}
+.map-foot{margin-top:56px}
+
+.close{text-align:center;padding:clamp(100px,12vw,170px) 0;background:var(--ink)}
+.close .t-title{font-size:clamp(36px,5.4vw,80px);max-width:13em;margin:0 auto 40px}
+.close .alt{margin-top:26px;font-size:14px;opacity:.66}
+.close .alt a{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--gold)}
+
+footer{background:var(--ink);border-top:1px solid var(--line-d);padding:64px 0 34px;position:relative;z-index:5}
+.foot{display:grid;grid-template-columns:1.4fr .7fr .7fr .8fr;gap:40px}
+.foot img{height:34px;margin-bottom:20px}
+.foot p{font-size:14.5px;opacity:.66;max-width:34ch}
+.foot h4{font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px;color:var(--gold-soft)}
+.foot a{display:block;font-size:14.5px;opacity:.7;margin-bottom:11px}
+.foot a:hover{opacity:1;color:var(--gold-soft)}
+.copy{margin-top:54px;padding-top:24px;border-top:1px solid var(--line-d);font-size:13px;opacity:.5}
+
+@media(max-width:900px){
+  .nav ul{display:none}.nav{padding:7px 7px 7px 18px;justify-content:space-between}
+  .nav .brand img{height:22px}.nav .cta{padding:12px 14px;font-size:10px}
+  .about{grid-template-columns:1fr}
+  .trio,.res,.steps{grid-template-columns:1fr}
+  .trio article,.trio article + article,.res article,.res article + article,.steps li,.steps li + li{padding:28px 0 30px;border-left:none;border-bottom:1px solid var(--line-d)}
+  .steps li,.steps li + li{border-bottom-color:var(--line-l)}
+  .front{grid-template-columns:44px 1fr;gap:10px 16px}
+  .front p,.front .th{grid-column:2}
+  .front .th{height:130px}
+  .logos ul{grid-template-columns:repeat(3,1fr)}
+  .foot{grid-template-columns:1fr 1fr}.foot > div:first-child{grid-column:1 / -1}
+  .mini div{padding-right:18px}.mini div + div{padding-left:18px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+
+.nav li a.on{color:var(--cream)}
+.phero{padding:clamp(132px,15vw,180px) 0 0;background:var(--ink)}
+.phero .g{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(32px,5vw,80px);align-items:end}
+.phero h1{font:600 clamp(56px,9.2vw,148px)/.84 var(--sans);letter-spacing:-.075em;text-transform:uppercase;margin:26px 0 28px}
+.phero .t-lead{margin-bottom:34px}
+.phero .cap{aspect-ratio:1.45;border-radius:999px;overflow:hidden;position:relative;margin-bottom:6px}
+.phero .cap img{width:100%;height:100%;object-fit:cover;object-position:50% 35%;filter:grayscale(.6) contrast(1.05)}
+.phero .cap::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,15,10,.05),rgba(5,15,10,.5))}
+.pstrip{margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--line-d)}
+.pstrip .wrap{display:grid;grid-template-columns:repeat(2,1fr)}
+.pstrip .wrap>div{padding:30px 0 34px}
+.pstrip .wrap>div + div{padding-left:34px;border-left:1px solid var(--line-d)}
+.pstrip b{display:block;font:500 clamp(40px,5vw,72px)/.95 var(--sans);letter-spacing:-.06em;color:var(--gold-soft)}
+.pstrip span{display:block;margin-top:12px;font:500 11.5px/1.35 var(--mono);letter-spacing:.04em;text-transform:uppercase;opacity:.65;max-width:34ch}
+
+.rows{margin-top:52px;border-top:1px solid var(--line-l)}
+.row{display:grid;grid-template-columns:70px 1fr 1fr;gap:24px;align-items:baseline;padding:30px 0;border-bottom:1px solid var(--line-l)}
+.row .n{font:500 11.5px/1 var(--mono);letter-spacing:.08em;color:var(--bronze)}
+.row h3{font:600 clamp(26px,3.2vw,46px)/1 var(--sans);letter-spacing:-.055em;text-transform:uppercase}
+.row p{max-width:34ch;opacity:.78}
+
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:60px;border-top:1px solid var(--line-d)}
+.plans article{padding:34px 36px 8px 0}
+.plans article + article{padding-left:36px;border-left:1px solid var(--line-d)}
+.plans .n{font:500 11.5px/1 var(--mono);letter-spacing:.08em;color:var(--gold-soft)}
+.plans h3{font:600 clamp(26px,3.1vw,46px)/1 var(--sans);text-transform:uppercase;letter-spacing:-.06em;margin:18px 0 14px}
+.plans p{opacity:.74;max-width:24ch}
+.plans-foot{margin-top:52px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.plans-foot small{font:500 11.5px/1.4 var(--mono);letter-spacing:.04em;text-transform:uppercase;opacity:.6}
+
+.list{margin-top:52px;border-top:1px solid var(--line-l)}
+.item{display:grid;grid-template-columns:1fr 1.2fr 40px;gap:24px;align-items:center;padding:26px 0;border-bottom:1px solid var(--line-l);transition:padding .25s var(--out)}
+.item:hover{padding-left:12px}
+.item h3{font:600 clamp(24px,2.8vw,40px)/1 var(--sans);letter-spacing:-.055em;text-transform:uppercase}
+.item p{opacity:.78;max-width:38ch}
+.item .ar{font-size:22px;text-align:right}
+
+.proof{display:grid;grid-template-columns:repeat(2,1fr);margin-top:56px;border-top:1px solid var(--line-d)}
+.proof article{padding:38px 36px 0 0}
+.proof article + article{padding-left:36px;border-left:1px solid var(--line-d)}
+.proof b{display:block;font:500 clamp(64px,8vw,128px)/.9 var(--sans);letter-spacing:-.07em;color:var(--gold-soft)}
+.proof small{display:block;margin-top:18px;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--gold-soft);opacity:.8}
+.proof p{margin-top:10px;max-width:32ch;opacity:.8}
+
+.big{border-top:1px solid var(--line-d)}
+.big:first-of-type{margin-top:56px}
+.big article{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,80px);align-items:center;padding:42px 0;border-bottom:1px solid var(--line-d)}
+.big b{font:500 clamp(60px,9vw,140px)/.9 var(--sans);letter-spacing:-.07em;color:var(--gold-soft);white-space:nowrap}
+.big small{display:block;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--gold-soft);opacity:.8;margin-bottom:12px}
+.big p{max-width:36ch;font-size:clamp(17px,1.5vw,21px);opacity:.85}
+
+@media(max-width:900px){
+  .phero .g{grid-template-columns:1fr}
+  .phero .cap{aspect-ratio:1.6}
+  .row{grid-template-columns:44px 1fr;gap:8px 16px}.row p{grid-column:2}
+  .plans,.proof{grid-template-columns:1fr}
+  .plans article,.plans article + article,.proof article,.proof article + article{padding:28px 0 30px;border-left:none;border-bottom:1px solid var(--line-d)}
+  .item{grid-template-columns:1fr 30px;gap:8px 16px}.item p{grid-column:1}.item .ar{grid-row:1;grid-column:2}
+  .big article{grid-template-columns:1fr;gap:12px}
+  .pstrip .wrap>div + div{padding-left:18px}
+}
+</style>
 </head>
 <body>
-
-
-<header id="site-header" class="site-header"></header>
-
+<nav class="nav" aria-label="Principal">
+  <a class="brand" href="index.html"><img src="img/logo-white.png" alt="Dom Partner Growth"></a>
+  <ul><li><a href="index.html#metodo">Método</a></li><li><a href="index.html#quem">Quem somos</a></li><li><a href="marketing.html" class="on">Serviços</a></li><li><a href="cases.html">Cases</a></li><li><a href="#">Daniel Gualberto</a></li></ul>
+  <a class="cta" href="#fim">Agende um diagnóstico</a>
+</nav>
 <main>
 
-  <section class="phero phero--stats">
-    <div class="phero-media" aria-hidden="true"><img src="hero-time-marketing.jpg" alt="" loading="eager" fetchpriority="high" style="--pos:60% 40%;"></div>
-    <div class="phero-in">
-      <div class="phero-copy">
-        <span class="phero-kicker">Frente 02</span>
-        <h1 class="phero-title phero-title--word">Marketing</h1>
-        <p class="phero-sub">Tráfego, conteúdo e branding puxando na mesma direção: a meta do seu negócio.</p>
-        <div class="phero-actions">
-          <a href="contato.html" class="btn btn-primary">Diagnosticar meu marketing</a>
-        </div>
-      </div>
-      <ul class="phero-stats">
-        <li><span class="n">198,2x</span><span class="t">Retorno sobre mídia em conta ativa de cliente Dom</span></li>
-        <li><span class="n">+956%</span><span class="t">Alcance de marca em 13 meses</span></li>
-      </ul>
+<header class="phero">
+  <div class="wrap g">
+    <div>
+      <span class="t-label">Frente 02</span>
+      <h1>Marketing</h1>
+      <p class="t-lead">Tráfego, conteúdo e marca puxando na mesma direção.</p>
+      <a class="btn btn-gold" href="#fim">Agende um diagnóstico <span class="ar">↗</span></a>
     </div>
-  </section>
+    <div class="cap"><img src="img/hero-time-marketing.jpg" alt=""></div>
+  </div>
+  <div class="pstrip"><div class="wrap">
+    <div><b>198,2x</b><span>de retorno sobre a mídia investida, em uma conta de cliente</span></div>
+    <div><b>+1M</b><span>pessoas alcançadas por mês no Instagram de uma marca nossa</span></div>
+  </div></div>
+</header>
 
-  <!-- DOBRA 2 - A DOR -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow-num"><span class="n">01</span><span class="t">A realidade</span></span>
-        <h2>Anúncio rodando não é sinônimo de venda acontecendo.</h2>
-        <p>Muita empresa investe em mídia, atrai curioso e continua sem previsibilidade de faturamento. O problema raramente é falta de verba: é falta de estratégia por trás do investimento.</p>
-      </div>
-      <div class="card-grid">
-        <div class="nx-card reveal">
-          <span class="tag">Voz que não aparece</span>
-          <h3>Presença digital fraca</h3>
-          <p class="desc">Comunicação sem clareza não constrói autoridade, e sem autoridade o anúncio custa mais caro pra converter menos.</p>
-        </div>
-        <div class="nx-card reveal">
-          <span class="tag">Esforço sem retorno</span>
-          <h3>Curioso não é cliente</h3>
-          <p class="desc">Página que não converte atrai clique barato e contato ruim: o esforço de marketing não vira oportunidade real de negócio.</p>
-        </div>
-        <div class="nx-card reveal">
-          <span class="tag">Sem inteligência de dados</span>
-          <h3>Decisão no achismo</h3>
-          <p class="desc">Sem um painel que mostra de onde vem cada venda, ninguém sabe qual criativo, canal ou público está de fato trazendo retorno.</p>
-        </div>
-      </div>
+<section class="sec light" id="realidade">
+  <div class="wrap">
+    <span class="t-label">A realidade</span>
+    <h2 class="t-title">Anúncio rodando<br>não é venda acontecendo.</h2>
+    <div class="rows">
+      <div class="row"><span class="n">01</span><h3>Voz que não aparece</h3><p>Sem autoridade, o anúncio custa mais e converte menos.</p></div>
+      <div class="row"><span class="n">02</span><h3>Curioso não é cliente</h3><p>Página que não converte traz clique barato e contato ruim.</p></div>
+      <div class="row"><span class="n">03</span><h3>Decisão no achismo</h3><p>Sem painel, ninguém sabe de onde vem cada venda.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section section--alt">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow-num"><span class="n">02</span><span class="t">O método</span></span>
-        <h2>Um plano pra cada momento do negócio.</h2>
-        <p>Gestão contínua de tráfego, conteúdo e branding. A profundidade muda conforme o plano, mas a régua de qualidade é sempre a mesma.</p>
-      </div>
-      <div class="plan-grid">
-        <div class="plan-card plan-card--scope reveal">
-          <span class="tag">Plano</span>
-          <h3>Tração</h3>
-          <p class="desc">Pra quem hoje depende de indicação e precisa de um fluxo previsível de clientes novos. Constrói a fundação digital: tráfego, conteúdo e relatório caminhando juntos, mês a mês.</p>
-          <ul class="plan-list">
-            <li>Setup e planejamento estratégico inicial</li>
-            <li>Gestão de tráfego pago (Google e Meta)</li>
-            <li>12 vídeos por mês, produzidos pela Papin REC (3 por semana)</li>
-            <li>8 carrosséis por mês (2 por semana), 20 publicações no total</li>
-            <li>25 peças por mês para Stories e WhatsApp</li>
-            <li>Relatório mensal e reunião de alinhamento</li>
-          </ul>
-          <a href="contato.html" class="btn btn-ghost">Falar sobre o Tração</a>
-        </div>
-        <div class="plan-card plan-card--scope reveal">
-          <span class="tag">Plano</span>
-          <h3>Performance</h3>
-          <p class="desc">Pra quem já investe em marketing e quer saber, com dado, quanto do resultado veio dele. Soma ao Tração o branding e o CRM com IA, pra marca e o follow-up crescerem junto com a operação.</p>
-          <ul class="plan-list">
-            <li class="is-lead">Tudo do Tração, com 12 carrosséis por mês (24 publicações no total)</li>
-            <li>Projeto de branding e posicionamento de marca</li>
-            <li>Implementação de CRM e automação com IA, pela Yzza</li>
-          </ul>
-          <a href="contato.html" class="btn btn-ghost">Falar sobre o Performance</a>
-        </div>
-        <div class="plan-card plan-card--scope reveal">
-          <span class="tag">Plano</span>
-          <h3>Domínio</h3>
-          <p class="desc">Pra quem já está no topo e precisa de um olhar de fora sobre o mercado. É o braço direito estratégico da operação: o marketing completo com a visão do CEO da Dom.</p>
-          <ul class="plan-list">
-            <li class="is-lead">Tudo do Performance</li>
-            <li>Consultoria estratégica de negócios direto com o CEO</li>
-            <li>Análise competitiva e de mercado</li>
-            <li>1 landing page por mês</li>
-          </ul>
-          <a href="contato.html" class="btn btn-ghost">Falar sobre o Domínio</a>
-        </div>
-      </div>
-      <p class="plan-footnote reveal">Valores e condições de cada plano vão na proposta.</p>
+<section class="sec" id="planos">
+  <div class="wrap">
+    <span class="t-label">O método</span>
+    <h2 class="t-title">Um plano para cada<br>momento do negócio.</h2>
+    <div class="plans">
+      <article><span class="n">01</span><h3>Tração</h3><p>Um fluxo previsível de clientes novos.</p></article>
+      <article><span class="n">02</span><h3>Performance</h3><p>Marketing com dado, marca e CRM com IA.</p></article>
+      <article><span class="n">03</span><h3>Domínio</h3><p>Marketing completo com a visão do CEO da Dom.</p></article>
     </div>
-  </section>
+    <div class="plans-foot"><a class="btn btn-line-d" href="#fim">Qual plano é o meu? <span class="ar">↗</span></a><small>Valores e condições vão na proposta.</small></div>
+  </div>
+</section>
 
-  <section class="section">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Projetos pontuais</span>
-        <h2>Quando o que falta é uma entrega específica.</h2>
-      </div>
-      <div class="shot-grid">
-        <div class="shot-card reveal">
-          <div class="shot-media shot-media--landscape">
-            <img src="site-institucional.jpg" alt="Site institucional da própria Dom Partner Growth" loading="lazy">
-          </div>
-          <div class="shot-body">
-            <span class="shot-tag">Projeto</span>
-            <h3 class="shot-title">Site Institucional</h3>
-            <p class="shot-desc">Site que apresenta a empresa com credibilidade: estrutura, copy e design pensados pra conversão.</p>
-          </div>
-        </div>
-        <div class="shot-card reveal">
-          <div class="shot-media shot-media--landscape">
-            <img src="landing-page.jpg" alt="Página de contato focada em conversão" loading="lazy">
-          </div>
-          <div class="shot-body">
-            <span class="shot-tag">Projeto</span>
-            <h3 class="shot-title">Landing Page</h3>
-            <p class="shot-desc">Página focada em um único objetivo: converter visitante em contato ou venda.</p>
-          </div>
-        </div>
-        <a class="shot-card reveal" href="loja-online.html">
-          <div class="shot-media shot-media--landscape">
-            <img src="joy-2.jpg" alt="Design da loja online Joy Variedades" loading="lazy">
-          </div>
-          <div class="shot-body">
-            <span class="shot-tag">Projeto</span>
-            <h3 class="shot-title">Loja Online</h3>
-            <p class="shot-desc">Loja virtual estruturada de ponta a ponta, com integração de marketplace quando faz sentido.</p>
-            <span class="more">Ver mais →</span>
-          </div>
-        </a>
-        <a class="shot-card reveal" href="gestao-anuncios.html">
-          <div class="shot-media shot-media--wide">
-            <img src="funil.jpg" alt="Funil de conversão de mídia paga" loading="lazy">
-          </div>
-          <div class="shot-body">
-            <span class="shot-tag">Serviço avulso</span>
-            <h3 class="shot-title">Gestão de Anúncios</h3>
-            <p class="shot-desc">Gestão de tráfego pago isolada, pra quem já tem conteúdo e marca e precisa de resultado em mídia paga.</p>
-            <span class="more">Ver mais →</span>
-          </div>
-        </a>
-        <a class="shot-card reveal" href="branding.html">
-          <div class="shot-media shot-media--landscape">
-            <img src="evoluc-1.jpg" alt="Brand Book Evoluc Construtora" loading="lazy">
-          </div>
-          <div class="shot-body">
-            <span class="shot-tag">Posicionamento</span>
-            <h3 class="shot-title">Branding</h3>
-            <p class="shot-desc">A Bíblia da sua marca: cases reais de posicionamento pra marcas pessoais e corporativas.</p>
-            <span class="more">Ver mais →</span>
-          </div>
-        </a>
-      </div>
+<section class="sec light" id="pontuais">
+  <div class="wrap">
+    <span class="t-label">Projetos pontuais</span>
+    <h2 class="t-title">Quando falta uma<br>entrega específica.</h2>
+    <div class="list">
+      <a class="item" href="#"><h3>Site institucional</h3><p>A empresa apresentada com credibilidade.</p><span class="ar">↗</span></a>
+      <a class="item" href="#"><h3>Landing page</h3><p>Uma página, um objetivo: gerar contato.</p><span class="ar">↗</span></a>
+      <a class="item" href="#"><h3>Loja online</h3><p>Loja virtual pronta, de ponta a ponta.</p><span class="ar">↗</span></a>
+      <a class="item" href="#"><h3>Gestão de anúncios</h3><p>Mídia paga isolada, para quem já tem marca e conteúdo.</p><span class="ar">↗</span></a>
+      <a class="item" href="#"><h3>Branding</h3><p>Posicionamento de marca com cases reais.</p><span class="ar">↗</span></a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- DOBRA - PROVA SOCIAL -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow-num"><span class="n">03</span><span class="t">Prova social</span></span>
-        <h2>Números que sustentam a estratégia.</h2>
-      </div>
-      <div class="case-grid--pro">
-        <div class="case-card--pro reveal">
-          <div class="ccp-inner">
-            <div class="ccp-top">
-              <div class="ccp-avatar">I</div>
-              <span class="ccp-segment">Incorporadora parceira</span>
-            </div>
-            <span class="ccp-number">198,2x</span>
-            <span class="ccp-metric">de retorno sobre a mídia investida, em 8 meses de conta ativa com mídia, branding e CRM integrados</span>
-            <p class="ccp-quote">R$19,43 milhões faturados no período, com 94% dos contatos que viraram cliente vindos do Facebook.</p>
-          </div>
-        </div>
-        <div class="case-card--pro reveal">
-          <div class="ccp-inner">
-            <div class="ccp-top">
-              <div class="ccp-avatar">R</div>
-              <span class="ccp-segment">Rede educacional parceira</span>
-            </div>
-            <span class="ccp-number">500</span>
-            <span class="ccp-metric">matrículas realizadas via campanha de mídia paga estruturada</span>
-            <p class="ccp-quote">Investimento de 12 meses que voltou mais de 20 vezes, com estratégia por trás de cada campanha.</p>
-          </div>
-        </div>
-      </div>
+<section class="sec" id="prova">
+  <div class="wrap">
+    <span class="t-label">Prova</span>
+    <h2 class="t-title">Números que sustentam.</h2>
+    <div class="proof">
+      <article><b>198,2x</b><small>Incorporadora parceira</small><p>de retorno sobre a mídia investida, em 8 meses, com mídia, marca e CRM juntos.</p></article>
+      <article><b>500</b><small>Rede educacional parceira</small><p>matrículas fechadas por campanha de mídia, em 12 meses.</p></article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section section--tight">
-    <div class="container">
-      <div class="cta-banner reveal">
-        <h2>Qual plano faz sentido pro seu momento?</h2>
-        <p>Conta pra gente onde você está hoje, a gente mostra exatamente o caminho até esse tipo de número.</p>
-        <div class="hero-actions">
-          <a href="contato.html" class="btn btn-primary">Falar com a Dom</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
+<section class="close" id="fim">
+  <div class="wrap">
+    <h2 class="t-title">Vamos descobrir o próximo passo da sua empresa.</h2>
+    <a class="btn btn-gold" href="#">Agende um diagnóstico <span class="ar">↗</span></a>
+    <p class="alt">Ou chame no <a href="#">WhatsApp</a>.</p>
+  </div>
+</section>
 </main>
-
-<footer id="site-footer" class="site-footer"></footer>
-
-<script src="script.js"></script>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><img src="img/logo-white.png" alt="Dom Partner Growth"><p>Marketing atrai. A nossa visão vende.</p></div>
+      <div><h4>Dom</h4><a href="#">Método</a><a href="#">Quem somos</a><a href="#">Cases</a><a href="#">Daniel Gualberto</a></div>
+      <div><h4>Frentes</h4><a href="#">Comercial</a><a href="#">Marketing</a><a href="#">Produtora</a><a href="#">Inteligência</a></div>
+      <div><h4>Contato</h4><a href="#">WhatsApp</a><a href="#">Agende um diagnóstico</a></div>
+    </div>
+    <p class="copy">© 2026 Dom Partner Growth. Todos os direitos reservados.</p>
+  </div>
+</footer>
 </body>
 </html>

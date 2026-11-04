@@ -3,269 +3,282 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cases: Resultados Reais da Dom Partner Growth</title>
-<meta name="description" content="Cases reais do ecossistema Dom Partner Growth: faturamento, retorno sobre investimento, alcance e crescimento auditáveis, com cliente, período e o que foi feito em cada um.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Cases: Resultados Reais da Dom Partner Growth">
-<meta property="og:description" content="Cases reais do ecossistema Dom Partner Growth: faturamento, retorno sobre investimento, alcance e crescimento auditáveis, com cliente, período e o que foi feito em cada um.">
-<meta property="og:image" content="case-construtoras.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<script>document.documentElement.classList.add("js");</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="style.css">
+<title>Dom Partner Growth: Cases (prévia)</title>
+<style>
+@font-face{font-family:"Manrope";font-weight:400;font-display:swap;src:url(fonts/manrope-400.woff2) format("woff2")}
+@font-face{font-family:"Manrope";font-weight:500;font-display:swap;src:url(fonts/manrope-500.woff2) format("woff2")}
+@font-face{font-family:"Manrope";font-weight:600;font-display:swap;src:url(fonts/manrope-600.woff2) format("woff2")}
+@font-face{font-family:"Geist Mono";font-weight:500;font-display:swap;src:url(fonts/geist-mono-500.woff2) format("woff2")}
+
+:root{
+  --ink:#050F0A;
+  --ink-2:#0B1912;
+  --paper:#F1ECDF;
+  --cream:#EFE9DC;
+  --gold:#C9A227;
+  --gold-soft:#E4C567;
+  --bronze:#8C5A17;
+  --line-d:rgba(239,233,220,.14);
+  --line-l:rgba(5,15,10,.16);
+  --pad:clamp(24px,5.6vw,80px);
+  --max:1280px;
+  --sans:"Manrope",system-ui,sans-serif;
+  --mono:"Geist Mono",ui-monospace,monospace;
+  --out:cubic-bezier(.23,1,.32,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--ink);overflow-x:clip;scroll-behavior:smooth}
+body{background:var(--ink);color:var(--cream);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;min-width:320px;overflow-x:clip}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+
+.t-label{display:flex;align-items:center;gap:14px;font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gold-soft)}
+.t-label::before{content:"";width:28px;height:1px;background:currentColor}
+.t-title{font-family:var(--sans);font-weight:600;text-transform:uppercase;letter-spacing:-.055em;line-height:.95;font-size:clamp(38px,5.4vw,78px)}
+.t-lead{font-size:clamp(17px,1.4vw,20px);max-width:44ch;opacity:.78}
+
+.btn{display:inline-flex;align-items:center;gap:28px;padding:15px 18px;border-radius:4px;font:500 11.5px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid transparent;transition:background-color .2s ease,transform .2s var(--out),color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+.btn .ar{font-size:15px;letter-spacing:0}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:var(--gold-soft)}
+.btn-dark{background:var(--ink);color:var(--cream)}
+.btn-line-d{border-color:rgba(239,233,220,.45);color:var(--cream)}
+.btn-line-d:hover{background:var(--cream);color:var(--ink)}
+
+/* MENU */
+.nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;width:min(1180px,calc(100% - 32px));
+  display:flex;align-items:center;gap:8px;padding:9px 10px 9px 24px;border-radius:999px;
+  background:rgba(6,16,11,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line-d)}
+.nav .brand img{height:28px;width:auto}
+.nav ul{list-style:none;display:flex;gap:4px;margin:0 auto}
+.nav li a{display:block;padding:12px 15px;font:500 13.5px/1 var(--sans);color:rgba(239,233,220,.72);transition:color .15s}
+.nav li a:hover{color:var(--cream)}
+.nav .cta{white-space:nowrap;padding:14px 20px;border-radius:999px;background:var(--gold);color:var(--ink);font:500 11.5px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase}
+
+/* ============ SEÇÕES ============ */
+.content-flow{position:relative;z-index:5;background:var(--ink)}
+.sec{padding:clamp(80px,9vw,130px) 0;position:relative}
+.sec.light{background:var(--paper);color:var(--ink)}
+.sec.light .t-label{color:var(--bronze)}
+.sec.light .t-lead{opacity:.8}
+.sec .t-title{margin:22px 0 22px}
+
+.about{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,7vw,110px);align-items:center}
+.about .t-lead{margin-bottom:34px}
+.mini{display:flex;margin-top:54px;border-top:1px solid var(--line-l)}
+.mini div{padding:22px 34px 0 0}
+.mini div + div{padding-left:34px;border-left:1px solid var(--line-l)}
+.mini b{display:block;white-space:nowrap;font:500 34px/1 var(--sans);letter-spacing:-.05em}
+.mini span{display:block;font:500 11.5px/1.3 var(--mono);text-transform:uppercase;margin-top:10px;opacity:.65}
+.photo{position:relative;padding:0 0 28px 28px}
+.photo::before{content:"";position:absolute;left:0;bottom:0;right:28px;top:28px;border:1px solid var(--line-l)}
+.photo img{position:relative;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;filter:grayscale(.2)}
+
+.method-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
+.method-head .t-lead{margin:0}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);margin-top:64px;border-top:1px solid var(--line-d)}
+.trio article{padding:34px 36px 6px 0}
+.trio article + article{padding-left:36px;border-left:1px solid var(--line-d)}
+.trio .n,.front .n,.res .n{font:500 11.5px/1 var(--mono);letter-spacing:.08em;color:var(--gold-soft)}
+.trio h3{font:600 clamp(28px,3vw,42px)/1 var(--sans);text-transform:uppercase;letter-spacing:-.055em;margin:18px 0 14px}
+.trio p{opacity:.72;max-width:26ch}
+.method-foot{margin-top:56px;display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.method-foot p{font:500 12px/1.4 var(--mono);letter-spacing:.03em;text-transform:uppercase;opacity:.8}
+
+.fronts{margin-top:56px;border-top:1px solid var(--line-l)}
+.front{display:grid;grid-template-columns:70px 1.1fr 1fr 190px;gap:24px;align-items:center;padding:30px 0;border-bottom:1px solid var(--line-l);transition:padding .25s var(--out)}
+.front:hover{padding-left:14px}
+.front .n{color:var(--bronze)}
+.front h3{font:600 clamp(32px,4.2vw,60px)/.95 var(--sans);text-transform:uppercase;letter-spacing:-.06em}
+.front p{max-width:34ch;opacity:.78}
+.front .th{height:112px;overflow:hidden;border-radius:56px}
+.front .th img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);transition:filter .3s,transform .4s var(--out)}
+.front:hover .th img{filter:none;transform:scale(1.06)}
+
+.res{display:grid;grid-template-columns:repeat(3,1fr);margin-top:64px;border-top:1px solid var(--line-d)}
+.res article{padding:38px 36px 0 0}
+.res article + article{padding-left:36px;border-left:1px solid var(--line-d)}
+.res b{display:block;font:500 clamp(52px,6.2vw,92px)/.95 var(--sans);letter-spacing:-.065em;color:var(--gold-soft)}
+.res p{margin-top:20px;max-width:28ch;opacity:.78}
+.res-foot{margin-top:60px}
+.logos{margin-top:84px;padding-top:34px;border-top:1px solid var(--line-d)}
+.logos small{display:block;font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.55;margin-bottom:26px}
+.logos ul{list-style:none;display:grid;grid-template-columns:repeat(6,1fr);gap:26px 34px;align-items:center}
+.logos img{height:34px;width:auto;max-width:100%;object-fit:contain;filter:brightness(0) invert(.92);opacity:.6}
+
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);margin-top:58px;border-top:1px solid var(--line-l);counter-reset:s}
+.steps li{padding:30px 28px 8px 0;counter-increment:s}
+.steps li + li{padding-left:28px;border-left:1px solid var(--line-l)}
+.steps li::before{content:counter(s);display:block;font:500 clamp(64px,7vw,104px)/.9 var(--sans);letter-spacing:-.07em;color:var(--bronze);margin-bottom:22px}
+.steps h3{font:600 22px/1.05 var(--sans);text-transform:uppercase;letter-spacing:-.04em;margin-bottom:10px}
+.steps p{opacity:.78;max-width:20ch}
+.map-foot{margin-top:56px}
+
+.close{text-align:center;padding:clamp(100px,12vw,170px) 0;background:var(--ink)}
+.close .t-title{font-size:clamp(36px,5.4vw,80px);max-width:13em;margin:0 auto 40px}
+.close .alt{margin-top:26px;font-size:14px;opacity:.66}
+.close .alt a{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--gold)}
+
+footer{background:var(--ink);border-top:1px solid var(--line-d);padding:64px 0 34px;position:relative;z-index:5}
+.foot{display:grid;grid-template-columns:1.4fr .7fr .7fr .8fr;gap:40px}
+.foot img{height:34px;margin-bottom:20px}
+.foot p{font-size:14.5px;opacity:.66;max-width:34ch}
+.foot h4{font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px;color:var(--gold-soft)}
+.foot a{display:block;font-size:14.5px;opacity:.7;margin-bottom:11px}
+.foot a:hover{opacity:1;color:var(--gold-soft)}
+.copy{margin-top:54px;padding-top:24px;border-top:1px solid var(--line-d);font-size:13px;opacity:.5}
+
+@media(max-width:900px){
+  .nav ul{display:none}.nav{padding:7px 7px 7px 18px;justify-content:space-between}
+  .nav .brand img{height:22px}.nav .cta{padding:12px 14px;font-size:10px}
+  .about{grid-template-columns:1fr}
+  .trio,.res,.steps{grid-template-columns:1fr}
+  .trio article,.trio article + article,.res article,.res article + article,.steps li,.steps li + li{padding:28px 0 30px;border-left:none;border-bottom:1px solid var(--line-d)}
+  .steps li,.steps li + li{border-bottom-color:var(--line-l)}
+  .front{grid-template-columns:44px 1fr;gap:10px 16px}
+  .front p,.front .th{grid-column:2}
+  .front .th{height:130px}
+  .logos ul{grid-template-columns:repeat(3,1fr)}
+  .foot{grid-template-columns:1fr 1fr}.foot > div:first-child{grid-column:1 / -1}
+  .mini div{padding-right:18px}.mini div + div{padding-left:18px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+
+.nav li a.on{color:var(--cream)}
+.phero{padding:clamp(132px,15vw,180px) 0 0;background:var(--ink)}
+.phero .g{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(32px,5vw,80px);align-items:end}
+.phero h1{font:600 clamp(56px,9.2vw,148px)/.84 var(--sans);letter-spacing:-.075em;text-transform:uppercase;margin:26px 0 28px}
+.phero .t-lead{margin-bottom:34px}
+.phero .cap{aspect-ratio:1.45;border-radius:999px;overflow:hidden;position:relative;margin-bottom:6px}
+.phero .cap img{width:100%;height:100%;object-fit:cover;object-position:50% 35%;filter:grayscale(.6) contrast(1.05)}
+.phero .cap::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,15,10,.05),rgba(5,15,10,.5))}
+.pstrip{margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--line-d)}
+.pstrip .wrap{display:grid;grid-template-columns:repeat(2,1fr)}
+.pstrip .wrap>div{padding:30px 0 34px}
+.pstrip .wrap>div + div{padding-left:34px;border-left:1px solid var(--line-d)}
+.pstrip b{display:block;font:500 clamp(40px,5vw,72px)/.95 var(--sans);letter-spacing:-.06em;color:var(--gold-soft)}
+.pstrip span{display:block;margin-top:12px;font:500 11.5px/1.35 var(--mono);letter-spacing:.04em;text-transform:uppercase;opacity:.65;max-width:34ch}
+
+.rows{margin-top:52px;border-top:1px solid var(--line-l)}
+.row{display:grid;grid-template-columns:70px 1fr 1fr;gap:24px;align-items:baseline;padding:30px 0;border-bottom:1px solid var(--line-l)}
+.row .n{font:500 11.5px/1 var(--mono);letter-spacing:.08em;color:var(--bronze)}
+.row h3{font:600 clamp(26px,3.2vw,46px)/1 var(--sans);letter-spacing:-.055em;text-transform:uppercase}
+.row p{max-width:34ch;opacity:.78}
+
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:60px;border-top:1px solid var(--line-d)}
+.plans article{padding:34px 36px 8px 0}
+.plans article + article{padding-left:36px;border-left:1px solid var(--line-d)}
+.plans .n{font:500 11.5px/1 var(--mono);letter-spacing:.08em;color:var(--gold-soft)}
+.plans h3{font:600 clamp(26px,3.1vw,46px)/1 var(--sans);text-transform:uppercase;letter-spacing:-.06em;margin:18px 0 14px}
+.plans p{opacity:.74;max-width:24ch}
+.plans-foot{margin-top:52px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.plans-foot small{font:500 11.5px/1.4 var(--mono);letter-spacing:.04em;text-transform:uppercase;opacity:.6}
+
+.list{margin-top:52px;border-top:1px solid var(--line-l)}
+.item{display:grid;grid-template-columns:1fr 1.2fr 40px;gap:24px;align-items:center;padding:26px 0;border-bottom:1px solid var(--line-l);transition:padding .25s var(--out)}
+.item:hover{padding-left:12px}
+.item h3{font:600 clamp(24px,2.8vw,40px)/1 var(--sans);letter-spacing:-.055em;text-transform:uppercase}
+.item p{opacity:.78;max-width:38ch}
+.item .ar{font-size:22px;text-align:right}
+
+.proof{display:grid;grid-template-columns:repeat(2,1fr);margin-top:56px;border-top:1px solid var(--line-d)}
+.proof article{padding:38px 36px 0 0}
+.proof article + article{padding-left:36px;border-left:1px solid var(--line-d)}
+.proof b{display:block;font:500 clamp(64px,8vw,128px)/.9 var(--sans);letter-spacing:-.07em;color:var(--gold-soft)}
+.proof small{display:block;margin-top:18px;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--gold-soft);opacity:.8}
+.proof p{margin-top:10px;max-width:32ch;opacity:.8}
+
+.big{border-top:1px solid var(--line-d)}
+.big:first-of-type{margin-top:56px}
+.big article{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,80px);align-items:center;padding:42px 0;border-bottom:1px solid var(--line-d)}
+.big b{font:500 clamp(60px,9vw,140px)/.9 var(--sans);letter-spacing:-.07em;color:var(--gold-soft);white-space:nowrap}
+.big small{display:block;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--gold-soft);opacity:.8;margin-bottom:12px}
+.big p{max-width:36ch;font-size:clamp(17px,1.5vw,21px);opacity:.85}
+
+@media(max-width:900px){
+  .phero .g{grid-template-columns:1fr}
+  .phero .cap{aspect-ratio:1.6}
+  .row{grid-template-columns:44px 1fr;gap:8px 16px}.row p{grid-column:2}
+  .plans,.proof{grid-template-columns:1fr}
+  .plans article,.plans article + article,.proof article,.proof article + article{padding:28px 0 30px;border-left:none;border-bottom:1px solid var(--line-d)}
+  .item{grid-template-columns:1fr 30px;gap:8px 16px}.item p{grid-column:1}.item .ar{grid-row:1;grid-column:2}
+  .big article{grid-template-columns:1fr;gap:12px}
+  .pstrip .wrap>div + div{padding-left:18px}
+}
+</style>
 </head>
 <body>
-
-<header id="site-header" class="site-header"></header>
-
+<nav class="nav" aria-label="Principal">
+  <a class="brand" href="index.html"><img src="img/logo-white.png" alt="Dom Partner Growth"></a>
+  <ul><li><a href="index.html#metodo">Método</a></li><li><a href="index.html#quem">Quem somos</a></li><li><a href="marketing.html">Serviços</a></li><li><a href="cases.html" class="on">Cases</a></li><li><a href="#">Daniel Gualberto</a></li></ul>
+  <a class="cta" href="#fim">Agende um diagnóstico</a>
+</nav>
 <main>
 
-  <section class="phero">
-    <div class="phero-media" aria-hidden="true"><img src="itaquera-poster.jpg" alt="" loading="eager" fetchpriority="high" style="--pos:50% 50%;"></div>
-    <div class="phero-in">
-      <div class="phero-copy">
-        <span class="phero-kicker">Cases</span>
-        <h1 class="phero-title">O que já entregamos, com número e período.</h1>
-        <p class="phero-sub">Uma seleção de cases do ecossistema Dom: cliente, período e o que foi feito em cada um. Números que dá pra conferir.</p>
-      </div>
+<header class="phero">
+  <div class="wrap g">
+    <div>
+      <span class="t-label">Cases</span>
+      <h1>Cases</h1>
+      <p class="t-lead">O que já entregamos, com número e período.</p>
+      <a class="btn btn-gold" href="#fim">Agende um diagnóstico <span class="ar">↗</span></a>
     </div>
-  </section>
+    <div class="cap"><img src="img/hero-clapperboard.jpg" alt=""></div>
+  </div>
+  <div style="height:clamp(56px,7vw,96px)"></div>
+</header>
 
-  <!-- CASES EM NÚMEROS -->
-  <section class="section" id="resultados">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow-num"><span class="n">01</span><span class="t">Em números</span></span>
-        <h2>Números que a gente prefere mostrar do que prometer.</h2>
-        <p>Cada card abaixo é um caso real do ecossistema Dom, com o resultado que entregamos.</p>
-      </div>
-      <div class="case-grid--pro">
-        <div class="case-card--pro reveal">
-          <div class="ccp-inner">
-            <div class="ccp-top">
-              <div class="ccp-avatar">C</div>
-              <span class="ccp-segment">Construtora parceira</span>
-            </div>
-            <span class="ccp-number">R$19,43M</span>
-            <span class="ccp-metric">faturados em 60 vendas (jan a ago/26), retorno de 198,2 vezes sobre a mídia investida no período</span>
-            <p class="ccp-quote">Resultado de anúncios e branding trabalhando juntos, com 94% dos contatos que viraram cliente vindos do Facebook.</p>
-          </div>
-        </div>
-        <div class="case-card--pro reveal">
-          <div class="ccp-inner">
-            <div class="ccp-top">
-              <div class="ccp-avatar">P</div>
-              <span class="ccp-segment">Pizzaria parceira · Gastronomia</span>
-            </div>
-            <span class="ccp-number">17,1x</span>
-            <span class="ccp-metric">de retorno sobre R$700 investidos em mídia, com nossa estratégia e a parceria da Anota.ai</span>
-            <p class="ccp-quote">R$700 viraram R$12 mil em vendas, e os seguidores saltaram de 750 para 2.248 com publicações e reels estratégicos.</p>
-          </div>
-        </div>
-        <div class="case-card--pro reveal">
-          <div class="ccp-inner">
-            <div class="ccp-top">
-              <div class="ccp-avatar">R</div>
-              <span class="ccp-segment">Rede educacional parceira</span>
-            </div>
-            <span class="ccp-number">500</span>
-            <span class="ccp-metric">matrículas fechadas via campanha de mídia estruturada</span>
-            <p class="ccp-quote">Mais de 20 vezes de retorno sobre o investimento em mídia no período de 12 meses.</p>
-          </div>
-        </div>
-        <div class="case-card--pro reveal">
-          <div class="ccp-inner">
-            <div class="ccp-top">
-              <div class="ccp-avatar">P</div>
-              <span class="ccp-segment">Papin REC · Produtora</span>
-            </div>
-            <span class="ccp-number">+15 milhões</span>
-            <span class="ccp-metric">visualizações geradas em +3 mil vídeos entregues</span>
-            <p class="ccp-quote">Autoridade visual construída pra empresas que decidiram parar de parecer menores do que são.</p>
-          </div>
-        </div>
-        <div class="case-card--pro reveal">
-          <div class="ccp-inner">
-            <div class="ccp-top">
-              <div class="ccp-avatar">E</div>
-              <span class="ccp-segment">Evoluc Construtora · Redes sociais</span>
-            </div>
-            <span class="ccp-number">+956%</span>
-            <span class="ccp-metric">de alcance mensal no Instagram em 13 meses (33,3 mil → 352 mil pessoas)</span>
-            <p class="ccp-quote">+166% de seguidores, +892% de engajamento e 15,2 milhões de impressões: audiência própria que continua rendendo depois de cada campanha.</p>
-          </div>
-        </div>
-      </div>
+<section class="sec" id="numeros" style="padding-top:0">
+  <div class="wrap">
+    <span class="t-label">Em números</span>
+    <div class="big">
+      <article><b>R$19,43M</b><div><small>Construtora parceira</small><p>faturados em 60 vendas, de janeiro a agosto de 2026. Retorno de 198,2 vezes sobre a mídia investida.</p></div></article>
+      <article><b>17,1x</b><div><small>Pizzaria parceira</small><p>R$700 em mídia viraram R$12 mil em vendas. Os seguidores foram de 750 para 2.248.</p></div></article>
+      <article><b>500</b><div><small>Rede educacional parceira</small><p>matrículas fechadas por campanha de mídia, em 12 meses, com mais de 20 vezes de retorno.</p></div></article>
+      <article><b>+40M</b><div><small>Papin REC, produtora</small><p>visualizações no último ano, com mais de 3 mil vídeos entregues.</p></div></article>
+      <article><b>+1M</b><div><small>Evoluc Construtora, redes sociais</small><p>pessoas alcançadas por mês no Instagram, partindo de 33,3 mil.</p></div></article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CASES EM DETALHE -->
-  <section class="section section--alt" id="em-detalhe">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow-num"><span class="n">02</span><span class="t">Em detalhe</span></span>
-        <h2>O que foi entregue, não só o resultado final.</h2>
-        <p>Sete projetos reais do ecossistema Dom, com <strong>o material de verdade de cada um</strong>: proposta, manual de marca ou a loja no ar, não só um print bonito. Clique em qualquer card pra ver o case completo.</p>
-      </div>
-
-      <div class="case-group">
-        <p class="case-group-label">Posicionamento de marca</p>
-        <div class="deck-grid">
-          <div class="deck-card reveal">
-            <a class="deck-slides-link" href="branding.html" aria-label="Ver case Wellington Guimarães completo">
-              <div class="deck-slides">
-                <img src="wguimaraes-1.jpg" alt="Capa da proposta W Guimarães Banking" loading="lazy">
-                <img src="wguimaraes-2.jpg" alt="Slide de estratégia W Guimarães Banking" loading="lazy">
-                <img src="wguimaraes-3.jpg" alt="Slide de execução W Guimarães Banking" loading="lazy">
-              </div>
-            </a>
-            <div class="deck-body">
-              <span class="deck-tag">Marca pessoal · Wellington Guimarães</span>
-              <h3 class="deck-title">O Ativo Mais Forte do Seu Império</h3>
-              <p class="deck-desc">Proposta de posicionamento pessoal que tira o Wellington da sombra do banco que leva seu nome e usa a própria história de superação como prova de confiança. A meta é medida em indicações e contatos reais.</p>
-              <div class="deck-actions">
-                <a class="deck-action" href="branding.html">Ver case completo →</a>
-                <a class="deck-action deck-action--muted" href="wguimaraes-proposta.pdf" target="_blank" rel="noopener">Ver a proposta (PDF) ↗</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="deck-card reveal">
-            <a class="deck-slides-link" href="branding.html" aria-label="Ver case Projeto Consigliere completo">
-              <div class="deck-slides">
-                <img src="consigliere-1.jpg" alt="Capa do Projeto Consigliere" loading="lazy">
-                <img src="consigliere-2.jpg" alt="Slide do arquétipo Consigliere" loading="lazy">
-                <img src="consigliere-3.jpg" alt="Slide de execução do Projeto Consigliere" loading="lazy">
-              </div>
-            </a>
-            <div class="deck-body">
-              <span class="deck-tag">Marca pessoal · Julio Machado, Confiatta</span>
-              <h3 class="deck-title">Projeto Consigliere</h3>
-              <p class="deck-desc">Posicionamento de autoridade pro Julio como o conselheiro por trás da decisão, com um ecossistema de conteúdo pra cada papel que ele ocupa pro cliente.</p>
-              <div class="deck-actions">
-                <a class="deck-action" href="branding.html">Ver case completo →</a>
-                <a class="deck-action deck-action--muted" href="consigliere-proposta-resumo.jpg" target="_blank" rel="noopener">Ver o resumo da estratégia ↗</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="deck-card reveal">
-            <a class="deck-slides-link" href="branding.html" aria-label="Ver case LabLaser completo">
-              <div class="deck-slides">
-                <img src="lablaser-1.jpg" alt="Capa A Era da Precisão LabLaser" loading="lazy">
-                <img src="lablaser-2.jpg" alt="Slide de diagnóstico LabLaser" loading="lazy">
-                <img src="lablaser-3.jpg" alt="Slide 01 Academia Tech and Mastery LabLaser" loading="lazy">
-              </div>
-            </a>
-            <div class="deck-body">
-              <span class="deck-tag">Clínica de laser · LabLaser</span>
-              <h3 class="deck-title">A Era da Precisão</h3>
-              <p class="deck-desc">Reposicionamento digital pra dominar o mercado de lasercirurgia, corrigindo o descompasso entre a autoridade técnica real da clínica e a comunicação que ela tinha nas redes.</p>
-              <div class="deck-actions">
-                <a class="deck-action" href="branding.html">Ver case completo →</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="deck-card reveal">
-            <a class="deck-slides-link" href="branding.html" aria-label="Ver case Evoluc Construtora completo">
-              <div class="deck-slides">
-                <img src="evoluc-1.jpg" alt="Capa do Brand Book Evoluc Construtora 2025" loading="lazy">
-                <img src="evoluc-roi.jpg" alt="Relatório de equity de marca da Evoluc: alcance, engajamento e seguidores" loading="lazy">
-                <img src="evoluc-relatorio-capa.jpg" alt="Capa do relatório consolidado de marketing e vendas da Evoluc" loading="lazy">
-              </div>
-            </a>
-            <div class="deck-body">
-              <span class="deck-tag">Construtora · Evoluc</span>
-              <h3 class="deck-title">Brand Book Evoluc Construtora 2025</h3>
-              <p class="deck-desc">Manual de marca completo, do uniforme de obra ao propósito institucional. A marca forte também aparece em número: +956% de alcance e +166% de seguidores no Instagram em 13 meses.</p>
-              <div class="deck-actions">
-                <a class="deck-action" href="branding.html">Ver case completo →</a>
-                <a class="deck-action deck-action--muted" href="evoluc-brandbook-2025.pdf" target="_blank" rel="noopener">Baixar o Brand Book (PDF) ↗</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="case-group">
-        <p class="case-group-label">Loja online</p>
-        <div class="deck-grid">
-          <div class="deck-card reveal">
-            <a class="deck-slides-link" href="loja-online.html" aria-label="Ver case Abihto completo">
-              <div class="deck-slides">
-                <img src="abihto-1.jpg" alt="Loja online da Abihto, banner de creatina" loading="lazy">
-                <img src="abihto-2.jpg" alt="Página de produto creatina Abihto" loading="lazy">
-                <img src="abihto-3.jpg" alt="Vitrine de suplementos Abihto" loading="lazy">
-              </div>
-            </a>
-            <div class="deck-body">
-              <span class="deck-tag">Suplementos · Abihto</span>
-              <h3 class="deck-title">Abihto</h3>
-              <p class="deck-desc">Loja online de suplementos: creatina, melatonina e L-treonina com magnésio em formato gummy, estruturada de ponta a ponta.</p>
-              <div class="deck-actions">
-                <a class="deck-action" href="loja-online.html">Ver case completo →</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="deck-card reveal">
-            <a class="deck-slides-link" href="loja-online.html" aria-label="Ver case Ameridan completo">
-              <div class="deck-slides">
-                <img src="ameridan-1.jpg" alt="Loja online Ameridan, linha Dove" loading="lazy">
-                <img src="ameridan-2.jpg" alt="Cuidados infantis Ameridan" loading="lazy">
-                <img src="ameridan-3.jpg" alt="Protetor solar Ameridan" loading="lazy">
-              </div>
-            </a>
-            <div class="deck-body">
-              <span class="deck-tag">Cuidados pessoais · Ameridan</span>
-              <h3 class="deck-title">Ameridan</h3>
-              <p class="deck-desc">E-commerce de cuidados pessoais com linha Dove, produtos infantis e proteção solar, vitrine pronta pra converter.</p>
-              <div class="deck-actions">
-                <a class="deck-action" href="loja-online.html">Ver case completo →</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="deck-card reveal">
-            <a class="deck-slides-link" href="loja-online.html" aria-label="Ver case Joy Variedades completo">
-              <div class="deck-slides">
-                <img src="joy-1.jpg" alt="Loja online Joy Variedades, brinquedos" loading="lazy">
-                <img src="joy-2.jpg" alt="Categoria de brinquedos Joy Variedades" loading="lazy">
-                <img src="joy-3.jpg" alt="Vitrine de brinquedos Joy Variedades" loading="lazy">
-              </div>
-            </a>
-            <div class="deck-body">
-              <span class="deck-tag">Brinquedos · Joy Variedades</span>
-              <h3 class="deck-title">Joy Variedades: a loja online do nosso ecossistema</h3>
-              <p class="deck-desc">Loja online de brinquedos, empresa do nosso próprio ecossistema, estruturada de ponta a ponta pra converter visita em venda.</p>
-              <div class="deck-actions">
-                <a class="deck-action" href="loja-online.html">Ver case completo →</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<section class="sec light" id="detalhe">
+  <div class="wrap">
+    <span class="t-label">Em detalhe</span>
+    <h2 class="t-title">O que foi entregue.</h2>
+    <div class="list">
+      <a class="item" href="#"><div><h3>O Ativo Mais Forte do Seu Império</h3></div><p>Marca pessoal, Wellington Guimarães. A própria história como prova de confiança.</p><span class="ar">↗</span></a>
+      <a class="item" href="#"><div><h3>Projeto Consigliere</h3></div><p>Marca pessoal, Julio Machado, Confiatta. Autoridade de conselheiro.</p><span class="ar">↗</span></a>
+      <a class="item" href="#"><div><h3>A Era da Precisão</h3></div><p>LabLaser, clínica de laser. Reposicionamento para dominar a lasercirurgia.</p><span class="ar">↗</span></a>
+      <a class="item" href="#"><div><h3>Manual de marca Evoluc 2025</h3></div><p>Construtora. Do uniforme de obra ao propósito da empresa.</p><span class="ar">↗</span></a>
+      <a class="item" href="#"><div><h3>Abihto</h3></div><p>Loja online de suplementos, de ponta a ponta.</p><span class="ar">↗</span></a>
+      <a class="item" href="#"><div><h3>Ameridan</h3></div><p>Loja online de cuidados pessoais, pronta para converter.</p><span class="ar">↗</span></a>
+      <a class="item" href="#"><div><h3>Joy Variedades</h3></div><p>Loja online de brinquedos, do nosso próprio ecossistema.</p><span class="ar">↗</span></a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CTA -->
-  <section class="section section--tight">
-    <div class="container">
-      <div class="cta-banner reveal">
-        <h2>Quer um resultado parecido no seu negócio?</h2>
-        <p>Vamos conversar sobre onde a sua marca está e onde ela precisa chegar.</p>
-        <div class="hero-actions">
-          <a href="contato.html" class="btn btn-primary">Falar com a Dom</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
+<section class="close" id="fim">
+  <div class="wrap">
+    <h2 class="t-title">Vamos descobrir o próximo passo da sua empresa.</h2>
+    <a class="btn btn-gold" href="#">Agende um diagnóstico <span class="ar">↗</span></a>
+    <p class="alt">Ou chame no <a href="#">WhatsApp</a>.</p>
+  </div>
+</section>
 </main>
-
-<footer id="site-footer" class="site-footer"></footer>
-
-<script src="script.js"></script>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><img src="img/logo-white.png" alt="Dom Partner Growth"><p>Marketing atrai. A nossa visão vende.</p></div>
+      <div><h4>Dom</h4><a href="#">Método</a><a href="#">Quem somos</a><a href="#">Cases</a><a href="#">Daniel Gualberto</a></div>
+      <div><h4>Frentes</h4><a href="#">Comercial</a><a href="#">Marketing</a><a href="#">Produtora</a><a href="#">Inteligência</a></div>
+      <div><h4>Contato</h4><a href="#">WhatsApp</a><a href="#">Agende um diagnóstico</a></div>
+    </div>
+    <p class="copy">© 2026 Dom Partner Growth. Todos os direitos reservados.</p>
+  </div>
+</footer>
 </body>
 </html>

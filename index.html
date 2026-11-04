@@ -3,340 +3,564 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dom Partner Growth: Parceria de Crescimento</title>
-<meta name="description" content="Dom Partner Growth: comercial, marketing, produtora e inteligência trabalhando pela mesma meta. Parceria de crescimento, não prestação de serviço.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Dom Partner Growth: Parceria de Crescimento">
-<meta property="og:description" content="Dom Partner Growth: comercial, marketing, produtora e inteligência trabalhando pela mesma meta. Parceria de crescimento, não prestação de serviço.">
-<meta property="og:image" content="logo-color.png">
-<meta name="twitter:card" content="summary_large_image">
-<script>document.documentElement.classList.add("js");</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="style.css">
+<title>Dom Partner Growth: nova home, modelo 2 (prévia)</title>
+<style>
+@font-face{font-family:"Manrope";font-weight:400;font-display:swap;src:url(fonts/manrope-400.woff2) format("woff2")}
+@font-face{font-family:"Manrope";font-weight:500;font-display:swap;src:url(fonts/manrope-500.woff2) format("woff2")}
+@font-face{font-family:"Manrope";font-weight:600;font-display:swap;src:url(fonts/manrope-600.woff2) format("woff2")}
+@font-face{font-family:"Geist Mono";font-weight:500;font-display:swap;src:url(fonts/geist-mono-500.woff2) format("woff2")}
+
+:root{
+  --ink:#050F0A;
+  --ink-2:#0B1912;
+  --paper:#F1ECDF;
+  --cream:#EFE9DC;
+  --gold:#C9A227;
+  --gold-soft:#E4C567;
+  --bronze:#8C5A17;
+  --line-d:rgba(239,233,220,.14);
+  --line-l:rgba(5,15,10,.16);
+  --pad:clamp(24px,5.6vw,80px);
+  --max:1280px;
+  --sans:"Manrope",system-ui,sans-serif;
+  --mono:"Geist Mono",ui-monospace,monospace;
+  --out:cubic-bezier(.23,1,.32,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--ink);overflow-x:clip;scroll-behavior:smooth}
+body{background:var(--ink);color:var(--cream);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;min-width:320px;overflow-x:clip}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+
+.t-label{display:flex;align-items:center;gap:14px;font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gold-soft)}
+.t-label::before{content:"";width:28px;height:1px;background:currentColor}
+.t-title{font-family:var(--sans);font-weight:600;text-transform:uppercase;letter-spacing:-.055em;line-height:.95;font-size:clamp(38px,5.4vw,78px)}
+.t-lead{font-size:clamp(17px,1.4vw,20px);max-width:44ch;opacity:.78}
+
+.btn{display:inline-flex;align-items:center;gap:28px;padding:15px 18px;border-radius:4px;font:500 11.5px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;border:1px solid transparent;transition:background-color .2s ease,transform .2s var(--out),color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+.btn .ar{font-size:15px;letter-spacing:0}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:var(--gold-soft)}
+.btn-dark{background:var(--ink);color:var(--cream)}
+.btn-line-d{border-color:rgba(239,233,220,.45);color:var(--cream)}
+.btn-line-d:hover{background:var(--cream);color:var(--ink)}
+
+/* MENU */
+.nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;width:min(1180px,calc(100% - 32px));
+  display:flex;align-items:center;gap:8px;padding:9px 10px 9px 24px;border-radius:999px;
+  background:rgba(6,16,11,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line-d)}
+.nav .brand img{height:28px;width:auto}
+.nav ul{list-style:none;display:flex;gap:4px;margin:0 auto}
+.nav li a{display:block;padding:12px 15px;font:500 13.5px/1 var(--sans);color:rgba(239,233,220,.72);transition:color .15s}
+.nav li a:hover{color:var(--cream)}
+.nav .cta{white-space:nowrap;padding:14px 20px;border-radius:999px;background:var(--gold);color:var(--ink);font:500 11.5px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase}
+
+/* ============ HERO EM SEQUÊNCIA (modelo Flowers) ============ */
+.hero-sequence{height:600vh;position:relative;width:100%;background:var(--ink)}
+.hero-sticky{height:100vh;height:100svh;overflow:hidden;position:sticky;top:0;width:100%;background:var(--ink)}
+
+.hero-copy{position:absolute;inset:0;z-index:6;padding:clamp(92px,13vh,128px) max(36px,calc((100vw - 1320px)/2)) 22px;display:grid;grid-template-columns:1fr 1.18fr 1fr;grid-template-rows:auto 1fr auto;column-gap:clamp(44px,6vw,108px);color:var(--cream);will-change:transform,opacity}
+.hero-copy__intro,.hero-copy__focus,.hero-copy__action{font:500 clamp(10px,.78vw,12px)/1.45 var(--mono);letter-spacing:.03em;text-transform:uppercase}
+.hero-copy p{margin:0}
+.hero-copy__intro{grid-column:1/-1;grid-row:1;justify-self:center;display:flex;flex-direction:column;gap:4px;text-align:center}
+.hero-copy__intro .d{color:rgba(239,233,220,.55)}
+.hero-copy__focus{grid-column:1;grid-row:2;align-self:center;display:flex;flex-direction:column;gap:14px}
+.hero-copy__focus p{display:flex;flex-direction:column;gap:2px}
+.hero-copy__focus b{font:600 clamp(22px,2vw,30px)/1 var(--sans);letter-spacing:-.04em;color:var(--gold-soft);text-transform:none}
+.hero-copy__focus span{color:rgba(239,233,220,.62)}
+.hero-copy__action{grid-column:3;grid-row:2;align-self:center;display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.hero-copy__action a{pointer-events:auto}
+.hero-copy__title{grid-column:1/-1;grid-row:3;justify-self:center;text-align:center;margin:0;font:600 clamp(40px,6.6vw,118px)/.9 var(--sans);letter-spacing:-.065em;text-transform:uppercase;color:#f2efe6;text-wrap:balance}
+.hero-copy__title em{font-style:normal;color:var(--gold-soft)}
+
+.capsule,.gold-pill,.hero-image{position:absolute;will-change:transform,opacity,width,height,border-radius}
+.capsule{overflow:hidden;background:var(--ink-2);isolation:isolate}
+.capsule img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;filter:grayscale(.65) contrast(1.04)}
+.capsule::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(5,15,10,.1),rgba(5,15,10,.55))}
+.capsule .tag{position:absolute;left:clamp(14px,1.6vw,26px);bottom:clamp(12px,1.4vw,22px);z-index:3;font:500 clamp(9px,.78vw,12px)/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--cream);padding:7px 10px;border-radius:99px;background:rgba(5,15,10,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(239,233,220,.22)}
+.capsule::after,.hero-image::after{content:"";position:absolute;inset:0;z-index:5;border-radius:inherit;background:url("img/grain.png") repeat;background-size:128px 128px;opacity:.14;pointer-events:none}
+
+.hero-image{inset:0;overflow:hidden;z-index:1;isolation:isolate;background:var(--ink)}
+.hero-image video,.hero-image .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:34% 50%;filter:grayscale(1) contrast(1.15) brightness(.9);opacity:.42;will-change:opacity}
+.hero-image__wash{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(5,15,10,.35) 0%,rgba(5,15,10,0) 30%,rgba(5,15,10,.55) 72%,rgba(201,162,39,.34) 100%)}
+.hero-image__tint{position:absolute;inset:0;z-index:1;background:#0f3a24;mix-blend-mode:color;opacity:.55}
+
+.gold-pill{z-index:2;display:flex;align-items:center;justify-content:center;background:var(--gold);overflow:hidden}
+.gold-pill img{width:46%;height:auto;filter:brightness(0)}
+
+.hero-headline{position:absolute;left:0;top:50%;z-index:3;white-space:nowrap;color:#efebe0;font:600 14vw/1 var(--sans);letter-spacing:-.06em;text-transform:uppercase;will-change:transform}
+.hero-headline span{color:rgba(239,235,224,.5)}
+
+.stats{position:absolute;left:50%;z-index:4;display:flex;flex-wrap:wrap;gap:8px;will-change:transform}
+.stat-card{position:relative;flex-shrink:0;display:flex;flex-direction:column;padding:40px;border-radius:8px;background:linear-gradient(180deg,rgba(14,26,19,.7) 0%,rgba(11,25,18,.5) 64%);backdrop-filter:blur(24px) saturate(1.2);-webkit-backdrop-filter:blur(24px) saturate(1.2);box-shadow:inset 0 1px 1px rgba(255,255,255,.26);will-change:transform,opacity}
+.stat-card::before{content:"";position:absolute;inset:0;padding:1px;border-radius:8px;background:linear-gradient(175deg,rgba(228,197,103,.4) 0%,rgba(228,197,103,0) 19%,rgba(255,240,200,.9) 41%,rgba(228,197,103,0) 77%,rgba(228,197,103,.06) 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.stat-card>i{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px rgba(201,162,39,.55)}
+.stat-card__number{margin-top:48px}
+.stat-card__number strong{display:block;color:#efebe0;font-weight:500;line-height:1;letter-spacing:-.045em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stat-card__copy{display:flex;flex-direction:column;gap:10px;margin-top:auto}
+.stat-card__copy b{font:500 15px/1.35 var(--mono);text-transform:uppercase;letter-spacing:.01em;color:var(--gold-soft)}
+.stat-card__copy p{margin:0;color:rgba(239,233,220,.6);font-size:14px;line-height:1.5;max-width:26ch}
+
+/* ============ SEÇÕES ============ */
+.content-flow{position:relative;z-index:5;background:var(--ink)}
+.sec{padding:clamp(80px,9vw,130px) 0;position:relative}
+.sec.light{background:var(--paper);color:var(--ink)}
+.sec.light .t-label{color:var(--bronze)}
+.sec.light .t-lead{opacity:.8}
+.sec .t-title{margin:22px 0 22px}
+
+.about{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,7vw,110px);align-items:center}
+.about .t-lead{margin-bottom:34px}
+.mini{display:flex;margin-top:54px;border-top:1px solid var(--line-l)}
+.mini div{padding:22px 34px 0 0}
+.mini div + div{padding-left:34px;border-left:1px solid var(--line-l)}
+.mini b{display:block;white-space:nowrap;font:500 34px/1 var(--sans);letter-spacing:-.05em}
+.mini span{display:block;font:500 11.5px/1.3 var(--mono);text-transform:uppercase;margin-top:10px;opacity:.65}
+.photo{position:relative;padding:0 0 28px 28px}
+.photo::before{content:"";position:absolute;left:0;bottom:0;right:28px;top:28px;border:1px solid var(--line-l)}
+.photo img{position:relative;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;filter:grayscale(.2)}
+
+.method-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
+.method-head .t-lead{margin:0}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);margin-top:64px;border-top:1px solid var(--line-d)}
+.trio article{padding:34px 36px 6px 0}
+.trio article + article{padding-left:36px;border-left:1px solid var(--line-d)}
+.trio .n,.front .n,.res .n{font:500 11.5px/1 var(--mono);letter-spacing:.08em;color:var(--gold-soft)}
+.trio h3{font:600 clamp(28px,3vw,42px)/1 var(--sans);text-transform:uppercase;letter-spacing:-.055em;margin:18px 0 14px}
+.trio p{opacity:.72;max-width:26ch}
+.method-foot{margin-top:56px;display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.method-foot p{font:500 12px/1.4 var(--mono);letter-spacing:.03em;text-transform:uppercase;opacity:.8}
+
+.fronts{margin-top:56px;border-top:1px solid var(--line-l)}
+.front{display:grid;grid-template-columns:70px 1.1fr 1fr 190px;gap:24px;align-items:center;padding:30px 0;border-bottom:1px solid var(--line-l);transition:padding .25s var(--out)}
+.front:hover{padding-left:14px}
+.front .n{color:var(--bronze)}
+.front h3{font:600 clamp(32px,4.2vw,60px)/.95 var(--sans);text-transform:uppercase;letter-spacing:-.06em}
+.front p{max-width:34ch;opacity:.78}
+.front .th{height:112px;overflow:hidden;border-radius:56px}
+.front .th img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);transition:filter .3s,transform .4s var(--out)}
+.front:hover .th img{filter:none;transform:scale(1.06)}
+
+.res{display:grid;grid-template-columns:repeat(3,1fr);margin-top:64px;border-top:1px solid var(--line-d)}
+.res article{padding:38px 36px 0 0}
+.res article + article{padding-left:36px;border-left:1px solid var(--line-d)}
+.res b{display:block;font:500 clamp(52px,6.2vw,92px)/.95 var(--sans);letter-spacing:-.065em;color:var(--gold-soft)}
+.res p{margin-top:20px;max-width:28ch;opacity:.78}
+.res-foot{margin-top:60px}
+.logos{margin-top:84px;padding-top:34px;border-top:1px solid var(--line-d)}
+.logos small{display:block;font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.55;margin-bottom:26px}
+.logos ul{list-style:none;display:grid;grid-template-columns:repeat(6,1fr);gap:26px 34px;align-items:center}
+.logos img{height:34px;width:auto;max-width:100%;object-fit:contain;filter:brightness(0) invert(.92);opacity:.6}
+
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);margin-top:58px;border-top:1px solid var(--line-l);counter-reset:s}
+.steps li{padding:30px 28px 8px 0;counter-increment:s}
+.steps li + li{padding-left:28px;border-left:1px solid var(--line-l)}
+.steps li::before{content:counter(s);display:block;font:500 clamp(64px,7vw,104px)/.9 var(--sans);letter-spacing:-.07em;color:var(--bronze);margin-bottom:22px}
+.steps h3{font:600 22px/1.05 var(--sans);text-transform:uppercase;letter-spacing:-.04em;margin-bottom:10px}
+.steps p{opacity:.78;max-width:20ch}
+.map-foot{margin-top:56px}
+
+.close{text-align:center;padding:clamp(100px,12vw,170px) 0;background:var(--ink)}
+.close .t-title{font-size:clamp(36px,5.4vw,80px);max-width:13em;margin:0 auto 40px}
+.close .alt{margin-top:26px;font-size:14px;opacity:.66}
+.close .alt a{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--gold)}
+
+footer{background:var(--ink);border-top:1px solid var(--line-d);padding:64px 0 34px;position:relative;z-index:5}
+.foot{display:grid;grid-template-columns:1.4fr .7fr .7fr .8fr;gap:40px}
+.foot img{height:34px;margin-bottom:20px}
+.foot p{font-size:14.5px;opacity:.66;max-width:34ch}
+.foot h4{font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px;color:var(--gold-soft)}
+.foot a{display:block;font-size:14.5px;opacity:.7;margin-bottom:11px}
+.foot a:hover{opacity:1;color:var(--gold-soft)}
+.copy{margin-top:54px;padding-top:24px;border-top:1px solid var(--line-d);font-size:13px;opacity:.5}
+
+@media(max-width:900px){
+  .nav ul{display:none}.nav{padding:7px 7px 7px 18px;justify-content:space-between}
+  .nav .brand img{height:22px}.nav .cta{padding:12px 14px;font-size:10px}
+  .about{grid-template-columns:1fr}
+  .trio,.res,.steps{grid-template-columns:1fr}
+  .trio article,.trio article + article,.res article,.res article + article,.steps li,.steps li + li{padding:28px 0 30px;border-left:none;border-bottom:1px solid var(--line-d)}
+  .steps li,.steps li + li{border-bottom-color:var(--line-l)}
+  .front{grid-template-columns:44px 1fr;gap:10px 16px}
+  .front p,.front .th{grid-column:2}
+  .front .th{height:130px}
+  .logos ul{grid-template-columns:repeat(3,1fr)}
+  .foot{grid-template-columns:1fr 1fr}.foot > div:first-child{grid-column:1 / -1}
+  .mini div{padding-right:18px}.mini div + div{padding-left:18px}
+}
+@media(max-width:809.98px){
+  .hero-sequence{height:520vh}
+  .hero-copy{padding:84px 20px 18px;grid-template-columns:1fr;grid-template-rows:auto auto 1fr auto}
+  .hero-copy__intro{grid-row:1;font-size:9.5px}
+  .hero-copy__focus{grid-column:1;grid-row:2;align-self:start;margin-top:22px;flex-direction:row;gap:0;justify-content:space-between;text-align:left}
+  .hero-copy__focus p{flex:1}
+  .hero-copy__focus b{font-size:20px}
+  .hero-copy__focus span{font-size:8.5px;max-width:11ch}
+  .hero-copy__action{grid-column:1;grid-row:3;align-self:end;margin-bottom:22px;align-items:stretch}
+  .hero-copy__action a{justify-content:space-between}
+  .hero-copy__title{grid-row:4;font-size:12.6vw;text-align:left;justify-self:start}
+  .hero-headline{font-size:22vw}
+  .stat-card{padding:20px}
+  .stat-card__number{margin-top:20px}
+  .stat-card__copy{gap:6px}
+  .stat-card__copy b{font-size:10.5px}
+  .stat-card__copy p{display:none}
+  .hero-image video,.hero-image .poster{object-position:30% 50%}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
 
-<header id="site-header" class="site-header"></header>
+<nav class="nav" aria-label="Principal">
+  <a class="brand" href="#"><img src="img/logo-white.png" alt="Dom Partner Growth"></a>
+  <ul>
+    <li><a href="#metodo">Método</a></li>
+    <li><a href="#quem">Quem somos</a></li>
+    <li><a href="#frentes">Serviços</a></li>
+    <li><a href="#resultados">Cases</a></li>
+    <li><a href="#">Daniel Gualberto</a></li>
+  </ul>
+  <a class="cta" href="#fim">Agende um diagnóstico</a>
+</nav>
 
 <main>
 
-  <!-- HERO: assessoria de crescimento. Texto embaixo à esquerda, vídeo
-       real de uma sessão de assessoria do Daniel à direita (em P&B, escurecido)
-       e o método da assessoria fechando a primeira tela -->
-  <section class="hero hero--assessoria">
-    <div class="hero-media" aria-hidden="true">
-      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="hero-assessoria.jpg">
-        <source src="hero-assessoria.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="hero-a">
-      <div class="hero-a-copy">
-        <span class="hero-a-kicker">Assessoria de crescimento</span>
-        <h1 class="hero-a-title"><span class="l1">Marketing atrai.</span><span class="l2">A nossa estratégia <br class="br-desk">vende.</span></h1>
-        <p class="hero-a-sub">Parceria de crescimento, não prestação de serviço.</p>
-        <div class="hero-a-actions">
-          <a href="contato.html" class="btn btn-primary">Personalize seu plano</a>
-          <a href="sobre.html#como-trabalhamos" class="hero-a-link">Como trabalhamos <span class="arrow" aria-hidden="true">→</span></a>
-        </div>
-      </div>
-      <ol class="hero-a-method" aria-label="Como a assessoria funciona">
-        <li><span class="n">01</span><span class="t">Diagnóstico</span></li>
-        <li><span class="n">02</span><span class="t">Estratégia</span></li>
-        <li><span class="n">03</span><span class="t">Execução</span></li>
-        <li><span class="n">04</span><span class="t">Escala</span></li>
-      </ol>
-    </div>
-  </section>
+<!-- 1. HERO EM SEQUÊNCIA -->
+<section class="hero-sequence" aria-label="Dom Partner Growth">
+  <div class="hero-sticky">
 
-  <!-- FAIXA CORRIDA: AS 4 FRENTES -->
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker-track">
-      <span>Comercial</span><span>Marketing</span><span>Produtora</span><span>Inteligência</span>
-      <span>Comercial</span><span>Marketing</span><span>Produtora</span><span>Inteligência</span>
-      <span>Comercial</span><span>Marketing</span><span>Produtora</span><span>Inteligência</span>
-      <span>Comercial</span><span>Marketing</span><span>Produtora</span><span>Inteligência</span>
+    <div class="hero-copy">
+      <div class="hero-copy__intro">
+        <p>Dom Partner Growth</p>
+        <p class="d">Comercial · Marketing · Produtora · Inteligência</p>
+      </div>
+      <div class="hero-copy__focus">
+        <p><b>+R$30M</b><span>faturados pelos clientes</span></p>
+        <p><b>+1M</b><span>pessoas alcançadas por mês</span></p>
+        <p><b>+40M</b><span>visualizações no último ano</span></p>
+      </div>
+      <div class="hero-copy__action">
+        <a class="btn btn-gold" href="#fim" id="heroCta">Agende um diagnóstico <span class="ar">↗</span></a>
+      </div>
+      <h1 class="hero-copy__title">Marketing atrai.<br><em>A nossa visão vende.</em></h1>
+    </div>
+
+    <!-- cápsulas -->
+    <div class="capsule" data-row="top" data-column="0"><img src="img/daniel-evento-3.jpg" alt=""></div>
+    <div class="capsule" data-row="top" data-column="1"><img src="img/hero-time-comercial.jpg" alt=""><span class="tag">Comercial</span></div>
+    <div class="capsule" data-row="top" data-column="2"><img src="img/hero-time-marketing.jpg" alt=""><span class="tag">Marketing</span></div>
+    <div class="capsule" data-row="top" data-column="3"><img src="img/daniel-perfil.jpg" alt=""></div>
+    <div class="capsule" data-row="top" data-column="4"><img src="img/hero-clapperboard.jpg" alt=""><span class="tag">Produtora</span></div>
+
+    <div class="capsule" data-row="middle" data-column="0"><img src="img/itaquera-poster.jpg" alt=""></div>
+    <div class="capsule" data-row="middle" data-column="1"><img src="img/hero-inteligencia-tablet.jpg" alt=""><span class="tag">Inteligência</span></div>
+    <div class="capsule" data-row="middle" data-column="3"><img src="img/daniel-retrato.jpg" alt=""></div>
+
+    <div class="capsule" data-row="bottom" data-column="0"><img src="img/daniel-evento-2.jpg" alt=""></div>
+    <div class="capsule" data-row="bottom" data-column="1"><img src="img/hero-sobre.jpg" alt=""></div>
+    <div class="capsule" data-row="bottom" data-column="2"><img src="img/canteiro-obra-poster.jpg" alt=""></div>
+    <div class="capsule" data-row="bottom" data-column="3"><img src="img/bio-rua.jpg" alt=""></div>
+    <div class="capsule" data-row="bottom" data-column="4"><img src="img/daniel-evento-1.jpg" alt=""></div>
+
+    <div class="gold-pill" aria-hidden="true"><img src="img/logo-white.png" alt=""></div>
+
+    <!-- vídeo do olho: tela cheia, quase transparente, vira a cápsula do centro -->
+    <div class="hero-image" aria-hidden="true">
+      <div class="hero-image__tint"></div>
+      <img class="poster" src="video/olho-poster.jpg" alt="">
+      <video autoplay muted loop playsinline preload="auto" poster="video/olho-poster.jpg">
+        <source src="video/olho.webm" type="video/webm">
+        <source src="video/olho.mp4" type="video/mp4">
+      </video>
+      <div class="hero-image__wash"></div>
+    </div>
+
+    <div class="hero-headline" aria-hidden="true">Quatro frentes. <span>Uma estratégia.</span></div>
+
+    <div class="stats" aria-label="Resultados">
+      <article class="stat-card" data-value="30" data-pre="+R$" data-suf="M">
+        <i></i><div class="stat-card__number"><strong>+R$0M</strong></div>
+        <div class="stat-card__copy"><b>Faturados pelos clientes</b><p>Vendas geradas nas empresas que atendemos.</p></div>
+      </article>
+      <article class="stat-card" data-value="1" data-pre="+" data-suf="M">
+        <i></i><div class="stat-card__number"><strong>+0M</strong></div>
+        <div class="stat-card__copy"><b>Pessoas alcançadas por mês</b><p>Em uma marca nossa, partindo de 33,3 mil.</p></div>
+      </article>
+      <article class="stat-card" data-value="40" data-pre="+" data-suf="M">
+        <i></i><div class="stat-card__number"><strong>+0M</strong></div>
+        <div class="stat-card__copy"><b>Visualizações no último ano</b><p>Com a Papin REC, nossa produtora.</p></div>
+      </article>
+      <article class="stat-card" data-value="3" data-pre="+" data-suf=" anos">
+        <i></i><div class="stat-card__number"><strong>+0 anos</strong></div>
+        <div class="stat-card__copy"><b>De mercado</b><p>Quatro frentes trabalhando juntas.</p></div>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<div class="content-flow">
+
+<!-- 2. QUEM SOMOS -->
+<section class="sec light" id="quem">
+  <div class="wrap about">
+    <div>
+      <span class="t-label">Quem somos</span>
+      <h2 class="t-title">Estratégia antes de anúncio.</h2>
+      <p class="t-lead">A Dom descobre onde o seu negócio trava e monta o caminho até a venda: marca, comercial, vídeo e dados trabalhando juntos.</p>
+      <a class="btn btn-dark" href="#">Conhecer a Dom <span class="ar">↗</span></a>
+      <div class="mini">
+        <div><b>+3 anos</b><span>de mercado</span></div>
+        <div><b>20+</b><span>empresas atendidas</span></div>
+        <div><b>4</b><span>frentes integradas</span></div>
+      </div>
+    </div>
+    <div class="photo"><img src="img/daniel-diagnostico.jpg" alt="Daniel Gualberto em uma reunião de diagnóstico"></div>
+  </div>
+</section>
+
+<!-- 3. MÉTODO -->
+<section class="sec" id="metodo">
+  <div class="wrap">
+    <div class="method-head">
+      <div>
+        <span class="t-label">Nosso método</span>
+        <h2 class="t-title">Domínio de Marca.</h2>
+      </div>
+      <p class="t-lead">A marca trabalhando por você.</p>
+    </div>
+    <div class="trio">
+      <article><span class="n">01</span><h3>Raiz</h3><p>Por que a sua empresa existe.</p></article>
+      <article><span class="n">02</span><h3>Constância</h3><p>A mesma voz em cada etapa.</p></article>
+      <article><span class="n">03</span><h3>Rosto</h3><p>Você e o seu time aparecendo.</p></article>
+    </div>
+    <div class="method-foot">
+      <a class="btn btn-line-d" href="#">Conhecer o método <span class="ar">↗</span></a>
+      <p>Quando os três funcionam juntos, o cliente volta e indica.</p>
     </div>
   </div>
+</section>
 
-  <!-- IMPACTO -->
-  <section class="section" id="impacto">
-    <div class="container">
-      <div class="impact-editorial">
-        <div class="impact-lead reveal">
-          <span class="eyebrow-num"><span class="n">01</span><span class="t">Impacto</span></span>
-          <h2>Resultado real e auditável.</h2>
-        </div>
-        <div class="impact-hero reveal">
-          <span class="impact-hero-number">+R$30M</span>
-          <span class="impact-hero-context">Faturados pelos nossos clientes · Só um deles, em 8 meses: R$19,43 milhões em 60 vendas, retorno de 198,2 vezes sobre a mídia investida</span>
-        </div>
-        <div class="impact-secondary">
-          <div class="impact-stat reveal">
-            <span class="impact-stat-number">+956%</span>
-            <span class="impact-stat-context">De alcance mensal no Instagram · 33,3 mil → 352 mil pessoas em 13 meses</span>
-          </div>
-          <div class="impact-stat reveal">
-            <span class="impact-stat-number">+15M</span>
-            <span class="impact-stat-context">Visualizações geradas · Papin REC, nossa produtora, em +3 mil vídeos entregues</span>
-          </div>
-        </div>
-        <p class="impact-caption reveal">Cases completos, com todos os números, estão na prova de valor abaixo e na página de cada frente.</p>
-      </div>
-      <div class="numbers-editorial reveal">
-        <div class="number-item-editorial">
-          <span class="num" data-count="3" data-prefix="+" data-suffix=" anos">0</span>
-          <span class="label">De estrada no mercado</span>
-        </div>
-        <div class="number-item-editorial">
-          <span class="num" data-count="20" data-suffix="+">0</span>
-          <span class="label">Empresas atendidas</span>
-        </div>
-        <div class="number-item-editorial">
-          <span class="num" data-count="4">0</span>
-          <span class="label">Frentes integradas</span>
-        </div>
-      </div>
+<!-- 4. FRENTES -->
+<section class="sec light" id="frentes">
+  <div class="wrap">
+    <span class="t-label">O que fazemos</span>
+    <h2 class="t-title">Quatro frentes.<br>Uma estratégia.</h2>
+    <div class="fronts">
+      <a class="front" href="#"><span class="n">01</span><h3>Comercial</h3><p>Seu time vendendo com processo e CRM.</p><div class="th"><img src="img/hero-time-comercial.jpg" alt=""></div></a>
+      <a class="front" href="#"><span class="n">02</span><h3>Marketing</h3><p>Anúncios e conteúdo que trazem gente certa.</p><div class="th"><img src="img/hero-time-marketing.jpg" alt=""></div></a>
+      <a class="front" href="#"><span class="n">03</span><h3>Produtora</h3><p>Vídeos que deixam a marca conhecida.</p><div class="th"><img src="img/hero-clapperboard.jpg" alt=""></div></a>
+      <a class="front" href="#"><span class="n">04</span><h3>Inteligência</h3><p>Dados e automação para decidir melhor.</p><div class="th"><img src="img/hero-inteligencia-tablet.jpg" alt=""></div></a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 4 FRENTES / A HOLDING -->
-  <section class="section section--alt" id="frentes">
-    <div class="container">
-      <div class="section-head section-head--editorial reveal">
-        <span class="numeral-ghost" aria-hidden="true">02</span>
-        <span class="eyebrow-num"><span class="n">02</span><span class="t">A holding</span></span>
-        <h2>Quatro frentes. Uma única operação.</h2>
-        <p>Cada frente resolve uma parte do crescimento. Juntas, fecham o ciclo inteiro.</p>
-      </div>
-
-      <div class="ecosystem ecosystem--frentes reveal">
-        <div class="eco-ring eco-ring--outer" aria-hidden="true"></div>
-        <div class="eco-ring eco-ring--inner" aria-hidden="true"></div>
-
-        <div class="eco-particles" aria-hidden="true">
-          <span class="eco-dot eco-dot--r1" style="--start:40deg; --duration:8s; --delay:-1s; --size:4px;"></span>
-          <span class="eco-dot eco-dot--r1" style="--start:210deg; --duration:8s; --delay:-5s; --size:3px;"></span>
-          <span class="eco-dot eco-dot--r2" style="--start:120deg; --duration:13s; --delay:-3s; --size:5px;"></span>
-          <span class="eco-dot eco-dot--r2" style="--start:300deg; --duration:13s; --delay:-9s; --size:4px;"></span>
-          <span class="eco-dot eco-dot--r3" style="--start:0deg; --duration:19s; --delay:-6s; --size:4px;"></span>
-          <span class="eco-dot eco-dot--r3" style="--start:250deg; --duration:19s; --delay:-14s; --size:3px;"></span>
-        </div>
-
-        <span class="eco-spoke" style="--start:270deg;"></span>
-        <span class="eco-spoke" style="--start:0deg;"></span>
-        <span class="eco-spoke" style="--start:90deg;"></span>
-        <span class="eco-spoke" style="--start:180deg;"></span>
-
-        <div class="eco-node eco-node--center">DOM</div>
-
-        <a href="comercial.html" class="eco-node eco-node--sat" style="--start:270deg;">
-          <span class="eco-node-title">Comercial</span>
-          <span class="eco-node-desc">Processo de vendas e CRM implantados. De R$3 mi a R$19 mi em 1 ano.</span>
-        </a>
-        <a href="marketing.html" class="eco-node eco-node--sat" style="--start:0deg;">
-          <span class="eco-node-title">Marketing</span>
-          <span class="eco-node-desc">Mídia e branding integrados. R$19,43 mi faturados em 8 meses.</span>
-        </a>
-        <a href="produtora.html" class="eco-node eco-node--sat" style="--start:90deg;">
-          <span class="eco-node-title">Produtora</span>
-          <span class="eco-node-desc">Vídeos de posicionamento e marketing. +15 milhões de visualizações geradas.</span>
-        </a>
-        <a href="inteligencia.html" class="eco-node eco-node--sat" style="--start:180deg;">
-          <span class="eco-node-title">Inteligência</span>
-          <span class="eco-node-desc">Automação de atendimento por IA. Yzza responde 24/7 no WhatsApp.</span>
-        </a>
-      </div>
+<!-- 5. RESULTADOS -->
+<section class="sec" id="resultados">
+  <div class="wrap">
+    <span class="t-label">Cases</span>
+    <h2 class="t-title">Resultados reais.</h2>
+    <div class="res">
+      <article><b>R$19,43M</b><p>faturados em 8 meses por uma construtora parceira, com retorno de 198,2 vezes sobre a mídia investida.</p></article>
+      <article><b>+1M</b><p>de pessoas alcançadas por mês no Instagram de uma marca nossa, partindo de 33,3 mil.</p></article>
+      <article><b>+40M</b><p>de visualizações no último ano com a Papin REC, nossa produtora.</p></article>
     </div>
-  </section>
-
-  <!-- PROVA DE VALOR -->
-  <section class="section" id="prova-de-valor">
-    <div class="container">
-      <div class="section-head section-head--editorial reveal">
-        <span class="numeral-ghost" aria-hidden="true">03</span>
-        <span class="eyebrow-num"><span class="n">03</span><span class="t">Prova de valor</span></span>
-        <h2>O que cada frente já entregou.</h2>
-        <p>Uma amostra. O case completo, com todos os números, está na página de cada produto.</p>
-      </div>
-      <div class="case-index">
-        <a class="case-row reveal" href="produtora.html">
-          <span class="case-row-num" aria-hidden="true">01</span>
-          <div class="case-row-text">
-            <span class="case-row-tag">Produtora · Papin REC</span>
-            <h3 class="case-row-title">Vídeo que constrói autoridade</h3>
-            <p class="case-row-desc">Produção institucional e de drone, do canteiro de obra ao empreendimento pronto.</p>
-          </div>
-          <div class="case-row-media">
-          <img src="case-construtoras.jpg" alt="Case de vídeo para o nicho de construtoras" loading="lazy">
-          <img src="case-academia.jpg" alt="Case de vídeo para academia Cross Over" loading="lazy">
-          <img src="case-variedades.jpg" alt="Case de vídeo de variedades, loja de conveniência" loading="lazy">
-          </div>
-          <span class="case-row-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="case-row reveal" href="gestao-anuncios.html">
-          <span class="case-row-num" aria-hidden="true">02</span>
-          <div class="case-row-text">
-            <span class="case-row-tag">Gestão de Anúncios</span>
-            <h3 class="case-row-title">R$19,43 milhões faturados em 8 meses</h3>
-            <p class="case-row-desc">Incorporadora parceira, com mídia, branding e CRM integrados numa única operação.</p>
-          </div>
-          <div class="case-row-media">
-          <img src="ga4.jpg" alt="Dashboard Google Analytics 4" loading="lazy">
-          <img src="funil.jpg" alt="Funil de conversão de mídia paga" loading="lazy">
-          <img src="alcance.jpg" alt="Alcance e impressões no Facebook e Instagram" loading="lazy">
-          </div>
-          <span class="case-row-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="case-row reveal" href="loja-online.html">
-          <span class="case-row-num" aria-hidden="true">03</span>
-          <div class="case-row-text">
-            <span class="case-row-tag">Brinquedos · Ecossistema Dom</span>
-            <h3 class="case-row-title">Joy Variedades: a loja online do nosso ecossistema</h3>
-            <p class="case-row-desc">Loja online estruturada de ponta a ponta, pensada pra converter visita em venda.</p>
-          </div>
-          <div class="case-row-media">
-          <img src="joy-1.jpg" alt="Loja online Joy Variedades, brinquedos" loading="lazy">
-          <img src="joy-2.jpg" alt="Categoria de brinquedos Joy Variedades" loading="lazy">
-          <img src="joy-3.jpg" alt="Vitrine de brinquedos Joy Variedades" loading="lazy">
-          </div>
-          <span class="case-row-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="case-row reveal" href="branding.html">
-          <span class="case-row-num" aria-hidden="true">04</span>
-          <div class="case-row-text">
-            <span class="case-row-tag">Branding</span>
-            <h3 class="case-row-title">A Bíblia da sua marca</h3>
-            <p class="case-row-desc">Branding é o que faz a sua marca ser lembrada. Aplicamos o método É · Faz · Fala, do posicionamento ao guia de conduta, em marcas pessoais e corporativas.</p>
-          </div>
-          <div class="case-row-media">
-          <img src="evoluc-1.jpg" alt="Capa do Brand Book Evoluc Construtora 2025" loading="lazy">
-          <img src="evoluc-2.jpg" alt="EPI e uniformes da marca Evoluc" loading="lazy">
-          <img src="evoluc-3.jpg" alt="Propósito, missão e visão da Evoluc" loading="lazy">
-          </div>
-          <span class="case-row-arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
+    <div class="res-foot"><a class="btn btn-line-d" href="#">Ver todos os cases <span class="ar">↗</span></a></div>
+    <div class="logos">
+      <small>Empresas que já trabalharam com a gente</small>
+      <ul>
+        <li><img src="img/logo-cliente-abihto.png" alt="Abihto"></li>
+        <li><img src="img/logo-cliente-academia-imperio.png" alt="Academia Império"></li>
+        <li><img src="img/logo-cliente-autoescola-virtual.png" alt="Autoescola Virtual"></li>
+        <li><img src="img/logo-cliente-colegio-cavlac.png" alt="Colégio Cavlac"></li>
+        <li><img src="img/logo-cliente-enrico.png" alt="Enrico"></li>
+        <li><img src="img/logo-cliente-jangada-fight.png" alt="Jangada Fight"></li>
+      </ul>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- O ECOSSISTEMA -->
-  <section class="section" id="ecossistema">
-    <div class="container">
-      <div class="section-head section-head--editorial reveal">
-        <span class="numeral-ghost" aria-hidden="true">04</span>
-        <span class="eyebrow-num"><span class="n">04</span><span class="t">O ecossistema</span></span>
-        <h2>A Dom é o centro de um ecossistema.</h2>
-        <p>A Dom atua como holding: reúne empresas de propósitos diferentes, cada uma com seu próprio mercado, sob uma mesma gestão e visão de crescimento.</p>
-      </div>
+<!-- 6. MAPA DA JORNADA -->
+<section class="sec light" id="mapa">
+  <div class="wrap">
+    <span class="t-label">Mapa da Jornada</span>
+    <h2 class="t-title">Em qual degrau<br>você está?</h2>
+    <ol class="steps">
+      <li><h3>Começando</h3><p>Marca e primeira venda.</p></li>
+      <li><h3>Organizando</h3><p>Venda e gestão no lugar.</p></li>
+      <li><h3>Crescendo</h3><p>Mais gente chegando.</p></li>
+      <li><h3>Estruturado</h3><p>Tudo ligado numa estratégia.</p></li>
+    </ol>
+    <div class="map-foot"><a class="btn btn-dark" href="#fim">Agende um diagnóstico <span class="ar">↗</span></a></div>
+  </div>
+</section>
 
-      <div class="ecosystem ecosystem--products reveal">
-        <div class="eco-ring eco-ring--outer" aria-hidden="true"></div>
-        <div class="eco-ring eco-ring--inner" aria-hidden="true"></div>
+<!-- 7. FECHAMENTO -->
+<section class="close" id="fim">
+  <div class="wrap">
+    <h2 class="t-title">Vamos descobrir o próximo passo da sua empresa.</h2>
+    <a class="btn btn-gold" href="#">Agende um diagnóstico <span class="ar">↗</span></a>
+    <p class="alt">Ou chame no <a href="#">WhatsApp</a>.</p>
+  </div>
+</section>
 
-        <div class="eco-particles" aria-hidden="true">
-          <span class="eco-dot eco-dot--r1" style="--start:60deg; --duration:8s; --delay:-1s; --size:4px;"></span>
-          <span class="eco-dot eco-dot--r1" style="--start:220deg; --duration:8s; --delay:-5s; --size:3px;"></span>
-          <span class="eco-dot eco-dot--r2" style="--start:180deg; --duration:13s; --delay:-4s; --size:5px;"></span>
-          <span class="eco-dot eco-dot--r2" style="--start:340deg; --duration:13s; --delay:-9s; --size:4px;"></span>
-          <span class="eco-dot eco-dot--r3" style="--start:300deg; --duration:19s; --delay:-8s; --size:4px;"></span>
-          <span class="eco-dot eco-dot--r3" style="--start:80deg; --duration:19s; --delay:-14s; --size:3px;"></span>
-        </div>
-
-        <span class="eco-spoke" style="--start:270deg;"></span>
-        <span class="eco-spoke" style="--start:30deg;"></span>
-        <span class="eco-spoke" style="--start:150deg;"></span>
-
-        <div class="eco-node eco-node--center">DOM</div>
-
-        <div class="eco-node eco-node--sat eco-node--logo" style="--start:270deg;">
-          <img src="papin-rec.png" alt="Papin REC">
-        </div>
-        <div class="eco-node eco-node--sat eco-node--logo" style="--start:30deg;">
-          <img src="yzza.png" alt="Yzza">
-        </div>
-        <div class="eco-node eco-node--sat eco-node--logo eco-node--round" style="--start:150deg;">
-          <img src="joy.png" alt="Joy Variedades">
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ESTEIRA DE MARCAS -->
-  <section class="logo-belt" aria-label="Marcas com quem já trabalhamos">
-    <div class="container">
-      <span class="eyebrow logo-belt-label">Marcas com quem já trabalhamos</span>
-    </div>
-    <div class="logo-belt-mask">
-      <div class="logo-belt-track">
-        <ul class="logo-belt-row">
-            <li><img src="logo-cliente-tn4.png" alt="TN4" width="100" height="52" style="--h:52" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-evoluc-construtora.png" alt="Evoluc Construtora" width="132" height="40" style="--h:40" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-enrico.png" alt="Enrico Pizzas e Esfihas" width="85" height="61" style="--h:61" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-cury.png" alt="Cury" width="128" height="41" style="--h:41" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-napoles.png" alt="Nápoles" width="101" height="51" style="--h:51" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-abihto.png" alt="Abihto" width="163" height="32" style="--h:32" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-colegio-cavlac.png" alt="Colégio Cavlac" width="119" height="44" style="--h:44" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-jangada-fight.png" alt="Centro de Treinamento Jangada Fight" width="64" height="64" style="--h:64" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-w-guimaraes-banking.png" alt="W Guimarães Banking" width="134" height="39" style="--h:39" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-telma-multimarcas.png" alt="Telma Multimarcas" width="104" height="49" style="--h:49" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-plano-e-plano.png" alt="Plano&Plano" width="151" height="34" style="--h:34" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-autoescola-virtual.png" alt="Autoescola Virtual" width="78" height="64" style="--h:64" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-academia-imperio.png" alt="Academia Império" width="121" height="43" style="--h:43" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-evoluc-vendas.png" alt="Evoluc Vendas" width="134" height="39" style="--h:39" loading="lazy" decoding="async"></li>
-        </ul>
-        <ul class="logo-belt-row" aria-hidden="true">
-            <li><img src="logo-cliente-tn4.png" alt="" width="100" height="52" style="--h:52" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-evoluc-construtora.png" alt="" width="132" height="40" style="--h:40" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-enrico.png" alt="" width="85" height="61" style="--h:61" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-cury.png" alt="" width="128" height="41" style="--h:41" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-napoles.png" alt="" width="101" height="51" style="--h:51" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-abihto.png" alt="" width="163" height="32" style="--h:32" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-colegio-cavlac.png" alt="" width="119" height="44" style="--h:44" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-jangada-fight.png" alt="" width="64" height="64" style="--h:64" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-w-guimaraes-banking.png" alt="" width="134" height="39" style="--h:39" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-telma-multimarcas.png" alt="" width="104" height="49" style="--h:49" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-plano-e-plano.png" alt="" width="151" height="34" style="--h:34" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-autoescola-virtual.png" alt="" width="78" height="64" style="--h:64" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-academia-imperio.png" alt="" width="121" height="43" style="--h:43" loading="lazy" decoding="async"></li>
-            <li><img src="logo-cliente-evoluc-vendas.png" alt="" width="134" height="39" style="--h:39" loading="lazy" decoding="async"></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- NOSSO NEGÓCIO / QUEM SOMOS -->
-  <section class="section">
-    <div class="container">
-      <div class="business-grid" style="grid-template-columns:1fr; max-width:720px; margin:0 auto;">
-        <div class="business-copy business-copy--editorial section-head--editorial reveal">
-          <span class="numeral-ghost" aria-hidden="true">05</span>
-          <span class="eyebrow-num"><span class="n">05</span><span class="t">O que fazemos</span></span>
-          <h2>O crescimento do negócio começa antes do marketing.</h2>
-          <p><span class="lede">Marketing sozinho não aumenta suas vendas: ele só leva gente até a porta.</span> Pra essa gente comprar e voltar, o negócio precisa de produto bom, vendedor treinado, tecnologia que dá agilidade e um posicionamento que gera confiança. Só depois entra o marketing, pra atrair cliente novo. Por isso o nosso ponto de partida nunca é só tráfego ou conteúdo: <strong>estruturamos o negócio inteiro, da estratégia à execução</strong>, pra cada real investido virar faturamento.</p>
-          <div class="business-divider"></div>
-          <a href="sobre.html" class="btn btn-ghost" style="margin-top:30px;">Conhecer a história</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA FINAL -->
-  <section class="section cta-poster">
-    <div class="container">
-      <div class="cta-poster-inner reveal">
-        <span class="cta-poster-ghost" aria-hidden="true">DOM</span>
-        <h2>Vamos conversar sobre o crescimento do seu negócio.</h2>
-        <p>Sem enrolação: conta pra gente onde está e onde quer chegar.</p>
-        <a href="contato.html" class="btn btn-primary">Falar com a Dom</a>
-      </div>
-    </div>
-  </section>
-
+</div>
 </main>
 
-<footer id="site-footer" class="site-footer"></footer>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><img src="img/logo-white.png" alt="Dom Partner Growth"><p>Marketing atrai. A nossa visão vende.</p></div>
+      <div><h4>Dom</h4><a href="#">Método</a><a href="#">Quem somos</a><a href="#">Cases</a><a href="#">Daniel Gualberto</a></div>
+      <div><h4>Frentes</h4><a href="#">Comercial</a><a href="#">Marketing</a><a href="#">Produtora</a><a href="#">Inteligência</a></div>
+      <div><h4>Contato</h4><a href="#">WhatsApp</a><a href="#">Agende um diagnóstico</a></div>
+    </div>
+    <p class="copy">© 2026 Dom Partner Growth. Todos os direitos reservados.</p>
+  </div>
+</footer>
 
-<script src="script.js"></script>
+<script>
+(() => {
+  "use strict";
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const sequence = $(".hero-sequence"), heroCopy = $(".hero-copy"), heroCta = $("#heroCta");
+  const capsules = $$(".capsule"), heroImage = $(".hero-image"), media = $$(".hero-image video, .hero-image .poster");
+  const wash = $(".hero-image__wash"), pill = $(".gold-pill"), headline = $(".hero-headline");
+  const stats = $(".stats"), cards = $$(".stat-card");
+  const qp = new URLSearchParams(location.search).get("progress");
+  const preview = qp === null ? null : Math.min(1, Math.max(0, Number(qp) || 0));
+  const reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const seg = (v, a, b) => clamp((v - a) / (b - a));
+  const mix = (a, b, t) => a + (b - a) * t;
+  const inOut = v => v < .5 ? 4 * v ** 3 : 1 - ((-2 * v + 2) ** 3) / 2;
+  const outC = v => 1 - (1 - v) ** 3;
+  const inC = v => v ** 3;
+
+  let target = 0, progress = 0, m = {};
+
+  function measure() {
+    const w = innerWidth, h = innerHeight;
+    const mobile = w < 810, tablet = !mobile && w < 1200;
+    const cw = w * (mobile ? .46 : tablet ? .30 : .235), ch = cw * .6;
+    const gap = w * (mobile ? .03 : .012), rowGap = ch * .16;
+    const cx = w / 2, cy = h / 2;
+    const colX = c => cx + (c - 2) * (cw + gap);
+    const rowY = { top: cy - ch - rowGap, middle: cy, bottom: cy + ch + rowGap };
+    const hw = headline.scrollWidth;
+    const cols = mobile || tablet ? 2 : 4;
+    const sw = Math.min(1320, w - (mobile ? 40 : tablet ? 64 : 120));
+    const cardW = (sw - 8 * (cols - 1)) / cols;
+    const cardH = mobile ? Math.min(h * .3, 220) : tablet ? Math.min(h * .34, 300) : Math.min(h * .6, 460);
+    const rows = Math.ceil(4 / cols);
+    const sh = rows * cardH + (rows - 1) * 8;
+    const bottomGap = mobile ? 24 : tablet ? 40 : 56;
+    const shift = Math.max(0, h - sh - bottomGap - (h - sh) / 2);
+    m = { w, h, mobile, tablet, cw, ch, gap, cx, cy, colX, rowY, hw, sw, cardW, cardH, sh, shift };
+
+    capsules.forEach(c => {
+      c.style.left = `${colX(+c.dataset.column) - cw / 2}px`;
+      c.style.top = `${rowY[c.dataset.row] - ch / 2}px`;
+      c.style.width = `${cw}px`; c.style.height = `${ch}px`; c.style.borderRadius = `${ch}px`;
+    });
+    pill.style.left = `${colX(4) - cw / 2}px`; pill.style.top = `${rowY.middle - ch / 2}px`;
+    pill.style.width = `${cw}px`; pill.style.height = `${ch}px`; pill.style.borderRadius = `${ch}px`;
+
+    stats.style.top = `${(h - sh) / 2}px`; stats.style.width = `${sw}px`;
+    const sizes = cards.map(card => {
+      const len = (card.dataset.pre + card.dataset.value + card.dataset.suf).length;
+      return Math.min(mobile ? 44 : 96, (cardW - (mobile ? 40 : 80)) / (len * .56));
+    });
+    const fs = Math.min(...sizes);
+    cards.forEach(card => {
+      card.style.width = `${cardW}px`; card.style.height = `${cardH}px`;
+      card.querySelector("strong").style.fontSize = `${fs}px`;
+    });
+    update();
+  }
+
+  function update() {
+    if (!m.w) return;
+    const p = progress;
+    const copyExit = inOut(seg(p, .015, .09));
+    heroCopy.style.opacity = 1 - copyExit;
+    heroCopy.style.transform = `translate3d(0,${mix(0, -28, copyExit)}px,0)`;
+    heroCopy.style.visibility = copyExit > .99 ? "hidden" : "visible";
+    heroCopy.style.pointerEvents = copyExit > .5 ? "none" : "auto";
+
+    const reveal = inOut(seg(p, .03, .15));
+    const slot = m.cw + m.gap;
+    const gridShift = mix(0, -2 * slot, inOut(seg(p, .40, .58)));
+    const far = Math.max(1.15 * m.w, m.cx + 2.5 * slot + 40);
+    const farOut = Math.max(1.35 * m.w, m.cx + 2.5 * slot + 40);
+    const topX = mix(-far, 0, outC(seg(p, .12, .34))) + mix(0, farOut, inC(seg(p, .40, .58)));
+    const botX = mix(far, 0, outC(seg(p, .15, .37))) + mix(0, -farOut, inC(seg(p, .41, .59)));
+    const midIn = outC(seg(p, .17, .38));
+    const midOp = 1 - seg(p, .50, .58), midSc = mix(1, .85, seg(p, .50, .58));
+
+    capsules.forEach(c => {
+      const row = c.dataset.row, col = +c.dataset.column;
+      let x = 0, op = 1, sc = 1;
+      if (row === "top") x = topX;
+      if (row === "bottom") x = botX;
+      if (row === "middle") {
+        x = (col >= 3 ? mix(.7 * m.w, 0, midIn) : mix(-.7 * m.w, 0, midIn)) + gridShift;
+        op = midOp; sc = midSc;
+      }
+      c.style.transform = `translate3d(${x}px,0,0) scale(${sc})`;
+      c.style.opacity = op;
+    });
+
+    // vídeo do olho: tela cheia -> cápsula do centro
+    heroImage.style.left = `${mix(0, m.cx - m.cw / 2, reveal) + gridShift}px`;
+    heroImage.style.top = `${mix(0, m.cy - m.ch / 2, reveal)}px`;
+    heroImage.style.width = `${mix(m.w, m.cw, reveal)}px`;
+    heroImage.style.height = `${mix(m.h, m.ch, reveal)}px`;
+    heroImage.style.borderRadius = `${mix(0, m.ch / 2, reveal)}px`;
+    heroImage.style.opacity = 1 - seg(p, .50, .58);
+    media.forEach(el => el.style.opacity = mix(.42, .9, reveal));
+    wash.style.opacity = 1 - reveal;
+
+    const pillScale = mix(1, .72, inOut(seg(p, .58, .72)));
+    const arrive = mix(.7 * m.w, 0, outC(seg(p, .17, .38))) + gridShift;
+    const rise = mix(0, -.75 * m.w, inC(seg(p, .62, .74)));
+    let px = arrive + rise;
+    const hx = mix(m.w, -m.hw, seg(p, .60, .86));
+    if (p > .60) px = Math.min(px, hx - (m.mobile ? 16 : 40) - (m.cw * pillScale / 2) - m.colX(4));
+    pill.style.transform = `translate3d(${px}px,0,0) scale(${pillScale})`;
+    headline.style.transform = `translate3d(${hx}px,-50%,0)`;
+
+    stats.style.transform = `translate3d(-50%,${mix(0, m.shift, inOut(seg(p, .93, 1)))}px,0)`;
+    cards.forEach((card, i) => {
+      const x = mix(m.w * .9 + i * 90, 0, outC(seg(p, .76 + i * .025, .90 + i * .02)));
+      card.style.transform = `translate3d(${x}px,0,0)`;
+      card.style.opacity = seg(p, .76 + i * .025, .84 + i * .025);
+      const n = Math.round(+card.dataset.value * outC(seg(p, .80 + i * .02, .93)));
+      card.querySelector("strong").textContent = card.dataset.pre + n + card.dataset.suf;
+    });
+  }
+
+  function onScroll() {
+    if (preview !== null) { target = progress = preview; return; }
+    const r = sequence.getBoundingClientRect();
+    target = clamp(-r.top / (sequence.offsetHeight - innerHeight));
+  }
+  function frame() {
+    progress = preview !== null ? preview : (reduce ? target : progress + (target - progress) * .105);
+    if (Math.abs(target - progress) < .00002) progress = target;
+    update();
+    requestAnimationFrame(frame);
+  }
+  addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("resize", measure);
+  addEventListener("load", measure);
+  onScroll(); measure(); requestAnimationFrame(frame);
+})();
+</script>
 </body>
 </html>
