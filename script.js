@@ -11,6 +11,7 @@
      "Serviços" — o conteúdo/links de cada frente continuam existindo
      normalmente, só a entrada no menu principal que fica agrupada. */
   var NAV_HOME = { href:'index.html', label:'Início' };
+  var NAV_METHOD = { href:'metodo.html', label:'Método' };
   var NAV_ABOUT = { href:'sobre.html', label:'Quem Somos' };
   var SERVICE_LINKS = [
     { href:'comercial.html',    label:'Comercial' },
@@ -21,7 +22,7 @@
   var NAV_CASES = { href:'cases.html', label:'Cases' };
   var NAV_ADVISOR = { href:'advisor.html', label:'Daniel Gualberto' };
   var CONTACT_LINK = { href:'contato.html', label:'Contato' };
-  var NAV_CTA = { href:'advisor.html#diagnostico', label:'Agendar Diagnóstico' };
+  var NAV_CTA = { href:'contato.html', label:'Agende um diagnóstico' };
 
   // mantido por compatibilidade: lista plana usada pelo rodapé (coluna "Frentes")
   var NAV_LINKS = [NAV_HOME, NAV_ABOUT, NAV_ADVISOR].concat(SERVICE_LINKS);
@@ -60,6 +61,7 @@
         '<a href="index.html" class="brand"><img src="logo-white.png" alt="Dom Partner Growth"></a>' +
         '<nav class="nav-links" id="nav-links">' +
           linkHtml(NAV_HOME) +
+          linkHtml(NAV_METHOD) +
           linkHtml(NAV_ABOUT) +
           '<div class="nav-item" id="nav-services-item">' +
             '<button type="button" class="nav-sub-toggle'+(isServicePage ? ' is-active' : '')+'" id="nav-services-toggle" aria-expanded="false">Serviços<span class="nav-sub-caret"></span></button>' +
@@ -123,6 +125,8 @@
           '<div class="footer-col">' +
             '<h4>Institucional</h4>' +
             '<a href="index.html">Início</a>' +
+            '<a href="metodo.html">Método</a>' +
+            '<a href="metodo.html#mapa">Mapa da Jornada</a>' +
             '<a href="sobre.html">Quem Somos</a>' +
             '<a href="cases.html">Cases</a>' +
             '<a href="advisor.html">Daniel Gualberto</a>' +
@@ -138,8 +142,8 @@
           '</div>' +
           '<div class="footer-col">' +
             '<h4>Contato</h4>' +
-            '<a href="mailto:comercial@dompartnergrowth.com.br">comercial@dompartnergrowth.com.br</a>' +
-            '<a href="contato.html">Fale no WhatsApp</a>' +
+            '<a href="https://wa.me/5511949901200" target="_blank" rel="noopener">WhatsApp</a>' +
+            '<a href="contato.html">Agende um diagnóstico</a>' +
           '</div>' +
         '</div>' +
         '<div class="footer-bottom">' +
@@ -239,7 +243,7 @@
   }
 
   function initCaseSpotlight(){
-    var rows = document.querySelectorAll('.case-row, .shot-card, .deck-card');
+    var rows = document.querySelectorAll('.case-row, .shot-card, .deck-card, .bio-chapter');
     if(!rows.length || !('IntersectionObserver' in window)) return;
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
@@ -247,6 +251,23 @@
       });
     }, { rootMargin:'-49% 0px -49% 0px', threshold:0 });
     rows.forEach(function(row){ io.observe(row); });
+  }
+
+  /* esteira de logos: o HTML traz uma lista só (com texto alternativo);
+     a segunda cópia, que fecha o loop da animação, nasce aqui e fica
+     escondida de leitor de tela e do Google */
+  function initLogoBelt(){
+    document.querySelectorAll('.logo-belt-track').forEach(function(track){
+      var row = track.querySelector('.logo-belt-row');
+      if(!row || track.querySelector('.logo-belt-row[aria-hidden]')) return;
+      var copy = row.cloneNode(true);
+      copy.setAttribute('aria-hidden', 'true');
+      copy.querySelectorAll('img').forEach(function(img){
+        img.setAttribute('alt', '');
+        img.removeAttribute('loading');
+      });
+      track.appendChild(copy);
+    });
   }
 
   function initReveal(){
@@ -494,8 +515,7 @@
     });
   }
 
-  /* ---------------- formulário de contato -> WhatsApp ou e-mail ---------------- */
-  var CONTACT_EMAIL = 'comercial@dompartnergrowth.com.br';
+  /* ---------------- formulário de contato -> WhatsApp ---------------- */
   function wireContactForm(form){
     if(!form) return;
     var WHATSAPP_NUMBER = '5511949901200';
@@ -507,13 +527,13 @@
       var nome = fieldValue('nome');
       var empresa = fieldValue('empresa');
       var whats = fieldValue('whatsapp');
-      var faturamento = fieldValue('faturamento');
+      var fase = fieldValue('fase');
       var msg = fieldValue('mensagem');
       return 'Olá, Dom Partner Growth! Meu nome é ' + nome +
              (empresa ? ' (' + empresa + ')' : '') +
              '. ' + (msg ? msg : 'Quero conversar sobre uma parceria de crescimento.') +
              (whats ? ' Meu WhatsApp: ' + whats : '') +
-             (faturamento ? ' Faturamento mensal aproximado: ' + faturamento : '');
+             (fase ? ' Fase do negócio: ' + fase + '.' : '');
     }
 
     form.addEventListener('submit', function(e){
@@ -522,18 +542,6 @@
       window.open(url, '_blank');
     });
 
-    // alternativa pra quem prefere mandar por e-mail em vez de WhatsApp
-    var emailLink = form.querySelector('.form-email-alt');
-    if(emailLink){
-      emailLink.addEventListener('click', function(e){
-        e.preventDefault();
-        var subject = 'Contato pelo site: ' + (fieldValue('nome') || 'Dom Partner Growth');
-        var mailto = 'mailto:' + CONTACT_EMAIL +
-                     '?subject=' + encodeURIComponent(subject) +
-                     '&body=' + encodeURIComponent(buildMessage());
-        window.location.href = mailto;
-      });
-    }
   }
   function initContactForm(){
     wireContactForm(document.getElementById('contact-form'));
@@ -568,6 +576,16 @@
               '<input type="tel" id="modal-whatsapp" name="whatsapp" placeholder="(11) 90000-0000" required>' +
             '</div>' +
             '<div class="field full">' +
+              '<label for="modal-fase">Em que fase está o seu negócio hoje?</label>' +
+              '<select id="modal-fase" name="fase">' +
+                '<option value="">Prefiro contar na conversa</option>' +
+                '<option value="Começando">Começando: estou estruturando a empresa</option>' +
+                '<option value="Organizando">Organizando: já vendo, mas falta processo</option>' +
+                '<option value="Crescendo">Crescendo: quero vender mais, com previsão</option>' +
+                '<option value="Estruturado">Estruturado: tenho time e processo, quero escalar</option>' +
+              '</select>' +
+            '</div>' +
+            '<div class="field full">' +
               '<label for="modal-mensagem">Mensagem</label>' +
               '<textarea id="modal-mensagem" name="mensagem" placeholder="Conta rapidamente onde seu negócio está hoje e o que você quer resolver."></textarea>' +
             '</div>' +
@@ -598,7 +616,7 @@
     });
 
     document.addEventListener('click', function(e){
-      var link = e.target.closest ? e.target.closest('a.btn[href="contato.html"]') : null;
+      var link = e.target.closest ? e.target.closest('a.btn[href="contato.html"], a.nav-cta[href="contato.html"]') : null;
       if(!link) return;
       e.preventDefault();
       openModal();
@@ -852,6 +870,7 @@
     buildHeader();
     buildFooter();
     initHeaderAutoHide();
+    initLogoBelt();
     initReveal();
     initCaseSpotlight();
     initHeroVideo();
