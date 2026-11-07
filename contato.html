@@ -353,8 +353,7 @@ html.js .rv.in{opacity:1;transform:none}
     <div>
       <span class="t-label">Contato</span>
       <h1 class="long">Vamos<br>conversar</h1>
-      <p class="t-lead">Preencha ao lado ou chame direto no WhatsApp.</p>
-      <a class="btn btn-line-d" href="https://wa.me/5511949901200">Chamar no WhatsApp <span class="ar">&#8599;</span></a>
+      <p class="t-lead">Preencha o formulário e a nossa equipe chama você em breve.</p>
     </div>
     <div><form class="form" id="contact-form" novalidate>
   <label>Nome<input name="nome" required autocomplete="name"></label>
@@ -365,7 +364,7 @@ html.js .rv.in{opacity:1;transform:none}
   <label>Faturamento anual da empresa<select name="faturamento" required><option value="">Selecione</option><option>Ainda não fatura</option><option>Até R$ 300 mil</option><option>De R$ 300 mil a R$ 600 mil</option><option>De R$ 600 mil a R$ 1 milhão</option><option>De R$ 1 a R$ 2 milhões</option><option>De R$ 2 a R$ 3 milhões</option><option>De R$ 3 a R$ 5 milhões</option><option>De R$ 5 a R$ 10 milhões</option><option>De R$ 10 a R$ 20 milhões</option><option>De R$ 20 a R$ 50 milhões</option><option>Acima de R$ 50 milhões</option></select></label>
   <input type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
   <label class="ck"><input type="checkbox" name="autorizo" required><span>Autorizo receber contato da Dom Partner Growth pelo WhatsApp, por e-mail e por telefone. Veja a <a href="privacidade.html">política de privacidade</a>.</span></label>
-  <button class="btn btn-gold" type="submit">Quero ser chamado no WhatsApp <span class="ar">&#8599;</span></button>
+  <button class="btn btn-gold" type="submit">Quero que a equipe me chame <span class="ar">&#8599;</span></button>
   <p class="note" id="form-msg" role="status" aria-live="polite"></p>
 </form></div>
   </div>
@@ -383,7 +382,7 @@ html.js .rv.in{opacity:1;transform:none}
   <div class="wrap">
     <div class="foot">
       <div><img src="logo-white.png" alt="Dom Partner Growth"><p>Marketing atrai. A nossa visão vende.</p></div>
-      <div><h4>Dom</h4><a href="index.html#metodo">Método</a><a href="sobre.html">Quem somos</a><a href="cases.html">Cases</a><a href="advisor.html">Advisor</a><a href="privacidade.html">Privacidade</a></div><div><h4>Frentes</h4><a href="comercial.html">Comercial</a><a href="marketing.html">Marketing</a><a href="produtora.html">Produtora</a><a href="inteligencia.html">Inteligência</a></div><div><h4>Produtos</h4><a href="crm.html">CRM</a><a href="consultoria-comercial.html">Consultoria comercial</a><a href="gestao-anuncios.html">Gestão de anúncios</a><a href="loja-online.html">Loja online</a><a href="automacao-ia.html">Automação de IA</a><a href="erp.html">ERP</a><a href="branding.html">Branding</a></div><div><h4>Contato</h4><a href="https://wa.me/5511949901200">WhatsApp</a><a href="contato.html">Agende um diagnóstico</a></div>
+      <div><h4>Dom</h4><a href="index.html#metodo">Método</a><a href="sobre.html">Quem somos</a><a href="cases.html">Cases</a><a href="advisor.html">Advisor</a><a href="privacidade.html">Privacidade</a></div><div><h4>Frentes</h4><a href="comercial.html">Comercial</a><a href="marketing.html">Marketing</a><a href="produtora.html">Produtora</a><a href="inteligencia.html">Inteligência</a></div><div><h4>Produtos</h4><a href="crm.html">CRM</a><a href="consultoria-comercial.html">Consultoria comercial</a><a href="gestao-anuncios.html">Gestão de anúncios</a><a href="loja-online.html">Loja online</a><a href="automacao-ia.html">Automação de IA</a><a href="erp.html">ERP</a><a href="branding.html">Branding</a></div><div><h4>Contato</h4><a href="contato.html">Agende um diagnóstico</a></div>
     </div>
     <p class="copy">&copy; 2026 Dom Partner Growth. Todos os direitos reservados.</p>
   </div>
@@ -431,16 +430,14 @@ f.addEventListener('submit',function(e){
     interesse:qs('consultoria')||qs('interesse'),
     enviado_em:new Date().toISOString()};
   try{var r=window.domRastreio?window.domRastreio():{};for(var k in r){dados[k]=r[k]}}catch(x){}
-  if(!CRM_URL){ /* enquanto o CRM não está ligado, mantém o caminho antigo pelo WhatsApp */
-    var m='Olá, Dom Partner Growth! Meu nome é '+dados.nome+' ('+dados.empresa+', '+dados.cargo+'). Quero conversar sobre uma parceria de crescimento.';
-    window.open('https://wa.me/5511949901200?text='+encodeURIComponent(m),'_blank');return}
+  if(!CRM_URL){say('O formulário ainda não está conectado. Tente novamente em alguns instantes.',1);return}
   btn.disabled=true;btn.textContent='Enviando...';say('');
   var ctl=('AbortController' in window)?new AbortController():null,to=setTimeout(function(){ctl&&ctl.abort()},15000);
   fetch(CRM_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(dados),signal:ctl?ctl.signal:undefined})
   .then(function(r){clearTimeout(to);if(!r.ok)throw new Error(r.status);
-    f.innerHTML='<h3 style="font-size:clamp(24px,2.6vw,34px);letter-spacing:-.04em;text-transform:uppercase">Recebemos o seu contato.</h3><p class="note" style="font-size:17px;opacity:1;margin-top:14px">Nossa assistente vai te chamar no WhatsApp em instantes.</p>';})
+    f.innerHTML='<h3 style="font-size:clamp(24px,2.6vw,34px);letter-spacing:-.04em;text-transform:uppercase">Recebemos o seu contato.</h3><p class="note" style="font-size:17px;opacity:1;margin-top:14px">Nossa equipe vai te chamar em breve.</p>';})
   .catch(function(){clearTimeout(to);btn.disabled=false;btn.innerHTML=btnHtml;
-    msg.innerHTML='Não conseguimos enviar agora. Tente de novo ou <a href="https://wa.me/5511949901200" target="_blank" rel="noopener">chame no WhatsApp</a>.';msg.style.color='#C0392B';});
+    msg.innerHTML='Não conseguimos enviar agora. Tente de novo em instantes ou escreva para <a href="mailto:comercial@dompartnergrowth.com.br">comercial@dompartnergrowth.com.br</a>.';msg.style.color='#C0392B';});
 });
 })();
 </script>
