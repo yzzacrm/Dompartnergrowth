@@ -406,7 +406,7 @@ html.js .rv.in{opacity:1;transform:none}
 </script><script>
 (function(){
 /* Endereço de entrada de contatos do CRM. Preencher com a URL pública fornecida pelo CRM. */
-var CRM_URL='';
+var CRM_URL='https://crm.yzzacrm.com.br/api/intake/cap_GEFm4jN0OuCf5rSxsdmyUL6s';
 var f=document.getElementById('contact-form');if(!f)return;
 var msg=document.getElementById('form-msg'),btn=f.querySelector('button[type=submit]'),btnHtml=btn.innerHTML;
 function v(n){return f[n]&&f[n].value?f[n].value.trim():''}
@@ -433,11 +433,23 @@ f.addEventListener('submit',function(e){
   if(!CRM_URL){say('O formulário ainda não está conectado. Tente novamente em alguns instantes.',1);return}
   btn.disabled=true;btn.textContent='Enviando...';say('');
   var ctl=('AbortController' in window)?new AbortController():null,to=setTimeout(function(){ctl&&ctl.abort()},15000);
+  var ROT={nome:'Nome',email:'E-mail',empresa:'Empresa',cargo:'Cargo',whatsapp:'WhatsApp',faturamento_anual:'Faturamento anual',autorizo_contato:'Autorização'};
+  function motivo(j){ /* lê o motivo por campo devolvido pelo CRM em respostas 400 */
+    var o=j&&(j.errors||j.erros||j.fields||j.campos||j.details||j.detalhes),out=[];
+    function add(k,m){if(typeof m==='object'&&m)m=m.message||m.motivo||m.msg||JSON.stringify(m);if(m)out.push((ROT[k]?ROT[k]+': ':'')+m)}
+    if(Array.isArray(o)){o.forEach(function(x){if(typeof x==='string')out.push(x);else if(x)add(x.field||x.campo||x.path||'',x.message||x.motivo||x.msg||'')})}
+    else if(o&&typeof o==='object'){for(var k in o)add(k,Array.isArray(o[k])?o[k].join(', '):o[k])}
+    if(!out.length&&j&&(j.message||j.error||j.erro))out.push(j.message||j.error||j.erro);
+    return out.slice(0,3).join(' ')}
   fetch(CRM_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(dados),signal:ctl?ctl.signal:undefined})
-  .then(function(r){clearTimeout(to);if(!r.ok)throw new Error(r.status);
-    f.innerHTML='<h3 style="font-size:clamp(24px,2.6vw,34px);letter-spacing:-.04em;text-transform:uppercase">Recebemos o seu contato.</h3><p class="note" style="font-size:17px;opacity:1;margin-top:14px">Nossa equipe vai te chamar em breve.</p>';})
+  .then(function(r){clearTimeout(to);
+    if(r.status===200||r.status===201){ /* 201 contato novo, 200 contato que já existia */
+      f.innerHTML='<h3 style="font-size:clamp(24px,2.6vw,34px);letter-spacing:-.04em;text-transform:uppercase">Recebemos o seu contato.</h3><p class="note" style="font-size:17px;opacity:1;margin-top:14px">Nossa equipe vai te chamar em breve.</p>';return}
+    if(r.status===400){return r.json().catch(function(){return null}).then(function(j){btn.disabled=false;btn.innerHTML=btnHtml;
+      var m=motivo(j);say('Confira os dados enviados. '+(m||'Algum campo está inválido.'),1)})}
+    throw new Error(r.status)})
   .catch(function(){clearTimeout(to);btn.disabled=false;btn.innerHTML=btnHtml;
-    msg.innerHTML='Não conseguimos enviar agora. Tente de novo em instantes ou escreva para <a href="mailto:comercial@dompartnergrowth.com.br">comercial@dompartnergrowth.com.br</a>.';msg.style.color='#C0392B';});
+    msg.innerHTML='Não conseguimos enviar agora. Tente de novo em instantes ou escreva para <a href="mailto:comercial@dompartnergrowth.com.br">comercial@dompartnergrowth.com.br</a>.';msg.style.color='#E57A6B';});
 });
 })();
 </script>
