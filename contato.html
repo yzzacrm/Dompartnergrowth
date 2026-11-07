@@ -275,6 +275,12 @@ html.js .rv.in{opacity:1;transform:none}
 .form input,.form textarea{display:block;width:100%;margin-top:10px;padding:10px 0 14px;background:none;border:0;border-bottom:1px solid rgba(239,233,220,.3);color:var(--cream);font:400 19px/1.3 var(--sans);border-radius:0;outline:none;resize:vertical;transition:border-color .2s}
 .form input:focus,.form textarea:focus{border-bottom-color:var(--gold)}
 .form .btn{justify-self:start;cursor:pointer;margin-top:6px}
+.form select{display:block;width:100%;margin-top:10px;padding:10px 0 14px;background:none;border:0;border-bottom:1px solid rgba(239,233,220,.3);color:var(--cream);font:400 19px/1.3 var(--sans);border-radius:0;outline:none;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' fill='none' stroke='%23E4C567' stroke-width='1.6'%3E%3Cpath d='M1 1l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 2px center}
+.form select:focus{border-bottom-color:var(--gold)}
+.form select option{color:#050F0A;background:#EFE9DC}
+.form label.ck{display:grid;grid-template-columns:22px 1fr;gap:14px;align-items:start;text-transform:none;letter-spacing:0;font:400 14.5px/1.45 var(--sans);color:var(--cream);opacity:.85;cursor:pointer}
+.form label.ck input{width:20px;height:20px;margin:1px 0 0;padding:0;accent-color:#C9A227;border:0;cursor:pointer}
+.form label.ck a{color:var(--gold-soft);text-decoration:underline}
 .form .note{font-size:13.5px;opacity:.6;max-width:40ch}
 .faq{margin-top:48px;border-top:1px solid var(--ln)}
 .faq details{border-bottom:1px solid var(--ln)}
@@ -347,13 +353,17 @@ html.js .rv.in{opacity:1;transform:none}
       <p class="t-lead">Preencha ao lado ou chame direto no WhatsApp.</p>
       <a class="btn btn-line-d" href="https://wa.me/5511949901200">Chamar no WhatsApp <span class="ar">&#8599;</span></a>
     </div>
-    <div><form class="form" id="contact-form">
+    <div><form class="form" id="contact-form" novalidate>
   <label>Nome<input name="nome" required autocomplete="name"></label>
-  <label>Empresa<input name="empresa" autocomplete="organization"></label>
-  <label>WhatsApp<input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel"></label>
-  <label>Mensagem<textarea name="mensagem" rows="3"></textarea></label>
-  <button class="btn btn-gold" type="submit">Enviar pelo WhatsApp <span class="ar">&#8599;</span></button>
-  <p class="note">Ao enviar, abrimos uma conversa no WhatsApp com a sua mensagem já preenchida.</p>
+  <label>E-mail<input name="email" type="email" inputmode="email" required autocomplete="email"></label>
+  <label>Empresa<input name="empresa" required autocomplete="organization"></label>
+  <label>Cargo<input name="cargo" required autocomplete="organization-title"></label>
+  <label>WhatsApp<input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="(11) 90000-0000" required></label>
+  <label>Faturamento anual da empresa<select name="faturamento" required><option value="">Selecione</option><option>Ainda não fatura</option><option>Até R$ 300 mil</option><option>De R$ 300 mil a R$ 600 mil</option><option>De R$ 600 mil a R$ 1 milhão</option><option>De R$ 1 a R$ 2 milhões</option><option>De R$ 2 a R$ 3 milhões</option><option>De R$ 3 a R$ 5 milhões</option><option>De R$ 5 a R$ 10 milhões</option><option>De R$ 10 a R$ 20 milhões</option><option>De R$ 20 a R$ 50 milhões</option><option>Acima de R$ 50 milhões</option></select></label>
+  <input type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
+  <label class="ck"><input type="checkbox" name="autorizo" required><span>Autorizo receber contato da Dom Partner Growth pelo WhatsApp, por e-mail e por telefone. Veja a <a href="privacidade.html">política de privacidade</a>.</span></label>
+  <button class="btn btn-gold" type="submit">Quero ser chamado no WhatsApp <span class="ar">&#8599;</span></button>
+  <p class="note" id="form-msg" role="status" aria-live="polite"></p>
 </form></div>
   </div>
   <div class="gap" style="height:clamp(72px,8vw,120px)"></div>
@@ -392,11 +402,44 @@ html.js .rv.in{opacity:1;transform:none}
   }
 })();
 </script><script>
-(function(){var f=document.getElementById('contact-form');if(!f)return;
-f.addEventListener('submit',function(e){e.preventDefault();
+(function(){
+/* Endereço de entrada de contatos do CRM. Preencher com a URL pública fornecida pelo CRM. */
+var CRM_URL='';
+var f=document.getElementById('contact-form');if(!f)return;
+var msg=document.getElementById('form-msg'),btn=f.querySelector('button[type=submit]'),btnHtml=btn.innerHTML;
 function v(n){return f[n]&&f[n].value?f[n].value.trim():''}
-var m='Olá, Dom Partner Growth! Meu nome é '+v('nome')+(v('empresa')?' ('+v('empresa')+')':'')+'. '+(v('mensagem')||'Quero conversar sobre uma parceria de crescimento.')+(v('whatsapp')?' Meu WhatsApp: '+v('whatsapp'):'');
-window.open('https://wa.me/5511949901200?text='+encodeURIComponent(m),'_blank');});})();
+function fone(x){var d=x.replace(/\D/g,'');if(d.indexOf('55')===0&&d.length>=12)return d;if(d.length===10||d.length===11)return '55'+d;return ''}
+function qs(k){try{return new URLSearchParams(location.search).get(k)||''}catch(e){return ''}}
+function say(t,err,el){msg.textContent=t;msg.style.color=err?'#E57A6B':'';if(el){el.focus()}}
+f.addEventListener('submit',function(e){
+  e.preventDefault();
+  if(v('site'))return; /* campo-armadilha contra robôs */
+  if(!v('nome')){say('Diga o seu nome para a gente saber com quem falar.',1,f.nome);return}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v('email'))){say('Confira o e-mail: algo como nome@empresa.com.br.',1,f.email);return}
+  if(!v('empresa')){say('Informe o nome da empresa.',1,f.empresa);return}
+  if(!v('cargo')){say('Informe o seu cargo.',1,f.cargo);return}
+  var tel=fone(v('whatsapp'));
+  if(!tel){say('Confira o WhatsApp: use o DDD e o número, por exemplo (11) 90000-0000.',1,f.whatsapp);return}
+  if(!v('faturamento')){say('Escolha a faixa de faturamento anual da empresa.',1,f.faturamento);return}
+  if(!f.autorizo.checked){say('Marque a caixa de autorização para podermos entrar em contato.',1,f.autorizo);return}
+  var dados={nome:v('nome'),email:v('email'),empresa:v('empresa'),cargo:v('cargo'),whatsapp:tel,faturamento_anual:v('faturamento'),
+    autorizo_contato:true,autorizo_texto:'Autorizo receber contato da Dom Partner Growth pelo WhatsApp, por e-mail e por telefone.',
+    origem:'site dompartnergrowth.com.br',pagina:location.pathname.replace(/^\//,'')||'index.html',
+    interesse:qs('consultoria')||qs('interesse'),
+    utm_source:qs('utm_source'),utm_medium:qs('utm_medium'),utm_campaign:qs('utm_campaign'),
+    enviado_em:new Date().toISOString()};
+  if(!CRM_URL){ /* enquanto o CRM não está ligado, mantém o caminho antigo pelo WhatsApp */
+    var m='Olá, Dom Partner Growth! Meu nome é '+dados.nome+' ('+dados.empresa+', '+dados.cargo+'). Quero conversar sobre uma parceria de crescimento.';
+    window.open('https://wa.me/5511949901200?text='+encodeURIComponent(m),'_blank');return}
+  btn.disabled=true;btn.textContent='Enviando...';say('');
+  var ctl=('AbortController' in window)?new AbortController():null,to=setTimeout(function(){ctl&&ctl.abort()},15000);
+  fetch(CRM_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(dados),signal:ctl?ctl.signal:undefined})
+  .then(function(r){clearTimeout(to);if(!r.ok)throw new Error(r.status);
+    f.innerHTML='<h3 style="font-size:clamp(24px,2.6vw,34px);letter-spacing:-.04em;text-transform:uppercase">Recebemos o seu contato.</h3><p class="note" style="font-size:17px;opacity:1;margin-top:14px">Nossa assistente vai te chamar no WhatsApp em instantes.</p>';})
+  .catch(function(){clearTimeout(to);btn.disabled=false;btn.innerHTML=btnHtml;
+    msg.innerHTML='Não conseguimos enviar agora. Tente de novo ou <a href="https://wa.me/5511949901200" target="_blank" rel="noopener">chame no WhatsApp</a>.';msg.style.color='#C0392B';});
+});
+})();
 </script>
 </body>
 </html>
