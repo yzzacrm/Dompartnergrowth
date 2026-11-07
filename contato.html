@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<script>if(location.protocol==="http:"&&/(^|\.)dompartnergrowth\.com\.br$/.test(location.hostname)){location.replace("https://"+location.host+location.pathname+location.search+location.hash)}</script>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contato | Dom Partner Growth</title>
@@ -424,10 +427,10 @@ f.addEventListener('submit',function(e){
   if(!f.autorizo.checked){say('Marque a caixa de autorização para podermos entrar em contato.',1,f.autorizo);return}
   var dados={nome:v('nome'),email:v('email'),empresa:v('empresa'),cargo:v('cargo'),whatsapp:tel,faturamento_anual:v('faturamento'),
     autorizo_contato:true,autorizo_texto:'Autorizo receber contato da Dom Partner Growth pelo WhatsApp, por e-mail e por telefone.',
-    origem:'site dompartnergrowth.com.br',pagina:location.pathname.replace(/^\//,'')||'index.html',
+    origem:'site dompartnergrowth.com.br',pagina_formulario:'contato.html',
     interesse:qs('consultoria')||qs('interesse'),
-    utm_source:qs('utm_source'),utm_medium:qs('utm_medium'),utm_campaign:qs('utm_campaign'),
     enviado_em:new Date().toISOString()};
+  try{var r=window.domRastreio?window.domRastreio():{};for(var k in r){dados[k]=r[k]}}catch(x){}
   if(!CRM_URL){ /* enquanto o CRM não está ligado, mantém o caminho antigo pelo WhatsApp */
     var m='Olá, Dom Partner Growth! Meu nome é '+dados.nome+' ('+dados.empresa+', '+dados.cargo+'). Quero conversar sobre uma parceria de crescimento.';
     window.open('https://wa.me/5511949901200?text='+encodeURIComponent(m),'_blank');return}
@@ -441,5 +444,6 @@ f.addEventListener('submit',function(e){
 });
 })();
 </script>
+<script src="rastreio.js" defer></script>
 </body>
 </html>
